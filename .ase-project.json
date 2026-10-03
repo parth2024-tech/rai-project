@@ -1,0 +1,54 @@
+{
+  "name": "Debate-Based Career Guidance Agent with Complementary Personas",
+  "version": "1.0.0",
+  "description": "A Responsible AI (RAI) multi-persona dialectic debate system (Planner, Critic, Ethics-Reviewer) using local LLMs (Qwen), Neo4j knowledge graphs, and vector retrieval to generate balanced career guidance with calibrated uncertainty and human override.",
+  "tech_stack": [
+    "Python 3.11+",
+    "Qwen Local (via Ollama / vLLM / HuggingFace)",
+    "LangGraph / Python Multi-Agent Harness",
+    "Neo4j (Career-Skill-Role Graph)",
+    "Chroma / FAISS (Vector DB for Course & Role Data)",
+    "Streamlit (Interactive Debate Trace & Override UI)"
+  ],
+  "conventions": [
+    "Modular multi-agent design with strict persona prompt contracts",
+    "Grounded evidence retrieval linking every claim to Neo4j nodes or vector chunks",
+    "Calibrated uncertainty estimation explicitly separated from agent confidence",
+    "Human-in-the-loop override mechanics built into the state graph",
+    "Strict RAI fairness checks across demographic and socio-economic synthetic profiles"
+  ],
+  "architecture_patterns": [
+    "Dialectic Multi-Agent Debate (Planner, Critic, Ethics-Reviewer, Arbiter/Synthesizer)",
+    "GraphRAG combining Neo4j graph traversals and dense vector retrieval",
+    "Counterfactual fairness evaluation via synthetic paired profiles"
+  ],
+  "file_structure": {
+    "docs": "Academic and system documentation, literature survey, and evaluation specs",
+    "src/agents": "Planner, Critic, Ethics-Reviewer, and Arbiter persona implementations",
+    "src/graph": "Neo4j ontology, graph queries, and skill taxonomy loaders",
+    "src/rag": "Vector database ingestion, retrieval, and citation verification",
+    "src/eval": "Metrics engine for evidence diversity, contradiction resolution, and fairness audits",
+    "src/ui": "Streamlit debate trace viewer with human override controls"
+  },
+  "testing_strategy": {
+    "framework": "pytest",
+    "coverage_target": "85%",
+    "patterns": [
+      "Unit tests for persona prompts and state transitions",
+      "Retrieval grounding and citation verification tests",
+      "Fairness delta unit tests on counterfactual profile pairs"
+    ]
+  },
+  "never_do": [
+    "Never generate monolithic, one-sided career advice without adversarial critique",
+    "Never drop unresolved ethical or feasibility contradictions from the final synthesis",
+    "Never emit uncalibrated 100% confidence career trajectories",
+    "Never suppress human override or force autonomous career decisions",
+    "Never produce hallucinated job statistics without ontology or citation grounding"
+  ],
+  "preferred_patterns": [
+    "Practice extreme token economy: dense, high-signal, academic-grade rigor",
+    "Structured JSON output schemas for all agent debate turns",
+    "Formal epistemic uncertainty scoring using Conformal / Bayesian calibration"
+  ]
+}
