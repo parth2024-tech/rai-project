@@ -1,9 +1,9 @@
 # Presentation Slide Deck: Debate-Based Career Guidance Agent
 
-**Generated Files:**
-* [`Debate_Career_Guidance_Agent_Professional.pptx`](file:///home/thor/Desktop/RAI%20Project/Debate_Career_Guidance_Agent_Professional.pptx)
-* [`Debate_Career_Guidance_Agent_Presentation.pptx`](file:///home/thor/Desktop/RAI%20Project/Debate_Career_Guidance_Agent_Presentation.pptx)
-* **Generator:** [`generate_human_deck.py`](file:///home/thor/Desktop/RAI%20Project/generate_human_deck.py)
+**Primary Presentation File:**
+* [`Final_Presentation.pptx`](file:///home/thor/Desktop/RAI%20Project/Final_Presentation.pptx)
+* **Design Generator Script:** [`generate_deck.py`](file:///home/thor/Desktop/RAI%20Project/generate_deck.py)
+
 
 ---
 
