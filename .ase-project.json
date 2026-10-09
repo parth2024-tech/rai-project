@@ -1,24 +1,26 @@
 {
   "name": "Debate-Based Career Guidance Agent with Complementary Personas",
   "version": "1.0.0",
-  "description": "A Responsible AI (RAI) multi-persona dialectic debate system (Planner, Critic, Ethics-Reviewer) using local LLMs (Qwen), Neo4j knowledge graphs, and vector retrieval to generate balanced career guidance with calibrated uncertainty and human override.",
+  "description": "A Responsible AI (RAI) multi-persona dialectic debate system featuring 3 distinct career philosophies (The Pragmatic Traditionalist, The Entrepreneurial Builder, The Deep-Tech Specialist) orchestrated by a Moderator Synthesizer using local LLMs (Qwen), Neo4j knowledge graphs, and vector retrieval to generate balanced guidance with calibrated uncertainty and human override.",
   "tech_stack": [
     "Python 3.11+",
-    "Qwen Local (via Ollama / vLLM / HuggingFace)",
+    "Qwen Local (via Ollama / vLLM)",
     "LangGraph / Python Multi-Agent Harness",
-    "Neo4j (Career-Skill-Role Graph)",
-    "Chroma / FAISS (Vector DB for Course & Role Data)",
+    "Neo4j (Career-Skill Graph: O*NET & ESCO)",
+    "Chroma / FAISS (Course & Role Data)",
     "Streamlit (Interactive Debate Trace & Override UI)"
   ],
   "conventions": [
-    "Modular multi-agent design with strict persona prompt contracts",
-    "Grounded evidence retrieval linking every claim to Neo4j nodes or vector chunks",
+    "Rigid 5-stage debate loop: Intake -> Parallel Openings -> Moderator Cross-Exam -> Rebuttals -> Hybrid Synthesis",
+    "Conflicting optimization goals: Corporate Stability vs Startup SaaS vs Deep Infrastructure",
+    "Grounded evidence retrieval linking claims to Neo4j nodes or vector chunks",
     "Calibrated uncertainty estimation explicitly separated from agent confidence",
     "Human-in-the-loop override mechanics built into the state graph",
     "Strict RAI fairness checks across demographic and socio-economic synthetic profiles"
   ],
   "architecture_patterns": [
-    "Dialectic Multi-Agent Debate (Planner, Critic, Ethics-Reviewer, Arbiter/Synthesizer)",
+    "Dialectic Multi-Agent Debate (Pragmatist, Builder, Specialist, Moderator)",
+    "Moderator-driven friction generation and dispute tree extraction",
     "GraphRAG combining Neo4j graph traversals and dense vector retrieval",
     "Counterfactual fairness evaluation via synthetic paired profiles"
   ],

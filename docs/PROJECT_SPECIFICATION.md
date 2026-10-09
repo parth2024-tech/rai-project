@@ -121,38 +121,51 @@ Where:
    - $\mathcal{E}_{requires} \subseteq \mathcal{V}_{role} \times \mathcal{V}_{skill}$: Explicit edge weights representing necessity level $w(r, s) \in [0, 1]$.
    - $\mathcal{E}_{prereq} \subseteq \mathcal{V}_{skill} \times \mathcal{V}_{skill}$: Prerequisite skill dependencies forming a DAG.
 3. **Dense Text Knowledge Base**: $\mathcal{D}_{rag} = \{d_k\}_{k=1}^K$ containing vector embeddings of accredited course curricula, real-world syllabi, Bureau of Labor Statistics (BLS) outlook reports, and wage percentiles.
-4. **Persona Policy Ensemble**: $\mathbf{\Pi} = \{\pi_P, \pi_C, \pi_E\}$:
-   - $\pi_P$ (**Planner**): Parameterized persona optimizing for proactive trajectory generation, milestone construction, and forward momentum.
-   - $\pi_C$ (**Critic**): Parameterized adversarial persona optimizing for flaw discovery, prerequisite gaps, market saturation risks, and dropout probabilities.
-   - $\pi_E$ (**Ethics-Reviewer**): Parameterized normative persona auditing financial toxicity, exploitative credentialing, burnout risk, and socio-economic fairness.
+4. **The Complementary Personas & Moderator Ensemble**: $\mathbf{\Pi} = \{\pi_{trad}, \pi_{builder}, \pi_{spec}\}$ orchestrated by Moderator $\Phi$:
+   - $\pi_{trad}$ (**The Pragmatic Traditionalist — Corporate & Stability Focus**):
+     - *Philosophy*: Security, structured growth, and highly validated career paths.
+     - *System Directive*: Advocates for established, high-paying corporate roles; emphasizes core fundamentals (DSA, competitive programming, scalability); skeptical of unproven startup trends.
+     - *Tone*: Grounded, realistic, data-driven, conservative.
+   - $\pi_{builder}$ (**The Entrepreneurial Builder — Startup & SaaS Focus**):
+     - *Philosophy*: High risk, high reward, rapid iteration, and commercial market disruption.
+     - *System Directive*: Advocates for building, shipping, and monetizing scalable AI SaaS platforms, multi-agent RAG systems, and commercial niches; views corporate ladders as excessively slow.
+     - *Tone*: Energetic, visionary, disruptive, product-market fit oriented.
+   - $\pi_{spec}$ (**The Deep-Tech Specialist — Niche Mastery & Infrastructure**):
+     - *Philosophy*: Irreplaceability through deep, complex low-level domain expertise.
+     - *System Directive*: Pushes candidate toward absolute technical mastery (Linux systems engineering, advanced 5NF database normalization, robust networking); argues both Pragmatist and Entrepreneur fail without robust infrastructure.
+     - *Tone*: Highly analytical, technically rigorous, detail-oriented, uncompromising.
+   - $\Phi$ (**The Moderator — Synthesizer & Strategist**):
+     - *Philosophy*: Balanced execution, transparent disagreement surfacing, and personalized roadmap generation.
+     - *System Directive*: Neutral facilitator; generates probing friction questions pitting agent arguments against each other; synthesizes hybrid career roadmaps with calibrated uncertainty and human override gates.
+     - *Tone*: Neutral, observant, diplomatic, organized.
 
-#### 2.2.2 Multi-Turn Dialectic Protocol
-For debate rounds $t \in \{1, \dots, T_{max}\}$:
-1. **Turn 1 (Thesis)**:
-   $$\tau^{(1)} \sim \pi_P\left(P, \text{Subgraph}(\mathcal{G}, \mathbf{g}_{target}), \text{Ret}(\mathcal{D}, \mathbf{g}_{target})\right)$$
-   Where $\tau = \langle (m_1, s_1, c_1), \dots, (m_L, s_L, c_L) \rangle$ is a progressive milestone trajectory of skills ($s_i$) and courses ($c_i$).
-2. **Turn 2 (Antithesis - Operational Critique)**:
-   $$\kappa^{(t)} \sim \pi_C\left(P, \tau^{(t)}, \mathcal{H}^{(<t)}, \text{PrereqPath}(\mathcal{G}, \tau^{(t)})\right)$$
-   Where $\kappa^{(t)} = \{k_1, k_2, \dots, k_m\}$ is a set of formal challenges (e.g., prerequisite violation $s_i \not\prec s_j$, unfeasible time load $\sum \text{hours}(c_i) > t_{avail} \cdot \tau_{horizon}$, or high market replacement index).
-3. **Turn 3 (Synthesis Audit - Normative & Fairness Review)**:
-   $$\epsilon^{(t)} \sim \pi_E\left(P, \tau^{(t)}, \kappa^{(t)}, \mathcal{H}^{(<t)}, \text{CostAudit}(\tau^{(t)})\right)$$
-   Where $\epsilon^{(t)}$ produces ethical challenges regarding credential predatory pricing, opportunity loss, credential gatekeeping, and mental strain.
-4. **Turn 4 (Rebuttal & Adaptation)**:
-   $$\tau^{(t+1)} \sim \pi_P\left(P, \tau^{(t)}, \kappa^{(t)}, \epsilon^{(t)}, \mathcal{H}^{(<t)}\right)$$
-   The Planner must explicitly concede, refute with grounded evidence, or alter the milestones in response to each challenge in $\kappa^{(t)} \cup \epsilon^{(t)}$.
+#### 2.2.2 The 5-Stage Debate Workflow (Execution Loop)
+To prevent unconstrained conversational drift, execution proceeds through a rigid 5-stage loop:
+1. **Stage 1: Context Intake**:
+   Candidate provides verified competencies $\mathbf{s}_{curr}$, major/background $\mathbf{e}_{hist}$, target domain $\mathbf{g}_{target}$, and constraints $\mathbf{c}_{user}$ (e.g. CSE Core student deciding between Big Tech SDE, AI startup founder, or Systems engineer).
+2. **Stage 2: Opening Statements (Parallel Execution)**:
+   The 3 advising agents independently retrieve from $\mathcal{G}$ and $\mathcal{D}_{rag}$, generating a concise 150-word opening recommendation:
+   $$u_{trad}^{(1)} \sim \pi_{trad}(P, \mathcal{G}, \mathcal{D}), \quad u_{builder}^{(1)} \sim \pi_{builder}(P, \mathcal{G}, \mathcal{D}), \quad u_{spec}^{(1)} \sim \pi_{spec}(P, \mathcal{G}, \mathcal{D})$$
+3. **Stage 3: Cross-Examination (Moderator Friction Point)**:
+   Moderator $\Phi$ analyzes opening claims and identifies direct philosophical and practical contradictions, injecting a specific friction probe:
+   $$\mathcal{F}^{(t)} = \text{ExtractFriction}(u_{trad}^{(t)}, u_{builder}^{(t)}, u_{spec}^{(t)})$$
+   *(e.g., "The Pragmatist insists on grinding LeetCode for Big Tech, while the Builder advocates launching an AI agent SaaS. Specialist, how does core operating system and network design bridge or invalidate these two approaches?")*
+4. **Stage 4: Rebuttal & Cross-Examination Defense**:
+   Each advising agent responds to the Moderator's friction point $\mathcal{F}^{(t)}$, attacking opposing assumptions, defending their career philosophy, or conceding unviable paths with grounded evidence citations.
+5. **Stage 5: Synthesis & Human Override Checkpoint**:
+   Moderator $\Phi$ evaluates dialogue history $\mathcal{H}$, generates structured hybrid output:
+   $$\langle \mathcal{R}^*, \mathcal{T}_{dispute}, U(\mathcal{R}^*) \rangle = \Phi(\mathcal{H})$$
+   - Summary of conflicting viewpoints and trade-off tensions.
+   - Personalized hybrid action plan balancing stability, product execution, and technical depth.
+   - Calibrated epistemic uncertainty score $U(\mathcal{R}^*)$ and cognitive forcing gate triggering user override before finalizing roadmap commitments.
 
 #### 2.2.3 Synthesis, Calibrated Uncertainty, and Override Gate
-At convergence or round $T$, the Arbiter policy $\Phi$ synthesizes the dialogue history $\mathcal{H}$:
-$$\langle \mathcal{R}^*, \mathcal{T}_{dispute}, U(\mathcal{R}^*) \rangle = \Phi(\mathcal{H})$$
-- $\mathcal{R}^*$: Balanced recommendation featuring primary trajectory, fallback options, and concrete risk disclosures.
-- $\mathcal{T}_{dispute}$: Graph of explicit points of contention, denoting which criticisms were resolved by evidence and which remain fundamental trade-offs.
-- $U(\mathcal{R}^*) \in [0, 1]$: Calibrated epistemic uncertainty score defined as:
+- **Dispute Graph $\mathcal{T}_{dispute}$**: Explicit network of consensus nodes vs. irreconcilable trade-offs (e.g. corporate security vs equity upside).
+- **Calibrated Uncertainty $U(\mathcal{R}^*) \in [0, 1]$**:
   $$U(\mathcal{R}^*) = \alpha \cdot \mathcal{H}_{entropy}(\mathbf{\Pi}) + \beta \cdot \text{Sparsity}(\mathcal{G}, P) + \gamma \cdot \left(1 - \text{GroundingScore}(\mathcal{R}^*, \mathcal{D})\right)$$
-  Where $\mathcal{H}_{entropy}(\mathbf{\Pi})$ measures the semantic divergence among persona position vectors.
+- **Human Override Gate**:
+  $$\text{TriggerOverride}(\mathcal{R}^*) = \mathbf{1}\left[ U(\mathcal{R}^*) > \theta_{uncertainty} \;\lor\; |\mathcal{K}_{unresolved}| \ge 1 \;\lor\; \text{Risk}(\mathcal{R}^*) > \theta_{risk} \right]$$
 
-**Human Override Checkpoint Condition**:
-$$\text{TriggerOverride}(\mathcal{R}^*) = \mathbf{1}\left[ U(\mathcal{R}^*) > \theta_{uncertainty} \;\lor\; |\mathcal{K}_{unresolved}| \ge 1 \;\lor\; \text{Risk}(\mathcal{R}^*) > \theta_{risk} \right]$$
-If triggered, the system pauses execution, presents the interactive debate trace, and mandates explicit user arbitration before generating concrete calendar commitments.
 
 ---
 
