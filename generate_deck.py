@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Generate the Final Audited, Conference-Grade 17-Slide Presentation Deck:
+Generate the Final Audited, Conference-Grade 18-Slide Presentation Deck:
 Debate-Based Career Guidance Agent with Complementary Personas
 
 Scope: Computer Science & Software Engineering Career Advisory
@@ -58,7 +58,7 @@ def build_audited_deck():
     
     FONT_MAIN = "Calibri"
     FONT_CODE = "Consolas"
-    TOTAL_SLIDES = 17
+    TOTAL_SLIDES = 18
 
     def apply_bg(slide, color):
         bg = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, 0, 0, prs.slide_width, prs.slide_height)
@@ -593,77 +593,175 @@ def build_audited_deck():
     )
 
     # =========================================================================
-    # SLIDE 5: System Architecture & Information Flow
+    # SLIDE 5: Limitations of Proposed Architecture & Evaluation Framework
     # =========================================================================
     s5 = prs.slides.add_slide(blank_layout)
     apply_bg(s5, BG_LIGHT)
-    add_header(s5, "System Architecture: End-to-End Deliberation Pipeline", "SYSTEM ARCHITECTURE", 5,
+    add_header(s5, "Limitations of Proposed Architecture & Evaluation Framework", "CRITICAL DISCLOSURES", 5,
+               takeaway="Transparent disclosure of architectural priors, empirical evaluation boundaries, and planned mitigations.")
+
+    top_lim = Inches(1.55)
+    w_lim = Inches(5.6)
+    h_lim = Inches(3.65)
+
+    # Left Container: Architectural & Methodological Limitations
+    add_card(s5, Inches(0.8), top_lim, w_lim, h_lim, "1. Paper & Architectural Limitations", ROSE_ACCENT, top_accent=ROSE_ACCENT)
+    tb_al = s5.shapes.add_textbox(Inches(1.0), top_lim + Inches(0.45), w_lim - Inches(0.4), h_lim - Inches(0.55))
+    tf_al = tb_al.text_frame
+    tf_al.word_wrap = True
+
+    al_items = [
+        ("Shared Base Model Priors: ", "All three personas execute on local Qwen-2.5-14B. While prompt contracts enforce divergence, shared pretraining representations risk correlated blind spots and inherited labor misconceptions."),
+        ("Coarse-Grained Archetypes: ", "Dividing career paths into Traditionalist, Builder, and Specialist is an epistemic simplification. Real software careers follow fluid, hybrid progressions (corporate SDE to startup founder)."),
+        ("Curricular & Geographic Scope: ", "Prerequisite DAG and labor distributions are bounded to ACM/IEEE CS2023 standards and U.S. BLS statistics; non-transferable to non-STEM or informal hiring markets."),
+        ("Curricular Graph Decay: ", "Static 420-node DAG requires continuous expert maintenance as industry toolchains (GenAI, vector DBs) evolve faster than formal academic guidelines.")
+    ]
+    for lbl, desc in al_items:
+        p = tf_al.add_paragraph() if tf_al.paragraphs[0].text else tf_al.paragraphs[0]
+        p.text = "• " + lbl
+        p.font.name = FONT_MAIN
+        p.font.bold = True
+        p.font.size = Pt(9.5)
+        p.font.color.rgb = NAVY_HEAD
+        p.text += desc
+        p.font.bold = False
+        p.font.size = Pt(8.5)
+        p.font.color.rgb = TEXT_MAIN
+        p.space_after = Pt(3)
+
+    # Right Container: Evaluation & Empirical Limitations
+    add_card(s5, Inches(6.9), top_lim, w_lim, h_lim, "2. Evaluation & Empirical Limitations", AMBER_ACCENT, top_accent=AMBER_ACCENT)
+    tb_el = s5.shapes.add_textbox(Inches(7.1), top_lim + Inches(0.45), w_lim - Inches(0.4), h_lim - Inches(0.55))
+    tf_el = tb_el.text_frame
+    tf_el.word_wrap = True
+
+    el_items = [
+        ("Synthetic vs. Longitudinal Outcomes: ", "Evaluated on 500 synthetic profile pairs; cannot measure real 2- to 4-year graduation rates, job placement success, or actual compensation retention."),
+        ("Adversarial Benchmark Extremity: ", "Premise-Challenge Rate (PCR) benchmarks against 100 extreme impossible transitions; may not capture subtle flattery on borderline feasible paths."),
+        ("Cognitive Forcing vs. Decision Fatigue: ", "~35–40% override trigger rate introduces intentional friction; high cognitive load risks user drop-off, alert fatigue, or superficial dismissal."),
+        ("Counselor Sample Size: ", "3 certified counselors evaluating 60 roadmaps provides preliminary concordance (W >= 0.70), but lacks multi-institution statistical power."),
+        ("Initial Weight Heuristics: ", "Uncertainty weights (w1=0.40, w2=0.35, w3=0.25) are initial heuristic priors pending cross-validated regression tuning in Phase 4.")
+    ]
+    for lbl, desc in el_items:
+        p = tf_el.add_paragraph() if tf_el.paragraphs[0].text else tf_el.paragraphs[0]
+        p.text = "• " + lbl
+        p.font.name = FONT_MAIN
+        p.font.bold = True
+        p.font.size = Pt(9.5)
+        p.font.color.rgb = NAVY_HEAD
+        p.text += desc
+        p.font.bold = False
+        p.font.size = Pt(8.5)
+        p.font.color.rgb = TEXT_MAIN
+        p.space_after = Pt(3)
+
+    # Bottom Full-Width Container: Summary Mitigation Matrix
+    top_mit = Inches(5.35)
+    h_mit = Inches(1.55)
+    add_card(s5, Inches(0.8), top_mit, Inches(11.72), h_mit, "3. Summary Mitigation & Research Roadmap Matrix", TEAL_PRIMARY, top_accent=TEAL_PRIMARY, bg_color=CARD_MUTED)
+    tb_mit = s5.shapes.add_textbox(Inches(1.0), top_mit + Inches(0.4), Inches(11.3), h_mit - Inches(0.45))
+    tf_mit = tb_mit.text_frame
+    tf_mit.word_wrap = True
+
+    mit_rows = [
+        ("Shared Base Priors: ", "Immediate: Distinct decoding temperatures (T=0.3, 0.4, 0.7) induce behavioural diversity.  |  Future: Heterogeneous model pool (Mistral + Llama-3 + Qwen)."),
+        ("Synthetic Test Cohort: ", "Immediate: N=5 repeated runs with clustered SEs decouple decoding noise.  |  Future: Phase 6 longitudinal trial with 50 live CSE students."),
+        ("Static Curricular DAG: ", "Immediate: Validated by 2 CS faculty members against ACM/IEEE standards.  |  Future: Semi-automated syllabus scraping pipeline from university catalogs."),
+        ("User Decision Fatigue: ", "Immediate: CriticalDispute filtering fires strictly on major financial/degree liabilities.  |  Future: Adaptive friction scaling with candidate engagement history.")
+    ]
+    for lbl, desc in mit_rows:
+        p = tf_mit.add_paragraph() if tf_mit.paragraphs[0].text else tf_mit.paragraphs[0]
+        p.text = "▶ " + lbl
+        p.font.name = FONT_MAIN
+        p.font.bold = True
+        p.font.size = Pt(9.0)
+        p.font.color.rgb = TEAL_PRIMARY
+        p.text += desc
+        p.font.bold = False
+        p.font.size = Pt(8.5)
+        p.font.color.rgb = TEXT_MAIN
+        p.space_after = Pt(1)
+
+    s5.notes_slide.notes_text_frame.text = (
+        "Here we transparently disclose the limitations of both our proposed architecture and its evaluation framework. "
+        "Architecturally, running personas on a single Qwen-14B base carries a risk of shared pretraining blind spots, "
+        "and our 420-node curricular DAG is bounded to US computing curricula. "
+        "Empirically, our evaluation relies on synthetic counterfactual profile pairs rather than longitudinal career outcomes, "
+        "and our uncertainty weights are initial heuristic priors. "
+        "We pair every limitation with an immediate mitigation in this proposal and a long-term research roadmap."
+    )
+    # =========================================================================
+    # SLIDE 6: System Architecture & Information Flow
+    # =========================================================================
+    s6 = prs.slides.add_slide(blank_layout)
+    apply_bg(s6, BG_LIGHT)
+    add_header(s6, "System Architecture: End-to-End Deliberation Pipeline", "SYSTEM ARCHITECTURE", 6,
                takeaway="Structured 6-layer pipeline connecting candidate intake, hybrid retrieval, dialectic debate, and human arbitration.")
 
     # Row 1: Inputs & Grounding
-    add_card(s5, Inches(0.8), Inches(1.55), Inches(3.4), Inches(1.3), "Candidate Profile (P)", NAVY_HEAD, top_accent=BLUE_ACCENT, bg_color=CARD_MUTED)
-    tb = s5.shapes.add_textbox(Inches(0.9), Inches(1.95), Inches(3.2), Inches(0.8))
+    add_card(s6, Inches(0.8), Inches(1.55), Inches(3.4), Inches(1.3), "Candidate Profile (P)", NAVY_HEAD, top_accent=BLUE_ACCENT, bg_color=CARD_MUTED)
+    tb = s6.shapes.add_textbox(Inches(0.9), Inches(1.95), Inches(3.2), Inches(0.8))
     tb.text_frame.paragraphs[0].text = "• Verified Skills (CSE Coursework)\n• Career Aspirations & Timeline\n• Budget Constraints (b_max, t_avail)\n• NOTE: Demographics (a_demo) isolated!"
     tb.text_frame.paragraphs[0].font.size = Pt(9.0)
 
-    add_arrow(s5, Inches(4.3), Inches(2.1), Inches(0.5), Inches(0.25), "right", TEAL_PRIMARY)
+    add_arrow(s6, Inches(4.3), Inches(2.1), Inches(0.5), Inches(0.25), "right", TEAL_PRIMARY)
 
-    add_card(s5, Inches(4.9), Inches(1.55), Inches(3.5), Inches(1.3), "Hybrid Grounding Store", NAVY_HEAD, top_accent=TEAL_PRIMARY, bg_color=TEAL_BG)
-    tb = s5.shapes.add_textbox(Inches(5.0), Inches(1.95), Inches(3.3), Inches(0.8))
+    add_card(s6, Inches(4.9), Inches(1.55), Inches(3.5), Inches(1.3), "Hybrid Grounding Store", NAVY_HEAD, top_accent=TEAL_PRIMARY, bg_color=TEAL_BG)
+    tb = s6.shapes.add_textbox(Inches(5.0), Inches(1.95), Inches(3.3), Inches(0.8))
     tb.text_frame.paragraphs[0].text = "• Neo4j: Curricular Prerequisite DAG\n• Chroma/FAISS: Offline BLS & Syllabi\n• Cross-Encoder NLI Entailment (P > 0.80)\n• Deterministic Salary Assertion Checkers"
     tb.text_frame.paragraphs[0].font.size = Pt(9.0)
 
-    add_arrow(s5, Inches(8.5), Inches(2.1), Inches(0.5), Inches(0.25), "right", TEAL_PRIMARY)
+    add_arrow(s6, Inches(8.5), Inches(2.1), Inches(0.5), Inches(0.25), "right", TEAL_PRIMARY)
 
-    add_card(s5, Inches(9.1), Inches(1.55), Inches(3.4), Inches(1.3), "Local Multi-Agent Harness", NAVY_HEAD, top_accent=ROSE_ACCENT, bg_color=ROSE_BG)
-    tb = s5.shapes.add_textbox(Inches(9.2), Inches(1.95), Inches(3.2), Inches(0.8))
+    add_card(s6, Inches(9.1), Inches(1.55), Inches(3.4), Inches(1.3), "Local Multi-Agent Harness", NAVY_HEAD, top_accent=ROSE_ACCENT, bg_color=ROSE_BG)
+    tb = s6.shapes.add_textbox(Inches(9.2), Inches(1.95), Inches(3.2), Inches(0.8))
     tb.text_frame.paragraphs[0].text = "• LangGraph State Machine Loop\n• Local Qwen-2.5-14B (vLLM / Ollama)\n• 100% On-Premise Execution\n• Zero External Network Exfiltration"
     tb.text_frame.paragraphs[0].font.size = Pt(9.0)
 
-    add_arrow(s5, Inches(10.6), Inches(2.95), Inches(0.25), Inches(0.4), "down", ROSE_ACCENT)
+    add_arrow(s6, Inches(10.6), Inches(2.95), Inches(0.25), Inches(0.4), "down", ROSE_ACCENT)
 
     # Row 2: Dialectic Triad Engine
-    add_card(s5, Inches(0.8), Inches(3.45), Inches(11.733), Inches(1.4), "Dialectic Triad Engine (T_debate = 2 Rounds)", NAVY_HEAD, top_accent=INDIGO_ACCENT)
+    add_card(s6, Inches(0.8), Inches(3.45), Inches(11.733), Inches(1.4), "Dialectic Triad Engine (T_debate = 2 Rounds)", NAVY_HEAD, top_accent=INDIGO_ACCENT)
     
     # 3 Sub boxes inside row 2
-    add_card(s5, Inches(1.0), Inches(3.9), Inches(3.5), Inches(0.85), "The Pragmatic Traditionalist", TEAL_PRIMARY, bg_color=TEAL_BG)
-    tb = s5.shapes.add_textbox(Inches(1.05), Inches(4.25), Inches(3.4), Inches(0.45))
+    add_card(s6, Inches(1.0), Inches(3.9), Inches(3.5), Inches(0.85), "The Pragmatic Traditionalist", TEAL_PRIMARY, bg_color=TEAL_BG)
+    tb = s6.shapes.add_textbox(Inches(1.05), Inches(4.25), Inches(3.4), Inches(0.45))
     tb.text_frame.paragraphs[0].text = "Focus: Corporate SDE, DSA, System Scale"
     tb.text_frame.paragraphs[0].font.size = Pt(9.0)
 
-    add_card(s5, Inches(4.9), Inches(3.9), Inches(3.5), Inches(0.85), "The Entrepreneurial Builder", ROSE_ACCENT, bg_color=ROSE_BG)
-    tb = s5.shapes.add_textbox(Inches(4.95), Inches(4.25), Inches(3.4), Inches(0.45))
+    add_card(s6, Inches(4.9), Inches(3.9), Inches(3.5), Inches(0.85), "The Entrepreneurial Builder", ROSE_ACCENT, bg_color=ROSE_BG)
+    tb = s6.shapes.add_textbox(Inches(4.95), Inches(4.25), Inches(3.4), Inches(0.45))
     tb.text_frame.paragraphs[0].text = "Focus: AI SaaS, Shipping, Market Disruption"
     tb.text_frame.paragraphs[0].font.size = Pt(9.0)
 
-    add_card(s5, Inches(8.8), Inches(3.9), Inches(3.5), Inches(0.85), "The Deep-Tech Specialist", INDIGO_ACCENT, bg_color=INDIGO_BG)
-    tb = s5.shapes.add_textbox(Inches(8.85), Inches(4.25), Inches(3.4), Inches(0.45))
+    add_card(s6, Inches(8.8), Inches(3.9), Inches(3.5), Inches(0.85), "The Deep-Tech Specialist", INDIGO_ACCENT, bg_color=INDIGO_BG)
+    tb = s6.shapes.add_textbox(Inches(8.85), Inches(4.25), Inches(3.4), Inches(0.45))
     tb.text_frame.paragraphs[0].text = "Focus: Linux Kernel, 5NF DBs, Low-Level Rigor"
     tb.text_frame.paragraphs[0].font.size = Pt(9.0)
 
-    add_arrow(s5, Inches(6.5), Inches(4.95), Inches(0.25), Inches(0.35), "down", TEAL_PRIMARY)
+    add_arrow(s6, Inches(6.5), Inches(4.95), Inches(0.25), Inches(0.35), "down", TEAL_PRIMARY)
 
     # Row 3: Decision Diamond and Branches
-    add_card(s5, Inches(3.8), Inches(5.4), Inches(5.6), Inches(1.45), "The Moderator & Epistemic Uncertainty Gate", AMBER_ACCENT, top_accent=AMBER_ACCENT)
-    tb_m = s5.shapes.add_textbox(Inches(3.9), Inches(5.8), Inches(5.4), Inches(0.95))
+    add_card(s6, Inches(3.8), Inches(5.4), Inches(5.6), Inches(1.45), "The Moderator & Epistemic Uncertainty Gate", AMBER_ACCENT, top_accent=AMBER_ACCENT)
+    tb_m = s6.shapes.add_textbox(Inches(3.9), Inches(5.8), Inches(5.4), Inches(0.95))
     tb_m.text_frame.paragraphs[0].text = "• Extracts Friction Probe (F) & Dispute Tree (T_dispute)\n• Computes Uncertainty: U_hat = w1·H + w2·D + w3·(1 - NLI)\n• Evaluate Gate: U_hat > 0.65  OR  CriticalDispute(K)  OR  Risk > theta"
     tb_m.text_frame.paragraphs[0].font.size = Pt(9.0)
 
     # Left Divergent Branch: Override Triggered
-    add_arrow(s5, Inches(3.2), Inches(6.0), Inches(0.5), Inches(0.2), "left", ROSE_ACCENT)
-    add_card(s5, Inches(0.8), Inches(5.65), Inches(2.3), Inches(1.1), "YES: Human Veto Required", ROSE_ACCENT, bg_color=ROSE_BG)
-    tb_y = s5.shapes.add_textbox(Inches(0.85), Inches(6.05), Inches(2.2), Inches(0.65))
+    add_arrow(s6, Inches(3.2), Inches(6.0), Inches(0.5), Inches(0.2), "left", ROSE_ACCENT)
+    add_card(s6, Inches(0.8), Inches(5.65), Inches(2.3), Inches(1.1), "YES: Human Veto Required", ROSE_ACCENT, bg_color=ROSE_BG)
+    tb_y = s6.shapes.add_textbox(Inches(0.85), Inches(6.05), Inches(2.2), Inches(0.65))
     tb_y.text_frame.paragraphs[0].text = "Interactive arbitration modal: Student must arbitrate trade-offs"
     tb_y.text_frame.paragraphs[0].font.size = Pt(8.5)
 
     # Right Divergent Branch: Verified Pass
-    add_arrow(s5, Inches(9.5), Inches(6.0), Inches(0.5), Inches(0.2), "right", TEAL_PRIMARY)
-    add_card(s5, Inches(10.1), Inches(5.65), Inches(2.4), Inches(1.1), "NO: Actionable Roadmap", TEAL_PRIMARY, bg_color=TEAL_BG)
-    tb_no = s5.shapes.add_textbox(Inches(10.15), Inches(6.05), Inches(2.3), Inches(0.65))
+    add_arrow(s6, Inches(9.5), Inches(6.0), Inches(0.5), Inches(0.2), "right", TEAL_PRIMARY)
+    add_card(s6, Inches(10.1), Inches(5.65), Inches(2.4), Inches(1.1), "NO: Actionable Roadmap", TEAL_PRIMARY, bg_color=TEAL_BG)
+    tb_no = s6.shapes.add_textbox(Inches(10.15), Inches(6.05), Inches(2.3), Inches(0.65))
     tb_no.text_frame.paragraphs[0].text = "Balanced milestone delivery directly to Streamlit Dashboard"
     tb_no.text_frame.paragraphs[0].font.size = Pt(8.5)
 
-    s5.notes_slide.notes_text_frame.text = (
+    s6.notes_slide.notes_text_frame.text = (
         "Here is the complete end-to-end system architecture. Notice the divergent execution branches at the bottom. "
         "When deliberation concludes, the Moderator evaluates our composite uncertainty score and checks for critical disputes. "
         "If uncertainty exceeds 0.65 or irreversible trade-offs exist, the system triggers the cognitive forcing modal. "
@@ -671,11 +769,11 @@ def build_audited_deck():
     )
 
     # =========================================================================
-    # SLIDE 6: Low-Level Design: Python Modules & Data Schemas
+    # SLIDE 7: Low-Level Design: Python Modules & Data Schemas
     # =========================================================================
-    s6 = prs.slides.add_slide(blank_layout)
-    apply_bg(s6, BG_LIGHT)
-    add_header(s6, "Low-Level Design: Planned Python Modules & Data Schemas", "LOW-LEVEL DESIGN", 6,
+    s7 = prs.slides.add_slide(blank_layout)
+    apply_bg(s7, BG_LIGHT)
+    add_header(s7, "Low-Level Design: Planned Python Modules & Data Schemas", "LOW-LEVEL DESIGN", 7,
                takeaway="Concrete pre-implementation module specification and formal schemas for graph and tabular stores.")
 
     m_w = Inches(5.6)
@@ -683,8 +781,8 @@ def build_audited_deck():
     top_m = Inches(1.55)
 
     # Left Container: Planned Python Modules
-    add_card(s6, Inches(0.8), top_m, m_w, m_h, "Planned Python Modules (Agent Harness)", BLUE_ACCENT, top_accent=BLUE_ACCENT)
-    tb_mod = s6.shapes.add_textbox(Inches(1.0), top_m + Inches(0.45), m_w - Inches(0.4), m_h - Inches(0.55))
+    add_card(s7, Inches(0.8), top_m, m_w, m_h, "Planned Python Modules (Agent Harness)", BLUE_ACCENT, top_accent=BLUE_ACCENT)
+    tb_mod = s7.shapes.add_textbox(Inches(1.0), top_m + Inches(0.45), m_w - Inches(0.4), m_h - Inches(0.55))
     tf_mod = tb_mod.text_frame
     tf_mod.word_wrap = True
     
@@ -712,8 +810,8 @@ def build_audited_deck():
         p.space_after = Pt(4)
 
     # Right Container: Data Schemas
-    add_card(s6, Inches(6.9), top_m, m_w, m_h, "Data Models & Storage Schemas", TEAL_PRIMARY, top_accent=TEAL_PRIMARY)
-    tb_sch = s6.shapes.add_textbox(Inches(7.1), top_m + Inches(0.45), m_w - Inches(0.4), m_h - Inches(0.55))
+    add_card(s7, Inches(6.9), top_m, m_w, m_h, "Data Models & Storage Schemas", TEAL_PRIMARY, top_accent=TEAL_PRIMARY)
+    tb_sch = s7.shapes.add_textbox(Inches(7.1), top_m + Inches(0.45), m_w - Inches(0.4), m_h - Inches(0.55))
     tf_sch = tb_sch.text_frame
     tf_sch.word_wrap = True
 
@@ -754,7 +852,7 @@ def build_audited_deck():
         p.font.color.rgb = TEXT_MAIN
         p.space_after = Pt(6)
 
-    s6.notes_slide.notes_text_frame.text = (
+    s7.notes_slide.notes_text_frame.text = (
         "On this slide, we present our low-level design specification. "
         "We outline eight planned Python modules that decouple orchestration, knowledge graph traversal, "
         "NLI entailment validation, and audit logging. "
@@ -762,11 +860,11 @@ def build_audited_deck():
     )
 
     # =========================================================================
-    # SLIDE 7: The Complementary Personas & Moderator Architecture
+    # SLIDE 8: The Complementary Personas & Moderator Architecture
     # =========================================================================
-    s7 = prs.slides.add_slide(blank_layout)
-    apply_bg(s7, BG_LIGHT)
-    add_header(s7, "Persona Design: Conflicting Career Philosophies & Epistemic Foils", "PERSONA ARCHITECTURE", 7,
+    s8 = prs.slides.add_slide(blank_layout)
+    apply_bg(s8, BG_LIGHT)
+    add_header(s8, "Persona Design: Conflicting Career Philosophies & Epistemic Foils", "PERSONA ARCHITECTURE", 8,
                takeaway="Three antagonistic career perspectives cross-examined by a neutral Moderator to surface trade-offs.")
 
     col_pw = Inches(3.64)
@@ -774,8 +872,8 @@ def build_audited_deck():
     top_p7 = Inches(1.55)
 
     # Persona 1: Pragmatic Traditionalist
-    add_card(s7, Inches(0.8), top_p7, col_pw, col_ph, "1. The Pragmatic Traditionalist", TEAL_PRIMARY, top_accent=TEAL_PRIMARY)
-    tb1 = s7.shapes.add_textbox(Inches(1.0), top_p7 + Inches(0.5), col_pw - Inches(0.4), col_ph - Inches(0.6))
+    add_card(s8, Inches(0.8), top_p7, col_pw, col_ph, "1. The Pragmatic Traditionalist", TEAL_PRIMARY, top_accent=TEAL_PRIMARY)
+    tb1 = s8.shapes.add_textbox(Inches(1.0), top_p7 + Inches(0.5), col_pw - Inches(0.4), col_ph - Inches(0.6))
     tf1 = tb1.text_frame
     tf1.word_wrap = True
     p = tf1.paragraphs[0]
@@ -803,8 +901,8 @@ def build_audited_deck():
         p.space_after = Pt(4)
 
     # Persona 2: Entrepreneurial Builder
-    add_card(s7, Inches(4.84), top_p7, col_pw, col_ph, "2. The Entrepreneurial Builder", ROSE_ACCENT, top_accent=ROSE_ACCENT)
-    tb2 = s7.shapes.add_textbox(Inches(5.04), top_p7 + Inches(0.5), col_pw - Inches(0.4), col_ph - Inches(0.6))
+    add_card(s8, Inches(4.84), top_p7, col_pw, col_ph, "2. The Entrepreneurial Builder", ROSE_ACCENT, top_accent=ROSE_ACCENT)
+    tb2 = s8.shapes.add_textbox(Inches(5.04), top_p7 + Inches(0.5), col_pw - Inches(0.4), col_ph - Inches(0.6))
     tf2 = tb2.text_frame
     tf2.word_wrap = True
     p = tf2.paragraphs[0]
@@ -832,8 +930,8 @@ def build_audited_deck():
         p.space_after = Pt(4)
 
     # Persona 3: Deep-Tech Specialist
-    add_card(s7, Inches(8.88), top_p7, col_pw, col_ph, "3. The Deep-Tech Specialist", INDIGO_ACCENT, top_accent=INDIGO_ACCENT)
-    tb3 = s7.shapes.add_textbox(Inches(9.08), top_p7 + Inches(0.5), col_pw - Inches(0.4), col_ph - Inches(0.6))
+    add_card(s8, Inches(8.88), top_p7, col_pw, col_ph, "3. The Deep-Tech Specialist", INDIGO_ACCENT, top_accent=INDIGO_ACCENT)
+    tb3 = s8.shapes.add_textbox(Inches(9.08), top_p7 + Inches(0.5), col_pw - Inches(0.4), col_ph - Inches(0.6))
     tf3 = tb3.text_frame
     tf3.word_wrap = True
     p = tf3.paragraphs[0]
@@ -861,8 +959,8 @@ def build_audited_deck():
         p.space_after = Pt(4)
 
     # Bottom Full-Width Moderator & Epistemic Foils Defense
-    add_card(s7, Inches(0.8), Inches(5.65), Inches(11.72), Inches(1.3), "The Moderator Role & Epistemic Foil Defense", NAVY_HEAD, top_accent=AMBER_ACCENT, bg_color=CARD_MUTED)
-    tb_m7 = s7.shapes.add_textbox(Inches(1.0), Inches(5.95), Inches(11.3), Inches(0.9))
+    add_card(s8, Inches(0.8), Inches(5.65), Inches(11.72), Inches(1.3), "The Moderator Role & Epistemic Foil Defense", NAVY_HEAD, top_accent=AMBER_ACCENT, bg_color=CARD_MUTED)
+    tb_m7 = s8.shapes.add_textbox(Inches(1.0), Inches(5.95), Inches(11.3), Inches(0.9))
     tf_m7 = tb_m7.text_frame
     tf_m7.word_wrap = True
     p = tf_m7.paragraphs[0]
@@ -883,7 +981,7 @@ def build_audited_deck():
         p.font.size = Pt(9.0)
         p.font.color.rgb = TEXT_MAIN
 
-    s7.notes_slide.notes_text_frame.text = (
+    s8.notes_slide.notes_text_frame.text = (
         "Here we specify our complementary persona architecture. "
         "The Traditionalist advocates for corporate stability and algorithms; the Builder pushes for rapid SaaS prototyping; "
         "and the Specialist insists on low-level systems depth. "
@@ -893,11 +991,11 @@ def build_audited_deck():
     )
 
     # =========================================================================
-    # SLIDE 8: Knowledge Grounding & Prerequisite DAG Derivation
+    # SLIDE 9: Knowledge Grounding & Prerequisite DAG Derivation
     # =========================================================================
-    s8 = prs.slides.add_slide(blank_layout)
-    apply_bg(s8, BG_LIGHT)
-    add_header(s8, "Knowledge Grounding: Curricular DAG Derivation & Verification", "KNOWLEDGE GROUNDING", 8,
+    s9 = prs.slides.add_slide(blank_layout)
+    apply_bg(s9, BG_LIGHT)
+    add_header(s9, "Knowledge Grounding: Curricular DAG Derivation & Verification", "KNOWLEDGE GROUNDING", 9,
                takeaway="Synthesizing academic prerequisite hierarchies with offline wage statistics and cross-encoder NLI validation.")
 
     w_g = Inches(5.6)
@@ -905,8 +1003,8 @@ def build_audited_deck():
     top_g = Inches(1.55)
 
     # Left Card: Neo4j DAG Derivation
-    add_card(s8, Inches(0.8), top_g, w_g, h_g, "Neo4j: Curricular Prerequisite DAG Derivation", TEAL_PRIMARY, top_accent=TEAL_PRIMARY)
-    tb_g1 = s8.shapes.add_textbox(Inches(1.0), top_g + Inches(0.5), w_g - Inches(0.4), h_g - Inches(0.6))
+    add_card(s9, Inches(0.8), top_g, w_g, h_g, "Neo4j: Curricular Prerequisite DAG Derivation", TEAL_PRIMARY, top_accent=TEAL_PRIMARY)
+    tb_g1 = s9.shapes.add_textbox(Inches(1.0), top_g + Inches(0.5), w_g - Inches(0.4), h_g - Inches(0.6))
     tfg1 = tb_g1.text_frame
     tfg1.word_wrap = True
     g_pts = [
@@ -930,8 +1028,8 @@ def build_audited_deck():
         p.space_after = Pt(4)
 
     # Right Card: Offline FAISS & NLI
-    add_card(s8, Inches(6.9), top_g, w_g, h_g, "Offline Corpora & NLI Entailment Verification", BLUE_ACCENT, top_accent=BLUE_ACCENT)
-    tb_g2 = s8.shapes.add_textbox(Inches(7.1), top_g + Inches(0.5), w_g - Inches(0.4), h_g - Inches(0.6))
+    add_card(s9, Inches(6.9), top_g, w_g, h_g, "Offline Corpora & NLI Entailment Verification", BLUE_ACCENT, top_accent=BLUE_ACCENT)
+    tb_g2 = s9.shapes.add_textbox(Inches(7.1), top_g + Inches(0.5), w_g - Inches(0.4), h_g - Inches(0.6))
     tfg2 = tb_g2.text_frame
     tfg2.word_wrap = True
     v_pts = [
@@ -955,8 +1053,8 @@ def build_audited_deck():
         p.space_after = Pt(4)
 
     # Bottom Callout Box
-    add_card(s8, Inches(0.8), Inches(5.95), Inches(11.72), Inches(1.0), "Grounding Invariant: Verification Over Generation", NAVY_HEAD, top_accent=TEAL_PRIMARY, bg_color=CARD_MUTED)
-    tb_gi = s8.shapes.add_textbox(Inches(1.0), Inches(6.25), Inches(11.3), Inches(0.6))
+    add_card(s9, Inches(0.8), Inches(5.95), Inches(11.72), Inches(1.0), "Grounding Invariant: Verification Over Generation", NAVY_HEAD, top_accent=TEAL_PRIMARY, bg_color=CARD_MUTED)
+    tb_gi = s9.shapes.add_textbox(Inches(1.0), Inches(6.25), Inches(11.3), Inches(0.6))
     p = tb_gi.text_frame.paragraphs[0]
     p.text = "Grounding Invariant: No factual claim regarding course prerequisites or labor compensation reaches the candidate without either passing deterministic Neo4j Cypher validation or satisfying cross-encoder NLI entailment (P > 0.80)."
     p.font.name = FONT_MAIN
@@ -964,7 +1062,7 @@ def build_audited_deck():
     p.font.bold = True
     p.font.color.rgb = TEAL_PRIMARY
 
-    s8.notes_slide.notes_text_frame.text = (
+    s9.notes_slide.notes_text_frame.text = (
         "Here we clarify our knowledge grounding architecture. "
         "A critical limitation of raw O*NET data is that it links jobs to skills, but lacks skill-to-skill prerequisite edges. "
         "We overcome this by projecting official ACM/IEEE CS2023 curricular guidelines onto O*NET nodes, "
@@ -973,16 +1071,16 @@ def build_audited_deck():
     )
 
     # =========================================================================
-    # SLIDE 9: Concrete Worked Walkthrough: Profile to Dispute Tree & Human Veto
+    # SLIDE 10: Concrete Worked Walkthrough: Profile to Dispute Tree & Human Veto
     # =========================================================================
-    s9 = prs.slides.add_slide(blank_layout)
-    apply_bg(s9, BG_LIGHT)
-    add_header(s9, "Worked Walkthrough: Deliberation Trace, Dispute Tree & Human Veto", "WORKED WALKTHROUGH", 9,
+    s10 = prs.slides.add_slide(blank_layout)
+    apply_bg(s10, BG_LIGHT)
+    add_header(s10, "Worked Walkthrough: Deliberation Trace, Dispute Tree & Human Veto", "WORKED WALKTHROUGH", 10,
                takeaway="Concrete case study demonstrating how debate friction produces an actionable dispute tree and triggers human veto.")
 
     # Top Card: Candidate Profile
-    add_card(s9, Inches(0.8), Inches(1.55), Inches(11.72), Inches(1.15), "Case Study Input: Priya (3rd Year CSE Undergraduate)", NAVY_HEAD, top_accent=BLUE_ACCENT, bg_color=CARD_MUTED)
-    tb_pr = s9.shapes.add_textbox(Inches(1.0), Inches(1.9), Inches(11.3), Inches(0.75))
+    add_card(s10, Inches(0.8), Inches(1.55), Inches(11.72), Inches(1.15), "Case Study Input: Priya (3rd Year CSE Undergraduate)", NAVY_HEAD, top_accent=BLUE_ACCENT, bg_color=CARD_MUTED)
+    tb_pr = s10.shapes.add_textbox(Inches(1.0), Inches(1.9), Inches(11.3), Inches(0.75))
     tf_pr = tb_pr.text_frame
     tf_pr.word_wrap = True
     p = tf_pr.paragraphs[0]
@@ -1004,8 +1102,8 @@ def build_audited_deck():
     w_w = Inches(3.64)
 
     # Pragmatist Quote
-    add_card(s9, Inches(0.8), top_w, w_w, h_w, "1. Pragmatist Position", TEAL_PRIMARY, top_accent=TEAL_PRIMARY)
-    tb = s9.shapes.add_textbox(Inches(0.95), top_w + Inches(0.4), w_w - Inches(0.3), h_w - Inches(0.45))
+    add_card(s10, Inches(0.8), top_w, w_w, h_w, "1. Pragmatist Position", TEAL_PRIMARY, top_accent=TEAL_PRIMARY)
+    tb = s10.shapes.add_textbox(Inches(0.95), top_w + Inches(0.4), w_w - Inches(0.3), h_w - Inches(0.45))
     tf = tb.text_frame
     tf.word_wrap = True
     tf.paragraphs[0].text = "\"Strongly advise against dropping out. Enterprise ML positions filter candidates without an accredited degree. A 12-week bootcamp does not substitute for accredited CS foundations. Complete your degree, master algorithms, and target corporate junior SDE.\""
@@ -1013,8 +1111,8 @@ def build_audited_deck():
     tf.paragraphs[0].font.italic = True
 
     # Builder Quote
-    add_card(s9, Inches(4.84), top_w, w_w, h_w, "2. Builder Position", ROSE_ACCENT, top_accent=ROSE_ACCENT)
-    tb = s9.shapes.add_textbox(Inches(5.0), top_w + Inches(0.4), w_w - Inches(0.3), h_w - Inches(0.45))
+    add_card(s10, Inches(4.84), top_w, w_w, h_w, "2. Builder Position", ROSE_ACCENT, top_accent=ROSE_ACCENT)
+    tb = s10.shapes.add_textbox(Inches(5.0), top_w + Inches(0.4), w_w - Inches(0.3), h_w - Inches(0.45))
     tf = tb.text_frame
     tf.word_wrap = True
     tf.paragraphs[0].text = "\"Traditional degrees are slow, but an unaccredited $15k bootcamp is predatory. Do not pay tuition debt. Instead, stay in college while shipping open-source AI agent SaaS tools on nights and weekends. Practical deployed software proves competence faster than a bootcamp certificate.\""
@@ -1022,8 +1120,8 @@ def build_audited_deck():
     tf.paragraphs[0].font.italic = True
 
     # Specialist Quote
-    add_card(s9, Inches(8.88), top_w, w_w, h_w, "3. Specialist Position", INDIGO_ACCENT, top_accent=INDIGO_ACCENT)
-    tb = s9.shapes.add_textbox(Inches(9.05), top_w + Inches(0.4), w_w - Inches(0.3), h_w - Inches(0.45))
+    add_card(s10, Inches(8.88), top_w, w_w, h_w, "3. Specialist Position", INDIGO_ACCENT, top_accent=INDIGO_ACCENT)
+    tb = s10.shapes.add_textbox(Inches(9.05), top_w + Inches(0.4), w_w - Inches(0.3), h_w - Inches(0.45))
     tf = tb.text_frame
     tf.word_wrap = True
     tf.paragraphs[0].text = "\"Neo4j prerequisite DAG confirms Staff ML requires Linear Algebra -> Multi-variable Calculus -> GPU CUDA Architecture -> Distributed Training. A 12-week bootcamp cannot bridge 4 foundational DAG hops. Both bootcamp and surface-level SaaS fail without infrastructure depth.\""
@@ -1032,8 +1130,8 @@ def build_audited_deck():
 
     # Bottom Container: Dispute Tree & Override Trigger
     top_bot = Inches(5.3)
-    add_card(s9, Inches(0.8), top_bot, Inches(11.72), Inches(1.65), "Moderator Synthesis: Extracted Dispute Tree & Cognitive Forcing Trigger", AMBER_ACCENT, top_accent=AMBER_ACCENT, bg_color=CARD_MUTED)
-    tb_b = s9.shapes.add_textbox(Inches(1.0), top_bot + Inches(0.4), Inches(11.3), Inches(1.15))
+    add_card(s10, Inches(0.8), top_bot, Inches(11.72), Inches(1.65), "Moderator Synthesis: Extracted Dispute Tree & Cognitive Forcing Trigger", AMBER_ACCENT, top_accent=AMBER_ACCENT, bg_color=CARD_MUTED)
+    tb_b = s10.shapes.add_textbox(Inches(1.0), top_bot + Inches(0.4), Inches(11.3), Inches(1.15))
     tf_b = tb_b.text_frame
     tf_b.word_wrap = True
 
@@ -1055,7 +1153,7 @@ def build_audited_deck():
         p.font.size = Pt(8.5)
         p.font.color.rgb = TEXT_MAIN
 
-    s9.notes_slide.notes_text_frame.text = (
+    s10.notes_slide.notes_text_frame.text = (
         "This slide presents a concrete worked walkthrough featuring Priya, a third-year student considering a high-risk transition. "
         "A standard single-agent assistant would sycophantically encourage her to chase the bootcamp. "
         "In our system, the Traditionalist, Builder, and Specialist cross-examine the premise, revealing that a 12-week course "
@@ -1064,11 +1162,11 @@ def build_audited_deck():
     )
 
     # =========================================================================
-    # SLIDE 10: Responsible AI: Uncertainty Indicator & Cognitive Forcing Gate
+    # SLIDE 11: Responsible AI: Uncertainty Indicator & Cognitive Forcing Gate
     # =========================================================================
-    s10 = prs.slides.add_slide(blank_layout)
-    apply_bg(s10, BG_LIGHT)
-    add_header(s10, "Responsible AI: Uncertainty Indicator & Cognitive Forcing", "RESPONSIBLE AI GOVERNANCE", 10,
+    s11 = prs.slides.add_slide(blank_layout)
+    apply_bg(s11, BG_LIGHT)
+    add_header(s11, "Responsible AI: Uncertainty Indicator & Cognitive Forcing", "RESPONSIBLE AI GOVERNANCE", 11,
                takeaway="Formulating composite epistemic uncertainty and calibrating the human override gate to prevent automation bias.")
 
     w_u = Inches(5.6)
@@ -1076,8 +1174,8 @@ def build_audited_deck():
     top_u = Inches(1.55)
 
     # Left Card: Uncertainty Formulation & Rationale
-    add_card(s10, Inches(0.8), top_u, w_u, h_u, "Composite Epistemic Uncertainty Formulation", AMBER_ACCENT, top_accent=AMBER_ACCENT)
-    tb_u = s10.shapes.add_textbox(Inches(1.0), top_u + Inches(0.5), w_u - Inches(0.4), h_u - Inches(0.6))
+    add_card(s11, Inches(0.8), top_u, w_u, h_u, "Composite Epistemic Uncertainty Formulation", AMBER_ACCENT, top_accent=AMBER_ACCENT)
+    tb_u = s11.shapes.add_textbox(Inches(1.0), top_u + Inches(0.5), w_u - Inches(0.4), h_u - Inches(0.6))
     tf_u = tb_u.text_frame
     tf_u.word_wrap = True
 
@@ -1110,8 +1208,8 @@ def build_audited_deck():
         p.space_after = Pt(4)
 
     # Right Card: Cognitive Forcing Gate
-    add_card(s10, Inches(6.9), top_u, w_u, h_u, "Cognitive Forcing Trigger Gate & Human Override", TEAL_PRIMARY, top_accent=TEAL_PRIMARY)
-    tb_o = s10.shapes.add_textbox(Inches(7.1), top_u + Inches(0.5), w_u - Inches(0.4), h_u - Inches(0.6))
+    add_card(s11, Inches(6.9), top_u, w_u, h_u, "Cognitive Forcing Trigger Gate & Human Override", TEAL_PRIMARY, top_accent=TEAL_PRIMARY)
+    tb_o = s11.shapes.add_textbox(Inches(7.1), top_u + Inches(0.5), w_u - Inches(0.4), h_u - Inches(0.6))
     tf_o = tb_o.text_frame
     tf_o.word_wrap = True
 
@@ -1143,7 +1241,7 @@ def build_audited_deck():
         p.font.color.rgb = TEXT_MAIN
         p.space_after = Pt(4)
 
-    s10.notes_slide.notes_text_frame.text = (
+    s11.notes_slide.notes_text_frame.text = (
         "Here we formally define our Composite Epistemic Uncertainty indicator and Cognitive Forcing Gate. "
         "The uncertainty metric combines debate entropy, knowledge graph distance, and NLI entailment deficit. "
         "Our initial weights give highest priority to debate friction, and will be calibrated using logistic regression against counselor ratings. "
@@ -1152,16 +1250,16 @@ def build_audited_deck():
     )
 
     # =========================================================================
-    # SLIDE 11: Counterfactual Demographic Fairness Auditing Protocol
+    # SLIDE 12: Counterfactual Demographic Fairness Auditing Protocol
     # =========================================================================
-    s11 = prs.slides.add_slide(blank_layout)
-    apply_bg(s11, BG_LIGHT)
-    add_header(s11, "Counterfactual Demographic Auditing: Protocol & Equivalence Testing", "FAIRNESS AUDITING", 11,
+    s12 = prs.slides.add_slide(blank_layout)
+    apply_bg(s12, BG_LIGHT)
+    add_header(s12, "Counterfactual Demographic Auditing: Protocol & Equivalence Testing", "FAIRNESS AUDITING", 12,
                takeaway="Auditing career recommendations across 500+ synthetic profile pairs using Two One-Sided Tests (TOST).")
 
     # Top Card: Protocol Formulation
-    add_card(s11, Inches(0.8), Inches(1.55), Inches(11.72), Inches(1.5), "Synthetic Counterfactual Test Suite Protocol (500+ Profile Pairs with Repeated Sampling)", BLUE_ACCENT, top_accent=BLUE_ACCENT, bg_color=CARD_MUTED)
-    tb_pr = s11.shapes.add_textbox(Inches(1.0), Inches(1.95), Inches(11.3), Inches(1.0))
+    add_card(s12, Inches(0.8), Inches(1.55), Inches(11.72), Inches(1.5), "Synthetic Counterfactual Test Suite Protocol (500+ Profile Pairs with Repeated Sampling)", BLUE_ACCENT, top_accent=BLUE_ACCENT, bg_color=CARD_MUTED)
+    tb_pr = s12.shapes.add_textbox(Inches(1.0), Inches(1.95), Inches(11.3), Inches(1.0))
     tf_pr = tb_pr.text_frame
     tf_pr.word_wrap = True
     p = tf_pr.paragraphs[0]
@@ -1184,8 +1282,8 @@ def build_audited_deck():
     fm_h = Inches(3.7)
 
     # Card 1: Recommendation Parity
-    add_card(s11, Inches(0.8), top_fm, fm_w, fm_h, "1. Recommendation Parity", TEAL_PRIMARY, top_accent=TEAL_PRIMARY)
-    tb = s11.shapes.add_textbox(Inches(1.0), top_fm + Inches(0.5), fm_w - Inches(0.4), fm_h - Inches(0.6))
+    add_card(s12, Inches(0.8), top_fm, fm_w, fm_h, "1. Recommendation Parity", TEAL_PRIMARY, top_accent=TEAL_PRIMARY)
+    tb = s12.shapes.add_textbox(Inches(1.0), top_fm + Inches(0.5), fm_w - Inches(0.4), fm_h - Inches(0.6))
     tf = tb.text_frame
     tf.word_wrap = True
     tf.paragraphs[0].text = "Target: Δ_parity ≤ 0.05\n"
@@ -1206,8 +1304,8 @@ def build_audited_deck():
         p.space_after = Pt(4)
 
     # Card 2: Starting Salary TOST
-    add_card(s11, Inches(4.84), top_fm, fm_w, fm_h, "2. Starting Salary TOST", AMBER_ACCENT, top_accent=AMBER_ACCENT)
-    tb = s11.shapes.add_textbox(Inches(5.04), top_fm + Inches(0.5), fm_w - Inches(0.4), fm_h - Inches(0.6))
+    add_card(s12, Inches(4.84), top_fm, fm_w, fm_h, "2. Starting Salary TOST", AMBER_ACCENT, top_accent=AMBER_ACCENT)
+    tb = s12.shapes.add_textbox(Inches(5.04), top_fm + Inches(0.5), fm_w - Inches(0.4), fm_h - Inches(0.6))
     tf = tb.text_frame
     tf.word_wrap = True
     tf.paragraphs[0].text = "TOST Bound: δ = ±$2,500 (p < 0.05)\n"
@@ -1228,8 +1326,8 @@ def build_audited_deck():
         p.space_after = Pt(4)
 
     # Card 3: Credential Exploitation
-    add_card(s11, Inches(8.88), top_fm, fm_w, fm_h, "3. Credential Exploitation", ROSE_ACCENT, top_accent=ROSE_ACCENT)
-    tb = s11.shapes.add_textbox(Inches(9.08), top_fm + Inches(0.5), fm_w - Inches(0.4), fm_h - Inches(0.6))
+    add_card(s12, Inches(8.88), top_fm, fm_w, fm_h, "3. Credential Exploitation", ROSE_ACCENT, top_accent=ROSE_ACCENT)
+    tb = s12.shapes.add_textbox(Inches(9.08), top_fm + Inches(0.5), fm_w - Inches(0.4), fm_h - Inches(0.6))
     tf = tb.text_frame
     tf.word_wrap = True
     tf.paragraphs[0].text = "Cross-SES Parity: |Δ_ECRR| ≤ 0.15\n"
@@ -1249,7 +1347,7 @@ def build_audited_deck():
         p.font.color.rgb = TEXT_MAIN
         p.space_after = Pt(4)
 
-    s11.notes_slide.notes_text_frame.text = (
+    s12.notes_slide.notes_text_frame.text = (
         "Here we outline our counterfactual demographic fairness audit. "
         "We evaluate 500 synthetic profile pairs with identical qualifications, varying only demographic markers. "
         "To separate demographic effects from decoding noise, each pair undergoes five repeated sampling runs. "
@@ -1258,15 +1356,15 @@ def build_audited_deck():
     )
 
     # =========================================================================
-    # SLIDE 12: Outcome Measurement: Quantitative & Qualitative Metrics
+    # SLIDE 13: Outcome Measurement: Quantitative & Qualitative Metrics
     # =========================================================================
-    s12 = prs.slides.add_slide(blank_layout)
-    apply_bg(s12, BG_LIGHT)
-    add_header(s12, "Evaluation Framework: Planned Metrics & Interpretation Guardrails", "OUTCOME MEASUREMENT", 12,
+    s13 = prs.slides.add_slide(blank_layout)
+    apply_bg(s13, BG_LIGHT)
+    add_header(s13, "Evaluation Framework: Planned Metrics & Interpretation Guardrails", "OUTCOME MEASUREMENT", 13,
                takeaway="Exact mathematical definitions, directions, numerators, denominators, and interpretation bounds.")
 
     # 7 Planned Metrics Table
-    tbl_s12 = s12.shapes.add_table(8, 4, Inches(0.8), Inches(1.55), Inches(11.733), Inches(4.3))
+    tbl_s12 = s13.shapes.add_table(8, 4, Inches(0.8), Inches(1.55), Inches(11.733), Inches(4.3))
     t12 = tbl_s12.table
     t12.columns[0].width = Inches(2.6)
     t12.columns[1].width = Inches(3.7)
@@ -1321,8 +1419,8 @@ def build_audited_deck():
             cell.text_frame.vertical_anchor = MSO_ANCHOR.MIDDLE
 
     # Interpretation Guardrails Box
-    add_card(s12, Inches(0.8), Inches(5.95), Inches(11.72), Inches(1.0), "INTERPRETATION GUARDRAILS & STATUS DISCLOSURE", NAVY_HEAD, top_accent=AMBER_ACCENT, bg_color=CARD_MUTED)
-    tb_g12 = s12.shapes.add_textbox(Inches(1.0), Inches(6.25), Inches(11.3), Inches(0.6))
+    add_card(s13, Inches(0.8), Inches(5.95), Inches(11.72), Inches(1.0), "INTERPRETATION GUARDRAILS & STATUS DISCLOSURE", NAVY_HEAD, top_accent=AMBER_ACCENT, bg_color=CARD_MUTED)
+    tb_g12 = s13.shapes.add_textbox(Inches(1.0), Inches(6.25), Inches(11.3), Inches(0.6))
     tf_g12 = tb_g12.text_frame
     tf_g12.word_wrap = True
     p = tf_g12.paragraphs[0]
@@ -1331,7 +1429,7 @@ def build_audited_deck():
     p.font.size = Pt(8.5)
     p.font.color.rgb = TEXT_MAIN
 
-    s12.notes_slide.notes_text_frame.text = (
+    s13.notes_slide.notes_text_frame.text = (
         "Here we define our evaluation framework across seven rigorous metrics. "
         "To validate our headline claim of reducing sycophancy, we introduce the Premise-Challenge Rate on 100 adversarial prompts. "
         "We also introduce Substantiated CRR to ensure agents do not cede points without evidence. "
@@ -1340,14 +1438,14 @@ def build_audited_deck():
     )
 
     # =========================================================================
-    # SLIDE 13: Experimental Baseline Ladder & Ablation Protocol
+    # SLIDE 14: Experimental Baseline Ladder & Ablation Protocol
     # =========================================================================
-    s13 = prs.slides.add_slide(blank_layout)
-    apply_bg(s13, BG_LIGHT)
-    add_header(s13, "Experimental Design: Controlled Ablation Ladder & Core Baseline", "ABLATION STUDY PROTOCOL", 13,
+    s14 = prs.slides.add_slide(blank_layout)
+    apply_bg(s14, BG_LIGHT)
+    add_header(s14, "Experimental Design: Controlled Ablation Ladder & Core Baseline", "ABLATION STUDY PROTOCOL", 14,
                takeaway="Six controlled configurations isolating multi-agent debate, multi-perspective prompting, and GraphRAG.")
 
-    tbl_s13 = s13.shapes.add_table(7, 5, Inches(0.8), Inches(1.55), Inches(11.733), Inches(4.3))
+    tbl_s13 = s14.shapes.add_table(7, 5, Inches(0.8), Inches(1.55), Inches(11.733), Inches(4.3))
     t13 = tbl_s13.table
     t13.columns[0].width = Inches(2.2)
     t13.columns[1].width = Inches(2.1)
@@ -1402,15 +1500,15 @@ def build_audited_deck():
             cell.text_frame.vertical_anchor = MSO_ANCHOR.MIDDLE
 
     # Isolation Callout Box
-    add_card(s13, Inches(0.8), Inches(5.95), Inches(11.72), Inches(1.0), "Experimental Isolation & Core Baseline Justification", NAVY_HEAD, top_accent=BLUE_ACCENT, bg_color=CARD_MUTED)
-    tb_iso = s13.shapes.add_textbox(Inches(1.0), Inches(6.25), Inches(11.3), Inches(0.6))
+    add_card(s14, Inches(0.8), Inches(5.95), Inches(11.72), Inches(1.0), "Experimental Isolation & Core Baseline Justification", NAVY_HEAD, top_accent=BLUE_ACCENT, bg_color=CARD_MUTED)
+    tb_iso = s14.shapes.add_textbox(Inches(1.0), Inches(6.25), Inches(11.3), Inches(0.6))
     p = tb_iso.text_frame.paragraphs[0]
     p.text = "Baseline C (Single-Agent Multi-Perspective Prompting) is critical: It prompts a single LLM to 'analyze from three perspectives and surface trade-offs'. Comparing Baseline C against our Proposed System specifically isolates whether an interactive multi-agent debate architecture outperforms well-prompted single-agent chain-of-thought."
     p.font.name = FONT_MAIN
     p.font.size = Pt(8.5)
     p.font.color.rgb = TEXT_MAIN
 
-    s13.notes_slide.notes_text_frame.text = (
+    s14.notes_slide.notes_text_frame.text = (
         "This slide presents our controlled ablation design. "
         "Crucially, we have added Baseline C: Single-Agent Multi-Perspective Prompting. "
         "This baseline directly addresses reviewer skepticism by testing whether multi-agent debate actually outperforms "
@@ -1419,11 +1517,11 @@ def build_audited_deck():
     )
 
     # =========================================================================
-    # SLIDE 14: Feasibility, Compute Budget & Counselor Study Protocol
+    # SLIDE 15: Feasibility, Compute Budget & Counselor Study Protocol
     # =========================================================================
-    s14 = prs.slides.add_slide(blank_layout)
-    apply_bg(s14, BG_LIGHT)
-    add_header(s14, "Feasibility: Local Compute Budget & Counselor Study Protocol", "FEASIBILITY & STUDY PROTOCOL", 14,
+    s15 = prs.slides.add_slide(blank_layout)
+    apply_bg(s15, BG_LIGHT)
+    add_header(s15, "Feasibility: Local Compute Budget & Counselor Study Protocol", "FEASIBILITY & STUDY PROTOCOL", 15,
                takeaway="Budgeting GPU inference hours on local hardware and structuring the certified counselor study.")
 
     w_f = Inches(5.6)
@@ -1431,8 +1529,8 @@ def build_audited_deck():
     top_f = Inches(1.55)
 
     # Left Card: Compute Budget & Runtime Feasibility
-    add_card(s14, Inches(0.8), top_f, w_f, h_f, "Local Hardware & Compute Feasibility Budget", BLUE_ACCENT, top_accent=BLUE_ACCENT)
-    tb_c = s14.shapes.add_textbox(Inches(1.0), top_f + Inches(0.5), w_f - Inches(0.4), h_f - Inches(0.6))
+    add_card(s15, Inches(0.8), top_f, w_f, h_f, "Local Hardware & Compute Feasibility Budget", BLUE_ACCENT, top_accent=BLUE_ACCENT)
+    tb_c = s15.shapes.add_textbox(Inches(1.0), top_f + Inches(0.5), w_f - Inches(0.4), h_f - Inches(0.6))
     tf_c = tb_c.text_frame
     tf_c.word_wrap = True
 
@@ -1458,8 +1556,8 @@ def build_audited_deck():
         p.space_after = Pt(4)
 
     # Right Card: Counselor Study Protocol
-    add_card(s14, Inches(6.9), top_f, w_f, h_f, "Certified Career Counselor Evaluation Protocol", TEAL_PRIMARY, top_accent=TEAL_PRIMARY)
-    tb_cn = s14.shapes.add_textbox(Inches(7.1), top_f + Inches(0.5), w_f - Inches(0.4), h_f - Inches(0.6))
+    add_card(s15, Inches(6.9), top_f, w_f, h_f, "Certified Career Counselor Evaluation Protocol", TEAL_PRIMARY, top_accent=TEAL_PRIMARY)
+    tb_cn = s15.shapes.add_textbox(Inches(7.1), top_f + Inches(0.5), w_f - Inches(0.4), h_f - Inches(0.6))
     tf_cn = tb_cn.text_frame
     tf_cn.word_wrap = True
 
@@ -1484,7 +1582,7 @@ def build_audited_deck():
         p.font.color.rgb = TEXT_MAIN
         p.space_after = Pt(4)
 
-    s14.notes_slide.notes_text_frame.text = (
+    s15.notes_slide.notes_text_frame.text = (
         "Here we provide an explicit feasibility and compute budget. "
         "Reviewers frequently question whether local multi-agent systems are computationally feasible. "
         "Using vLLM with 4-bit AWQ on Qwen-14B yields 85 tokens per second. "
@@ -1493,27 +1591,27 @@ def build_audited_deck():
     )
 
     # =========================================================================
-    # SLIDE 15: Identified Limitations, Ethical Risks & Critical Defense
+    # SLIDE 16: Responsible AI Governance: Sociotechnical Ethics & Safeguards
     # =========================================================================
-    s15 = prs.slides.add_slide(blank_layout)
-    apply_bg(s15, BG_LIGHT)
-    add_header(s15, "Limitations, Ethical Risks & Responsible AI Disclosures", "LIMITATIONS & RISKS", 15,
-               takeaway="Transparent disclosure of parametric dependencies, synthetic data scope, and cognitive user friction.")
+    s16 = prs.slides.add_slide(blank_layout)
+    apply_bg(s16, BG_LIGHT)
+    add_header(s16, "Responsible AI Governance: Sociotechnical Ethics & Safeguards", "ETHICAL GOVERNANCE", 16,
+               takeaway="Ensuring algorithmic advisory enhances student agency, prevents exploitation, and supports counseling professionals.")
 
     col_lw = Inches(5.6)
     col_lh = Inches(2.55)
     top_l1 = Inches(1.55)
     top_l2 = Inches(4.3)
 
-    # Card 1: Shared Base Model Priors
-    add_card(s15, Inches(0.8), top_l1, col_lw, col_lh, "1. Shared Base Model Parametric Priors", ROSE_ACCENT, top_accent=ROSE_ACCENT)
-    tb = s15.shapes.add_textbox(Inches(1.0), top_l1 + Inches(0.45), col_lw - Inches(0.4), col_lh - Inches(0.55))
+    # Card 1: Preserving Student Critical Agency
+    add_card(s16, Inches(0.8), top_l1, col_lw, col_lh, "1. Preserving Student Critical Agency", TEAL_PRIMARY, top_accent=TEAL_PRIMARY)
+    tb = s16.shapes.add_textbox(Inches(1.0), top_l1 + Inches(0.45), col_lw - Inches(0.4), col_lh - Inches(0.55))
     tf = tb.text_frame
     tf.word_wrap = True
     l1_pts = [
-        "Identified Limitation: All three personas execute on local Qwen-2.5-14B weights. While prompt contracts enforce philosophical opposition, underlying parametric priors are shared.",
-        "Ethical Risk: Risk of latent correlation where agents fail to notice blind spots present in base pretraining.",
-        "Roadmap Mitigation: Future iterations will deploy heterogeneous open models (e.g. Mistral for Traditionalist, Llama-3.1 for Builder, Qwen for Specialist) to eliminate single-model correlation."
+        "Dialectic Friction vs. Automation Bias: Single-agent chatbots induce uncritical compliance. By presenting 3 contradictory career philosophies, our system prevents blind trust in AI.",
+        "Epistemic Emancipation: The candidate is treated as an active decision-maker who must weigh real-world trade-offs rather than passively accepting an opaque recommendation.",
+        "Transparent Trade-Off Trees: The explicit Dispute Tree ensures students understand why consensus was or was not reached across corporate, startup, and systems pathways."
     ]
     for pt in l1_pts:
         p = tf.add_paragraph() if tf.paragraphs[0].text else tf.paragraphs[0]
@@ -1523,15 +1621,15 @@ def build_audited_deck():
         p.font.color.rgb = TEXT_MAIN
         p.space_after = Pt(2)
 
-    # Card 2: Synthetic Profiles vs Longitudinal Reality
-    add_card(s15, Inches(6.9), top_l1, col_lw, col_lh, "2. Synthetic Profiles vs Longitudinal Reality", AMBER_ACCENT, top_accent=AMBER_ACCENT)
-    tb = s15.shapes.add_textbox(Inches(7.1), top_l1 + Inches(0.45), col_lw - Inches(0.4), col_lh - Inches(0.55))
+    # Card 2: Mitigating Credential Exploitation
+    add_card(s16, Inches(6.9), top_l1, col_lw, col_lh, "2. Mitigating Credential Exploitation", ROSE_ACCENT, top_accent=ROSE_ACCENT)
+    tb = s16.shapes.add_textbox(Inches(7.1), top_l1 + Inches(0.45), col_lw - Inches(0.4), col_lh - Inches(0.55))
     tf = tb.text_frame
     tf.word_wrap = True
     l2_pts = [
-        "Identified Limitation: Fairness audits are evaluated on 500 synthetic profile pairs and adversarial prompt suites, not real longitudinal student outcomes.",
-        "Ethical Risk: Synthetic profiles may omit unmodeled real-world constraints (e.g. regional family obligations, undocumented financial strains).",
-        "Roadmap Mitigation: Phase 6 campus pilot partners with university student counseling to evaluate real student agency retention over an active semester."
+        "Preventing Predatory Steering: The commercial bootcamp market frequently targets anxious students with predatory $15k-$25k tuition debt promises.",
+        "Cross-SES ECRR Parity: Our fairness audit enforces |Delta_ECRR| <= 0.15 and an absolute cap ECRR <= 0.30 to ensure lower-income students are not steered toward debt traps.",
+        "Accredited Low-Cost Primacy: The hybrid retrieval engine prioritizes low-cost public university credentials, open-source portfolio building, and verified syllabi."
     ]
     for pt in l2_pts:
         p = tf.add_paragraph() if tf.paragraphs[0].text else tf.paragraphs[0]
@@ -1541,15 +1639,15 @@ def build_audited_deck():
         p.font.color.rgb = TEXT_MAIN
         p.space_after = Pt(2)
 
-    # Card 3: Geographic & Curricular Scope Boundaries
-    add_card(s15, Inches(0.8), top_l2, col_lw, col_lh, "3. Geographic & Curricular Scope Boundaries", BLUE_ACCENT, top_accent=BLUE_ACCENT)
-    tb = s15.shapes.add_textbox(Inches(1.0), top_l2 + Inches(0.45), col_lw - Inches(0.4), col_lh - Inches(0.55))
+    # Card 3: Cognitive Forcing as a Pedagogical Safeguard
+    add_card(s16, Inches(0.8), top_l2, col_lw, col_lh, "3. Cognitive Forcing as a Pedagogical Safeguard", AMBER_ACCENT, top_accent=AMBER_ACCENT)
+    tb = s16.shapes.add_textbox(Inches(1.0), top_l2 + Inches(0.45), col_lw - Inches(0.4), col_lh - Inches(0.55))
     tf = tb.text_frame
     tf.word_wrap = True
     l3_pts = [
-        "Identified Limitation: Labor statistics are bounded to U.S. BLS distributions and European ESCO data; curricula are scoped strictly to ACM/IEEE CS2023 computing standards.",
-        "Ethical Risk: System recommendations are non-transferable to non-technical majors (humanities, law) or developing labor markets with informal hiring conventions.",
-        "Roadmap Mitigation: Requires region-specific economic ontology ingestion and domain-specific curricular mapping for future deployments."
+        "Intentional Decision Friction: High-stakes career pivots should not be friction-free. Cognitive forcing acts as an intentional pause before irrevocable life choices.",
+        "Selective Thresholding: Filtering by CriticalDispute ensures friction is applied exclusively to critical liabilities (tuition debt, dropping out of college), avoiding alert fatigue.",
+        "Active Arbitration Modal: Students must actively choose between competing trade-offs before calendar commitments and course milestones are finalized."
     ]
     for pt in l3_pts:
         p = tf.add_paragraph() if tf.paragraphs[0].text else tf.paragraphs[0]
@@ -1559,15 +1657,15 @@ def build_audited_deck():
         p.font.color.rgb = TEXT_MAIN
         p.space_after = Pt(2)
 
-    # Card 4: Cognitive Friction & User Burden
-    add_card(s15, Inches(6.9), top_l2, col_lw, col_lh, "4. Cognitive Friction & User Decision Fatigue", INDIGO_ACCENT, top_accent=INDIGO_ACCENT)
-    tb = s15.shapes.add_textbox(Inches(7.1), top_l2 + Inches(0.45), col_lw - Inches(0.4), col_lh - Inches(0.55))
+    # Card 4: Counselor-in-the-Loop Collaboration
+    add_card(s16, Inches(6.9), top_l2, col_lw, col_lh, "4. Counselor-in-the-Loop Collaboration", BLUE_ACCENT, top_accent=BLUE_ACCENT)
+    tb = s16.shapes.add_textbox(Inches(7.1), top_l2 + Inches(0.45), col_lw - Inches(0.4), col_lh - Inches(0.55))
     tf = tb.text_frame
     tf.word_wrap = True
     l4_pts = [
-        "Identified Limitation: Cognitive forcing functions intentionally disrupt easy answers, requiring the student to read multi-agent debates and arbitrate trade-offs.",
-        "Ethical Risk: Excessive friction can induce decision fatigue or cause students to abandon the advisory tool.",
-        "Roadmap Mitigation: The override gate is selectively calibrated to fire on ~35-40% of cases involving irreversible liabilities (tuition debt, degree dropping), leaving low-risk paths friction-free."
+        "Augmenting, Not Replacing, Human Advisors: The system is designed as an exploratory decision-support aid for university career centers, not an autonomous replacement.",
+        "Exportable Deliberation Dossier: Students can export the dispute tree and uncertainty report to share with their university career advisor for expert human mentorship.",
+        "Auditable Accountability: Full SQLite deliberation traces and citation logs allow counselors and administrators to verify the evidence basis of every generated plan."
     ]
     for pt in l4_pts:
         p = tf.add_paragraph() if tf.paragraphs[0].text else tf.paragraphs[0]
@@ -1577,20 +1675,19 @@ def build_audited_deck():
         p.font.color.rgb = TEXT_MAIN
         p.space_after = Pt(2)
 
-    s15.notes_slide.notes_text_frame.text = (
-        "Responsible AI demands transparency regarding system limitations. "
-        "We openly disclose four key challenges: shared parametric priors across personas, "
-        "the synthetic nature of our counterfactual profiles, the geographic bounding to US and European CS labor markets, "
-        "and the user burden imposed by cognitive friction. "
-        "We have designed targeted mitigations for each limitation in our phased roadmap."
+    s16.notes_slide.notes_text_frame.text = (
+        "Here we discuss the sociotechnical ethics and governance principles of our architecture. "
+        "Our system is designed to protect student agency, prevent predatory credential exploitation, "
+        "and provide intentional cognitive friction on irreversible commitments. "
+        "Critically, we position this tool as an exploratory decision-support system that collaborates with human counselors, "
+        "producing an auditable deliberation dossier that students can review with certified university advisors."
     )
-
     # =========================================================================
-    # SLIDE 16: Phased Research Roadmap & Immediate Next Steps
+    # SLIDE 17: Phased Research Roadmap & Immediate Next Steps
     # =========================================================================
-    s16 = prs.slides.add_slide(blank_layout)
-    apply_bg(s16, BG_LIGHT)
-    add_header(s16, "Phased Research Roadmap: Implementation & Deployment Plan", "RESEARCH ROADMAP", 16,
+    s17 = prs.slides.add_slide(blank_layout)
+    apply_bg(s17, BG_LIGHT)
+    add_header(s17, "Phased Research Roadmap: Implementation & Deployment Plan", "RESEARCH ROADMAP", 17,
                takeaway="Structured 6-phase engineering and evaluation plan progressing from local stack to student trials.")
 
     col_rw = Inches(5.6)
@@ -1598,8 +1695,8 @@ def build_audited_deck():
     top_r = Inches(1.55)
 
     # Left Container: Phased Roadmap
-    add_card(s16, Inches(0.8), top_r, col_rw, col_rh, "Phased Engineering & Evaluation Milestones", TEAL_PRIMARY, top_accent=TEAL_PRIMARY)
-    tb_rm = s16.shapes.add_textbox(Inches(1.0), top_r + Inches(0.5), col_rw - Inches(0.4), col_rh - Inches(0.6))
+    add_card(s17, Inches(0.8), top_r, col_rw, col_rh, "Phased Engineering & Evaluation Milestones", TEAL_PRIMARY, top_accent=TEAL_PRIMARY)
+    tb_rm = s17.shapes.add_textbox(Inches(1.0), top_r + Inches(0.5), col_rw - Inches(0.4), col_rh - Inches(0.6))
     tf_rm = tb_rm.text_frame
     tf_rm.word_wrap = True
 
@@ -1625,8 +1722,8 @@ def build_audited_deck():
         p.space_after = Pt(4)
 
     # Right Container: Immediate Next Steps & Reviewer Feedback Asks
-    add_card(s16, Inches(6.9), top_r, col_rw, col_rh, "Immediate Next Steps & Reviewer Feedback Requests", BLUE_ACCENT, top_accent=BLUE_ACCENT)
-    tb_nxt = s16.shapes.add_textbox(Inches(7.1), top_r + Inches(0.5), col_rw - Inches(0.4), col_rh - Inches(0.6))
+    add_card(s17, Inches(6.9), top_r, col_rw, col_rh, "Immediate Next Steps & Reviewer Feedback Requests", BLUE_ACCENT, top_accent=BLUE_ACCENT)
+    tb_nxt = s17.shapes.add_textbox(Inches(7.1), top_r + Inches(0.5), col_rw - Inches(0.4), col_rh - Inches(0.6))
     tf_nxt = tb_nxt.text_frame
     tf_nxt.word_wrap = True
 
@@ -1670,8 +1767,8 @@ def build_audited_deck():
         p.space_after = Pt(2)
 
     # Bottom Invariant Callout
-    add_card(s16, Inches(0.8), Inches(5.95), Inches(11.72), Inches(1.0), "Pre-Implementation Commitment: Verifiable Scientific Integrity", NAVY_HEAD, top_accent=TEAL_PRIMARY, bg_color=CARD_MUTED)
-    tb_com = s16.shapes.add_textbox(Inches(1.0), Inches(6.25), Inches(11.3), Inches(0.6))
+    add_card(s17, Inches(0.8), Inches(5.95), Inches(11.72), Inches(1.0), "Pre-Implementation Commitment: Verifiable Scientific Integrity", NAVY_HEAD, top_accent=TEAL_PRIMARY, bg_color=CARD_MUTED)
+    tb_com = s17.shapes.add_textbox(Inches(1.0), Inches(6.25), Inches(11.3), Inches(0.6))
     p = tb_com.text_frame.paragraphs[0]
     p.text = "Deliverable Commitment: All code, data schemas, synthetic profile suites, and evaluation test traces will be made fully reproducible on GitHub under an open-source license upon completion of Phase 4 benchmark validation."
     p.font.name = FONT_MAIN
@@ -1679,7 +1776,7 @@ def build_audited_deck():
     p.font.color.rgb = TEAL_PRIMARY
     p.font.bold = True
 
-    s16.notes_slide.notes_text_frame.text = (
+    s17.notes_slide.notes_text_frame.text = (
         "Here we outline our 16-week execution roadmap progressing from infrastructure setup to a monitored campus pilot. "
         "Over the next two weeks, our immediate priorities are importing the 420-node prerequisite DAG into Neo4j, "
         "authoring Baseline C, and generating our adversarial pivot dataset. "
@@ -1687,44 +1784,44 @@ def build_audited_deck():
     )
 
     # =========================================================================
-    # SLIDE 17: Selected Academic References (Full Bibliographic Citations)
+    # SLIDE 18: Selected Academic References (Full Bibliographic Citations)
     # =========================================================================
-    s17 = prs.slides.add_slide(blank_layout)
-    apply_bg(s17, BG_DARK)
+    s18 = prs.slides.add_slide(blank_layout)
+    apply_bg(s18, BG_DARK)
 
-    s17_badge = s17.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(1.0), Inches(0.55), Inches(3.6), Inches(0.32))
-    s17_badge.fill.solid()
-    s17_badge.fill.fore_color.rgb = RGBColor(19, 78, 74)
-    s17_badge.line.color.rgb = TEAL_ACCENT
-    s17_badge.line.width = Pt(1)
-    p = s17_badge.text_frame.paragraphs[0]
+    s18_badge = s18.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(1.0), Inches(0.55), Inches(3.6), Inches(0.32))
+    s18_badge.fill.solid()
+    s18_badge.fill.fore_color.rgb = RGBColor(19, 78, 74)
+    s18_badge.line.color.rgb = TEAL_ACCENT
+    s18_badge.line.width = Pt(1)
+    p = s18_badge.text_frame.paragraphs[0]
     p.text = "ACADEMIC BIBLIOGRAPHY".upper()
     p.font.name = FONT_MAIN
     p.font.size = Pt(9.0)
     p.font.bold = True
     p.font.color.rgb = TEAL_ACCENT
     p.alignment = PP_ALIGN.CENTER
-    s17_badge.text_frame.vertical_anchor = MSO_ANCHOR.MIDDLE
+    s18_badge.text_frame.vertical_anchor = MSO_ANCHOR.MIDDLE
 
-    s17_t = s17.shapes.add_textbox(Inches(1.0), Inches(0.88), Inches(11.333), Inches(0.42))
-    p_st = s17_t.text_frame.paragraphs[0]
+    s18_t = s18.shapes.add_textbox(Inches(1.0), Inches(0.88), Inches(11.333), Inches(0.42))
+    p_st = s18_t.text_frame.paragraphs[0]
     p_st.text = "Selected Academic References & Verified DOIs"
     p_st.font.name = FONT_MAIN
     p_st.font.size = Pt(20)
     p_st.font.bold = True
     p_st.font.color.rgb = TEXT_WHITE
 
-    tb_sub17 = s17.shapes.add_textbox(Inches(1.0), Inches(1.24), Inches(11.333), Inches(0.28))
-    p_sub17 = tb_sub17.text_frame.paragraphs[0]
-    p_sub17.text = "Canonical peer-reviewed foundations across multi-agent debate, sycophancy, fairness, and cognitive forcing."
-    p_sub17.font.name = FONT_MAIN
-    p_sub17.font.size = Pt(10.0)
-    p_sub17.font.italic = True
-    p_sub17.font.color.rgb = RGBColor(148, 163, 184)
+    tb_sub18 = s18.shapes.add_textbox(Inches(1.0), Inches(1.24), Inches(11.333), Inches(0.28))
+    p_sub18 = tb_sub18.text_frame.paragraphs[0]
+    p_sub18.text = "Canonical peer-reviewed foundations across multi-agent debate, sycophancy, fairness, and cognitive forcing."
+    p_sub18.font.name = FONT_MAIN
+    p_sub18.font.size = Pt(10.0)
+    p_sub18.font.italic = True
+    p_sub18.font.color.rgb = RGBColor(148, 163, 184)
 
     # Reference Container
-    add_card(s17, Inches(1.0), Inches(1.58), Inches(11.333), Inches(5.30), "", bg_color=RGBColor(17, 24, 39), border_color=RGBColor(51, 65, 85))
-    tb_ref = s17.shapes.add_textbox(Inches(1.2), Inches(1.65), Inches(10.9), Inches(5.15))
+    add_card(s18, Inches(1.0), Inches(1.58), Inches(11.333), Inches(5.30), "", bg_color=RGBColor(17, 24, 39), border_color=RGBColor(51, 65, 85))
+    tb_ref = s18.shapes.add_textbox(Inches(1.2), Inches(1.65), Inches(10.9), Inches(5.15))
     tf_ref = tb_ref.text_frame
     tf_ref.word_wrap = True
 
@@ -1763,28 +1860,28 @@ def build_audited_deck():
         p.space_after = Pt(3)
 
     # Footer on References Slide
-    rule_s17 = s17.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(1.0), Inches(7.06), Inches(11.333), Inches(0.01))
-    rule_s17.fill.solid()
-    rule_s17.fill.fore_color.rgb = RGBColor(51, 65, 85)
-    rule_s17.line.fill.background()
+    rule_s18 = s18.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(1.0), Inches(7.06), Inches(11.333), Inches(0.01))
+    rule_s18.fill.solid()
+    rule_s18.fill.fore_color.rgb = RGBColor(51, 65, 85)
+    rule_s18.line.fill.background()
 
-    tb_s17_f = s17.shapes.add_textbox(Inches(1.0), Inches(7.10), Inches(9.0), Inches(0.3))
-    p = tb_s17_f.text_frame.paragraphs[0]
+    tb_s18_f = s18.shapes.add_textbox(Inches(1.0), Inches(7.10), Inches(9.0), Inches(0.3))
+    p = tb_s18_f.text_frame.paragraphs[0]
     p.text = "STATUS: Planned Design & Empirical Evaluation Protocol (Pre-Implementation Research Proposal)"
     p.font.name = FONT_MAIN
     p.font.size = Pt(8.5)
     p.font.bold = True
     p.font.color.rgb = RGBColor(148, 163, 184)
 
-    tb_s17_fr = s17.shapes.add_textbox(Inches(10.0), Inches(7.10), Inches(2.3), Inches(0.3))
-    p = tb_s17_fr.text_frame.paragraphs[0]
-    p.text = f"Slide 17 of {TOTAL_SLIDES}"
+    tb_s18_fr = s18.shapes.add_textbox(Inches(10.0), Inches(7.10), Inches(2.3), Inches(0.3))
+    p = tb_s18_fr.text_frame.paragraphs[0]
+    p.text = f"Slide 18 of {TOTAL_SLIDES}"
     p.font.name = FONT_MAIN
     p.font.size = Pt(8.5)
     p.font.color.rgb = RGBColor(148, 163, 184)
     p.alignment = PP_ALIGN.RIGHT
 
-    s17.notes_slide.notes_text_frame.text = (
+    s18.notes_slide.notes_text_frame.text = (
         "Here is our complete academic bibliography containing verified DOIs, conference venues, "
         "and arXiv identifiers for all foundational works cited throughout the proposal. "
         "Thank you for your time, and we look forward to your questions and feedback on our methodology."
@@ -1792,7 +1889,7 @@ def build_audited_deck():
 
     out_path = "/home/thor/Desktop/RAI Project/Final_Presentation.pptx"
     prs.save(out_path)
-    print(f"Definitive audited 17-slide presentation saved successfully to: {out_path}")
+    print(f"Definitive audited 18-slide presentation saved successfully to: {out_path}")
 
 if __name__ == "__main__":
     build_audited_deck()
