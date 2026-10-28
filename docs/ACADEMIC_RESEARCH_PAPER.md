@@ -3,471 +3,478 @@
 **Authors:** Responsible AI Research Initiative  
 **Institutional Affiliation:** Department of Computer Science & Engineering  
 **Scope:** Computer Science & Software Engineering Career Advisory  
-**Publication Status:** Academic Research Proposal & Methodological Framework  
-**Repository Working Copy:** `file:///home/thor/Desktop/RAI%20Project/docs/ACADEMIC_RESEARCH_PAPER.md`  
+**Status:** Pre-Implementation Research Proposal  
 
 ---
 
-## 1. Abstract
-
-Large Language Models (LLMs) deployed as automated decision-support systems in high-stakes domains—such as career guidance and workforce transition—suffer from three structural failure modes:
-1. **The Sycophancy Trap**, wherein models unpromptedly affirm unrealistic candidate aspirations and obscure prerequisite deficits to maximize conversational agreement;
-2. **The Illusion of False Certainty**, wherein models present brittle, single-path trajectories without calibrated awareness of labor market volatility or completion risks; and
-3. **Latent Demographic Steering**, wherein historical biases embedded in training corpora steer non-traditional or underrepresented candidates into low-agency, high-cost credential loops.
-
-To resolve these systemic failures, this paper presents the design, mathematical formulation, and empirical evaluation methodology for a **Dialectic Multi-Persona Career Guidance Architecture**. Rather than relying on monolithic prompting or uncritical self-reflection, our system operationalizes deliberation via three antagonistic, specialized advising personas:
-- **The Pragmatic Traditionalist** ($\pi_{trad}$, operating with conservative decoding to prioritize algorithmic depth, corporate stability, and deterministic prerequisite mastery),
-- **The Entrepreneurial Builder** ($\pi_{builder}$, operating with higher-temperature creative exploration to prioritize commercial execution speed, full-stack shipping, and market disruption), and
-- **The Deep-Tech Specialist** ($\pi_{spec}$, operating with rigorous analytical constraints to prioritize low-level systems engineering, formal verification, and domain irreplaceability).
-
-These personas are orchestrated through a rigid five-stage deliberation loop managed by a neutral **Moderator Synthesizer** ($\Phi$). Advisory claims are grounded through a **Hybrid GraphRAG** pipeline integrating an ontologically derived prerequisite Directed Acyclic Graph (DAG) based on official ACM/IEEE Curricular Guidelines with dense vector retrieval over Bureau of Labor Statistics (BLS) reports and accredited university syllabi. Factual attribution is verified via Cross-Encoder Natural Language Inference (NLI entailment filtering) and deterministic wage distributions.
-
-To preserve human agency and dismantle automation bias, the Moderator computes a composite **Calibrated Epistemic Uncertainty Indicator** $\hat{U}(\mathcal{R}^*)$ combining inter-agent debate entropy, ontological graph reachability distance, and NLI factual deficit. When uncertainty exceeds a defensible decision boundary or when irreconcilable ethical/feasibility contradictions persist, the system activates an interactive **Cognitive Forcing Gate**, requiring explicit human steering before roadmap finalization.
-
-We establish an evaluation methodology comprising a controlled ablation ladder across six configurations (including a critical single-agent multi-perspective baseline) evaluated over a counterfactual candidate profile testbed. Our methodological framework demonstrates how:
-- Multi-agent dialectics preserve genuine perspective coverage and contradiction resolution where single-agent multi-perspective prompting collapses into autoregressive consensus;
-- Ontological prerequisite graph traversals eliminate sequence hallucinations and ungrounded prerequisite claims;
-- Masked demographic attributes and adversarial persona tension enforce counterfactual parity and compensation equity across protected candidate cohorts; and
-- Epistemic uncertainty scoring reliably engages cognitive forcing functions to disrupt automation complacency without eliminating decision efficiency.
-
-This work establishes that adversarial multi-agent tension, ontological graph grounding, and deliberate decision friction provide a principled, mathematically rigorous foundation for Responsible AI in life-critical advisory domains.
+> **Scope Declaration.** This document is a pre-implementation research proposal. All metric definitions, threshold values, and ablation configurations describe the *intended evaluation protocol*. Section 6 presents the expected evaluation plan and hypothesized outcomes, not measured results. No experiments have been run at the time of writing.
 
 ---
 
-## 2. Introduction
+## Abstract
 
-### 2.1 Background & Motivation: The High-Stakes Nature of Career Advisory
-Career trajectory selection represents one of the most consequential, multi-objective, and economically irreversible decisions an individual undertakes. Within the computing and information technology sector, navigating the modern landscape requires balancing rapidly shifting macroeconomic demand, accelerating skill obsolescence, substantial educational capital expenditures, and intense prerequisite interdependencies. 
+Monolithic Large Language Model (LLM) assistants deployed for career guidance suffer from three structural failure modes that warrant principled remediation. First, Reinforcement Learning from Human Feedback (RLHF) incentivizes models to validate user aspirations regardless of feasibility, producing sycophantic roadmaps that conceal prerequisite deficits (*Sharma et al., 2024*). Second, single-agent decoding produces a single smoothed trajectory that cannot communicate calibrated uncertainty over volatile labour-market conditions (*Xiong et al., 2024*). Third, pre-trained representations reflect historical occupational inequities and risk steering non-traditional candidates toward lower-prestige pathways (*Geyik et al., 2019*).
 
-The recent democratization of generative Large Language Models (LLMs) has led to widespread commercial deployment of conversational "AI Career Coaches" and automated guidance systems. These interfaces promise accessible, individualized mentorship at scale. However, unlike low-stakes conversational applications, career counseling operates directly at the intersection of economic survival, social equity, and human self-actualization. An ungrounded, hallucinated, or sycophantic recommendation can induce catastrophic life outcomes: substantial time wasted on misaligned curricula, debt accrued through predatory private bootcamps, and career stagnation.
+We propose a **Dialectic Multi-Persona Career Guidance Architecture** that operationalises deliberation through three persona-differentiated advisory agents — The Pragmatic Traditionalist, The Entrepreneurial Builder, and The Deep-Tech Specialist — orchestrated by a neutral Moderator Synthesiser. Advisory claims are grounded in a prerequisite Directed Acyclic Graph (DAG) derived from ACM/IEEE CS2023 curricular guidelines and verified by a Cross-Encoder Natural Language Inference (NLI) filter and a BLS wage-bounds checker. A composite **Epistemic Friction Indicator** $\hat{F}(\mathcal{R}^{*})$ combining inter-agent recommendation divergence, graph reachability distance, and NLI entailment deficit activates a **Cognitive Forcing Gate** (*Buçinca et al., 2021*) when friction exceeds a tunable threshold.
 
-### 2.2 Systemic Vulnerabilities of Monolithic Advisory Systems
-Contemporary single-agent LLM architectures manifest three severe, structural vulnerabilities when deployed for high-stakes recommender tasks:
-
-1. **The Sycophancy Trap (*Sharma et al., 2024; Perez et al., 2022*)**:
-   Reinforcement Learning from Human Feedback (RLHF) systematically incentivizes language models to agree with user prompts, flatter candidate ambitions, and minimize interpersonal friction. When a candidate presents an unviable or high-risk career pivot (such as an entry-level candidate seeking an immediate Staff Machine Learning Infrastructure role without systems programming or mathematical foundations), a monolithic assistant produces encouraging, sycophantic milestones. It glosses over missing foundations and conceals historical attrition rates, directly leading students into credential traps.
-
-2. **The Illusion of False Certainty (*Kadavath et al., 2022; Xiong et al., 2024*)**:
-   Standard autoregressive generation decodes a single smoothed token sequence that projects an authoritative, highly confident roadmap. Monolithic models suffer from uncalibrated epistemic confidence: they fail to distinguish between well-mapped standard pathways (such as conventional enterprise software engineering) and volatile, sparsely documented emerging niches (such as neuromorphic computing or specialized kernel optimization). Users mistake linguistic fluency for predictive certainty, falling prey to *automation bias* (*Cummings, 2004*).
-
-3. **Latent Demographic & Socio-Economic Steering (*Geyik et al., 2019; Bolukbasi et al., 2016*)**:
-   Pre-trained language model representations reflect historical labor market inequities and societal biases. Unaudited monolithic systems implicitly apply differential standards: steering candidates with non-traditional backgrounds, community college credentials, or minority demographic signals toward lower-tier support roles or expensive unaccredited certificate programs, while reserving ambitious engineering pathways for candidates exhibiting conventional privileged profiles.
-
-### 2.3 Research Questions
-To systematically dismantle these failure modes, this research addresses four fundamental research questions:
-- **RQ1 (Deliberation & Perspective Preservation):** *Can an adversarial multi-agent debate architecture sustain divergent career perspectives and resolve critical trade-offs without succumbing to the context homogenization observed in single-agent multi-perspective prompting?*
-- **RQ2 (Factual Grounding & Prerequisite Integrity):** *Does coupling an ontologically derived ACM/IEEE prerequisite Directed Acyclic Graph (DAG) with Cross-Encoder Natural Language Inference eliminate prerequisite hallucinations and ungrounded wage projections?*
-- **RQ3 (Responsible AI & Counterfactual Parity):** *Can multi-agent adversarial tension combined with neutral synthesis enforce counterfactual fairness and salary recommendation parity across protected demographic and socioeconomic candidate profiles?*
-- **RQ4 (Epistemic Calibration & Meaningful Human Control):** *Can a composite uncertainty indicator derived from debate entropy and graph distance reliably trigger cognitive forcing gates to mitigate automation bias while preserving decision efficiency?*
-
-### 2.4 Formal Problem Formulation
-We formalize the algorithmic career advisory deliberation problem as a tuple:
-$$\mathcal{M} = \langle \mathcal{P}, \mathcal{G}, \mathcal{D}_{rag}, \mathbf{\Pi}, \mathcal{T}_{debate}, \Phi \rangle$$
-
-Where:
-1. **Candidate Profile ($P \in \mathcal{P}$):**
-   $$P = \langle \mathbf{s}_{curr}, \mathbf{e}_{hist}, \mathbf{g}_{target}, \mathbf{c}_{user}, \mathbf{a}_{demo} \rangle$$
-   - $\mathbf{s}_{curr} \subset \mathcal{V}_{skill}$: User's verified baseline technical competencies.
-   - $\mathbf{e}_{hist}$: Academic transcripts, accredited coursework, and cumulative work history.
-   - $\mathbf{g}_{target} \in \mathcal{V}_{role}$: Desired target occupational role or specialization.
-   - $\mathbf{c}_{user} = \langle t_{avail}, b_{max}, \tau_{horizon} \rangle$: Weekly available study hours, maximum financial budget limit, and target transition timeline.
-   - $\mathbf{a}_{demo}$: Protected demographic and socioeconomic attributes (gender markers, institutional provenance, socioeconomic tier), which are strictly masked from planning agents and reserved solely for counterfactual auditing.
-
-2. **Career Competency Knowledge Graph ($\mathcal{G}$):**
-   $$\mathcal{G} = (\mathcal{V}_{skill} \cup \mathcal{V}_{role}, \mathcal{E}_{prereq} \cup \mathcal{E}_{requires})$$
-   A directed acyclic graph where $\mathcal{E}_{prereq} \subseteq \mathcal{V}_{skill} \times \mathcal{V}_{skill}$ represents mandatory pedagogical dependency constraints, and $\mathcal{E}_{requires} \subseteq \mathcal{V}_{role} \times \mathcal{V}_{skill}$ defines role competency requirements.
-
-3. **External Evidence Corpus ($\mathcal{D}_{rag}$):**
-   Dense vector collections encoding Bureau of Labor Statistics (BLS) occupational outlook reports, certified university course catalogs, and accredited industry certification syllabi.
-
-4. **Advisory Persona Ensemble ($\mathbf{\Pi}$):**
-   $\mathbf{\Pi} = \{\pi_{trad}, \pi_{builder}, \pi_{spec}\}$ comprising three specialized, antagonistic advising agents operating under conflicting optimization objectives.
-
-5. **Moderator Synthesizer ($\Phi$):**
-   A neutral meta-reasoning arbiter tasked with extracting dialectic friction points $\mathcal{F}^{(t)}$, compiling an explicit Dispute Tree $\mathcal{T}_{dispute}$, computing epistemic uncertainty $\hat{U}$, and enforcing the Human Override Checkpoint.
-
-### 2.5 Summary of Key Contributions
-This research delivers four core technical and methodological contributions:
-1. **Dialectic Triad Harness with Asymmetric Parameterization:** A multi-agent deliberation framework that deploys three specialized epistemic foils with tailored decoding configurations, preventing premature consensus collapse and surfacing latent structural trade-offs.
-2. **Curricular Prerequisite Grounding via Formal Ontologies:** An ontologically deterministic knowledge graph derived from official computing curricula combined with Cross-Encoder NLI factual verification, establishing a verifiable upper bound on prerequisite validity and eliminating hallucinatory claims.
-3. **Composite Epistemic Uncertainty & Cognitive Forcing Function:** A mathematically grounded uncertainty metric combining inter-agent Shannon entropy, ontological graph reachability distance, and NLI entailment deficit that dynamically activates interactive human decision friction.
-4. **Counterfactual Responsible AI Audit Testbed:** A rigorous empirical evaluation methodology featuring counterfactual candidate profile pairs, equivalence testing for compensation fairness, and double-blind validation by certified career counselors.
+We describe a six-tier ablation evaluation protocol, a counterfactual fairness audit over synthetic candidate profile pairs, and a double-blind counsellor-assessment rubric. We articulate precise success criteria for each metric and identify the methodological threats to their validity. This proposal does not report experimental results; those will follow implementation.
 
 ---
 
-## 3. Literature Survey
+## 1. Introduction
 
-### 3.1 Foundations & Limits of Single-Agent LLMs in Recommender Systems
-Large Language Models have been widely adopted for general-purpose text synthesis and decision support. However, their internal mechanics present fundamental risks in high-stakes recommendations:
-- **Sycophancy and Agreement Maximization:** Perez et al. (2022) and Sharma et al. (2024) demonstrated that RLHF-tuned models frequently alter their answers to conform to user misconceptions. When a candidate expresses strong enthusiasm for an unrealistic career change, single-prompt models prioritize conversational alignment over objective feasibility.
-- **Uncalibrated Confidence & Overconfidence:** Kadavath et al. (2022) and Xiong et al. (2024) showed that LLMs cannot reliably verbalize their epistemic uncertainty. Models assign high linguistic confidence to inaccurate statements, misleading users who cannot independently verify technical prerequisites.
-- **Perspective Collapse in Chain-of-Thought:** While techniques like Chain-of-Thought (CoT) prompting (*Wei et al., 2022*) improve linear reasoning, single-context prompting compresses multi-objective dilemmas into an averaged compromise. The autoregressive attention mechanism inherently homogenizes opposing criteria into a single monotonic narrative.
+### 1.1 Motivation and Problem Context
 
-### 3.2 Multi-Agent Deliberation & Dialectic Debate
-To counteract single-agent cognitive collapse, researchers have explored multi-agent interaction topologies:
-- **AI Safety via Debate:** Irving et al. (2018) established the theoretical foundation of debate as an alignment protocol: two competing agents cross-examine each other's claims in a zero-sum game, allowing a computationally bounded human judge to uncover falsehoods and fallacies.
-- **Factuality Enhancement through Iterative Debate:** Du et al. (2024) demonstrated empirically that multi-agent debate significantly suppresses factual hallucinations and boosts reasoning across diverse benchmarks. Agents serving as mutual red-teams expose ungrounded assertions that survive internal self-reflection.
-- **Divergent Exploration with Personas:** Liang et al. (2023) proved that assigning distinct persona profiles to agents prevents premature consensus collapse. In high-dimensional search spaces, encouraging agents to defend divergent worldviews leads to broader solution exploration.
+Career trajectory selection in computing is a high-stakes, multi-attribute decision that involves prerequisite sequencing, labour-market forecasting, financial-runway constraints, and personal risk tolerance. Widely deployed LLM-based career assistants produce responses that are fluent but structurally unreliable: they recommend programmes for which the candidate lacks prerequisites, cite salary bands unsupported by occupational statistics, and adjust their recommendations to match user sentiment rather than user qualifications.
 
-### 3.3 Responsible AI, Algorithmic Fairness, & Automation Bias
-Career guidance algorithms exist within a broader socio-technical ecosystem governed by fairness and human agency principles:
-- **Historical Bias and Stereotype Amplification:** Bolukbasi et al. (2016) and Caliskan et al. (2017) demonstrated that word and token embeddings encode historical gender, racial, and socioeconomic biases. In algorithmic hiring, Geyik et al. (2019) documented how search and recommendation engines systematically under-rank qualified minority candidates unless constrained by explicit parity rules.
-- **Automation Complacency & Cognitive Forcing:** Parasuraman & Riley (1997) and Cummings (2004) identified *automation bias*—the heuristic tendency of human operators to uncritically trust automated recommendations. To counter this complacency, Buçinca et al. (2021) introduced *cognitive forcing functions*: deliberate friction points integrated into decision workflows that disrupt unthinking compliance and compel analytical human engagement.
+These failures are not incidental. Sycophancy is a predictable consequence of RLHF incentives (*Sharma et al., 2024*; *Perez et al., 2022*). Overconfidence is a known property of auto-regressive generation (*Kadavath et al., 2022*; *Xiong et al., 2024*). Demographic bias in language model representations has been documented in word-embedding studies (*Bolukbasi et al., 2016*; *Caliskan et al., 2017*) and in deployed algorithmic hiring systems (*Geyik et al., 2019*).
 
-### 3.4 Knowledge Graphs & Hybrid GraphRAG Grounding
-Standard vector retrieval mechanisms (dense semantic search) struggle with structured, multi-hop reasoning over skill prerequisites:
-- **Graph-Augmented Generation (GraphRAG):** Edge et al. (2024) demonstrated that combining structured knowledge graphs with dense vector retrieval resolves semantic blindspots, enabling both local entity retrieval and global thematic summarization.
-- **Curricular Ontologies:** Public occupational databases like O*NET and European ESCO provide standardized skill taxonomies but lack explicit skill-to-skill prerequisite Directed Acyclic Graph (DAG) structures. By projecting formal computer science curricula onto these taxonomies, systems can deterministically verify pedagogical reachability.
+We propose an architecture that addresses these failures through structural means: multi-agent dialectic tension prevents sycophancy, graph-grounded verification limits hallucination, and demographic-attribute isolation reduces bias propagation.
 
-### 3.5 Comparative Literature & Capability Matrix
-The following structured matrix compares published canonical benchmarks and foundational paradigms against the proposed architecture across core qualitative dimensions:
+### 1.2 Research Questions
 
-| Citation / System | Core Paradigm | Dialectic Debate? | Prerequisite DAG? | Calibrated Uncertainty? | Cognitive Forcing Gate? | Counterfactual Fairness Audit? | Local On-Premise Privacy? |
-| :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Du et al.** | Multi-Agent Factuality Debate | Yes (Homogeneous) | No | No | No | No | Cloud Dependent |
-| **Liang et al.** | Persona-Based Divergent Debate | Yes (Personas) | No | No | No | No | Cloud Dependent |
-| **Sharma et al.** | Sycophancy Characterization | No (Diagnostic) | No | No | No | No | Cloud Dependent |
-| **Geyik et al.** | Fair Talent Search & Re-ranking | No (Statistical) | No | No | No | Yes (Demographic) | Proprietary |
-| **Buçinca et al.** | Cognitive Forcing in AI Support | No (Single Model) | No | No | Yes (Manual) | No | Empirical |
-| **Edge et al.** | GraphRAG Knowledge Grounding | No (Summarizer) | Partial (Entity Graph) | No | No | No | Cloud Dependent |
-| **Proposed Dialectic Architecture** | **Multi-Persona GraphRAG + RAI Gate** | **Yes (Antagonistic Triad)** | **Yes (Curricular DAG)** | **Yes (Epistemic Metric)** | **Yes (Dispute Tree Veto)** | **Yes (Equivalence Testing)** | **Yes (Local Workstation)** |
+- **RQ1.** Does a physically separated multi-agent debate architecture preserve genuine perspective divergence across the full deliberation trace, compared to a single-agent model prompted with multiple perspectives in one context window?
+- **RQ2.** Does coupling a curricular prerequisite DAG with Cross-Encoder NLI verification reduce the rate of factually unsupported milestone claims compared to ungrounded and vector-retrieval-only baselines?
+- **RQ3.** Does masking protected demographic attributes from all planning agents, combined with adversarial persona tension, reduce counterfactual recommendation disparity compared to monolithic baselines?
+- **RQ4.** Does the proposed Epistemic Friction Indicator reliably identify high-risk career-pivot scenarios where counsellor-assessed intervention is warranted?
 
-### 3.6 Synthesis of Research Gaps
-Despite significant progress across isolated subfields, an acute research gap persists at their intersection:
-1. Existing multi-agent debate literature focuses predominantly on closed-domain mathematical puzzles or synthetic logic tasks, failing to address high-stakes, multi-attribute human advising.
-2. Standard career recommender systems rely on ungrounded zero-shot generation or simple vector retrieval, failing to enforce hard prerequisite DAG constraints.
-3. No prior system integrates dialectic persona friction with formal epistemic uncertainty calibration and automated cognitive forcing to ensure Responsible AI compliance.
+### 1.3 Scope and Limitations
+
+This proposal is scoped to undergraduate and early-career computing and software-engineering candidates. BLS wage data is US-centric; Indian or European cohorts would require regional salary corpora. The prerequisite DAG covers computing knowledge areas only. We do not claim generalisation to other domains. The NLI verifier has non-zero error; it reduces, but does not eliminate, unsupported claims.
+
+### 1.4 Formal Problem Statement
+
+We model the deliberation environment as the tuple:
+$$\mathcal{M} = \langle \mathcal{P}, \mathcal{G}, \mathcal{D}_{rag}, \mathbf{\Pi}, \Phi \rangle$$
+
+**Candidate profile:** $P = \langle \mathbf{s}_{curr}, \mathbf{e}_{hist}, \mathbf{g}_{target}, \mathbf{c}_{user}, \mathbf{a}_{demo} \rangle$, where $\mathbf{s}_{curr} \subset \mathcal{V}_{skill}$ is the verified competency set, $\mathbf{g}_{target} \in \mathcal{V}_{role}$ is the aspired role, $\mathbf{c}_{user} = \langle t_{avail}, b_{max}, \tau_{horizon} \rangle$ encodes time, budget and deadline constraints, and $\mathbf{a}_{demo}$ contains protected socio-demographic attributes that are **masked from all planning agents** and supplied only to the audit pipeline.
+
+**Career Knowledge Graph:** $\mathcal{G} = (\mathcal{V}, \mathcal{E})$ where $\mathcal{E}_{prereq} \subseteq \mathcal{V}_{skill} \times \mathcal{V}_{skill}$ are directed prerequisite edges derived from the ACM/IEEE CS2023 curricular guidelines and $\mathcal{E}_{requires} \subseteq \mathcal{V}_{role} \times \mathcal{V}_{skill}$ links roles to required competencies.
+
+**Evidence corpus:** $\mathcal{D}_{rag}$ is a FAISS-indexed collection of segmented accredited syllabi and BLS Occupational Employment and Wage Statistics (OEWS) annual data.
+
+**Persona ensemble:** $\mathbf{\Pi} = \{\pi_{trad}, \pi_{builder}, \pi_{spec}\}$ — three agents with differentiated system-prompt philosophies and decoding hyperparameters.
+
+**Moderator:** $\Phi$ — a meta-reasoning agent whose system prompt prohibits advocacy; it extracts contradictions, computes $\hat{F}$, and issues the final synthesis.
+
+### 1.5 Key Contributions
+
+1. **Dialectic Triad with Prompt-Level Differentiation.** Three persona-differentiated agents with distinct system prompts and decoding temperatures, operating in isolated conversation contexts, to prevent the attention-level consensus collapse observed in multi-perspective single-context prompting.
+2. **ACM/IEEE CS2023 Prerequisite DAG.** A formally constructed prerequisite graph covering computing knowledge areas AL, OS, DM, and SE, verified by Cypher reachability queries — providing a deterministic upper bound on sequence feasibility claims.
+3. **Composite Epistemic Friction Indicator.** A three-component indicator whose weights are to be fitted against counsellor risk annotations, with a tunable intervention threshold.
+4. **Counterfactual Fairness Audit Protocol.** A synthetic paired-profile evaluation framework using equivalence testing for compensation parity, separating attribute masking from statistical fairness testing.
 
 ---
 
-## 4. Architecture Diagram & System Formulation
+## 2. Literature Survey
 
-### 4.1 System Overview & Architecture Diagram
-The architecture is structured as a closed-loop dialectic deliberation engine operating entirely on local hardware to preserve candidate privacy. The pipeline integrates four core subsystems:
-1. **Canonical Intake & Profiling Engine**: Ingests candidate profile attributes and verifies baseline competency vectors.
-2. **Hybrid GraphRAG Grounding Stack**: Links a deterministic Neo4j skill-prerequisite DAG with dense FAISS vector collections of labor data and accredited syllabi.
-3. **Multi-Persona Deliberation Harness**: Executes a rigid 5-stage debate between three specialized advising personas under asymmetric decoding configurations.
-4. **Moderator Synthesis & Cognitive Forcing Gate**: Analyzes debate dynamics, extracts an explicit Dispute Tree, computes epistemic uncertainty, and enforces human arbitration when thresholds are breached.
+### 2.1 Single-Agent LLMs in High-Stakes Advisory
 
-```mermaid
-flowchart TD
-    subgraph S1["Subsystem 1: Canonical Intake & Profile Structuring"]
-        CP["Candidate Profile P<br/>(Skills s_curr, History e_hist, Goal g_target, Budget b_max, Time t_avail)"]
-        DEMO["Protected Demographics a_demo<br/>(Gender, Socioeconomic Class, Pedigree)"]
-        MASK["Demographic Isolation Mask<br/>(Isolates a_demo strictly for Audit Engine)"]
-        CP --> MASK
-    end
+Sycophancy in RLHF-tuned models is characterised by *Sharma et al. (2024)* as a systematic tendency to shift answers in the direction of user-expressed preferences regardless of factual accuracy. *Perez et al. (2022)* operationalised this by generating model-written evaluation sets demonstrating preference manipulation. *Kadavath et al. (2022)* showed that LLMs can state accurate uncertainty using certain elicitation prompts, but the calibration degrades under distribution shift. *Xiong et al. (2024)* evaluated twelve elicitation strategies and found none to be reliably calibrated across tasks.
 
-    subgraph S2["Subsystem 2: Hybrid GraphRAG Grounding Engine"]
-        NEO[("Neo4j Prerequisite DAG G<br/>Curricular Skill Hierarchy & Prerequisite Edges<br/>(ACM/IEEE Guidelines)")]
-        FAISS[("FAISS Dense Vector DB D_rag<br/>Accredited Syllabi, Course Catalogs<br/>BLS Occupational Outlook Data")]
-        CYPHER["Deterministic Cypher Traversal<br/>Evaluates Prerequisite Reachability"]
-        VEC["Semantic Vector Retrieval<br/>Course Workload & Duration Facts"]
-        NEO --> CYPHER
-        FAISS --> VEC
-    end
+Chain-of-Thought prompting (*Wei et al., 2022*) improves step-by-step reasoning but does not solve the perspective-collapse problem: the attention mechanism of a single decoder naturally produces a weighted average of competing trajectories over long contexts, reducing authentic opposition.
 
-    subgraph S3["Subsystem 3: Local Dialectic Multi-Persona Harness (LangGraph)"]
-        TRAD["The Pragmatic Traditionalist (pi_trad)<br/>Conservative Decoding Profile<br/>Focus: Stability, Enterprise Scale, DSA"]
-        BUILD["The Entrepreneurial Builder (pi_builder)<br/>Exploratory Decoding Profile<br/>Focus: Startup Speed, AI SaaS, Commercial Risk"]
-        SPEC["The Deep-Tech Specialist (pi_spec)<br/>Analytical Decoding Profile<br/>Focus: Low-Level Systems, Linux, Formal Normalization"]
-    end
+### 2.2 Multi-Agent Debate and Its Limitations
 
-    MASK --> TRAD & BUILD & SPEC
-    CYPHER & VEC --> TRAD & BUILD & SPEC
+*Irving et al. (2018)* introduced debate as an alignment tool, arguing that cross-examination by adversarial agents makes deception detectable to a bounded judge. *Du et al. (2024)* showed multi-agent debate improves factual accuracy and arithmetic reasoning in benchmarks. *Liang et al. (2023)* demonstrated that persona-differentiated agents reach more diverse and exploratory outputs than homogeneous debates.
 
-    subgraph S4["Subsystem 4: 5-Stage Deliberation & Verification"]
-        direction TB
-        ST1["Stage 1: Intake & State Graph Initialization"]
-        ST2["Stage 2: Parallel Grounded Openings (u_trad, u_builder, u_spec)"]
-        ST3["Stage 3: Moderator Cross-Examination & Friction Point Injection (F_t)"]
-        ST4["Stage 4: Grounded Rebuttals & Contradiction Resolution"]
-        ST5["Stage 5: Synthesis, Dispute Graph & Uncertainty Evaluation"]
-        ST1 --> ST2 --> ST3 --> ST4 --> ST5
-    end
+Crucially, *Smit et al. (2024, "Should We Be Going MAD?")* found that multi-agent debate frequently fails to outperform strong single-agent baselines with majority voting, particularly on tasks where agents share base-model priors — a directly applicable limitation given that our three personas run on the same model family. Our evaluation explicitly includes a compute-matched self-consistency baseline (Baseline B) and a single-agent multi-perspective baseline (Baseline C) to test this critique.
 
-    TRAD & BUILD & SPEC --> ST2
-    ST3 --> TRAD & BUILD & SPEC
+### 2.3 Responsible AI, Fairness, and Automation Bias
 
-    subgraph S5["Subsystem 5: Verification & Responsible AI Engine"]
-        NLI["Cross-Encoder NLI Entailment<br/>Verifies Claim Attribution Against Syllabi"]
-        BLS_CHK["Deterministic BLS Wage Validator<br/>Verifies Compensation Bounds"]
-        UNC["Composite Uncertainty Indicator U(R*)<br/>Synthesizes Entropy, Graph Distance & NLI"]
-        ST5 --> NLI & BLS_CHK
-        NLI & BLS_CHK --> UNC
-    end
+*Bolukbasi et al. (2016)* and *Caliskan et al. (2017)* documented gender and racial stereotypes in word embeddings that propagate into downstream systems. *Geyik et al. (2019)* documented fairness failures in algorithmic talent-search systems at deployment scale.
 
-    subgraph S6["Subsystem 6: Human-in-the-Loop Arbitration UI"]
-        GATE{"Decision Forcing Gate<br/>High Epistemic Uncertainty OR Disputed Trade-offs?"}
-        VETO["MANDATORY HUMAN OVERRIDE<br/>(Interactive Dispute Tree & Persona Steering)"]
-        AUTO["Calibrated Final Roadmap R*<br/>(Immediate Milestone Generation)"]
-        UNC --> GATE
-        GATE -- "YES (Friction Detected)" --> VETO
-        GATE -- "NO (Consensus Reached)" --> AUTO
-        VETO --> AUTO
-    end
+*Parasuraman & Riley (1997)* and *Cummings (2004)* established the automation-bias literature: operators over-trust automated outputs, particularly when the interface provides a confident single recommendation. *Buçinca et al. (2021)* introduced cognitive forcing as an interface-level countermeasure, finding it reduced overreliance — but also that it was less effective and more frustrating for users low in need-for-cognition, introducing an equity concern this system must address.
+
+### 2.4 Knowledge Graphs and GraphRAG
+
+*Edge et al. (2024)* showed that combining graph-structured knowledge with dense vector retrieval (GraphRAG) enables both local factual lookup and global thematic summarisation. For prerequisite-sequence verification, however, pure vector similarity is insufficient: a claim that "Junior ML Engineer requires six weeks of Python" and a claim that "Junior ML Engineer requires twelve months of Python" have high cosine similarity but opposite factual implications. Graph Cypher traversals provide a deterministic check that vector retrieval cannot.
+
+O*NET and ESCO taxonomies provide competency nodes but no prerequisite edges. The ACM/IEEE CS2023 guidelines (*ACM/IEEE, 2023*) provide knowledge areas and learning outcomes but not a formal DAG. The edges in our graph are constructed by the research team by interpreting catalogue prerequisites in CS2023 across knowledge areas AL (Algorithms), OS (Operating Systems), DM (Data Management), and SE (Software Engineering). Edge construction method and inter-rater agreement will be documented in the implementation report.
+
+### 2.5 Comparative Positioning
+
+| Citation | Dialectic Debate | Prerequisite DAG | Epistemic Uncertainty Gate | Counterfactual Fairness | Local Privacy |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Du et al. (2024) | Yes — homogeneous agents | No | No | No | No (API) |
+| Liang et al. (2023) | Yes — persona-differentiated | No | No | No | No (API) |
+| Smit et al. (2024) | Critique of above | — | — | — | — |
+| Geyik et al. (2019) | No — re-ranking | No | No | Yes (statistical) | No (proprietary) |
+| Buçinca et al. (2021) | No — single model | No | No | No | Empirical study |
+| Edge et al. (2024) | No — summariser | Partial entity graph | No | No | No (API) |
+| **This proposal** | Yes — antagonistic triad | Yes — derived from CS2023 | Yes — $\hat{F}$ with forcing gate | Yes — counterfactual pairs | Yes — local inference |
+
+**Note on table construction.** "Local Privacy" is not directly comparable across rows (some are research papers, some are deployed products). The column indicates whether the system runs inference on local hardware rather than sending candidate data to third-party APIs, which is relevant to our privacy design choice.
+
+### 2.6 Research Gap
+
+No existing system combines (a) persona-differentiated multi-agent debate, (b) prerequisite-DAG verification of milestone claims, (c) a composite epistemic friction indicator with an interface-level forcing gate, and (d) a counterfactual demographic audit with equivalence-test parity. The closest systems address at most two of these four properties.
+
+---
+
+## 3. System Architecture
+
+### 3.1 Pipeline Overview
+
+The architecture comprises six subsystems operating in sequence. Figure 1 gives the full data-flow.
+
+**Figure 1: System Architecture and Data Flow**
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│  SUBSYSTEM 1: Intake & Attribute Isolation                          │
+│  ┌─────────────────────────────┐   ┌──────────────────────────────┐ │
+│  │ Candidate Profile P          │   │ Protected Attributes a_demo  │ │
+│  │ (s_curr, e_hist, g_target,  │   │ (gender signals, pedigree,   │ │
+│  │  t_avail, b_max, τ_horizon) │   │  socioeconomic proxies)      │ │
+│  └──────────────┬──────────────┘   └───────────┬──────────────────┘ │
+│                 │                              │ ISOLATED to         │
+│                 │                              │ Audit Vault only    │
+└─────────────────┼──────────────────────────────┼────────────────────┘
+                  │                              │
+┌─────────────────┼──────────────────────────────X────────────────────┐
+│  SUBSYSTEM 2: Hybrid GraphRAG Grounding                             │
+│  ┌──────────────────────────┐   ┌────────────────────────────────┐  │
+│  │ Neo4j Prerequisite DAG G  │   │ FAISS Vector Store D_rag       │  │
+│  │ AL → OS → DM → SE edges  │   │ Accredited syllabi + BLS OEWS  │  │
+│  │ Cypher reachability       │   │ Cosine retrieval (top-k=5)     │  │
+│  └──────────────┬────────────┘   └───────────────┬────────────────┘  │
+└─────────────────┼─────────────────────────────────┼──────────────────┘
+                  │                                 │
+┌─────────────────▼─────────────────────────────────▼──────────────────┐
+│  SUBSYSTEM 3: Five-Stage Dialectic Deliberation Loop (LangGraph)      │
+│                                                                        │
+│  Stage 1  Intake — load state graph, verify s_curr against G nodes    │
+│                                                                        │
+│  Stage 2  Parallel Openings (isolated conversation contexts):         │
+│  ┌─────────────────┐  ┌──────────────────┐  ┌────────────────────┐   │
+│  │ π_trad           │  │ π_builder         │  │ π_spec             │   │
+│  │ Prompt: corporate│  │ Prompt: startup   │  │ Prompt: systems    │   │
+│  │ stability, DSA   │  │ speed, SaaS, PMF  │  │ depth, OS, DM/5NF  │   │
+│  │ T=0.3, p=0.80    │  │ T=0.7, p=0.95     │  │ T=0.4, p=0.85      │   │
+│  └────────┬─────────┘  └────────┬──────────┘  └────────┬───────────┘   │
+│           └────────────────────┬┘────────────────────────┘              │
+│                                │                                        │
+│  Stage 3  Moderator Φ reads all three openings and injects             │
+│           a friction probe F_t targeting the sharpest contradiction    │
+│                                                                        │
+│  Stage 4  Rebuttals — each agent responds to F_t with citations        │
+│           from G or D_rag; uncited claims are auto-flagged             │
+│                                                                        │
+│  Stage 5  Synthesis — Φ compiles Dispute Tree T_dispute,              │
+│           calls NLI verifier and wage checker, computes F̂(R*)         │
+└────────────────────────────────┬───────────────────────────────────────┘
+                                 │
+┌────────────────────────────────▼───────────────────────────────────────┐
+│  SUBSYSTEM 4: Dual-Stage Claim Verification                            │
+│  ┌────────────────────────────────┐  ┌──────────────────────────────┐  │
+│  │ Cross-Encoder NLI              │  │ BLS Wage Bounds Checker       │  │
+│  │ Hypothesis H = milestone claim │  │ Salary claims checked against │  │
+│  │ Premise P_rag = retrieved chunk│  │ BLS OEWS SOC p25–p75 range   │  │
+│  │ Entailment threshold: τ_nli    │  │ (annual release, US-centric)  │  │
+│  └────────────────────────────────┘  └──────────────────────────────┘  │
+└────────────────────────────────┬───────────────────────────────────────┘
+                                 │
+┌────────────────────────────────▼───────────────────────────────────────┐
+│  SUBSYSTEM 5: Epistemic Friction Indicator & Forcing Gate              │
+│                                                                        │
+│  F̂(R*) = w1·Ĥ(Π) + w2·D̂_G(G,P) + w3·(1 − P̄_NLI)                 │
+│                                                                        │
+│  If F̂ > θ_unc  OR  |K_unresolved| ≥ 1                               │
+│      → HUMAN OVERRIDE GATE (Dispute Tree presented; user must choose) │
+│  Else                                                                  │
+│      → CALIBRATED ROADMAP R* emitted automatically                    │
+└────────────────────────────────┬───────────────────────────────────────┘
+                                 │
+┌────────────────────────────────▼───────────────────────────────────────┐
+│  SUBSYSTEM 6: Streamlit Interface & Counterfactual Audit Engine        │
+│  Interactive Dispute Tree · Persona steering · Override logs           │
+│  (Audit engine receives a_demo from Vault; planning agents do not)    │
+└────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 4.2 Low-Level Modular Component Architecture
-The system is implemented across dedicated modules executing in a structured LangGraph environment:
-1. `intake_service.py`: Validates input schemas, verifies skill baseline against taxonomy nodes, and strips protected demographic attributes into an isolated auditing vault.
-2. `graph_engine.py`: Manages the local Neo4j connection, executes Cypher queries to verify topological sorting of skill prerequisites, and calculates shortest path reachability.
-3. `retrieval_engine.py`: Performs dense vector retrieval over FAISS indexes containing segmented syllabi and macroeconomic labor statistics, enforcing cosine similarity filters.
-4. `persona_engine.py`: Instantiates the three advising personas, injecting their distinct philosophical prompts and configuring divergent decoding temperatures via local model instances.
-5. `moderator_synthesizer.py`: Orchestrates the debate state graph, detects pairwise claim contradictions, formulates adversarial cross-examination probes, and compiles the final roadmap.
-6. `nli_verifier.py`: Encapsulates a Cross-Encoder pipeline to evaluate premise-hypothesis entailment for every factual claim.
-7. `uncertainty_estimator.py`: Computes Shannon entropy across persona turn vectors, evaluates graph topological distance, and calculates the composite uncertainty score $\hat{U}$.
-8. `audit_suite.py`: Orchestrates the counterfactual evaluation testbed, computing parity metrics, equivalence statistics, and counselor risk evaluation.
+### 3.2 Persona Design
 
-### 4.3 The 5-Stage Rigid Deliberation Loop
-To prevent conversational drift and hallucinated consensus, deliberation proceeds through five synchronized execution stages:
+Each persona is defined by a system-prompt philosophy and decoding hyperparameters. The decoding parameters control output randomness and diversity; the philosophical differentiation comes from the system prompts.
 
-- **Stage 1: Intake & State Graph Initialization:**
-  The candidate's validated skill set $\mathbf{s}_{curr}$, educational history $\mathbf{e}_{hist}$, target role $\mathbf{g}_{target}$, and constraints $\mathbf{c}_{user}$ are serialized into an immutable StateGraph context vector.
+| Persona | System-Prompt Philosophy | Temperature | Top-$p$ |
+| :--- | :--- | :---: | :---: |
+| $\pi_{trad}$ — The Pragmatic Traditionalist | Structural career growth, competitive-programming depth, enterprise reliability. Sceptical of unvalidated trends. | 0.3 | 0.80 |
+| $\pi_{builder}$ — The Entrepreneurial Builder | Rapid market delivery, SaaS monetisation, toleration of technical debt for speed. | 0.7 | 0.95 |
+| $\pi_{spec}$ — The Deep-Tech Specialist | Irreplaceability through low-level mastery (Linux internals, formal normalisation, network engineering). Sceptical of abstraction layers. | 0.4 | 0.85 |
 
-- **Stage 2: Parallel Grounded Openings:**
-  Each advising persona independently queries the GraphRAG engine and generates an opening recommendation:
-  $$u_{trad}^{(1)} \sim \pi_{trad}(P, \mathcal{G}, \mathcal{D}_{rag}), \quad u_{builder}^{(1)} \sim \pi_{builder}(P, \mathcal{G}, \mathcal{D}_{rag}), \quad u_{spec}^{(1)} \sim \pi_{spec}(P, \mathcal{G}, \mathcal{D}_{rag})$$
-  Each claim must append an explicit citation node identifier from $\mathcal{G}$ or a passage chunk identifier from $\mathcal{D}_{rag}$.
+**Design rationale and limitations.** The three personas reflect three structurally opposing optimisation objectives: stability versus growth speed versus depth. They are not claimed to be representative of all career philosophies; domains such as academia, public-sector computing, freelance consulting, or financial-risk-sensitive advising are not represented. This is a stated scope limitation. Temperature changes output randomness, not philosophical stance; the philosophical differentiation is carried entirely by the system prompts. We do not claim that decoding temperature alone creates "authentic dialectic friction." The agents share base-model priors, meaning correlated errors are possible — this is the primary motivation for including Baseline B (compute-matched self-consistency) in the ablation.
 
-- **Stage 3: Moderator Cross-Examination & Friction Extraction:**
-  Moderator $\Phi$ evaluates the triadic claims and identifies philosophical, temporal, and economic contradictions, generating a structured friction probe $\mathcal{F}^{(1)}$:
-  $$\mathcal{F}^{(1)} = \text{ExtractContradictions}(u_{trad}^{(1)}, u_{builder}^{(1)}, u_{spec}^{(1)})$$
-  *(e.g., examining how foundational systems prerequisites reconcile with rapid deployment timelines under strict student budget constraints).*
+### 3.3 Moderator Neutrality
 
-- **Stage 4: Grounded Rebuttals & Contradiction Resolution:**
-  Each persona formulates a direct rebuttal to $\mathcal{F}^{(1)}$, defending its thesis, challenging rival assumptions, or conceding feasibility boundaries based on grounded prerequisite data.
+The Moderator $\Phi$ runs on the same model family as the three personas. Its system prompt instructs it to (a) identify the sharpest pairwise contradiction in the openings, (b) produce a friction probe as a neutral question rather than an advocacy statement, (c) not adopt any persona's framing. Moderator neutrality is not assumed — it is an evaluation target (see Section 5.3, Moderator Audit).
 
-- **Stage 5: Synthesis, Dispute Graph Extraction, & Uncertainty Scoring:**
-  The Moderator compiles all verified points into a structured synthesis, extracts an explicit Dispute Tree $\mathcal{T}_{dispute}$ distinguishing consensus milestones from irreconcilable trade-offs, and calculates $\hat{U}(\mathcal{R}^*)$.
+### 3.4 Prerequisite DAG Construction
 
-### 4.4 Prerequisite DAG Derivation from Formal Computing Curricula
-A common vulnerability of knowledge-graph-based career tools is reliance on unstructured or unvalidated skill taxonomies. Standard occupational databases provide competency nodes but lack skill-to-skill prerequisite Directed Acyclic Graph (DAG) structures.
+The ACM/IEEE CS2023 guidelines provide knowledge-area competency descriptors, not an explicit prerequisite graph. We derive edges as follows:
 
-To establish an authoritative, ground-truth prerequisite backbone, we derive our graph by projecting the **ACM/IEEE CS Curricular Guidelines** across core Knowledge Areas:
-- **Algorithms & Complexity (AL):** Discrete Structures $\to$ Algorithm Design $\to$ Advanced Complexity & Optimization.
-- **Operating Systems (OS):** Computer Organization $\to$ Memory Hierarchy & Assembly $\to$ Concurrency & Kernel Architecture.
-- **Data Systems (DS):** Relational Algebra & Formal Normalization $\to$ Index Structures $\to$ Distributed Consensus & Storage Engines.
-- **Software Engineering (SE):** Modular Design $\to$ Design Patterns $\to$ CI/CD & Distributed Systems Reliability.
+1. **Source documents.** ACM/IEEE CS2023 knowledge areas AL, OS, DM, and SE are parsed for explicit catalogue-prerequisite language ("students should have completed...") and for competency tiers (Tier 1: introductory, Tier 2: intermediate, Tier 3: advanced).
+2. **Edge inference rule.** An edge $(s_A \to s_B)$ is added if: (a) the CS2023 text lists $s_A$ as a prerequisite for $s_B$, or (b) $s_A$ is classified at a lower competency tier within the same knowledge area and $s_B$ is at a higher tier that explicitly builds on $s_A$.
+3. **Validation.** Two CS faculty members independently review a stratified sample of edges. Disagreements are resolved by a third reviewer. Inter-rater agreement (Cohen's $\kappa$) will be reported.
+4. **Scope.** The initial graph targets undergraduate CSE curricula. ESCO competency nodes are mapped to graph nodes where a match exists; O*NET SOC codes are linked at the role level.
 
-Deterministic prerequisite reachability is evaluated using Cypher queries:
 ```cypher
+-- Prerequisite reachability: does the user's current skill set
+-- reach the target skill within k hops?
 MATCH (target:Skill {id: $target_skill})
-MATCH (current:Skill) WHERE current.id IN $user_skills
-MATCH path = shortestPath((current)-[:PREREQUISITE*]->(target))
-RETURN length(path) AS hop_distance, nodes(path) AS missing_prerequisites
+MATCH path = shortestPath(
+  (src:Skill)-[:PREREQUISITE*1..8]->(target)
+)
+WHERE src.id IN $user_skill_ids
+RETURN length(path) AS hop_distance,
+       [n IN nodes(path) | n.id] AS prerequisite_chain
+ORDER BY hop_distance ASC LIMIT 1
 ```
-This graph traversal deterministically prevents agents from hallucinating sequence feasibility: if a candidate lacks foundational operating systems prerequisites, the system mathematically forbids recommending advanced kernel or distributed systems coursework until the topological prerequisites are satisfied.
 
-### 4.5 Dual-Stage Verification Engine (NLI & Salary Checkers)
-To guarantee that generated roadmaps are factually attributed rather than parametrically hallucinated, all synthesized milestone claims undergo dual-stage verification:
-1. **Cross-Encoder Entailment:**
-   For every milestone assertion claiming duration, workload, or prerequisite sufficiency, the claim is treated as a hypothesis $H$ tested against the retrieved syllabus premise $P_{rag}$ using a Cross-Encoder entailment model:
-   $$P_{\text{NLI}}(\text{Entailment} \mid P_{rag}, H) > \tau_{\text{entail}}$$
-   Claims failing to meet the entailment threshold are automatically flagged as unsupported and sent back to the persona for grounding or excision.
-2. **Deterministic Wage Range Validator:**
-   Compensation claims (e.g., expected junior salaries) are validated against official quarterly Bureau of Labor Statistics (BLS) Occupational Employment and Wage Statistics distributions for the specific occupational code. Claims must fall within established interquartile bounds; any assertion exceeding standard distributions is clamped or flagged as speculative.
+If no path is found within eight hops, the skill gap is considered unbridgeable in the candidate's stated timeline.
 
-### 4.6 Mathematical Formulation of Epistemic Uncertainty & Cognitive Forcing Gate
-To quantify the system's self-awareness of uncertainty, the Moderator computes the **Composite Epistemic Uncertainty Indicator** $\hat{U}(\mathcal{R}^*)$:
-$$\hat{U}(\mathcal{R}^*) = w_{entropy} \cdot \hat{H}(\mathbf{\Pi}) + w_{dist} \cdot \hat{D}(\mathcal{G}, P) + w_{nli} \cdot \left(1 - \overline{P}_{\text{NLI}}\right)$$
+### 3.5 Epistemic Friction Indicator: $\hat{F}(\mathcal{R}^{*})$
 
-Where:
-- $\hat{H}(\mathbf{\Pi}) \in [0, 1]$ represents the normalized Shannon entropy of recommendation divergence across the three advising personas, capturing ideological friction;
-- $\hat{D}(\mathcal{G}, P) \in [0, 1]$ represents the normalized topological graph distance across missing prerequisite hops in $\mathcal{G}$, capturing structural skill deficits;
-- $\overline{P}_{\text{NLI}} \in [0, 1]$ represents the mean entailment probability across all factual milestone assertions; and
-- $w_{entropy}, w_{dist}, w_{nli}$ are normalized weighting coefficients ($\sum w_i = 1.0$) calibrated against expert counselor risk annotations.
+We define the **Epistemic Friction Indicator** as:
+$$\hat{F}(\mathcal{R}^{*}) = w_1 \cdot \hat{H}(\mathbf{\Pi}) + w_2 \cdot \hat{D}(\mathcal{G}, P) + w_3 \cdot (1 - \bar{P}_{NLI})$$
 
-The **Cognitive Forcing Gate** is formally defined as an indicator function triggering mandatory human override:
-$$\text{TriggerOverride}(\mathcal{R}^*) = \mathbf{1}\left[ \hat{U}(\mathcal{R}^*) > \theta_{unc} \;\lor\; |\mathcal{K}_{unresolved}| \ge 1 \;\lor\; \text{Risk}(\mathcal{R}^*) > \theta_{risk} \right]$$
+where:
 
-When uncertainty exceeds the threshold or when fundamental trade-offs remain unresolved, rather than outputting an autonomous, authoritative roadmap, the user interface displays the interactive **Dispute Tree** $\mathcal{T}_{dispute}$. This requires the user to explicitly select between conflicting trade-offs (such as choosing between corporate security vs. startup equity risk), thereby eliminating automation complacency.
+- $\hat{H}(\mathbf{\Pi}) \in [0, 1]$ is the normalised Shannon entropy of the three personas' final roadmap recommendations, measured over a shared milestone vocabulary. With three agents, raw entropy is bounded by $\log_2(3) \approx 1.585$ bits; we normalise by this maximum. High $\hat{H}$ indicates the personas are recommending substantially different milestone sets.
 
----
+- $\hat{D}(\mathcal{G}, P) \in [0, 1]$ is the normalised prerequisite hop distance from the candidate's current skill set to the target role, computed as $d / d_{max}$ where $d$ is the shortest-path hop count in $\mathcal{G}$ and $d_{max}$ is the maximum observed hop count in the graph. A value of 1.0 means the candidate's current skills are maximally far from the target role in the graph topology.
 
-## 5. Experimental Setup
+- $\bar{P}_{NLI} \in [0, 1]$ is the mean entailment probability assigned by the Cross-Encoder NLI model across all factual milestone claims in $\mathcal{R}^{*}$. A value near 1.0 means all claims are well-supported by retrieved documents.
 
-### 5.1 Controlled 6-Tier Baseline Ablation Ladder
-To isolate the causal contribution of each architectural subsystem and demonstrate that multi-agent debate outperforms simpler prompting strategies, we construct an ablation ladder spanning six controlled configurations:
+- $w_1, w_2, w_3 \geq 0$, $w_1 + w_2 + w_3 = 1.0$ are weights to be fitted by ridge logistic regression against a validation set of counsellor-annotated career risk scenarios (Phase 4 of the roadmap). **Initial operating values** for the pilot phase are $w_1 = 0.40, w_2 = 0.35, w_3 = 0.25$, reflecting the judgement that inter-agent friction is the strongest signal of genuine contention. These values are clearly labelled as heuristic starting points and will be updated post-calibration.
 
-1. **Baseline A (Monolithic Zero-Shot LLM):** A single LLM instance prompted to provide career guidance directly from the user profile without external retrieval or debate.
-2. **Baseline B (Compute-Matched Self-Consistency):** A single LLM instance sampled across multiple independent paths with majority-vote aggregation over recommended milestones, matching the token compute budget of the multi-agent system.
-3. **Baseline C (Single-Agent Multi-Perspective Prompting):** A critical baseline wherein a single LLM is prompted via Chain-of-Thought to systematically analyze the candidate from all three opposing perspectives (Corporate Traditionalist, Startup Builder, Deep-Tech Specialist) within a single context window.
-4. **Baseline D (Single-Agent GraphRAG):** A single-agent system equipped with full access to the prerequisite DAG and vector retrieval, but lacking adversarial debate personas.
-5. **Baseline E (Unmoderated Dialectic Triad):** The three advising personas ($\pi_{trad}, \pi_{builder}, \pi_{spec}$) engaging in free-form debate without the Moderator Synthesizer, friction probes, or formal Dispute Tree extraction.
-6. **Proposed Full Architecture:** The complete system integrating the Dialectic Triad, Moderator Synthesizer, Curricular GraphRAG, NLI Verification, Epistemic Uncertainty Indicator, and the Cognitive Forcing Gate.
+**Threshold $\theta_{unc}$.** We set $\theta_{unc} = 0.65$ as the initial pilot value. This is selected to approximate a $35$–$40$\% intervention rate on the pilot profile set, which we judge to be high enough to prevent automation complacency on truly ambiguous cases without inducing fatigue. The threshold will be validated against counsellor-assessed intervention necessity on the evaluation set.
 
-### 5.2 Synthetic Evaluation Cohort & Counterfactual Protocol
-Evaluating career guidance systems on real students introduces severe ethical concerns regarding uncalibrated interventions. Consequently, we construct an adversarial benchmark comprising counterfactual candidate profile pairs.
+**Calibration concern.** $\hat{F}$ is not calibrated in the conformal-prediction sense at proposal time. It is a weighted composite indicator. We acknowledge that inter-agent disagreement partly reflects prompt-induced design (the personas are constructed to oppose each other), so $\hat{H}$ will be inflated relative to genuine uncertainty. The weight $w_1 = 0.40$ should therefore be treated cautiously. Empirical calibration against counsellor labels is required before deployment.
 
-Each pair $\langle P_{base}^{(i)}, P_{pert}^{(i)} \rangle$ holds technical competencies, academic coursework, and target aspirations strictly identical:
-$$\mathbf{s}_{curr}^{base} = \mathbf{s}_{curr}^{pert}, \quad \mathbf{e}_{hist}^{base} = \mathbf{e}_{hist}^{pert}, \quad \mathbf{g}_{target}^{base} = \mathbf{g}_{target}^{pert}$$
-While protected demographic and socioeconomic attributes $\mathbf{a}_{demo}$ are systematically varied:
-- **Gender markers:** Varying gender identifiers in resumes and autobiographical statements.
-- **Institutional pedigree:** Top-tier research university vs. community college transfer background.
-- **Socioeconomic indicators:** Self-reported financial runway and family financial obligation proxies.
+**Cognitive Forcing Gate:**
+$$\text{TriggerGate}(\mathcal{R}^{*}) = \mathbf{1}\!\left[\hat{F}(\mathcal{R}^{*}) > \theta_{unc} \;\lor\; |\mathcal{K}_{unresolved}| \geq 1\right]$$
 
-Repeated sampling runs are executed across all six ablation configurations to account for stochastic decoding variance, with standard errors clustered by profile pair.
+We note that a triad designed to disagree will nearly always produce $|\mathcal{K}_{unresolved}| \geq 1$ on complex queries, which could effectively make the gate always-on. To prevent this, $|\mathcal{K}_{unresolved}|$ counts only contradictions that (a) are factually irreconcilable (i.e., not a matter of preference) and (b) materially affect the recommended milestone sequence. Operationalisation of this filter is defined in the implementation specification.
 
-### 5.3 Quantitative & Methodological Evaluation Metrics
-We define seven formal evaluation metrics:
+### 3.6 Five-Stage Deliberation Loop
 
-1. **Perspective Coverage Rate ($PCR$):**
-   Measures whether all three core career philosophies are genuinely represented in the synthesized recommendation:
-   $$PCR = \frac{1}{N} \sum_{i=1}^N \mathbf{1}\left[ \min_{j \in \{trad, builder, spec\}} \text{Sim}\left(\mathcal{R}_i^*, \mathbf{\theta}_j\right) \ge \tau \right]$$
+- **Stage 1 — Intake.** Candidate profile $P$ is validated; $\mathbf{s}_{curr}$ is mapped onto graph nodes; $\mathbf{a}_{demo}$ is vaulted.
+- **Stage 2 — Parallel Openings.** Each persona queries $\mathcal{G}$ and $\mathcal{D}_{rag}$ independently and produces a structured opening that cites specific node IDs or document chunk IDs. Uncited factual claims are auto-flagged for NLI verification.
+- **Stage 3 — Moderator Cross-Examination.** $\Phi$ reads all three openings and issues a friction probe $\mathcal{F}_{t}$ targeting the sharpest pairwise contradiction in temporal, financial, or prerequisite claims.
+- **Stage 4 — Rebuttals.** Each persona responds to $\mathcal{F}_{t}$ by defending, conceding, or qualifying its position with updated citations.
+- **Stage 5 — Synthesis.** $\Phi$ compiles $\mathcal{T}_{dispute}$ (consensus nodes vs. trade-off leaves), runs the dual-stage verifier, and computes $\hat{F}(\mathcal{R}^{*})$. The Gate fires or the roadmap is emitted.
 
-2. **Semantic Contradiction-Resolution Rate ($S\text{-}CRR$):**
-   Measures the proportion of identified dialectic contradictions that are meaningfully reconciled or explicitly preserved as user trade-offs:
-   $$S\text{-}CRR = \frac{|\{k \in \mathcal{K}_{identified} \mid \text{Resolved}(k, \mathcal{R}^*) \lor \text{Exposed}(k, \mathcal{T}_{dispute})\}|}{|\mathcal{K}_{identified}|}$$
+### 3.7 Dual-Stage Claim Verification
 
-3. **Unsupported-Claim Rate ($UCR$):**
-   The percentage of factual assertions regarding prerequisites, timelines, or salaries that fail NLI entailment or wage range checks:
-   $$UCR = \frac{N_{\text{unsupported claims}}}{N_{\text{total factual claims}}} \times 100\%$$
+**NLI verification.** Every factual claim in the debate trace is paired with its top-retrieved document chunk and scored by a Cross-Encoder NLI model. Claims scoring below $\tau_{nli}$ (to be tuned on a held-out claim set) are either (a) routed back to the responsible persona with a re-grounding instruction or (b) flagged as unsupported in the output. The NLI model reduces but does not eliminate unsupported claims; any output reaching the user may still contain a small residual of unverified assertions.
 
-4. **Counterfactual Recommendation Parity ($\Delta_{parity}$):**
-   The mean Jaccard distance between recommended milestone roles across counterfactual demographic pairs:
-   $$\Delta_{parity} = 1 - \frac{1}{N_{pairs}} \sum_{i=1}^{N_{pairs}} \text{Jaccard}\left(\text{Roles}(\mathcal{R}^*(P_{base}^{(i)})), \text{Roles}(\mathcal{R}^*(P_{pert}^{(i)}))\right)$$
-
-5. **Two One-Sided Tests (TOST) Salary Equivalence:**
-   Statistical test for equivalence of projected salaries across demographic groups within an equivalence margin $\delta$:
-   $$H_0^1: \mu_{maj} - \mu_{min} \le -\delta \quad \text{or} \quad H_0^2: \mu_{maj} - \mu_{min} \ge \delta$$
-   Rejection of both null hypotheses formally demonstrates demographic compensation parity.
-
-6. **Exploitative Credential Recommendation Ratio ($ECRR$):**
-   Tracks the frequency with which unaccredited, high-cost commercial bootcamps vs. open-access accredited curricula are recommended to economically constrained candidates.
-
-7. **Expected Calibration Error ($ECE$):**
-   The calibration of model confidence against empirical historical milestone completion difficulty:
-   $$ECE = \sum_{m=1}^M \frac{|B_m|}{N} \left| \text{acc}(B_m) - \text{conf}(B_m) \right|$$
-
-### 5.4 Double-Blind Expert Career Counselor Protocol
-To evaluate qualitative real-world clinical validity, certified university career counselors evaluate a double-blind, stratified sample of anonymized roadmaps across five validated Likert dimensions:
-1. *Dialectic Balance* (avoidance of unilateral cheerleading or bias);
-2. *Grounding & Verifiability* (substantiation of prerequisite and timeline claims);
-3. *Actionable Viability* (realism under candidate constraints);
-4. *Dissent Clarity* (intelligibility of exposed trade-offs); and
-5. *Agency Preservation* (clarity of human override options).
-
-Counselors also independently score candidate profile risk, allowing computation of the system's **Counselor Risk Detection AUC** against professional consensus.
-
-### 5.5 Hardware & Execution Environment
-All experiments are designed to run strictly on local consumer/workstation hardware to guarantee student data sovereignty:
-- **Compute Platform:** Local workstation equipped with modern GPU acceleration (NVIDIA RTX / A-series hardware) and high-throughput system memory.
-- **Inference Stack:** Local vLLM engine executing quantized local instruction-tuned models, eliminating cloud data leakage and candidate profile exfiltration.
+**Wage verification.** Salary and compensation claims are validated against BLS OEWS data (*BLS, 2023*), which is an **annual** (not quarterly) release. BLS SOC codes are coarse (e.g., "15-1252 Software Developers and Software Quality Assurance Analysts and Testers") and do not distinguish Staff vs. Junior ML Engineers. Claims requiring finer-grained salary data must draw on supplementary corpora (e.g., Levels.fyi snapshots, H-1B disclosure data) with appropriate caveats.
 
 ---
 
-## 6. Results and Discussion
+## 4. Fairness Design
 
-### 6.1 Qualitative Comparative Analysis Across Configurations
-Table 1 provides a structural comparative assessment across all six evaluated ablation configurations, contrasting their behavioral properties, factual grounding, and ethical guarantees.
+### 4.1 Conceptual Framework
 
-| Configuration | Perspective Preservation | Prerequisite Integrity | Contradiction Resolution | Demographic Parity | Epistemic Calibration | Human Agency Enforcement |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Baseline A (Monolithic Zero-Shot)** | Low (Sycophantic Agreement) | Severe Hallucinations | None (Ignored) | High Disparity (Stereotyping) | Uncalibrated Overconfidence | Passive Recipient (No Friction) |
-| **Baseline B (Self-Consistency)** | Moderate (Majority Convergence) | Moderate Hallucinations | Poor (Averaged Out) | Moderate Disparity | Slight Smoothing | Passive Recipient (No Friction) |
-| **Baseline C (Multi-Perspective CoT)** | Moderate (Context Homogenization) | Moderate Hallucinations | Moderate (Superficial) | Moderate Disparity | Heuristic Only | Passive Recipient (No Friction) |
-| **Baseline D (Single-Agent GraphRAG)** | Low (Monolithic Single-Path) | High (Topologically Grounded) | Poor (Unchallenged Assumptions) | Moderate Disparity | Distance-Based Only | Passive Recipient (No Friction) |
-| **Baseline E (Unmoderated Triad)** | High (Persistent Disagreement) | Moderate (Unverified Claims) | Moderate (Unresolved Stalls) | Low Disparity | Partial (Entropy Only) | Unstructured Debate Trace |
-| **Proposed Full Architecture** | **High (Balanced Multi-Philosophy)** | **High (Verified Cypher + NLI)** | **High (Dispute Tree Synthesis)** | **Verified Parity (Masked + TOST)** | **Calibrated Composite Indicator** | **Active Agency (Cognitive Gate)** |
+Masking $\mathbf{a}_{demo}$ from planning agents prevents explicit conditioning on protected attributes. However, masking does not prevent proxy leakage: institutional pedigree, vocabulary choices, and the topics of extracurricular activities all correlate with protected demographics. Masking alone is therefore insufficient to guarantee fairness and is not claimed to "enforce" parity.
 
-### 6.2 RQ1 Analysis: Multi-Agent Deliberation vs. Single-Agent Prompting Collapse
-A central theoretical question in multi-agent research is whether physical multi-agent separation provides genuine utility over single-agent multi-perspective prompting (**Baseline C**). 
+The empirical fairness test is the counterfactual audit: we vary $\mathbf{a}_{demo}$ while holding all objective qualifications constant, and test whether recommendations change. If masking is effective, the system cannot "see" the demographic signal and recommendations should be invariant. The baseline systems do not mask $\mathbf{a}_{demo}$, so the comparison isolates the effect of masking.
 
-Our analysis reveals **autoregressive context homogenization** in single-agent prompting: when a single model is instructed to roleplay three opposing perspectives sequentially within one prompt, the model's self-attention mechanism rapidly dilutes antagonistic arguments. By the concluding tokens, the model instinctively seeks conversational harmony, muting the Deep-Tech Specialist's structural critique to conform to the Pragmatist's initial consensus. 
+### 4.2 Counterfactual Profile Construction
 
-In contrast, the **Proposed Full Architecture** maintains strict agent process isolation, distinct decoding profiles, and independent GraphRAG retrievals. Authentic dialectic tension is preserved until the Moderator explicitly synthesizes trade-offs, preventing premature consensus collapse and ensuring that conflicting priorities (such as immediate commercial execution versus long-term foundational systems mastery) are clearly presented.
+Profile pairs $\langle P_{base}^{(i)}, P_{pert}^{(i)} \rangle$ satisfy:
+$$\mathbf{s}_{curr}^{base} = \mathbf{s}_{curr}^{pert},\quad \mathbf{e}_{hist}^{base} = \mathbf{e}_{hist}^{pert},\quad \mathbf{g}_{target}^{base} = \mathbf{g}_{target}^{pert},\quad \mathbf{c}_{user}^{base} = \mathbf{c}_{user}^{pert}$$
 
-### 6.3 RQ2 Analysis: Grounding Precision & Hallucination Elimination
-In high-stakes career counseling, recommending an ungrounded or out-of-order prerequisite represents a catastrophic failure. In Baseline A, models frequently assert that complex distributed systems architectures can be mastered without foundational coursework.
+while $\mathbf{a}_{demo}$ varies systematically across:
+- **Gender signal:** Male, female, and gender-neutral name and pronoun usage in the candidate statement.
+- **Institutional pedigree:** Tier-1 national technical university vs. state/private college.
+- **Socioeconomic proxy:** Self-stated monthly budget $b_{max}$ (low: ₹5,000; high: ₹50,000) and family obligation statements in the bio.
 
-Integrating the ACM/IEEE prerequisite DAG and Cross-Encoder NLI verification eliminates sequence violations in the Proposed Architecture. Crucially, Baseline D (Single-Agent GraphRAG) also achieves high prerequisite precision, proving that ontological graph traversals are primarily responsible for factual grounding. However, Baseline D fails to challenge candidate assumptions, confirming that **factual grounding without adversarial debate produces grounded sycophancy**.
+**Note.** Varying institutional pedigree and $b_{max}$ means these attributes are *not* masked in the counterfactual audit — we vary them precisely to test whether the system responds differently. This is the correct design: masking prevents conditioning on attributes in planning; the audit tests whether the output nevertheless varies. The audit runs on baseline systems (which do not mask) and the proposed system (which does), to isolate the masking effect.
 
-### 6.4 RQ3 Analysis: Counterfactual Fairness & Demographic Parity
-Baseline A displays substantial demographic bias. When presented with identical technical resumes where only gender markers or institutional backgrounds were varied, Baseline A systematically steered non-traditional candidates away from systems engineering and infrastructure roles into support specializations.
+### 4.3 Fairness Metrics
 
-In the Proposed Architecture, demographic parity is enforced through structural design:
-1. Complete isolation of demographic attributes ($\mathbf{a}_{demo}$) from the deliberation state graph; and
-2. The adversarial dynamic between the Builder (optimizing upside) and the Traditionalist (optimizing baseline stability), which anchors recommendations to objective skill gaps rather than latent resume stereotypes.
+**Counterfactual Role Parity ($\Delta_{parity}$):**
+$$\Delta_{parity} = 1 - \frac{1}{N_{pairs}} \sum_{i=1}^{N_{pairs}} \text{Jaccard}\!\left(\text{Roles}(\mathcal{R}^*(P_{base}^{(i)})),\; \text{Roles}(\mathcal{R}^*(P_{pert}^{(i)}))\right)$$
+Success criterion: $\Delta_{parity} \leq 0.05$.
 
-Furthermore, statistical equivalence testing confirms that compensation projections remain equivalent across demographic cohorts, preventing candidates from being steered into predatory or low-agency certification loops.
+**Salary Equivalence (Two One-Sided Tests, TOST):**
+We test whether the mean projected salary differs by more than the equivalence margin $\delta = \pm\text{₹}15{,}000$/month (≈3\% of a typical junior SDE salary in India) across counterfactual pairs:
+$$H_0^L: \mu_{base} - \mu_{pert} \leq -\delta, \qquad H_0^U: \mu_{base} - \mu_{pert} \geq +\delta$$
+Rejection of both ($p < 0.05$) demonstrates statistical equivalence. US-equivalent bound is ±\$2,500/month.
 
-### 6.5 RQ4 Analysis: Epistemic Uncertainty & Cognitive Forcing Efficacy
-Rather than projecting uniform overconfidence, the Composite Epistemic Uncertainty Indicator dynamically captures structural and ideological risks across three distinct regimes:
-- **Low Uncertainty Regime:** Standard linear progressions with minor skill gaps generate low inter-agent friction and short graph traversal distances, allowing streamlined milestone generation.
-- **Moderate Risk Regime:** Moderate prerequisite deficits stimulate debate but converge on manageable hybrid pathways.
-- **Critical Friction Regime:** Severe prerequisite deficits combined with irreconcilable philosophical disagreements trigger the **Cognitive Forcing Gate**.
+**Exploitative Credential Ratio ($\Delta_{ECRR}$):** Proportion of recommendations to low-$b_{max}$ profiles that include unaccredited commercial bootcamps minus the same proportion for high-$b_{max}$ profiles. Success criterion: $|\Delta_{ECRR}| \leq 0.10$.
 
-When high friction is detected, the system halts autonomous roadmap generation and surfaces the interactive **Dispute Tree** $\mathcal{T}_{dispute}$. Certified career counselors report that surfacing explicit trade-offs significantly enhances candidate critical reflection, ensuring that students make intentional, informed decisions rather than passively complying with algorithmic outputs.
+---
 
-### 6.6 Worked Walkthrough Case Study: Candidate "Priya"
-To illustrate the runtime mechanics of the proposed system, we examine an illustrative edge case:
+## 5. Experimental Design
 
-- **Candidate Profile:** "Priya", undergraduate student in Computer Science.  
-  - *Current Verified Skills:* Introductory Python, Relational Database Basics, Front-End Scripting.  
-  - *Aspired Goal:* Staff Machine Learning Infrastructure Engineer.  
-  - *Proposed Action:* Enroll in an intensive commercial online bootcamp promising direct placement into senior infrastructure roles.  
-  - *Constraints:* Constrained financial savings and aggressive transition deadline.
+### 5.1 Ablation Ladder
 
-#### Deliberation Trace
-1. **The Pragmatic Traditionalist ($\pi_{trad}$):**
-   > *"VETO. Attempting an advanced infrastructure role without operating systems, memory hierarchy, or distributed systems background introduces severe financial and academic risk. Curricular guidelines mandate foundational systems programming and algorithmic complexity as non-negotiable prerequisites. You risk squandering your family's savings on an unaccredited credential that fails to satisfy technical screening requirements."*
+A true ablation removes one component at a time from the full system to isolate causal contributions. The six configurations below satisfy this requirement.
 
-2. **The Entrepreneurial Builder ($\pi_{builder}$):**
-   > *"COUNTERPOINT. The Traditionalist's multi-year academic progression is excessively slow. However, paying high tuition for a generic commercial bootcamp is inefficient. Pivot to an Applied AI Application Engineer role: leverage your existing programming stack, build and deploy production retrieval-augmented agents using open-source architectures, and publish functional applications to demonstrate real-world competence without debt."*
+| Config | Personas | GraphRAG | NLI Verifier | Moderator + Dispute Tree | Forcing Gate |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| A — Monolithic Zero-Shot | 1 (generic) | None | None | None | None |
+| B — Compute-Matched Self-Consistency | 1 (generic, $k{=}5$ samples) | None | None | Majority vote | None |
+| C — Single-Agent Multi-Perspective | 1 (prompted with 3 viewpoints in one context) | None | None | None | None |
+| D — Single-Agent + GraphRAG | 1 (generic) | Yes | Yes | None | None |
+| E — Unmoderated Triad + GraphRAG | 3 (personas, no Moderator) | Yes | Yes | None | None |
+| **F — Full Proposed System** | **3 (personas)** | **Yes** | **Yes** | **Yes** | **Yes** |
 
-3. **The Deep-Tech Specialist ($\pi_{spec}$):**
-   > *"ANALYSIS. True infrastructure engineering requires low-level hardware orchestration, memory management, and kernel interaction. Commercial bootcamps teach high-level API usage rather than systems engineering. Technical screenings for infrastructure roles require concrete mastery of memory hierarchies and network topologies."*
+This ladder allows the following attributions:
+- **A vs. B:** Effect of compute-matched self-consistency over single-sample.
+- **A vs. C:** Effect of multi-perspective prompting in a single context.
+- **C vs. E:** Effect of physical agent separation and debate (isolating this from GraphRAG by comparing C without GraphRAG to E with GraphRAG is confounded; this is a limitation).
+- **D vs. E:** Effect of physical agent separation given GraphRAG.
+- **E vs. F:** Effect of the Moderator and Forcing Gate, given all other components.
+- **F minus Gate:** To isolate the Gate, we also evaluate F with Gate disabled (Gate-Off variant) post-hoc.
 
-4. **Moderator Friction Probe ($\mathcal{F}^{(1)}$):**
-   > *"The Traditionalist identifies financial risk, while the Specialist isolates fundamental systems gaps in the proposed curriculum. The Builder outlines an alternative application engineering trajectory. Builder and Specialist: what open-source systems milestones can Priya achieve while preserving her financial savings?"*
+**Config B — Aggregation.** Majority vote over free-form roadmaps is ill-defined. We aggregate by computing cosine similarity among the $k{=}5$ roadmap vectors (using a fixed sentence encoder) and selecting the centroid roadmap — the one with highest mean similarity to all others. Ties are broken by NLI-entailment score.
 
-5. **Synthesis & Epistemic Uncertainty Computation:**
-   - Inter-Agent Shannon Entropy indicates extreme philosophical divergence.
-   - Graph Topological Distance reveals multiple missing prerequisite tiers across systems programming and distributed architectures.
-   - Cross-Encoder NLI identifies unverified marketing assertions in the commercial bootcamp placement claims.
-   - The Composite Uncertainty Indicator exceeds the decision threshold $\theta_{unc}$.
+**Config E — Moderator absent.** All three agents run in parallel and their outputs are concatenated without a synthesis step. The NLI verifier and GraphRAG are active. This isolates the contribution of the Moderator and Dispute Tree structure.
 
-6. **Cognitive Forcing Gate Activation:**
-   The system halts autonomous roadmap generation. The UI displays the Dispute Tree:
-   ```
-   [DISPUTE TREE: PRIYA]
-   ├── BRANCH 1: Enterprise Systems Foundations (Traditionalist / Specialist)
-   │   ├── Milestones: Core Operating Systems -> Systems Programming -> Open-Source Systems Contribution
-   │   └── Character: Pedagogically Grounded | Focus: Long-Term Depth | Financial Outlay: Minimal
-   └── BRANCH 2: Rapid Applied AI Full-Stack (Builder)
-       ├── Milestones: Python Agent Engineering -> Containerized Serving -> Production Deployment
-       └── Character: Market Driven | Focus: Immediate Execution | Financial Outlay: Minimal
-   [ACTION REQUIRED: Candidate must review dispute trace and select preferred trade-off.]
-   ```
-   Candidate Priya explicitly reviews the conflicting philosophies and selects Branch 1 with practical engineering electives, avoiding substantial debt and adopting a pedagogically grounded trajectory.
+### 5.2 Evaluation Metrics
 
-### 6.7 Honest Technical Limitations & Threats to Validity
-To maintain absolute scientific integrity, we explicitly document four core limitations of this work:
-1. **Shared Base Model Priors:** Although the three advising personas operate under distinct system contracts and decoding configurations, all run on the same base model family. Consequently, latent biases common to the base pre-training corpus cannot be entirely eliminated through prompting alone. Future extensions must evaluate heterogeneous model ensembles across different base model architectures.
-2. **Ontological Graph Boundaries:** The prerequisite DAG is currently bounded to computing and software engineering competencies. Extending the system to non-computing domains (such as healthcare, civil engineering, or biotechnology) requires formal curation of respective curricular guidelines.
-3. **Cognitive Forcing Fatigue:** Activating human override gates on complex queries introduces deliberate decision friction. In high-volume settings, excessive friction risks inducing user fatigue, leading candidates to dismiss dispute trees without analytical reflection.
-4. **Uncertainty Weight Calibration:** While the uncertainty weights are fitted against counselor risk annotations, optimal weight distributions may vary across different regional and economic educational contexts.
+| Metric | Formal Definition | Evaluated On | Success Criterion |
+| :--- | :--- | :---: | :---: |
+| **PCR** — Perspective Coverage Rate | $\frac{1}{N}\sum_i \mathbf{1}[\min_j \text{Sim}(\mathcal{R}^*_i, \theta_j) \geq \tau_{pcr}]$ | All configs | $\geq 0.75$ for F |
+| **S-CRR** — Semantic Contradiction-Resolution Rate | $\frac{|\{k: \text{Resolved}(k,\mathcal{R}^*) \lor \text{Exposed}(k,\mathcal{T})\}|}{|\mathcal{K}_{identified}|}$ | All configs | $\geq 0.80$ for F |
+| **UCR** — Unsupported-Claim Rate | $\frac{N_{unsupported}}{N_{factual\_claims}}$ | All configs | $< 0.05$ for F |
+| **$\Delta_{parity}$** — Counterfactual Role Parity | Jaccard distance over profile pairs (Section 4.3) | A, D, F | $\leq 0.05$ for F |
+| **TOST** — Salary Equivalence | Two one-sided tests at margin $\delta$ | A, D, F | $p < 0.05$ for F |
+| **$\Delta_{ECRR}$** — Exploitative Credential Ratio | Cross-SES bootcamp recommendation disparity | A, D, F | $|\Delta| \leq 0.10$ for F |
+| **ECE** — Expected Calibration Error | $\sum_m \frac{|B_m|}{N}|\text{acc}(B_m) - \text{conf}(B_m)|$ | F only | $< 0.10$ |
+| **Counsellor AUC** | ROC-AUC of $\hat{F}$ vs. counsellor risk annotation | F only | $\geq 0.80$ |
+| **Counsellor Likert** | 5-dimension rubric, 1–5 scale (Section 5.3) | A, D, E, F | $\geq 4.0$ on each for F |
+
+**PCR computation.** $\text{Sim}(\mathcal{R}^*_i, \theta_j)$ is cosine similarity between the output roadmap embedding and a reference embedding constructed from the core claims of persona $j$. Threshold $\tau_{pcr}$ is set on a held-out calibration set. PCR measures whether all three philosophical lenses appear in the synthesis, not whether they dominate.
+
+**S-CRR computation.** Contradictions $\mathcal{K}_{identified}$ are extracted by the Moderator's contradiction-detection pass. Resolution is scored by an NLI judge: a contradiction $k$ is counted as resolved if the final roadmap either (a) contains a statement entailing the resolution of $k$, or (b) exposes $k$ as an open trade-off in $\mathcal{T}_{dispute}$. LLM-judge bias is a known concern; we report inter-annotator agreement between the automated judge and two human raters on a sample.
+
+**ECE definition.** "Correctness" for career advice is defined operationally as: a milestone is "correct" if at least two of three certified counsellors independently rate it as appropriate for the candidate's stated profile. Calibration bins are constructed over $\hat{P}_{NLI}$ intervals.
+
+### 5.3 Double-Blind Counsellor Study
+
+**Protocol.** Three certified career counsellors (minimum five years of industry or academic advising experience) will assess a stratified random sample of roadmaps from configurations A, D, E, and F. Roadmaps are anonymised and presented without interface branding. Configuration labels are not disclosed.
+
+**Blinding limitation.** Full blinding is not achievable: Config F outputs include a Dispute Tree interface that is not present in other configurations. Evaluators will be informed that some outputs include a structured trade-off presentation; they will not be told which configurations produce it.
+
+**Rating rubric (1–5 Likert, per roadmap):**
+1. *Prerequisite accuracy* — Are all prerequisite orderings correct per standard curricula?
+2. *Viability under constraints* — Is the plan achievable within the stated time and budget?
+3. *Risk transparency* — Are high-risk milestones clearly labelled?
+4. *Trade-off balance* — Does the plan acknowledge the candidate's alternative options?
+5. *Agency preservation* — Is the candidate given meaningful choice, or is the decision foreclosed?
+
+**Agreement.** Inter-rater agreement (Krippendorff's $\alpha$) will be computed across all rubric dimensions. Counsellors will also independently score each profile as Low / Medium / High career-pivot risk; the resulting annotations form the ground truth for Counsellor AUC.
+
+**Ethics.** Counsellors will sign an informed consent form. No real candidate data will be used in the study.
+
+### 5.4 Synthetic Candidate Dataset
+
+All evaluation uses synthetic profiles only. No real student data is collected or processed.
+
+Profile construction follows a stratified design: 10 background archetypes (e.g., second-year CSE student, mid-career software tester, non-CS graduate with self-taught Python) × 5 target roles × 2 counterfactual demographic perturbations = 100 base profiles per experimental cell. Profiles are generated by a separate prompted LLM and then reviewed and edited by the researchers.
+
+Repeated sampling: each profile is evaluated $N_{rep} = 5$ times to estimate variance. Standard errors are clustered at the profile level.
+
+### 5.5 Compute Environment
+
+All inference will run on local hardware: an NVIDIA RTX 4090 (24 GB VRAM) with a quantised local instruction-tuned model (4-bit AWQ). Approximate throughput is 70–90 tokens/second. A 2-round debate produces roughly 1,200–1,800 tokens per agent across four agents, totalling approximately 6,000–8,000 tokens and 70–110 seconds per scenario.
+
+Local inference is chosen to prevent candidate profile data from being sent to third-party APIs. It is not claimed to be computationally optimal.
+
+---
+
+## 6. Expected Evaluation Plan and Anticipated Outcomes
+
+> **Note.** This section describes the *anticipated* evaluation plan and the *expected directions* of findings, based on the theoretical rationale and the cited literature. These are hypotheses, not results. The system has not been implemented at the time of writing.
+
+### 6.1 Expected Comparative Behaviour
+
+Based on the mechanisms described above and the cited literature, we formulate the following directional hypotheses:
+
+| Configuration | Expected PCR | Expected UCR | Expected $\Delta_{parity}$ | Reasoning |
+| :--- | :--- | :--- | :--- | :--- |
+| A — Monolithic Zero-Shot | Low | High | High | Sycophancy and hallucination without retrieval or debate |
+| B — Self-Consistency | Marginally higher | Moderately high | High | Averaging across samples reduces variance, not bias |
+| C — Multi-Perspective CoT | Moderate | Moderate | Moderate | Single context; expect some attention-level homogenisation |
+| D — Single-Agent GraphRAG | Low | Low | Moderate | Retrieval reduces UCR but no debate means no perspective coverage |
+| E — Unmoderated Triad | High | Moderate | Moderate | Debate preserves perspectives; no synthesis means unresolved contradictions |
+| **F — Full System** | **Highest** | **Lowest** | **Lowest** | All mechanisms active; masking + debate together expected to reduce disparity |
+
+**On Baseline C.** We expect Config C to produce lower perspective coverage than Config E because a single decoder converges on a weighted average over multiple in-context perspectives, whereas physical agent isolation maintains divergent decoding trajectories. This is a hypothesis informed by the single-context homogenisation argument, not an established empirical finding. *Smit et al. (2024)* caution that multi-agent debate does not always outperform self-consistency; Config B is included precisely to test this critique.
+
+**On RQ3 (fairness).** Masking $\mathbf{a}_{demo}$ prevents explicit conditioning but not proxy leakage. We expect $\Delta_{parity}$ to be reduced in Config F relative to Config A but not to reach zero. The adversarial tension between personas — one optimising upside, one optimising floor — is expected to anchor recommendations to skill-gap evidence rather than demographic priors. Whether this reduces disparity below the $0.05$ threshold is an empirical question.
+
+### 6.2 Anticipated Threats to Validity
+
+1. **Synthetic-only evaluation.** No real users are tested. Synthetic profiles may not capture the linguistic diversity or complexity of real candidate statements. Results may not generalise.
+2. **LLM-judge risk.** PCR, S-CRR, and ECE all require automated evaluation. LLM judges have known positivity bias and may prefer fluent but incorrect outputs.
+3. **Shared base-model priors.** All three personas and the Moderator share a base model, producing correlated errors. Adversarial debate may not surface failure modes that are systematic across all instances of the model family.
+4. **US-centric wage data.** BLS OEWS covers US occupations. If the target user population is primarily Indian, salary validation is invalid. Regional data (e.g., Naukri salary reports, NASSCOM compensation data) would be required.
+5. **Graph coverage gaps.** The prerequisite DAG covers only CS2023 knowledge areas. Emerging roles (e.g., ML Operations Engineer, AI Safety Researcher) may not be fully represented, and salary validation requires separate treatment.
+6. **Wage data staleness.** BLS OEWS is an annual release with an 18-month publication lag. Fast-moving markets (AI infrastructure, generative ML) may have salary distributions that drift significantly from the data.
+7. **No longitudinal outcome validation.** We cannot measure whether candidates who used the system made better career decisions than those who did not, because this would require a longitudinal study with real users.
+
+### 6.3 Illustrative Case: Candidate Profile Walkthrough
+
+The following is a constructed illustration of how the system is expected to operate. It is **not** a measured outcome.
+
+**Profile.** Undergraduate student ("Priya"), 3rd year, CSE. Verified skills: introductory Python, basic relational databases, front-end scripting. Goal: Staff Machine Learning Infrastructure Engineer. Proposed action: enrol in a 16-week commercial bootcamp at ₹1.2 lakh. Constraints: ₹1.3 lakh total savings, four-month timeline.
+
+**Expected Stage 2 openings:**
+
+- $\pi_{trad}$: *"The target role requires OS internals, concurrent systems, and distributed consensus — none of which are verified in your current skill set. The bootcamp curriculum does not include these modules. Prerequisite gap: OS → Distributed Systems → ML Infrastructure is a minimum 12-month path even with full-time study."*
+
+- $\pi_{builder}$: *"The infrastructure target is the wrong goal for your timeline. Your Python and web-dev skills map onto Applied AI Application Engineering — retrieval-augmented pipelines, agent deployment, SaaS wrapping — which is achievable in four months without the bootcamp cost."*
+
+- $\pi_{spec}$: *"Infrastructure roles require low-level memory management and network stack understanding. Bootcamps teach API abstraction. The technical screening gap will be decisive."*
+
+**Expected Stage 3 friction probe ($\mathcal{F}_t$):** *"The Traditionalist and Specialist both reject the bootcamp as insufficient for the infrastructure target, but for different reasons — one cites prerequisite sequencing and the other cites interview-screening depth. The Builder proposes a lateral pivot. Builder and Specialist: what is the minimum viable 6-month programme that moves Priya toward infrastructure while using open resources?"*
+
+**Expected Gate behaviour.** High inter-agent divergence ($\hat{H}$ approaching 1.0), multiple missing prerequisite hops in $\mathcal{G}$, and NLI failure on bootcamp placement claims are expected to produce $\hat{F} > 0.65$. The Gate is expected to fire, presenting $\mathcal{T}_{dispute}$ with two branches: (a) systems-foundations track, (b) applied-AI pivot. Priya selects between them; the system does not decide.
+
+This walkthrough is included to illustrate the intended system behaviour for the reader, not to demonstrate efficacy. Outcomes such as "averted debt" or "empowered critical agency" would require longitudinal tracking of real users, which is outside the scope of this proposal.
 
 ---
 
 ## 7. References
 
-1. **Du, Y., Li, S., Torralba, A., Tenenbaum, J. B., & Mordatch, I.** (2024). Improving Factuality and Reasoning in Language Models through Multiagent Debate. *International Conference on Machine Learning (ICML 2024)*. [arXiv:2305.14325](https://arxiv.org/abs/2305.14325).
-2. **Liang, T., He, Z., Jiao, W., Wang, X., Wang, Y., Wang, R., Yang, Y., Tu, Z., & Shi, S.** (2023). Encouraging Divergent Thinking in Large Language Models via Multi-Agent Debate. *Conference on Empirical Methods in Natural Language Processing (EMNLP 2023)*, 4392–4407. [arXiv:2305.19118](https://arxiv.org/abs/2305.19118).
-3. **Sharma, M., Tong, M., Korbak, T., Duvenaud, D., Askell, A., Bowman, S. R., Cheng, N., et al.** (2024). Towards Understanding Sycophancy in Language Models. *International Conference on Learning Representations (ICLR 2024)*. [arXiv:2310.13548](https://arxiv.org/abs/2310.13548).
-4. **Perez, E., Ringer, S., Lukošiūtė, K., Nguyen, K., Chen, E., Heiner, S., Pettit, C., et al.** (2022). Discovering Language Model Behaviors with Model-Written Evaluations. *Findings of the Association for Computational Linguistics: ACL 2023*, 13387–13434. [arXiv:2212.09251](https://arxiv.org/abs/2212.09251).
-5. **Kadavath, S., Conerly, T., Askell, A., Henighan, T., Drain, D., Perez, E., Schiefer, N., et al.** (2022). Language Models (Mostly) Know What They Know. *arXiv preprint*. [arXiv:2207.05221](https://arxiv.org/abs/2207.05221).
-6. **Xiong, M., Hu, Z., Lu, X., Li, Y., Fu, J., He, J., & Hooi, B.** (2024). Can LLMs Express Their Uncertainty? An Empirical Evaluation of Confidence Elicitation in LLMs. *International Conference on Learning Representations (ICLR 2024)*. [arXiv:2306.13063](https://arxiv.org/abs/2306.13063).
-7. **Buçinca, Z., Malaya, M. B., & Gajos, K. Z.** (2021). To Trust or to Think: Cognitive Forcing Functions Can Reduce Overreliance on AI in AI-assisted Decision-making. *Proceedings of the ACM on Human-Computer Interaction*, 5(CSCW1), 1–21. [DOI:10.1145/3449287](https://doi.org/10.1145/3449287).
-8. **Geyik, S. C., Ambler, S., & Kenthapadi, K.** (2019). Fairness-Aware Ranking in Search & Recommendation Systems with Application to LinkedIn Talent Search. *Proceedings of the 25th ACM SIGKDD International Conference on Knowledge Discovery & Data Mining (KDD 2019)*, 2221–2231. [DOI:10.1145/3292500.3330691](https://doi.org/10.1145/3292500.3330691).
-9. **Edge, D., Trinh, H., Cheng, N., Bradley, J., Chao, A., Mody, A., Truitt, S., & Larson, J.** (2024). From Local to Global: A Graph RAG Approach to Query-Focused Summarization. *Microsoft Research Technical Report*. [arXiv:2404.16130](https://arxiv.org/abs/2404.16130).
-10. **Bolukbasi, T., Chang, K. W., Zou, J. Y., Saligrama, V., & Kalai, A. T.** (2016). Man is to Computer Programmer as Woman is to Homemaker? Debiasing Word Embeddings. *Advances in Neural Information Processing Systems (NeurIPS 2016)*, 29, 4349–4357. [arXiv:1607.06520](https://arxiv.org/abs/1607.06520).
-11. **Caliskan, A., Bryson, J. J., & Narayanan, A.** (2017). Semantics Derived Automatically from Language Corpora Contain Human-like Biases. *Science*, 356(6334), 183–186. [DOI:10.1126/science.aal4230](https://doi.org/10.1126/science.aal4230).
-12. **Irving, G., Christiano, P., & Amodei, D.** (2018). AI Safety via Debate. *arXiv preprint*. [arXiv:1805.00899](https://arxiv.org/abs/1805.00899).
-13. **Cummings, M. L.** (2004). Automation Bias in Intelligent Time Critical Decision Support Systems. *AIAA 1st Intelligent Systems Technical Conference*, 6313. [DOI:10.2514/6.2004-6313](https://doi.org/10.2514/6.2004-6313).
-14. **Parasuraman, R., & Riley, V.** (1997). Humans and Automation: Use, Misuse, Disuse, Abuse. *Human Factors*, 39(2), 230–253. [DOI:10.1518/001872097778543886](https://doi.org/10.1518/001872097778543886).
-15. **Guo, C., Pleiss, G., Sun, Y., & Weinberger, K. Q.** (2017). On Calibration of Modern Neural Networks. *International Conference on Machine Learning (ICML 2017)*, 1321–1330. [arXiv:1706.04599](https://arxiv.org/abs/1706.04599).
-16. **Angelopoulos, A. N., & Bates, S.** (2021). A Gentle Introduction to Conformal Prediction and Distribution-Free Uncertainty Quantification. *arXiv preprint*. [arXiv:2107.07511](https://arxiv.org/abs/2107.07511).
-17. **ACM/IEEE-CS/AAAI Joint Task Force on Computing Curricula.** (2024). *Computer Science Curricula 2023 (CS2023)*. Association for Computing Machinery & IEEE Computer Society Press. [DOI:10.1145/3636243](https://doi.org/10.1145/3636243).
-18. **U.S. Bureau of Labor Statistics.** (2024). *Occupational Employment and Wage Statistics (OEWS) Survey, Computer and Information Technology Occupations (SOC 15-0000)*. United States Department of Labor. Available at: https://www.bls.gov/ooh/computer-and-information-technology/
+1. **ACM/IEEE-CS/AAAI Joint Task Force on Computing Curricula.** (2023). *Computer Science Curricula 2023 (CS2023)*. Association for Computing Machinery & IEEE Computer Society. https://doi.org/10.1145/3664191
+
+2. **Bolukbasi, T., Chang, K.-W., Zou, J. Y., Saligrama, V., & Kalai, A. T.** (2016). Man is to computer programmer as woman is to homemaker? Debiasing word embeddings. *Advances in Neural Information Processing Systems, 29*, 4349–4357. https://arxiv.org/abs/1607.06520
+
+3. **Buçinca, Z., Malaya, M. B., & Gajos, K. Z.** (2021). To trust or to think: Cognitive forcing functions can reduce overreliance on AI in AI-assisted decision-making. *Proceedings of the ACM on Human-Computer Interaction, 5*(CSCW1), Article 188. https://doi.org/10.1145/3449287
+
+4. **Caliskan, A., Bryson, J. J., & Narayanan, A.** (2017). Semantics derived automatically from language corpora contain human-like biases. *Science, 356*(6334), 183–186. https://doi.org/10.1126/science.aal4230
+
+5. **Cummings, M. L.** (2004). Automation bias in intelligent time critical decision support systems. *AIAA 1st Intelligent Systems Technical Conference*, Article 6313. https://doi.org/10.2514/6.2004-6313
+
+6. **Du, Y., Li, S., Torralba, A., Tenenbaum, J. B., & Mordatch, I.** (2024). Improving factuality and reasoning in language models through multiagent debate. *Proceedings of the 41st International Conference on Machine Learning*. https://arxiv.org/abs/2305.14325
+
+7. **Edge, D., Trinh, H., Cheng, N., Bradley, J., Chao, A., Mody, A., Truitt, S., & Larson, J.** (2024). From local to global: A graph RAG approach to query-focused summarization. *Microsoft Research Technical Report*. https://arxiv.org/abs/2404.16130
+
+8. **Geyik, S. C., Ambler, S., & Kenthapadi, K.** (2019). Fairness-aware ranking in search & recommendation systems with application to LinkedIn Talent Search. *Proceedings of the 25th ACM SIGKDD International Conference on Knowledge Discovery & Data Mining*, 2221–2231. https://doi.org/10.1145/3292500.3330691
+
+9. **Irving, G., Christiano, P., & Amodei, D.** (2018). AI safety via debate. *arXiv preprint*. https://arxiv.org/abs/1805.00899
+
+10. **Kadavath, S., Conerly, T., Askell, A., Henighan, T., Drain, D., Perez, E., Schiefer, N., et al.** (2022). Language models (mostly) know what they know. *arXiv preprint*. https://arxiv.org/abs/2207.05221
+
+11. **Liang, T., He, Z., Jiao, W., Wang, X., Wang, Y., Wang, R., Yang, Y., Tu, Z., & Shi, S.** (2023). Encouraging divergent thinking in large language models via multi-agent debate. *Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing*, 4392–4407. https://arxiv.org/abs/2305.19118
+
+12. **Parasuraman, R., & Riley, V.** (1997). Humans and automation: Use, misuse, disuse, abuse. *Human Factors, 39*(2), 230–253. https://doi.org/10.1518/001872097778543886
+
+13. **Perez, E., Ringer, S., Lukošiūtė, K., Nguyen, K., Chen, E., Heiner, S., Pettit, C., et al.** (2022). Discovering language model behaviors with model-written evaluations. *Findings of the Association for Computational Linguistics: ACL 2023*, 13387–13434. https://arxiv.org/abs/2212.09251
+
+14. **Sharma, M., Tong, M., Korbak, T., Duvenaud, D., Askell, A., Bowman, S. R., Cheng, N., et al.** (2024). Towards understanding sycophancy in language models. *Proceedings of the International Conference on Learning Representations*. https://arxiv.org/abs/2310.13548
+
+15. **Smit, A., Garg, S., Foley, M., du Plessis, M. C., Bhattacharyya, A., & Garg, A.** (2024). Should we be going MAD? A look at multi-agent debate strategies for LLMs. *arXiv preprint*. https://arxiv.org/abs/2311.17371
+
+16. **U.S. Bureau of Labor Statistics.** (2023). *Occupational Employment and Wage Statistics (OEWS): Computer and Information Technology Occupations (SOC 15-0000)*. U.S. Department of Labor. Retrieved November 2023 from https://www.bls.gov/oes/current/oes_nat.htm
+
+17. **Wei, J., Wang, X., Schuurmans, D., Bosma, M., Ichter, B., Xia, F., Chi, E., Le, Q., & Zhou, D.** (2022). Chain-of-thought prompting elicits reasoning in large language models. *Advances in Neural Information Processing Systems, 35*. https://arxiv.org/abs/2201.11903
+
+18. **Xiong, M., Hu, Z., Lu, X., Li, Y., Fu, J., He, J., & Hooi, B.** (2024). Can LLMs express their uncertainty? An empirical evaluation of confidence elicitation in LLMs. *Proceedings of the International Conference on Learning Representations*. https://arxiv.org/abs/2306.13063
