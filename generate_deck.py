@@ -1,14 +1,19 @@
 #!/usr/bin/env python3
 """
-Generate Complete Conference-Grade Academic Presentation Deck (18 Slides)
+High-Impact Conference-Grade Academic Presentation Deck (18 Slides)
 Debate-Based Career Guidance Agent with Complementary Personas
-Strictly mapped to the 7 evaluation sections for the 20-mark academic component:
+
+Redesigned strictly following the presentation-designer skill:
+- Native visual diagrams and flowcharts on every core slide
+- Decision diamonds, horizontal process pipelines, tree diagrams, and network graphs
+- High-contrast visual cards with clean typographic hierarchy
+- Strictly mapped across the 7 evaluation sections for the 20-mark academic component:
   1. Abstract (Slide 2)
   2. Introduction (Slides 3–4)
-  3. Literature Survey (Slides 5–8)
-  4. Architecture Diagram & Design (Slides 9–12)
-  5. Experimental Setup (Slides 13–15)
-  6. Results & Discussion (Slides 16–17)
+  3. Literature Survey (Slides 5–7)
+  4. Architecture Diagram & Design (Slides 8–11)
+  5. Experimental Setup (Slides 12–14)
+  6. Results & Discussion (Slides 15–17)
   7. References & Conclusion (Slide 18)
 """
 
@@ -24,33 +29,33 @@ def build_presentation_deck(output_path="/home/thor/Desktop/RAI Project/Final_Pr
     prs.slide_height = Inches(7.5)
     blank_layout = prs.slide_layouts[6]
 
-    # Professional Academic Color Palette
-    BG_DARK = RGBColor(15, 23, 42)         # Slate 900 #0F172A
-    BG_LIGHT = RGBColor(248, 250, 252)     # Slate 50  #F8FAFC
-    CARD_BG = RGBColor(255, 255, 255)      # Pure White #FFFFFF
-    CARD_BORDER = RGBColor(203, 213, 225)  # Slate 300 #CBD5E1
-    CARD_MUTED = RGBColor(241, 245, 249)   # Slate 100 #F1F5F9
+    # Academic Palette (60-30-10 Rule)
+    # 60% Neutral Backgrounds, 30% Slate/Navy Primary, 10% Teal/Accent
+    BG_DARK = RGBColor(15, 23, 42)          # Slate 900 #0F172A
+    BG_LIGHT = RGBColor(248, 250, 252)      # Slate 50  #F8FAFC
+    CARD_BG = RGBColor(255, 255, 255)       # Pure White #FFFFFF
+    CARD_BORDER = RGBColor(203, 213, 225)   # Slate 300 #CBD5E1
+    CARD_MUTED = RGBColor(241, 245, 249)    # Slate 100 #F1F5F9
     
-    NAVY_PRIMARY = RGBColor(30, 41, 59)    # Slate 800 #1E293B
-    NAVY_HEAD = RGBColor(15, 23, 42)       # Slate 900 #0F172A
-    TEAL_PRIMARY = RGBColor(13, 148, 136)  # Teal 600 #0D9488
-    TEAL_ACCENT = RGBColor(20, 184, 166)   # Teal 500 #14B8A6
-    TEAL_BG = RGBColor(240, 253, 250)      # Teal 50 #F0FDFA
-    BLUE_ACCENT = RGBColor(37, 99, 235)    # Blue 600 #2563EB
-    BLUE_BG = RGBColor(239, 246, 255)      # Blue 50 #EFF6FF
-    ROSE_ACCENT = RGBColor(225, 29, 72)    # Rose 600 #E11D48
-    ROSE_BG = RGBColor(255, 241, 242)      # Rose 50 #FFF1F2
-    AMBER_ACCENT = RGBColor(217, 119, 6)   # Amber 600 #D97706
-    AMBER_BG = RGBColor(254, 243, 199)     # Amber 100 #FEF3C7
-    INDIGO_ACCENT = RGBColor(79, 70, 229)  # Indigo 600 #4F46E5
-    INDIGO_BG = RGBColor(238, 242, 255)    # Indigo 50 #EEF2FF
+    NAVY_PRIMARY = RGBColor(30, 41, 59)     # Slate 800 #1E293B
+    NAVY_HEAD = RGBColor(15, 23, 42)        # Slate 900 #0F172A
+    TEAL_PRIMARY = RGBColor(13, 148, 136)   # Teal 600 #0D9488
+    TEAL_ACCENT = RGBColor(20, 184, 166)    # Teal 500 #14B8A6
+    TEAL_BG = RGBColor(240, 253, 250)       # Teal 50 #F0FDFA
+    BLUE_ACCENT = RGBColor(37, 99, 235)     # Blue 600 #2563EB
+    BLUE_BG = RGBColor(239, 246, 255)       # Blue 50 #EFF6FF
+    ROSE_ACCENT = RGBColor(225, 29, 72)     # Rose 600 #E11D48
+    ROSE_BG = RGBColor(255, 241, 242)       # Rose 50 #FFF1F2
+    AMBER_ACCENT = RGBColor(217, 119, 6)    # Amber 600 #D97706
+    AMBER_BG = RGBColor(254, 243, 199)      # Amber 100 #FEF3C7
+    INDIGO_ACCENT = RGBColor(79, 70, 229)   # Indigo 600 #4F46E5
+    INDIGO_BG = RGBColor(238, 242, 255)     # Indigo 50 #EEF2FF
     
-    TEXT_MAIN = RGBColor(30, 41, 59)       # Slate 800 #1E293B
-    TEXT_MUTED = RGBColor(100, 116, 139)   # Slate 500 #64748B
+    TEXT_MAIN = RGBColor(30, 41, 59)        # Slate 800
+    TEXT_MUTED = RGBColor(100, 116, 139)    # Slate 500
     TEXT_WHITE = RGBColor(255, 255, 255)
     
     FONT_MAIN = "Calibri"
-    FONT_CODE = "Consolas"
     TOTAL_SLIDES = 18
 
     def apply_bg(slide, color):
@@ -62,7 +67,7 @@ def build_presentation_deck(output_path="/home/thor/Desktop/RAI Project/Final_Pr
 
     def add_header(slide, title, category, slide_num, takeaway=""):
         # Category Tag Badge
-        tag = slide.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.8), Inches(0.32), Inches(3.6), Inches(0.28))
+        tag = slide.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.8), Inches(0.30), Inches(3.8), Inches(0.28))
         tag.fill.solid()
         tag.fill.fore_color.rgb = TEAL_BG
         tag.line.color.rgb = TEAL_PRIMARY
@@ -77,7 +82,7 @@ def build_presentation_deck(output_path="/home/thor/Desktop/RAI Project/Final_Pr
         tag.text_frame.vertical_anchor = MSO_ANCHOR.MIDDLE
 
         # Slide Number
-        tb_n = slide.shapes.add_textbox(Inches(11.3), Inches(0.32), Inches(1.2), Inches(0.3))
+        tb_n = slide.shapes.add_textbox(Inches(11.3), Inches(0.30), Inches(1.2), Inches(0.3))
         p_n = tb_n.text_frame.paragraphs[0]
         p_n.text = f"{slide_num:02d} / {TOTAL_SLIDES:02d}"
         p_n.font.name = FONT_MAIN
@@ -86,18 +91,18 @@ def build_presentation_deck(output_path="/home/thor/Desktop/RAI Project/Final_Pr
         p_n.font.color.rgb = TEXT_MUTED
         p_n.alignment = PP_ALIGN.RIGHT
 
-        # Main Title
-        tb_t = slide.shapes.add_textbox(Inches(0.8), Inches(0.62), Inches(11.7), Inches(0.42))
+        # Main Title (Headline >= 20pt)
+        tb_t = slide.shapes.add_textbox(Inches(0.8), Inches(0.60), Inches(11.7), Inches(0.44))
         p = tb_t.text_frame.paragraphs[0]
         p.text = title
         p.font.name = FONT_MAIN
-        p.font.size = Pt(18)
+        p.font.size = Pt(20)
         p.font.bold = True
         p.font.color.rgb = NAVY_HEAD
 
         # Subtitle / Takeaway Line
         if takeaway:
-            tb_sub = slide.shapes.add_textbox(Inches(0.8), Inches(1.02), Inches(11.7), Inches(0.32))
+            tb_sub = slide.shapes.add_textbox(Inches(0.8), Inches(1.04), Inches(11.7), Inches(0.30))
             p_sub = tb_sub.text_frame.paragraphs[0]
             p_sub.text = takeaway
             p_sub.font.name = FONT_MAIN
@@ -133,7 +138,7 @@ def build_presentation_deck(output_path="/home/thor/Desktop/RAI Project/Final_Pr
         p_fr.font.color.rgb = TEXT_MUTED
         p_fr.alignment = PP_ALIGN.RIGHT
 
-    def add_card(slide, left, top, width, height, title="", title_color=NAVY_HEAD, top_accent=None, bg_color=CARD_BG, border_color=CARD_BORDER):
+    def add_card(slide, left, top, width, height, title="", title_color=NAVY_HEAD, top_accent=None, bg_color=CARD_BG, border_color=CARD_BORDER, title_size=12.0):
         card = slide.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, left, top, width, height)
         card.fill.solid()
         card.fill.fore_color.rgb = bg_color
@@ -147,18 +152,22 @@ def build_presentation_deck(output_path="/home/thor/Desktop/RAI Project/Final_Pr
             acc.line.fill.background()
 
         if title:
-            tb = slide.shapes.add_textbox(left + Inches(0.18), top + Inches(0.12), width - Inches(0.36), Inches(0.38))
+            tb = slide.shapes.add_textbox(left + Inches(0.14), top + Inches(0.16), width - Inches(0.28), Inches(0.38))
             tb.text_frame.word_wrap = True
+            tb.text_frame.margin_left = Inches(0.02)
+            tb.text_frame.margin_right = Inches(0.02)
+            tb.text_frame.margin_top = Inches(0.0)
+            tb.text_frame.margin_bottom = Inches(0.0)
             p = tb.text_frame.paragraphs[0]
             p.text = title
             p.font.name = FONT_MAIN
-            p.font.size = Pt(12.0)
+            p.font.size = Pt(title_size)
             p.font.bold = True
             p.font.color.rgb = title_color
             return card, tb
         return card, None
 
-    def add_bullet(tf, bold_txt, norm_txt, pt_size=9.5, space_after=4):
+    def add_bullet(tf, bold_txt, norm_txt, pt_size=9.5, space_after=4, bold_color=None, norm_color=None):
         p = tf.add_paragraph() if len(tf.paragraphs[0].text) > 0 else tf.paragraphs[0]
         p.space_after = Pt(space_after)
         run_b = p.add_run()
@@ -166,16 +175,49 @@ def build_presentation_deck(output_path="/home/thor/Desktop/RAI Project/Final_Pr
         run_b.font.name = FONT_MAIN
         run_b.font.size = Pt(pt_size)
         run_b.font.bold = True
-        run_b.font.color.rgb = NAVY_PRIMARY
+        run_b.font.color.rgb = bold_color if bold_color else NAVY_PRIMARY
         
         run_n = p.add_run()
         run_n.text = norm_txt
         run_n.font.name = FONT_MAIN
         run_n.font.size = Pt(pt_size)
-        run_n.font.color.rgb = TEXT_MAIN
+        run_n.font.color.rgb = norm_color if norm_color else TEXT_MAIN
+
+    def add_flow_node(slide, left, top, width, height, text, sub="", bg=CARD_BG, border=TEAL_PRIMARY, text_color=NAVY_HEAD, shape=MSO_SHAPE.ROUNDED_RECTANGLE):
+        node = slide.shapes.add_shape(shape, left, top, width, height)
+        node.fill.solid()
+        node.fill.fore_color.rgb = bg
+        node.line.color.rgb = border
+        node.line.width = Pt(1.2)
+        tf = node.text_frame
+        tf.word_wrap = True
+        p = tf.paragraphs[0]
+        p.text = text
+        p.font.name = FONT_MAIN
+        p.font.size = Pt(10)
+        p.font.bold = True
+        p.font.color.rgb = text_color
+        p.alignment = PP_ALIGN.CENTER
+        node.text_frame.vertical_anchor = MSO_ANCHOR.MIDDLE
+        if sub:
+            p2 = tf.add_paragraph()
+            p2.text = sub
+            p2.font.name = FONT_MAIN
+            p2.font.size = Pt(8.0)
+            p2.font.color.rgb = TEXT_MUTED
+            p2.alignment = PP_ALIGN.CENTER
+        return node
+
+    def add_arrow(slide, left, top, width, height, direction="right", color=TEAL_PRIMARY):
+        st = MSO_SHAPE.RIGHT_ARROW if direction == "right" else MSO_SHAPE.DOWN_ARROW
+        arr = slide.shapes.add_shape(st, left, top, width, height)
+        arr.fill.solid()
+        arr.fill.fore_color.rgb = color
+        arr.line.fill.background()
+        return arr
 
     # =========================================================================
-    # SLIDE 1: Title Slide
+    # SLIDE 1: Title Slide (Executive Dark Navy)
     # =========================================================================
     s1 = prs.slides.add_slide(blank_layout)
     apply_bg(s1, BG_DARK)
@@ -201,7 +243,7 @@ def build_presentation_deck(output_path="/home/thor/Desktop/RAI Project/Final_Pr
     s1_status.line.color.rgb = BLUE_ACCENT
     s1_status.line.width = Pt(1)
     p = s1_status.text_frame.paragraphs[0]
-    p.text = "ACADEMIC RESEARCH & IMPLEMENTATION PROJECT (20 MARKS)"
+    p.text = "ACADEMIC EVALUATION (20-MARK COMPONENT)"
     p.font.name = FONT_MAIN
     p.font.size = Pt(9.5)
     p.font.bold = True
@@ -229,54 +271,55 @@ def build_presentation_deck(output_path="/home/thor/Desktop/RAI Project/Final_Pr
 
     # 3 Metadata Cards
     col_w = Inches(3.64)
-    col_h = Inches(2.3)
+    col_h = Inches(2.9)
     top_meta = Inches(3.8)
 
+    card_bold_col = RGBColor(241, 245, 249)
+    card_norm_col = RGBColor(203, 213, 225)
+
     add_card(s1, Inches(1.0), top_meta, col_w, col_h, "Project Scope & Domain", TEAL_ACCENT, bg_color=RGBColor(30, 41, 59), border_color=RGBColor(51, 65, 85))
-    tb_m1 = s1.shapes.add_textbox(Inches(1.15), top_meta + Inches(0.48), col_w - Inches(0.3), col_h - Inches(0.6))
+    tb_m1 = s1.shapes.add_textbox(Inches(1.15), top_meta + Inches(0.48), col_w - Inches(0.3), col_h - Inches(0.55))
     tf_m1 = tb_m1.text_frame
     tf_m1.word_wrap = True
-    add_bullet(tf_m1, "• Domain:", "Undergraduate CSE Career Advisory", pt_size=10.0)
-    add_bullet(tf_m1, "• Focus Tracks:", "SDE, Systems, Data & AI Engineering", pt_size=10.0)
-    add_bullet(tf_m1, "• Core Mechanism:", "3 Dialectic Antagonistic Personas", pt_size=10.0)
-    add_bullet(tf_m1, "• Verification:", "NetworkX 42-Node Prerequisite DAG", pt_size=10.0)
-    add_bullet(tf_m1, "• Ethics:", "Demographic Attribute Isolation Vault", pt_size=10.0)
+    add_bullet(tf_m1, "• Domain:", "Undergraduate CSE Advisory", pt_size=9.5, space_after=3, bold_color=card_bold_col, norm_color=card_norm_col)
+    add_bullet(tf_m1, "• Focus Tracks:", "SDE, Systems, Data & AI Engg", pt_size=9.5, space_after=3, bold_color=card_bold_col, norm_color=card_norm_col)
+    add_bullet(tf_m1, "• Core Mechanism:", "3 Dialectic Antagonistic Personas", pt_size=9.5, space_after=3, bold_color=card_bold_col, norm_color=card_norm_col)
+    add_bullet(tf_m1, "• Verification:", "NetworkX 42-Node Prerequisite DAG", pt_size=9.5, space_after=3, bold_color=card_bold_col, norm_color=card_norm_col)
+    add_bullet(tf_m1, "• Ethics:", "Demographic Attribute Isolation Vault", pt_size=9.5, space_after=3, bold_color=card_bold_col, norm_color=card_norm_col)
 
     add_card(s1, Inches(4.84), top_meta, col_w, col_h, "Engineering Architecture", BLUE_ACCENT, bg_color=RGBColor(30, 41, 59), border_color=RGBColor(51, 65, 85))
-    tb_m2 = s1.shapes.add_textbox(Inches(5.0), top_meta + Inches(0.48), col_w - Inches(0.3), col_h - Inches(0.6))
+    tb_m2 = s1.shapes.add_textbox(Inches(5.0), top_meta + Inches(0.48), col_w - Inches(0.3), col_h - Inches(0.55))
     tf_m2 = tb_m2.text_frame
     tf_m2.word_wrap = True
-    add_bullet(tf_m2, "• Inference Engine:", "Local Ollama on RTX 3050 Laptop GPU", pt_size=10.0)
-    add_bullet(tf_m2, "• Persona Triad:", "Traditionalist, Builder, Specialist", pt_size=10.0)
-    add_bullet(tf_m2, "• Meta-Reasoning:", "Neutral Moderator Synthesizer", pt_size=10.0)
-    add_bullet(tf_m2, "• Prerequisite Check:", "Deterministic Graph Traversal", pt_size=10.0)
-    add_bullet(tf_m2, "• Interface Gate:", "Cognitive Forcing Dispute Tree", pt_size=10.0)
+    add_bullet(tf_m2, "• Inference Engine:", "Local Ollama on RTX 3050 Laptop GPU", pt_size=9.5, space_after=3, bold_color=card_bold_col, norm_color=card_norm_col)
+    add_bullet(tf_m2, "• Persona Triad:", "Traditionalist, Builder, Specialist", pt_size=9.5, space_after=3, bold_color=card_bold_col, norm_color=card_norm_col)
+    add_bullet(tf_m2, "• Meta-Reasoning:", "Neutral Moderator Synthesizer", pt_size=9.5, space_after=3, bold_color=card_bold_col, norm_color=card_norm_col)
+    add_bullet(tf_m2, "• Prerequisite Check:", "Deterministic Graph Traversal", pt_size=9.5, space_after=3, bold_color=card_bold_col, norm_color=card_norm_col)
+    add_bullet(tf_m2, "• Interface Gate:", "Cognitive Forcing Dispute Tree", pt_size=9.5, space_after=3, bold_color=card_bold_col, norm_color=card_norm_col)
 
     add_card(s1, Inches(8.68), top_meta, col_w, col_h, "Evaluation Methodology", AMBER_ACCENT, bg_color=RGBColor(30, 41, 59), border_color=RGBColor(51, 65, 85))
-    tb_m3 = s1.shapes.add_textbox(Inches(8.83), top_meta + Inches(0.48), col_w - Inches(0.3), col_h - Inches(0.6))
+    tb_m3 = s1.shapes.add_textbox(Inches(8.83), top_meta + Inches(0.48), col_w - Inches(0.3), col_h - Inches(0.55))
     tf_m3 = tb_m3.text_frame
     tf_m3.word_wrap = True
-    add_bullet(tf_m3, "• Experimental Setup:", "4-Tier Controlled Ablation", pt_size=10.0)
-    add_bullet(tf_m3, "• Evaluation Cohort:", "20 Synthetic Profiles (10 Pairs)", pt_size=10.0)
-    add_bullet(tf_m3, "• Counterfactual Audit:", "Gender, College Tier & Budget", pt_size=10.0)
-    add_bullet(tf_m3, "• Core Metrics:", "Prerequisite Errors, Coverage, Flip Rate", pt_size=10.0)
-    add_bullet(tf_m3, "• Structure:", "7 Mandatory Academic Sections", pt_size=10.0)
+    add_bullet(tf_m3, "• Experimental Setup:", "4-Tier Controlled Ablation", pt_size=9.5, space_after=3, bold_color=card_bold_col, norm_color=card_norm_col)
+    add_bullet(tf_m3, "• Evaluation Cohort:", "20 Synthetic Profiles (10 Pairs)", pt_size=9.5, space_after=3, bold_color=card_bold_col, norm_color=card_norm_col)
+    add_bullet(tf_m3, "• Counterfactual Audit:", "Gender, College Tier & Budget", pt_size=9.5, space_after=3, bold_color=card_bold_col, norm_color=card_norm_col)
+    add_bullet(tf_m3, "• Core Metrics:", "Prereq Errors, Coverage, Flip Rate", pt_size=9.5, space_after=3, bold_color=card_bold_col, norm_color=card_norm_col)
+    add_bullet(tf_m3, "• Structure:", "7 Mandatory Academic Sections", pt_size=9.5, space_after=3, bold_color=card_bold_col, norm_color=card_norm_col)
 
     s1.notes_slide.notes_text_frame.text = (
-        "Good morning members of the evaluation committee. Today, I am presenting our work: "
-        "'Debate-Based Career Guidance Agent with Complementary Personas'. This project addresses three "
-        "fundamental flaws in monolithic career AI: sycophancy, hallucinated milestones, and demographic bias. "
-        "We present our end-to-end multi-agent dialectic architecture, a hand-built curricular DAG in NetworkX, "
-        "and a rigorous experimental ablation study structured across the 7 academic sections."
+        "Good morning committee. Today I present 'Debate-Based Career Guidance Agent with Complementary Personas'. "
+        "This project replaces single-agent sycophancy with multi-agent dialectic tension grounded in a hand-built NetworkX "
+        "prerequisite DAG, preserving student agency and enforcing fairness on consumer local hardware."
     )
 
     # =========================================================================
-    # SLIDE 2: Section 1 — Abstract & Executive Summary
+    # SLIDE 2: Section 1 — Abstract: Visual System Overview
     # =========================================================================
     s2 = prs.slides.add_slide(blank_layout)
     apply_bg(s2, BG_LIGHT)
-    add_header(s2, "Abstract: Responsible AI Career Advisory Architecture", "Section 1: Abstract", 2,
-               "Executive summary of the research motivation, multi-agent dialectic framework, and key findings.")
+    add_header(s2, "Abstract: Multi-Agent Dialectic Advisory Architecture", "Section 1: Abstract", 2,
+               "Executive overview of the research problem, multi-agent dialectic architecture, and key contributions.")
 
     w3 = Inches(3.64)
     h_top = Inches(2.4)
@@ -286,15 +329,15 @@ def build_presentation_deck(output_path="/home/thor/Desktop/RAI Project/Final_Pr
     tb = s2.shapes.add_textbox(Inches(0.95), Inches(2.0), w3 - Inches(0.3), h_top - Inches(0.55))
     tf = tb.text_frame
     tf.word_wrap = True
-    add_bullet(tf, "• Sycophancy Trap:", "RLHF models validate infeasible student goals to maximize perceived helpfulness.")
-    add_bullet(tf, "• False Consensus:", "Single-agent prompts smooth over vital engineering trade-offs into generic advice.")
-    add_bullet(tf, "• Demographic Steering:", "Pre-trained priors steer candidates based on college tier or gender proxies.")
+    add_bullet(tf, "• Sycophancy Trap:", "RLHF prompts validate infeasible student aspirations without verifying prerequisites.")
+    add_bullet(tf, "• False Consensus:", "Single-agent models average competing trajectories into vague advice.")
+    add_bullet(tf, "• Demographic Steering:", "Pre-trained models leak subtle biases based on college tier or gender.")
 
-    add_card(s2, Inches(4.84), Inches(1.55), w3, h_top, "The Proposed Architecture", TEAL_PRIMARY, top_accent=TEAL_PRIMARY)
+    add_card(s2, Inches(4.84), Inches(1.55), w3, h_top, "Proposed Architecture", TEAL_PRIMARY, top_accent=TEAL_PRIMARY)
     tb = s2.shapes.add_textbox(Inches(5.0), Inches(2.0), w3 - Inches(0.3), h_top - Inches(0.55))
     tf = tb.text_frame
     tf.word_wrap = True
-    add_bullet(tf, "• 3 Dialectic Personas:", "Traditionalist (DSA/Enterprise), Builder (Speed/MVPs), Specialist (Systems/Depth).")
+    add_bullet(tf, "• 3 Dialectic Personas:", "Traditionalist (DSA/Degree), Builder (MVPs/Speed), Specialist (Systems/Depth).")
     add_bullet(tf, "• Curricular Graph:", "NetworkX 42-node prerequisite DAG derived from computing curricula.")
     add_bullet(tf, "• Neutral Moderator:", "Identifies sharp contradictions and constructs structured Dispute Trees.")
 
@@ -302,9 +345,9 @@ def build_presentation_deck(output_path="/home/thor/Desktop/RAI Project/Final_Pr
     tb = s2.shapes.add_textbox(Inches(9.03), Inches(2.0), w3 - Inches(0.3), h_top - Inches(0.55))
     tf = tb.text_frame
     tf.word_wrap = True
-    add_bullet(tf, "• 4-Tier Ablation:", "Evaluates Monolithic, In-Context, Unmoderated Triad, and Proposed System.")
-    add_bullet(tf, "• Counterfactual Audit:", "Tests 20 synthetic candidate profiles across 10 matched demographic pairs.")
-    add_bullet(tf, "• Cognitive Forcing Gate:", "Surfaces unresolvable trade-offs directly to the student rather than deciding.")
+    add_bullet(tf, "• 4-Tier Ablation:", "Benchmarks Monolithic vs In-Context vs Triad vs Proposed System.")
+    add_bullet(tf, "• Counterfactual Audit:", "Evaluates 20 synthetic profiles across 10 matched demographic pairs.")
+    add_bullet(tf, "• Cognitive Forcing Gate:", "Surfaces unresolvable trade-offs directly to student choice.")
 
     add_card(s2, Inches(0.8), Inches(4.2), Inches(11.733), h_bot, "Core Contributions & Scope Summary", NAVY_HEAD, top_accent=NAVY_HEAD)
     tb_bot = s2.shapes.add_textbox(Inches(1.0), Inches(4.65), Inches(11.333), h_bot - Inches(0.6))
@@ -318,62 +361,55 @@ def build_presentation_deck(output_path="/home/thor/Desktop/RAI Project/Final_Pr
         "In Section 1, our Abstract provides an executive summary of the entire work. Monolithic LLMs fail in "
         "career advisory because they tell users what they want to hear, hallucinate milestone sequences, and encode "
         "demographic biases. Our architecture decouples the decision into 3 adversarial personas grounded by a curricular "
-        "DAG in NetworkX, orchestrated by a neutral moderator. We evaluate this on 20 synthetic candidate profiles."
+        "DAG in NetworkX, orchestrated by a neutral moderator."
     )
 
     # =========================================================================
-    # SLIDE 3: Section 2 — Introduction: Failure Modes of Monolithic Career AI
+    # SLIDE 3: Section 2 — Introduction: Visual Problem Comparison Flowchart
     # =========================================================================
     s3 = prs.slides.add_slide(blank_layout)
     apply_bg(s3, BG_LIGHT)
-    add_header(s3, "Introduction: Three Structural Failures in Algorithmic Advisory", "Section 2: Introduction", 3,
-               "Why standard single-prompt LLM assistants fail in high-stakes computer science career advisory.")
+    add_header(s3, "Introduction: Monolithic Flattery vs. Dialectic Truth-Seeking", "Section 2: Introduction", 3,
+               "Contrasting the dangerous sycophancy trap of standard LLMs with our grounded dialectic pipeline.")
 
-    w3 = Inches(3.64)
-    h_card = Inches(5.1)
+    # Left Box: Monolithic Failure Trap (Red Theme)
+    add_card(s3, Inches(0.8), Inches(1.55), Inches(5.6), Inches(5.1), "Standard Monolithic AI (Sycophancy Trap)", ROSE_ACCENT, top_accent=ROSE_ACCENT, bg_color=ROSE_BG, border_color=ROSE_ACCENT)
+    
+    # Flowchart Nodes Inside Left Box
+    add_flow_node(s3, Inches(1.1), Inches(2.2), Inches(5.0), Inches(0.6), "1. Unrealistic Student Prompt", "e.g., 'Become Staff ML Engineer in 4 Months via Bootcamp'", bg=CARD_BG, border=CARD_BORDER)
+    add_arrow(s3, Inches(3.3), Inches(2.85), Inches(0.4), Inches(0.35), direction="down", color=ROSE_ACCENT)
+    add_flow_node(s3, Inches(1.1), Inches(3.25), Inches(5.0), Inches(0.6), "2. RLHF Conversational Agreeableness", "Model affirms student goal to maximize user satisfaction score", bg=CARD_BG, border=ROSE_ACCENT)
+    add_arrow(s3, Inches(3.3), Inches(3.9), Inches(0.4), Inches(0.35), direction="down", color=ROSE_ACCENT)
+    add_flow_node(s3, Inches(1.1), Inches(4.3), Inches(5.0), Inches(0.6), "3. Hallucinated Milestone Sequencing", "Omits Linear Algebra & OS; recommends advanced Transformers directly", bg=CARD_BG, border=ROSE_ACCENT)
+    add_arrow(s3, Inches(3.3), Inches(4.95), Inches(0.4), Inches(0.35), direction="down", color=ROSE_ACCENT)
+    add_flow_node(s3, Inches(1.1), Inches(5.35), Inches(5.0), Inches(0.7), "FAIL: Predatory Debt & Career Trap", "Student spends savings on bootcamp; fails technical screening", bg=RGBColor(254, 226, 226), border=ROSE_ACCENT, text_color=ROSE_ACCENT)
 
-    add_card(s3, Inches(0.8), Inches(1.55), w3, h_card, "1. The Sycophancy Trap", ROSE_ACCENT, top_accent=ROSE_ACCENT)
-    tb = s3.shapes.add_textbox(Inches(0.95), Inches(2.05), w3 - Inches(0.3), h_card - Inches(0.6))
-    tf = tb.text_frame
-    tf.word_wrap = True
-    add_bullet(tf, "• Mechanism:", "Reinforcement Learning from Human Feedback (RLHF) rewards conversational agreeableness.")
-    add_bullet(tf, "• Advisory Failure:", "When a novice student proposes a 3-month pivot to 'Staff AI Engineer', the model affirms the dream rather than warning of missing prerequisites.")
-    add_bullet(tf, "• Economic Risk:", "Validates predatory bootcamps and unaccredited credentials, creating severe debt exposure.")
-    add_bullet(tf, "• Literature:", "Demonstrated empirically by Sharma et al. (ICLR '24) and Perez et al. (ACL '23).")
-
-    add_card(s3, Inches(4.84), Inches(1.55), w3, h_card, "2. Prerequisite Hallucination", AMBER_ACCENT, top_accent=AMBER_ACCENT)
-    tb = s3.shapes.add_textbox(Inches(5.0), Inches(2.05), w3 - Inches(0.3), h_card - Inches(0.6))
-    tf = tb.text_frame
-    tf.word_wrap = True
-    add_bullet(tf, "• Mechanism:", "Autoregressive token generation generates superficially plausible sequences without topological validation.")
-    add_bullet(tf, "• Advisory Failure:", "Recommends advanced Distributed Systems or Transformers to students who lack basic OS or Linear Algebra.")
-    add_bullet(tf, "• False Certainty:", "Single-agent decoding presents one confident roadmap with no calibrated indication of prerequisite risk.")
-    add_bullet(tf, "• Literature:", "Documented in confidence elicitation studies by Kadavath et al. and Xiong et al. ('24).")
-
-    add_card(s3, Inches(8.88), Inches(1.55), w3, h_card, "3. Latent Demographic Steering", INDIGO_ACCENT, top_accent=INDIGO_ACCENT)
-    tb = s3.shapes.add_textbox(Inches(9.03), Inches(2.05), w3 - Inches(0.3), h_card - Inches(0.6))
-    tf = tb.text_frame
-    tf.word_wrap = True
-    add_bullet(tf, "• Mechanism:", "Pre-trained embeddings encode historical occupational hierarchies and demographic correlations.")
-    add_bullet(tf, "• Advisory Failure:", "When candidate qualifications are held identical, subtle proxy leaks (college tier, gender name) shift career advice.")
-    add_bullet(tf, "• Disparity:", "Tier-1 candidates receive ambitious R&D trajectories; Tier-3 candidates are steered to IT support or paid bootcamps.")
-    add_bullet(tf, "• Literature:", "Documented by Geyik et al. (ACM KDD '19) and Bolukbasi et al. (NeurIPS '16).")
+    # Right Box: Dialectic Truth-Seeking (Teal Theme)
+    add_card(s3, Inches(6.9), Inches(1.55), Inches(5.6), Inches(5.1), "Proposed Dialectic Architecture (Truth-Seeking)", TEAL_PRIMARY, top_accent=TEAL_PRIMARY, bg_color=TEAL_BG, border_color=TEAL_PRIMARY)
+    
+    # Flowchart Nodes Inside Right Box
+    add_flow_node(s3, Inches(7.2), Inches(2.2), Inches(5.0), Inches(0.6), "1. Candidate Profile & Isolated Vault", "Demographics masked; verified skills verified against graph", bg=CARD_BG, border=CARD_BORDER)
+    add_arrow(s3, Inches(9.4), Inches(2.85), Inches(0.4), Inches(0.35), direction="down", color=TEAL_PRIMARY)
+    add_flow_node(s3, Inches(7.2), Inches(3.25), Inches(5.0), Inches(0.6), "2. Differentiated Persona Friction", "Traditionalist (Rigor) vs Builder (Speed) vs Specialist (Depth)", bg=CARD_BG, border=TEAL_PRIMARY)
+    add_arrow(s3, Inches(9.4), Inches(3.9), Inches(0.4), Inches(0.35), direction="down", color=TEAL_PRIMARY)
+    add_flow_node(s3, Inches(7.2), Inches(4.3), Inches(5.0), Inches(0.6), "3. NetworkX Topological Validation", "Detects 4 missing prerequisite hops: halts automated roadmap", bg=CARD_BG, border=TEAL_PRIMARY)
+    add_arrow(s3, Inches(9.4), Inches(4.95), Inches(0.4), Inches(0.35), direction="down", color=TEAL_PRIMARY)
+    add_flow_node(s3, Inches(7.2), Inches(5.35), Inches(5.0), Inches(0.7), "PASS: Cognitive Forcing & Dispute Tree", "Surfaces genuine trade-offs; student makes informed decision", bg=RGBColor(204, 251, 241), border=TEAL_PRIMARY, text_color=TEAL_PRIMARY)
 
     s3.notes_slide.notes_text_frame.text = (
-        "In Section 2, we introduce the three primary failure modes. First is the Sycophancy Trap: because LLMs "
-        "are trained to be polite and helpful, they enthusiastically validate unrealistic student timelines. Second is "
-        "Prerequisite Hallucination: language models generate text that sounds good, but violates the strict mathematical "
-        "and topological ordering of computing knowledge. Third is Latent Demographic Steering: models alter their advice "
-        "based on college tier or gender signals even when core skills are identical."
+        "Slide 3 directly illustrates the core problem using two contrasting flowcharts. On the left is the "
+        "Monolithic Sycophancy Trap: an unrealistic student prompt is flattered by the LLM, leading to ungrounded "
+        "milestones and debt. On the right is our Dialectic Truth-Seeking pipeline: candidate skills are checked against "
+        "a prerequisite graph, personas debate, and the cognitive forcing gate intervenes before false certainty occurs."
     )
 
     # =========================================================================
-    # SLIDE 4: Section 2 — Introduction: Research Questions & Concrete Scope
+    # SLIDE 4: Section 2 — Introduction: Research Questions & Problem Formulation
     # =========================================================================
     s4 = prs.slides.add_slide(blank_layout)
     apply_bg(s4, BG_LIGHT)
-    add_header(s4, "Introduction: Research Questions & Formulation", "Section 2: Introduction", 4,
-               "Formal definition of research objectives, mathematical environment, and bounded academic scope.")
+    add_header(s4, "Introduction: Research Questions & Mathematical Tuple", "Section 2: Introduction", 4,
+               "Formal definition of the research environment and testable hypotheses.")
 
     w2 = Inches(5.67)
     h_top = Inches(2.55)
@@ -398,7 +434,7 @@ def build_presentation_deck(output_path="/home/thor/Desktop/RAI Project/Final_Pr
     add_bullet(tf, "• Advisory Personas:", "Π = {π_trad, π_builder, π_spec} representing 3 orthogonal optimisation axes.", pt_size=10.0)
     add_bullet(tf, "• Synthesizer & Gate:", "Φ extracts contradictions; Gate triggers whenever irreconcilable trade-offs emerge.", pt_size=10.0)
 
-    add_card(s4, Inches(0.8), Inches(4.35), Inches(11.733), h_bot, "Bounded Project Scope & Methodological Safeguards", BLUE_ACCENT, top_accent=BLUE_ACCENT)
+    add_card(s4, Inches(0.8), Inches(4.35), Inches(11.733), h_bot, "Bounded Local Engineering Scope", BLUE_ACCENT, top_accent=BLUE_ACCENT)
     tb_bot = s4.shapes.add_textbox(Inches(1.0), Inches(4.8), Inches(11.333), h_bot - Inches(0.55))
     tf_bot = tb_bot.text_frame
     tf_bot.word_wrap = True
@@ -407,10 +443,9 @@ def build_presentation_deck(output_path="/home/thor/Desktop/RAI Project/Final_Pr
     add_bullet(tf_bot, "• Graph Realism:", "Uses a hand-built 42-node NetworkX DAG spanning AL, OS, DM, SE, Web, and ML. Eliminates external database overhead while providing exact topological validation.", pt_size=10.0)
 
     s4.notes_slide.notes_text_frame.text = (
-        "We formalise the problem around 4 core research questions covering dialectic friction, graph grounding, "
-        "fairness, and student agency. Our mathematical formulation isolates protected demographic attributes "
-        "into an Audit Vault while passing only verified competencies to the planning agents. The scope is strictly "
-        "bounded to undergraduate CSE, and inference runs completely on consumer local hardware via Ollama."
+        "We formalise our environment around 4 concrete research questions. Our deliberation tuple isolates "
+        "demographic tokens into an audit vault while passing only verified competencies to the planning agents. "
+        "The system runs entirely locally on an RTX 3050 laptop GPU via Ollama."
     )
 
     # =========================================================================
@@ -419,42 +454,39 @@ def build_presentation_deck(output_path="/home/thor/Desktop/RAI Project/Final_Pr
     s5 = prs.slides.add_slide(blank_layout)
     apply_bg(s5, BG_LIGHT)
     add_header(s5, "Literature Survey: Canonical Foundations", "Section 3: Literature Survey", 5,
-               "Foundational research in multi-agent debate, sycophancy mitigation, and confidence calibration.")
+               "Peer-reviewed foundations across multi-agent debate, sycophancy, and confidence calibration.")
 
-    w2 = Inches(5.67)
-    h_top = Inches(2.55)
-    h_bot = Inches(2.45)
+    w3 = Inches(3.64)
+    h_card = Inches(5.1)
 
-    add_card(s5, Inches(0.8), Inches(1.55), w2, h_top, "Multi-Agent Debate & Divergent Thinking", TEAL_PRIMARY, top_accent=TEAL_PRIMARY)
-    tb = s5.shapes.add_textbox(Inches(0.95), Inches(2.0), w2 - Inches(0.3), h_top - Inches(0.55))
+    add_card(s5, Inches(0.8), Inches(1.55), w3, h_card, "Multi-Agent Debate", TEAL_PRIMARY, top_accent=TEAL_PRIMARY)
+    tb = s5.shapes.add_textbox(Inches(0.95), Inches(2.05), w3 - Inches(0.3), h_card - Inches(0.6))
     tf = tb.text_frame
     tf.word_wrap = True
-    add_bullet(tf, "• Du et al. (ICML 2024):", "Showed that multi-agent debate significantly improves factual accuracy and arithmetic reasoning on standard reasoning benchmarks.")
-    add_bullet(tf, "• Liang et al. (EMNLP 2023):", "Demonstrated that persona-differentiated agents foster divergent thinking, exploring creative search spaces far better than homogeneous agents.")
-    add_bullet(tf, "• Irving et al. (2018):", "Established AI safety via debate: adversarial cross-examination makes deception and hallucination detectable to an external judge.")
+    add_bullet(tf, "• Du et al. (ICML 2024):", "Improving Factuality & Reasoning in LLMs through Multiagent Debate. Proved debate improves benchmark truthfulness.")
+    add_bullet(tf, "• Liang et al. (EMNLP 2023):", "Encouraging Divergent Thinking in LLMs via Multi-Agent Debate. Persona differentiation uncovers broader solution spaces.")
+    add_bullet(tf, "• Irving et al. (2018):", "AI Safety via Debate. Adversarial cross-examination makes deception visible to external evaluators.")
 
-    add_card(s5, Inches(6.86), Inches(1.55), w2, h_top, "Sycophancy & Model Manipulation", ROSE_ACCENT, top_accent=ROSE_ACCENT)
-    tb = s5.shapes.add_textbox(Inches(7.01), Inches(2.0), w2 - Inches(0.3), h_top - Inches(0.55))
+    add_card(s5, Inches(4.84), Inches(1.55), w3, h_card, "Sycophancy & Manipulation", ROSE_ACCENT, top_accent=ROSE_ACCENT)
+    tb = s5.shapes.add_textbox(Inches(5.0), Inches(2.05), w3 - Inches(0.3), h_card - Inches(0.6))
     tf = tb.text_frame
     tf.word_wrap = True
-    add_bullet(tf, "• Sharma et al. (ICLR 2024):", "Proved that RLHF systematically induces sycophancy: models prioritize agreeing with user-stated beliefs over stating truthful facts.")
-    add_bullet(tf, "• Perez et al. (ACL 2023):", "Generated model-written evaluations exposing how models adjust their philosophical and political stances to match user prompts.")
-    add_bullet(tf, "• Takeaway for Advisory:", "In career planning, a polite single agent will encourage unrealistic pivot plans rather than identifying missing foundational courses.")
+    add_bullet(tf, "• Sharma et al. (ICLR 2024):", "Towards Understanding Sycophancy in Language Models. Demonstrates RLHF models systematically agree with user misconceptions.")
+    add_bullet(tf, "• Perez et al. (ACL 2023):", "Discovering Language Model Behaviors with Model-Written Evaluations. Shows models alter opinions to flatter the prompter.")
+    add_bullet(tf, "• Impact on Advisory:", "Career AI will validate an unviable transition rather than risk contradicting user sentiment.")
 
-    add_card(s5, Inches(0.8), Inches(4.35), Inches(11.733), h_bot, "Uncertainty Elicitation & In-Context Reasoning Limits", NAVY_HEAD, top_accent=NAVY_HEAD)
-    tb_bot = s5.shapes.add_textbox(Inches(1.0), Inches(4.8), Inches(11.333), h_bot - Inches(0.55))
-    tf_bot = tb_bot.text_frame
-    tf_bot.word_wrap = True
-    add_bullet(tf_bot, "• Kadavath et al. (2022) & Xiong et al. (ICLR 2024):", "Demonstrated that LLMs struggle to express calibrated uncertainty; verbalized confidence is frequently overconfident and degrades sharply under domain shifts.", pt_size=10.0)
-    add_bullet(tf_bot, "• Wei et al. (NeurIPS 2022):", "Chain-of-Thought prompting enhances step-by-step reasoning but suffers from in-context consensus collapse when multiple viewpoints are presented within a single prompt window.", pt_size=10.0)
-    add_bullet(tf_bot, "• Architectural Implication:", "Calibration cannot be achieved by merely asking an LLM 'how sure are you?'. It requires structural friction across physically separated agents.", pt_size=10.0)
+    add_card(s5, Inches(8.88), Inches(1.55), w3, h_card, "Confidence & Calibration", BLUE_ACCENT, top_accent=BLUE_ACCENT)
+    tb = s5.shapes.add_textbox(Inches(9.03), Inches(2.05), w3 - Inches(0.3), h_card - Inches(0.6))
+    tf = tb.text_frame
+    tf.word_wrap = True
+    add_bullet(tf, "• Kadavath et al. (2022):", "Language Models (Mostly) Know What They Know. Verbalized confidence is poorly calibrated across tasks.")
+    add_bullet(tf, "• Xiong et al. (ICLR 2024):", "Can LLMs Express Their Uncertainty? None of 12 standard elicitation methods yield reliable calibration.")
+    add_bullet(tf, "• Architectural Need:", "Uncertainty must be computed from structural friction across divergent perspectives rather than self-reported confidence.")
 
     s5.notes_slide.notes_text_frame.text = (
-        "In Section 3, we review canonical literature. Du et al. and Liang et al. established that multi-agent "
-        "debate enhances reasoning and divergent thinking. Sharma et al. proved that RLHF induces sycophancy, "
-        "which explains why standard AI assistants give overly optimistic career advice. Kadavath and Xiong showed "
-        "that single-agent models cannot reliably calibrate their own uncertainty. Therefore, authentic disagreement "
-        "must be built into the system architecture."
+        "Section 3 covers canonical foundations. Du and Liang established the power of debate; Sharma and Perez "
+        "exposed RLHF-induced sycophancy; Kadavath and Xiong proved that models cannot reliably self-report "
+        "their own uncertainty. Structural friction is necessary."
     )
 
     # =========================================================================
@@ -462,85 +494,48 @@ def build_presentation_deck(output_path="/home/thor/Desktop/RAI Project/Final_Pr
     # =========================================================================
     s6 = prs.slides.add_slide(blank_layout)
     apply_bg(s6, BG_LIGHT)
-    add_header(s6, "Literature Survey: The Debate Critique Frontier", "Section 3: Literature Survey", 6,
-               "Addressing recent skepticism around multi-agent debate and designing principled baselines.")
+    add_header(s6, "Literature Survey: The Debate Critique Frontier (Smit et al., 2024)", "Section 3: Literature Survey", 6,
+               "Addressing skepticism around multi-agent debate and constructing principled architectural defenses.")
 
     w2 = Inches(5.67)
     h_card = Inches(5.1)
 
-    add_card(s6, Inches(0.8), Inches(1.55), w2, h_card, "The Smit et al. (2024) Critique: 'Should We Be Going MAD?'", AMBER_ACCENT, top_accent=AMBER_ACCENT)
+    add_card(s6, Inches(0.8), Inches(1.55), w2, h_card, "The Smit et al. Critique: 'Should We Be Going MAD?'", AMBER_ACCENT, top_accent=AMBER_ACCENT)
     tb = s6.shapes.add_textbox(Inches(0.95), Inches(2.05), w2 - Inches(0.3), h_card - Inches(0.6))
     tf = tb.text_frame
     tf.word_wrap = True
-    add_bullet(tf, "• Critical Finding:", "Smit et al. (2024) evaluated multi-agent debate and found it frequently fails to beat simple compute-matched self-consistency baselines.")
-    add_bullet(tf, "• Shared Prior Pathology:", "When all agents share the same base-model weights, homogeneous debates suffer from correlated blind spots and pseudo-diversity.")
-    add_bullet(tf, "• False Consensus Collapse:", "Agents often converge to an incorrect intermediate majority rather than uncovering truth.")
-    add_bullet(tf, "• Direct Rebuttal in Our Design:", "We do NOT use homogeneous debate. We construct three structurally orthogonal personas with opposing system-prompt philosophies.")
+    add_bullet(tf, "• The Benchmark Finding:", "Smit et al. (2024) tested multi-agent debate across multiple tasks and found it frequently fails to outperform simple self-consistency majority voting.")
+    add_bullet(tf, "• Shared Prior Pathology:", "When all debate agents share the same base-model weights, homogeneous debates suffer from correlated errors and artificial consensus.")
+    add_bullet(tf, "• Unmoderated Noise:", "Debate rounds often amplify verbosity and confusion rather than truth.")
+    add_bullet(tf, "• Academic Honesty:", "We do not ignore this critique; we directly test it by including compute-matched self-consistency and in-context baselines.")
 
-    add_card(s6, Inches(6.86), Inches(1.55), w2, h_card, "Architectural Defense & Mitigation Strategies", TEAL_PRIMARY, top_accent=TEAL_PRIMARY)
+    add_card(s6, Inches(6.86), Inches(1.55), w2, h_card, "Our Four Architectural Countermeasures", TEAL_PRIMARY, top_accent=TEAL_PRIMARY)
     tb = s6.shapes.add_textbox(Inches(7.01), Inches(2.05), w2 - Inches(0.3), h_card - Inches(0.6))
     tf = tb.text_frame
     tf.word_wrap = True
-    add_bullet(tf, "1. System-Prompt Orthogonality:", "Each persona optimises a fundamentally different career function (stability vs market speed vs systems depth), guaranteeing persistent divergence.")
-    add_bullet(tf, "2. Neutral Synthesizer (Φ):", "The Moderator is explicitly prohibited from voting. Its only role is to extract irreconcilable trade-offs into a Dispute Tree.")
-    add_bullet(tf, "3. External Grounding in DAG:", "Debate alone is ungrounded. We bind the debate directly to a deterministic NetworkX prerequisite graph to ground factual claims.")
-    add_bullet(tf, "4. Compute-Matched Baseline Inclusion:", "In Section 5, we explicitly include both single-agent in-context prompting and unmoderated triads to directly benchmark against Smit et al.'s critique.")
+    add_bullet(tf, "1. Orthogonal System Prompts:", "We do NOT use homogeneous agents. Personas optimize opposing career objectives (stability vs speed vs systems depth), ensuring authentic divergence.")
+    add_bullet(tf, "2. Neutral Synthesizer (Φ):", "The Moderator does not vote. It identifies pairwise contradictions and extracts unresolvable trade-offs into a Dispute Tree.")
+    add_bullet(tf, "3. External Graph Grounding:", "Debate claims are grounded in a deterministic NetworkX prerequisite DAG, preventing agents from hallucinating milestone paths.")
+    add_bullet(tf, "4. 4-Tier Ablation Benchmarking:", "We explicitly compare against single-agent in-context prompting and unmoderated triads to measure exact value add.")
 
     s6.notes_slide.notes_text_frame.text = (
-        "An honest academic paper must engage with critiques of its methodology. In 2024, Smit et al. published "
-        "'Should We Be Going MAD?', showing that multi-agent debate often fails to outperform simple majority voting "
-        "when agents share base model priors. We address this directly: our agents are not homogeneous—they embody "
-        "strictly opposing philosophies, are grounded by an external NetworkX graph, and are synthesized by a neutral moderator."
+        "In Slide 6, we address the debate critique frontier. Smit et al. showed in 2024 that homogeneous debate "
+        "fails to beat majority voting. We address this directly: our agents embody orthogonal philosophies, are grounded "
+        "by an external DAG, and are synthesized by a neutral moderator."
     )
 
     # =========================================================================
-    # SLIDE 7: Section 3 — Literature Survey: Responsible AI & Human Factors
+    # SLIDE 7: Section 3 — Literature Survey: Comparative Feature Matrix
     # =========================================================================
     s7 = prs.slides.add_slide(blank_layout)
     apply_bg(s7, BG_LIGHT)
-    add_header(s7, "Literature Survey: Responsible AI & Human Factors", "Section 3: Literature Survey", 7,
-               "Algorithmic fairness in recruitment systems and cognitive forcing functions for human agency.")
-
-    w2 = Inches(5.67)
-    h_card = Inches(5.1)
-
-    add_card(s7, Inches(0.8), Inches(1.55), w2, h_card, "Algorithmic Fairness in Career Systems", INDIGO_ACCENT, top_accent=INDIGO_ACCENT)
-    tb = s7.shapes.add_textbox(Inches(0.95), Inches(2.05), w2 - Inches(0.3), h_card - Inches(0.6))
-    tf = tb.text_frame
-    tf.word_wrap = True
-    add_bullet(tf, "• Geyik et al. (ACM KDD 2019):", "Documented fairness-aware ranking in LinkedIn Talent Search, showing algorithmic systems easily entrench demographic disparities.")
-    add_bullet(tf, "• Bolukbasi et al. & Caliskan et al.:", "Demonstrated that semantic representations naturally encode gender and prestige stereotypes from web training corpora.")
-    add_bullet(tf, "• The Proxy Leakage Problem:", "Simply removing 'gender' or 'caste' is insufficient; college names, budget statements, and phrasing serve as proxy leaks.")
-    add_bullet(tf, "• Our Methodological Solution:", "Complete physical separation of demographic tokens into an isolated Audit Vault during roadmap generation.")
-
-    add_card(s7, Inches(6.86), Inches(1.55), w2, h_card, "Automation Bias & Cognitive Forcing", ROSE_ACCENT, top_accent=ROSE_ACCENT)
-    tb = s7.shapes.add_textbox(Inches(7.01), Inches(2.05), w2 - Inches(0.3), h_card - Inches(0.6))
-    tf = tb.text_frame
-    tf.word_wrap = True
-    add_bullet(tf, "• Parasuraman & Riley (1997):", "Defined automation bias: operators routinely over-trust automated advice, failing to scrutinize dangerous or incorrect system outputs.")
-    add_bullet(tf, "• Buçinca et al. (ACM CSCW 2021):", "Introduced Cognitive Forcing Functions: deliberately interrupting the user flow with trade-offs significantly reduces decision complacency.")
-    add_bullet(tf, "• The Need-for-Cognition Dilemma:", "Buçinca found forcing interfaces can frustrate users if triggered too frequently on simple queries.")
-    add_bullet(tf, "• Our Methodological Solution:", "A dynamic Friction Gate that triggers ONLY when genuine prerequisite gaps or persona conflicts exceed threshold.")
-
-    s7.notes_slide.notes_text_frame.text = (
-        "On the Responsible AI front, Geyik et al. demonstrated that algorithmic talent systems entrench disparities "
-        "through proxy leaks. We address this via our Demographic Vault. On the human factors side, Parasuraman and "
-        "Cummings established automation bias, and Buçinca et al. demonstrated that Cognitive Forcing Functions break "
-        "overreliance by presenting explicit trade-offs. Our system adopts this via a dynamic Cognitive Forcing Gate."
-    )
-
-    # =========================================================================
-    # SLIDE 8: Section 3 — Literature Survey: Comparative Feature Matrix
-    # =========================================================================
-    s8 = prs.slides.add_slide(blank_layout)
-    apply_bg(s8, BG_LIGHT)
-    add_header(s8, "Literature Survey: Comparative Positioning Matrix", "Section 3: Literature Survey", 8,
+    add_header(s7, "Literature Survey: Comparative Positioning Matrix", "Section 3: Literature Survey", 7,
                "Systematic benchmarking against published approaches across 6 core technical dimensions.")
 
     # Table layout
     rows = 7
     cols = 6
-    tbl_shape = s8.shapes.add_table(rows, cols, Inches(0.8), Inches(1.6), Inches(11.733), Inches(4.8))
+    tbl_shape = s7.shapes.add_table(rows, cols, Inches(0.8), Inches(1.6), Inches(11.733), Inches(4.8))
     table = tbl_shape.table
     table.columns[0].width = Inches(2.333)
     table.columns[1].width = Inches(1.88)
@@ -585,83 +580,103 @@ def build_presentation_deck(output_path="/home/thor/Desktop/RAI Project/Final_Pr
             p.font.color.rgb = TEAL_PRIMARY if is_ours else NAVY_PRIMARY
             p.alignment = PP_ALIGN.LEFT if c == 0 else PP_ALIGN.CENTER
 
-    s8.notes_slide.notes_text_frame.text = (
-        "Slide 8 presents our Comparative Positioning Matrix. Existing works address isolated components: "
-        "Du and Liang focus on debate without curricular graphs or fairness audits; Geyik focuses on ranking fairness "
-        "without generative debate; Buçinca studies cognitive forcing in lab settings. Our proposed system is the "
-        "first to integrate an antagonistic debate triad, deterministic NetworkX DAG grounding, counterfactual fairness "
-        "auditing, and local privacy-preserving execution."
+    s7.notes_slide.notes_text_frame.text = (
+        "Slide 7 benchmarks our system against the literature. No existing framework combines adversarial debate, "
+        "deterministic curricular prerequisite graphs, dynamic cognitive forcing gates, and counterfactual fairness auditing."
     )
 
     # =========================================================================
-    # SLIDE 9: Section 4 — Architecture Diagram: End-to-End System Pipeline
+    # SLIDE 8: Section 4 — Architecture Diagram: End-to-End Visual Flowchart
+    # =========================================================================
+    s8 = prs.slides.add_slide(blank_layout)
+    apply_bg(s8, BG_LIGHT)
+    add_header(s8, "Architecture Diagram: End-to-End System Pipeline & Decision Flow", "Section 4: Architecture Diagram", 8,
+               "Native flowchart tracking candidate profile intake, prerequisite graph grounding, dialectic loop, and gate.")
+
+    # Visual Flowchart Layout
+    # 1. Intake Node
+    add_flow_node(s8, Inches(0.8), Inches(1.8), Inches(2.2), Inches(1.0), "1. Candidate Profile Intake", "Verified skills, target role, timeline constraints", bg=CARD_BG, border=CARD_BORDER)
+    add_arrow(s8, Inches(3.05), Inches(2.15), Inches(0.45), Inches(0.3), direction="right", color=TEAL_PRIMARY)
+
+    # 2. Demographic Vault Node
+    add_flow_node(s8, Inches(3.55), Inches(1.8), Inches(2.2), Inches(1.0), "2. Attribute Isolation Vault", "Gender, college tier & budget masked into audit vault", bg=INDIGO_BG, border=INDIGO_ACCENT, text_color=INDIGO_ACCENT)
+    add_arrow(s8, Inches(5.8), Inches(2.15), Inches(0.45), Inches(0.3), direction="right", color=TEAL_PRIMARY)
+
+    # 3. Dialectic Triad Engine (3 Parallel Boxes)
+    add_card(s8, Inches(6.3), Inches(1.5), Inches(3.1), Inches(3.2), "3. Dialectic Triad Engine", TEAL_PRIMARY, top_accent=TEAL_PRIMARY)
+    add_flow_node(s8, Inches(6.5), Inches(2.0), Inches(2.7), Inches(0.6), "Traditionalist (T=0.3)", "Core DSA, degree rigor, career stability", bg=CARD_BG, border=NAVY_PRIMARY)
+    add_flow_node(s8, Inches(6.5), Inches(2.8), Inches(2.7), Inches(0.6), "Builder (T=0.7)", "Rapid execution, MVPs, practical tools", bg=CARD_BG, border=AMBER_ACCENT)
+    add_flow_node(s8, Inches(6.5), Inches(3.6), Inches(2.7), Inches(0.6), "Specialist (T=0.4)", "Low-level internals, OS/kernel depth", bg=CARD_BG, border=TEAL_PRIMARY)
+
+    add_arrow(s8, Inches(9.45), Inches(2.9), Inches(0.45), Inches(0.3), direction="right", color=TEAL_PRIMARY)
+
+    # 4. Moderator Node
+    add_flow_node(s8, Inches(9.95), Inches(2.4), Inches(2.5), Inches(1.3), "4. Moderator Synthesizer Φ", "Extracts pairwise contradictions;\nChecks NetworkX 42-Node DAG", bg=CARD_BG, border=BLUE_ACCENT, text_color=BLUE_ACCENT)
+
+    # Arrow Down to Decision Diamond
+    add_arrow(s8, Inches(11.0), Inches(3.75), Inches(0.3), Inches(0.45), direction="down", color=BLUE_ACCENT)
+
+    # Decision Diamond
+    dia = s8.shapes.add_shape(MSO_SHAPE.DIAMOND, Inches(9.8), Inches(4.3), Inches(2.8), Inches(1.2))
+    dia.fill.solid()
+    dia.fill.fore_color.rgb = AMBER_BG
+    dia.line.color.rgb = AMBER_ACCENT
+    dia.line.width = Pt(1.5)
+    tf_d = dia.text_frame
+    tf_d.word_wrap = True
+    p = tf_d.paragraphs[0]
+    p.text = "Unresolved Gap or\nPersona Conflict?"
+    p.font.name = FONT_MAIN
+    p.font.size = Pt(9.5)
+    p.font.bold = True
+    p.font.color.rgb = AMBER_ACCENT
+    p.alignment = PP_ALIGN.CENTER
+    dia.text_frame.vertical_anchor = MSO_ANCHOR.MIDDLE
+
+    # Branch Left: YES -> Gate Triggered
+    add_arrow(s8, Inches(9.2), Inches(4.75), Inches(0.55), Inches(0.3), direction="left", color=ROSE_ACCENT)
+    tb_lbl1 = s8.shapes.add_textbox(Inches(9.1), Inches(4.4), Inches(0.7), Inches(0.3))
+    p = tb_lbl1.text_frame.paragraphs[0]
+    p.text = "YES"
+    p.font.name = FONT_MAIN
+    p.font.size = Pt(9)
+    p.font.bold = True
+    p.font.color.rgb = ROSE_ACCENT
+
+    add_flow_node(s8, Inches(4.8), Inches(4.3), Inches(4.3), Inches(1.2), "Cognitive Forcing Gate Fired!", "Halts automation. Displays interactive Dispute Tree\n(Branch 1: Systems Rigor vs Branch 2: Applied AI Pivot)", bg=ROSE_BG, border=ROSE_ACCENT, text_color=ROSE_ACCENT)
+
+    # Branch Down: NO -> Standard Roadmap
+    add_arrow(s8, Inches(11.0), Inches(5.55), Inches(0.3), Inches(0.45), direction="down", color=TEAL_PRIMARY)
+    tb_lbl2 = s8.shapes.add_textbox(Inches(11.35), Inches(5.6), Inches(0.6), Inches(0.3))
+    p = tb_lbl2.text_frame.paragraphs[0]
+    p.text = "NO"
+    p.font.name = FONT_MAIN
+    p.font.size = Pt(9)
+    p.font.bold = True
+    p.font.color.rgb = TEAL_PRIMARY
+
+    add_flow_node(s8, Inches(9.2), Inches(6.05), Inches(3.9), Inches(0.85), "Direct Calibrated Roadmap", "Prerequisites verified; emits unified 3-step schedule", bg=TEAL_BG, border=TEAL_PRIMARY, text_color=TEAL_PRIMARY)
+
+    s8.notes_slide.notes_text_frame.text = (
+        "Slide 8 is our complete Architecture Diagram. Notice the strict flow: candidate data is sanitized in the Vault; "
+        "three personas execute in parallel; the Moderator Φ synthesizes and verifies reachability in NetworkX. "
+        "At the decision diamond, if an unresolvable contradiction or prerequisite gap exists, the Cognitive Forcing Gate fires, "
+        "presenting an interactive Dispute Tree to the student."
+    )
+
+    # =========================================================================
+    # SLIDE 9: Section 4 — Architecture Details: Dialectic Persona Engine
     # =========================================================================
     s9 = prs.slides.add_slide(blank_layout)
     apply_bg(s9, BG_LIGHT)
-    add_header(s9, "Architecture Diagram: End-to-End System Data Flow", "Section 4: Architecture Diagram", 9,
-               "Complete 3-stage data flow from profile intake to deterministic graph grounding and cognitive forcing.")
-
-    w_box = Inches(2.65)
-    h_box = Inches(5.1)
-    top_y = Inches(1.6)
-
-    # Box 1: Intake & Isolation
-    add_card(s9, Inches(0.8), top_y, w_box, h_box, "1. Intake & Vault", NAVY_HEAD, top_accent=NAVY_HEAD)
-    tb = s9.shapes.add_textbox(Inches(0.95), top_y + Inches(0.5), w_box - Inches(0.3), h_box - Inches(0.6))
-    tf = tb.text_frame
-    tf.word_wrap = True
-    add_bullet(tf, "• Input Profile:", "Skills, target role, timeline, and budget constraints.")
-    add_bullet(tf, "• Attribute Vault:", "Protected demographic tokens (gender, college tier, budget) are isolated.")
-    add_bullet(tf, "• Sanitized Payload:", "Only verified competencies are passed forward to planning agents.")
-
-    # Box 2: Knowledge Grounding
-    add_card(s9, Inches(3.82), top_y, w_box, h_box, "2. Prerequisite DAG", TEAL_PRIMARY, top_accent=TEAL_PRIMARY)
-    tb = s9.shapes.add_textbox(Inches(3.97), top_y + Inches(0.5), w_box - Inches(0.3), h_box - Inches(0.6))
-    tf = tb.text_frame
-    tf.word_wrap = True
-    add_bullet(tf, "• NetworkX Graph:", "42 core computing nodes spanning AL, OS, DM, SE, Web, ML.")
-    add_bullet(tf, "• Topological Check:", "Deterministic validation: node v requires predecessor u.")
-    add_bullet(tf, "• Gap Assessment:", "Calculates hop-distance from current skills to target role.")
-
-    # Box 3: Dialectic Triad Engine
-    add_card(s9, Inches(6.84), top_y, w_box, h_box, "3. Dialectic Triad", BLUE_ACCENT, top_accent=BLUE_ACCENT)
-    tb = s9.shapes.add_textbox(Inches(6.99), top_y + Inches(0.5), w_box - Inches(0.3), h_box - Inches(0.6))
-    tf = tb.text_frame
-    tf.word_wrap = True
-    add_bullet(tf, "• Stage 1: Openings:", "3 personas produce independent, uncoordinated roadmaps.")
-    add_bullet(tf, "• Stage 2: Dispute:", "Moderator Φ identifies sharpest contradiction and challenges agents.")
-    add_bullet(tf, "• Stage 3: Synthesis:", "Φ compiles consensus nodes and surfaces unresolved trade-offs.")
-
-    # Box 4: Decision & Forcing Gate
-    add_card(s9, Inches(9.86), top_y, w_box, h_box, "4. Gate & Output", ROSE_ACCENT, top_accent=ROSE_ACCENT)
-    tb = s9.shapes.add_textbox(Inches(10.01), top_y + Inches(0.5), w_box - Inches(0.3), h_box - Inches(0.6))
-    tf = tb.text_frame
-    tf.word_wrap = True
-    add_bullet(tf, "• Condition Check:", "Prerequisite gap unbridgeable OR persona conflict unresolved.")
-    add_bullet(tf, "• Gate Triggered [YES]:", "Cognitive Forcing Gate fires. Presents interactive Dispute Tree.")
-    add_bullet(tf, "• Gate Triggered [NO]:", "Emits standard calibrated roadmap directly to student.")
-
-    s9.notes_slide.notes_text_frame.text = (
-        "In Section 4, Slide 9 provides our complete Architecture Diagram. Data moves through four strict subsystems: "
-        "Subsystem 1 isolates demographic attributes into an audit vault. Subsystem 2 grounds candidate skills against "
-        "our 42-node NetworkX prerequisite DAG. Subsystem 3 executes our 3-stage dialectic loop across the triad and moderator. "
-        "Subsystem 4 evaluates the friction gate: if an unresolvable prerequisite or trajectory trade-off exists, the cognitive "
-        "forcing gate interrupts automation and presents a Dispute Tree."
-    )
-
-    # =========================================================================
-    # SLIDE 10: Section 4 — Architecture Details: Dialectic Persona Engine
-    # =========================================================================
-    s10 = prs.slides.add_slide(blank_layout)
-    apply_bg(s10, BG_LIGHT)
-    add_header(s10, "Architecture Details: Dialectic Persona Engine & Foils", "Section 4: Architecture Diagram", 10,
+    add_header(s9, "Architecture Details: Dialectic Persona Engine & Foils", "Section 4: Architecture Diagram", 9,
                "Orthogonal persona design serving as epistemic foils to prevent monolithic sycophancy.")
 
     w3 = Inches(3.64)
     h_card = Inches(5.1)
 
-    add_card(s10, Inches(0.8), Inches(1.55), w3, h_card, "The Pragmatic Traditionalist", NAVY_HEAD, top_accent=NAVY_HEAD)
-    tb = s10.shapes.add_textbox(Inches(0.95), Inches(2.05), w3 - Inches(0.3), h_card - Inches(0.6))
+    add_card(s9, Inches(0.8), Inches(1.55), w3, h_card, "The Pragmatic Traditionalist", NAVY_HEAD, top_accent=NAVY_HEAD)
+    tb = s9.shapes.add_textbox(Inches(0.95), Inches(2.05), w3 - Inches(0.3), h_card - Inches(0.6))
     tf = tb.text_frame
     tf.word_wrap = True
     add_bullet(tf, "• Decoding Profile:", "Temperature = 0.3, Top-p = 0.80 (Deterministic, low variance)")
@@ -669,8 +684,8 @@ def build_presentation_deck(output_path="/home/thor/Desktop/RAI Project/Final_Pr
     add_bullet(tf, "• Standard Bias:", "Skeptical of fast-track credentials, unaccredited bootcamps, and lateral career pivots.")
     add_bullet(tf, "• Epistemic Role:", "Defends foundational prerequisite ordering and institutional hiring standards.")
 
-    add_card(s10, Inches(4.84), Inches(1.55), w3, h_card, "The Entrepreneurial Builder", AMBER_ACCENT, top_accent=AMBER_ACCENT)
-    tb = s10.shapes.add_textbox(Inches(5.0), Inches(2.05), w3 - Inches(0.3), h_card - Inches(0.6))
+    add_card(s9, Inches(4.84), Inches(1.55), w3, h_card, "The Entrepreneurial Builder", AMBER_ACCENT, top_accent=AMBER_ACCENT)
+    tb = s9.shapes.add_textbox(Inches(5.0), Inches(2.05), w3 - Inches(0.3), h_card - Inches(0.6))
     tf = tb.text_frame
     tf.word_wrap = True
     add_bullet(tf, "• Decoding Profile:", "Temperature = 0.7, Top-p = 0.95 (Creative, highly exploratory)")
@@ -678,8 +693,8 @@ def build_presentation_deck(output_path="/home/thor/Desktop/RAI Project/Final_Pr
     add_bullet(tf, "• Standard Bias:", "Prone to downplaying theoretical depth in favor of rapid product delivery.")
     add_bullet(tf, "• Epistemic Role:", "Challenges excessive academic gatekeeping and identifies high-velocity entry paths.")
 
-    add_card(s10, Inches(8.88), Inches(1.55), w3, h_card, "The Deep-Tech Specialist", TEAL_PRIMARY, top_accent=TEAL_PRIMARY)
-    tb = s10.shapes.add_textbox(Inches(9.03), Inches(2.05), w3 - Inches(0.3), h_card - Inches(0.6))
+    add_card(s9, Inches(8.88), Inches(1.55), w3, h_card, "The Deep-Tech Specialist", TEAL_PRIMARY, top_accent=TEAL_PRIMARY)
+    tb = s9.shapes.add_textbox(Inches(9.03), Inches(2.05), w3 - Inches(0.3), h_card - Inches(0.6))
     tf = tb.text_frame
     tf.word_wrap = True
     add_bullet(tf, "• Decoding Profile:", "Temperature = 0.4, Top-p = 0.85 (Analytical, depth-oriented)")
@@ -687,95 +702,123 @@ def build_presentation_deck(output_path="/home/thor/Desktop/RAI Project/Final_Pr
     add_bullet(tf, "• Standard Bias:", "Hostile to framework-level abstractions and superficial tutorial portfolios.")
     add_bullet(tf, "• Epistemic Role:", "Surfaces deep technical bottlenecks and interview screening hurdles.")
 
-    s10.notes_slide.notes_text_frame.text = (
-        "Slide 10 details our three personas. Notice they are deliberately constructed as epistemic foils. "
-        "The Traditionalist optimizes for career stability and prerequisite rigor. The Builder optimizes for market "
-        "speed and shipping practical products. The Specialist optimizes for low-level systems depth. "
-        "Because their optimisation functions are orthogonal, they naturally uncover genuine trade-offs rather than "
-        "regressing to an agreeable mean."
+    s9.notes_slide.notes_text_frame.text = (
+        "Slide 9 outlines our three personas. They are designed as epistemic foils: Traditionalist optimizes stability, "
+        "Builder optimizes velocity, and Specialist optimizes depth. Their opposing philosophies surface real career trade-offs."
     )
 
     # =========================================================================
-    # SLIDE 11: Section 4 — Architecture Details: Hand-Built Prerequisite DAG
+    # SLIDE 10: Section 4 — Architecture Details: Visual Curricular DAG
+    # =========================================================================
+    s10 = prs.slides.add_slide(blank_layout)
+    apply_bg(s10, BG_LIGHT)
+    add_header(s10, "Architecture Details: NetworkX Curricular Prerequisite DAG", "Section 4: Architecture Diagram", 10,
+               "Multi-tier topological dependency graph of 42 nodes providing deterministic reachability validation.")
+
+    # 4 Visual Tracks (Horizontal & Vertical Layout)
+    col_w4 = Inches(2.7)
+    top_y = Inches(1.55)
+
+    # Track 1: Programming & DSA
+    add_card(s10, Inches(0.8), top_y, col_w4, Inches(5.1), "Track 1: DSA & Math", NAVY_HEAD, top_accent=NAVY_HEAD, title_size=11.5)
+    add_flow_node(s10, Inches(1.0), Inches(2.25), Inches(2.3), Inches(0.55), "Discrete Math", "Graph theory, logic", bg=CARD_BG, border=CARD_BORDER)
+    add_arrow(s10, Inches(2.02), Inches(2.84), Inches(0.26), Inches(0.24), direction="down", color=NAVY_PRIMARY)
+    add_flow_node(s10, Inches(1.0), Inches(3.12), Inches(2.3), Inches(0.55), "Python / C Basics", "Syntax, functions, control flow", bg=CARD_BG, border=CARD_BORDER)
+    add_arrow(s10, Inches(2.02), Inches(3.71), Inches(0.26), Inches(0.24), direction="down", color=NAVY_PRIMARY)
+    add_flow_node(s10, Inches(1.0), Inches(3.99), Inches(2.3), Inches(0.55), "Data Structures", "Trees, graphs, heaps", bg=CARD_BG, border=NAVY_PRIMARY)
+    add_arrow(s10, Inches(2.02), Inches(4.58), Inches(0.26), Inches(0.24), direction="down", color=NAVY_PRIMARY)
+    add_flow_node(s10, Inches(1.0), Inches(4.86), Inches(2.3), Inches(0.55), "Advanced Algorithms", "Dynamic programming, flows", bg=TEAL_BG, border=TEAL_PRIMARY, text_color=TEAL_PRIMARY)
+
+    # Track 2: Systems Core
+    add_card(s10, Inches(3.8), top_y, col_w4, Inches(5.1), "Track 2: Systems & OS", BLUE_ACCENT, top_accent=BLUE_ACCENT, title_size=11.5)
+    add_flow_node(s10, Inches(4.0), Inches(2.25), Inches(2.3), Inches(0.55), "C Pointers & Memory", "Stack, heap, pointer arithmetic", bg=CARD_BG, border=CARD_BORDER)
+    add_arrow(s10, Inches(5.02), Inches(2.84), Inches(0.26), Inches(0.24), direction="down", color=BLUE_ACCENT)
+    add_flow_node(s10, Inches(4.0), Inches(3.12), Inches(2.3), Inches(0.55), "Operating Systems", "Virtual memory, system calls", bg=CARD_BG, border=BLUE_ACCENT)
+    add_arrow(s10, Inches(5.02), Inches(3.71), Inches(0.26), Inches(0.24), direction="down", color=BLUE_ACCENT)
+    add_flow_node(s10, Inches(4.0), Inches(3.99), Inches(2.3), Inches(0.55), "OS Concurrency", "Locks, semaphores, deadlocks", bg=CARD_BG, border=BLUE_ACCENT)
+    add_arrow(s10, Inches(5.02), Inches(4.58), Inches(0.26), Inches(0.24), direction="down", color=BLUE_ACCENT)
+    add_flow_node(s10, Inches(4.0), Inches(4.86), Inches(2.3), Inches(0.55), "Distributed Systems", "Raft consensus, replication", bg=TEAL_BG, border=TEAL_PRIMARY, text_color=TEAL_PRIMARY)
+
+    # Track 3: Web & Cloud
+    add_card(s10, Inches(6.8), top_y, col_w4, Inches(5.1), "Track 3: Web & Cloud", INDIGO_ACCENT, top_accent=INDIGO_ACCENT, title_size=11.5)
+    add_flow_node(s10, Inches(7.0), Inches(2.25), Inches(2.3), Inches(0.55), "SQL & Relational DB", "Queries, joins, indexing, 3NF", bg=CARD_BG, border=CARD_BORDER)
+    add_arrow(s10, Inches(8.02), Inches(2.84), Inches(0.26), Inches(0.24), direction="down", color=INDIGO_ACCENT)
+    add_flow_node(s10, Inches(7.0), Inches(3.12), Inches(2.3), Inches(0.55), "Backend Frameworks", "Django, FastAPI, Spring Boot", bg=CARD_BG, border=INDIGO_ACCENT)
+    add_arrow(s10, Inches(8.02), Inches(3.71), Inches(0.26), Inches(0.24), direction="down", color=INDIGO_ACCENT)
+    add_flow_node(s10, Inches(7.0), Inches(3.99), Inches(2.3), Inches(0.55), "REST APIs & Docker", "Endpoints, containerization", bg=CARD_BG, border=INDIGO_ACCENT)
+    add_arrow(s10, Inches(8.02), Inches(4.58), Inches(0.26), Inches(0.24), direction="down", color=INDIGO_ACCENT)
+    add_flow_node(s10, Inches(7.0), Inches(4.86), Inches(2.3), Inches(0.55), "System Design", "Microservices, load balancing", bg=TEAL_BG, border=TEAL_PRIMARY, text_color=TEAL_PRIMARY)
+
+    # Track 4: AI & ML
+    add_card(s10, Inches(9.8), top_y, col_w4, Inches(5.1), "Track 4: Applied AI & ML", ROSE_ACCENT, top_accent=ROSE_ACCENT, title_size=11.5)
+    add_flow_node(s10, Inches(10.0), Inches(2.25), Inches(2.3), Inches(0.55), "Linear Alg & Probability", "Matrix ops, Bayes theorem", bg=CARD_BG, border=CARD_BORDER)
+    add_arrow(s10, Inches(11.02), Inches(2.84), Inches(0.26), Inches(0.24), direction="down", color=ROSE_ACCENT)
+    add_flow_node(s10, Inches(10.0), Inches(3.12), Inches(2.3), Inches(0.55), "ML Foundations", "Regression, loss, scikit-learn", bg=CARD_BG, border=ROSE_ACCENT)
+    add_arrow(s10, Inches(11.02), Inches(3.71), Inches(0.26), Inches(0.24), direction="down", color=ROSE_ACCENT)
+    add_flow_node(s10, Inches(10.0), Inches(3.99), Inches(2.3), Inches(0.55), "Deep Learning", "PyTorch, backprop, neural nets", bg=CARD_BG, border=ROSE_ACCENT)
+    add_arrow(s10, Inches(11.02), Inches(4.58), Inches(0.26), Inches(0.24), direction="down", color=ROSE_ACCENT)
+    add_flow_node(s10, Inches(10.0), Inches(4.86), Inches(2.3), Inches(0.55), "LLMs & MLOps", "RAG pipelines, model deployment", bg=TEAL_BG, border=TEAL_PRIMARY, text_color=TEAL_PRIMARY)
+
+    s10.notes_slide.notes_text_frame.text = (
+        "Slide 10 visualizes our hand-built NetworkX prerequisite graph across four distinct tracks. Notice the strict "
+        "topological hierarchy: a student cannot jump to Distributed Systems without OS Concurrency, or to Deep Learning "
+        "without Linear Algebra and ML Foundations. Our algorithm traverses this graph deterministically."
+    )
+
+    # =========================================================================
+    # SLIDE 11: Section 4 — Architecture Details: Visual Dispute Tree
     # =========================================================================
     s11 = prs.slides.add_slide(blank_layout)
     apply_bg(s11, BG_LIGHT)
-    add_header(s11, "Architecture Details: Hand-Built Prerequisite Graph", "Section 4: Architecture Diagram", 11,
-               "Deterministic 42-node NetworkX DAG providing exact curricular sequence validation.")
+    add_header(s11, "Architecture Details: Cognitive Forcing & Dispute Tree Diagram", "Section 4: Architecture Diagram", 11,
+               "How cognitive forcing transforms unresolvable contradictions into explicit student choices.")
 
-    w2 = Inches(5.67)
-    h_card = Inches(5.1)
+    # Tree Visual Flowchart
+    # Root Node: Consensus Core
+    add_flow_node(s11, Inches(3.8), Inches(1.65), Inches(5.7), Inches(0.9), "Root Node: Consensus Core", "Foundational milestones verified by all 3 advisors:\nPython OOP + Pandas Data Analysis + Basic SQL", bg=CARD_BG, border=NAVY_PRIMARY, text_color=NAVY_HEAD)
 
-    add_card(s11, Inches(0.8), Inches(1.55), w2, h_card, "NetworkX Graph Construction & Scope", TEAL_PRIMARY, top_accent=TEAL_PRIMARY)
-    tb = s11.shapes.add_textbox(Inches(0.95), Inches(2.05), w2 - Inches(0.3), h_card - Inches(0.6))
-    tf = tb.text_frame
-    tf.word_wrap = True
-    add_bullet(tf, "• 42 Curricular Nodes:", "Structured across 6 core computing disciplines:\n  - Programming: Python, Java, C, Pointers\n  - Core CS: Discrete Math, Linear Algebra, Probability\n  - DSA: Data Structures, Basic/Advanced Algorithms\n  - Systems: Architecture, OS, Concurrency, Linux, Networks\n  - Data/DB: Relational DB, SQL, Normalization, NoSQL\n  - Web/ML: Backend, REST APIs, System Design, ML, Deep Learning, MLOps")
-    add_bullet(tf, "• 60 Directed Edges:", "Represent strict prerequisite dependencies (e.g., C → Pointers → Architecture → OS → Concurrency).")
-    add_bullet(tf, "• Deterministic Traversal:", "Does not rely on fuzzy vector similarity; checks mathematical reachability.")
+    # Branch Connectors (Left Down & Right Down)
+    add_arrow(s11, Inches(4.5), Inches(2.6), Inches(0.4), Inches(0.6), direction="down", color=BLUE_ACCENT)
+    add_arrow(s11, Inches(8.4), Inches(2.6), Inches(0.4), Inches(0.6), direction="down", color=TEAL_PRIMARY)
 
-    add_card(s11, Inches(6.86), Inches(1.55), w2, h_card, "Deterministic Order Validation Algorithm", NAVY_HEAD, top_accent=NAVY_HEAD)
-    tb = s11.shapes.add_textbox(Inches(7.01), Inches(2.05), w2 - Inches(0.3), h_card - Inches(0.6))
-    tf = tb.text_frame
-    tf.word_wrap = True
-    add_bullet(tf, "• Step 1: Candidate State:", "Initialize Known_Skills = {verified candidate skills}.")
-    add_bullet(tf, "• Step 2: Milestone Extraction:", "Extract recommended milestone skills from LLM advice.")
-    add_bullet(tf, "• Step 3: Predecessor Check:", "For each recommended skill s:\n  Predecessors = list(G.predecessors(s))\n  Missing = [p for p in Predecessors if p not in Known_Skills]")
-    add_bullet(tf, "• Step 4: Violation Counting:", "If Missing is non-empty, flag a Prerequisite Violation and record the missing foundational nodes.")
-    add_bullet(tf, "• Step 5: State Update:", "Add s to Known_Skills for subsequent milestone evaluations.")
+    # Branch 1 (Left Box): Traditional Rigor
+    add_card(s11, Inches(0.8), Inches(3.25), Inches(5.6), Inches(2.6), "Branch 1: Foundational Systems Track", BLUE_ACCENT, top_accent=BLUE_ACCENT, bg_color=BLUE_BG)
+    tb1 = s11.shapes.add_textbox(Inches(0.95), Inches(3.7), Inches(5.3), Inches(2.0))
+    tf1 = tb1.text_frame
+    tf1.word_wrap = True
+    add_bullet(tf1, "• Advocates:", "Traditionalist (T=0.3) & Specialist (T=0.4)")
+    add_bullet(tf1, "• Curriculum:", "Linear Algebra → Probability → ML Foundations → PyTorch Internals")
+    add_bullet(tf1, "• Required Timeline:", "12 Months (Rigorous depth; passes rigorous screening)")
+    add_bullet(tf1, "• Financial Cost:", "Zero commercial bootcamp expense; free academic resources")
+
+    # Branch 2 (Right Box): Builder Velocity
+    add_card(s11, Inches(6.9), Inches(3.25), Inches(5.6), Inches(2.6), "Branch 2: Applied AI Engineering Track", TEAL_PRIMARY, top_accent=TEAL_PRIMARY, bg_color=TEAL_BG)
+    tb2 = s11.shapes.add_textbox(Inches(7.05), Inches(3.7), Inches(5.3), Inches(2.0))
+    tf2 = tb2.text_frame
+    tf2.word_wrap = True
+    add_bullet(tf2, "• Advocate:", "Entrepreneurial Builder (T=0.7)")
+    add_bullet(tf2, "• Curriculum:", "FastAPI Backend → REST APIs → LangChain / RAG → Shipped Web MVP")
+    add_bullet(tf2, "• Required Timeline:", "4 Months (Achievable within student's immediate deadline)")
+    add_bullet(tf2, "• Career Pivot:", "Targets Applied AI Engineer instead of unfeasible Staff Infrastructure")
+
+    # Bottom Banner: Student Agency Preservation
+    add_flow_node(s11, Inches(0.8), Inches(6.0), Inches(11.733), Inches(0.9), "Human Decision Arbitration Point", "The system halts automated recommendation. The student explicitly chooses between Branch 1 (Depth) vs Branch 2 (Velocity).\nPreserves critical human agency and prevents automation bias.", bg=RGBColor(241, 245, 249), border=NAVY_PRIMARY, text_color=NAVY_PRIMARY)
 
     s11.notes_slide.notes_text_frame.text = (
-        "In Slide 11, we explain our prerequisite graph. Rather than relying on a heavy database like Neo4j, "
-        "we construct a 42-node directed acyclic graph in Python using NetworkX. It codifies 60 prerequisite edges "
-        "across computer science knowledge areas. Our validation algorithm performs deterministic predecessor checks: "
-        "if an agent recommends Deep Learning before the student has acquired Linear Algebra or ML Foundations, a "
-        "prerequisite violation is instantly detected."
+        "Slide 11 shows our Dispute Tree diagram. Instead of hiding the trade-off, the moderator constructs a tree. "
+        "The root is the consensus foundation. Branch 1 represents the 12-month foundational track for depth; Branch 2 "
+        "represents the 4-month applied AI track for speed. The student makes the informed choice, preserving agency."
     )
 
     # =========================================================================
-    # SLIDE 12: Section 4 — Architecture Details: Cognitive Forcing Gate
+    # SLIDE 12: Section 5 — Experimental Setup: 4-Tier Ablation Ladder
     # =========================================================================
     s12 = prs.slides.add_slide(blank_layout)
     apply_bg(s12, BG_LIGHT)
-    add_header(s12, "Architecture Details: Cognitive Forcing & Dispute Trees", "Section 4: Architecture Diagram", 12,
-               "Transforming irreconcilable advisory contradictions into structured student choices.")
-
-    w2 = Inches(5.67)
-    h_card = Inches(5.1)
-
-    add_card(s12, Inches(0.8), Inches(1.55), w2, h_card, "The Cognitive Forcing Mechanism", ROSE_ACCENT, top_accent=ROSE_ACCENT)
-    tb = s12.shapes.add_textbox(Inches(0.95), Inches(2.05), w2 - Inches(0.3), h_card - Inches(0.6))
-    tf = tb.text_frame
-    tf.word_wrap = True
-    add_bullet(tf, "• Purpose:", "Prevents automation bias by forcing the student into an active cognitive state.")
-    add_bullet(tf, "• Trigger Logic:", "The Gate fires if either condition holds:\n  1. Irreconcilable Contradiction: Personas disagree on foundational milestone trajectory.\n  2. Prerequisite Violation: The target role requires foundational skills unachievable in the stated timeline.")
-    add_bullet(tf, "• Pedagogical Value:", "Respects student autonomy: the AI refuses to paternalistically decide; instead, it exposes the trade-off.")
-
-    add_card(s12, Inches(6.86), Inches(1.55), w2, h_card, "Structured Dispute Tree Representation (T_dispute)", TEAL_PRIMARY, top_accent=TEAL_PRIMARY)
-    tb = s12.shapes.add_textbox(Inches(7.01), Inches(2.05), w2 - Inches(0.3), h_card - Inches(0.6))
-    tf = tb.text_frame
-    tf.word_wrap = True
-    add_bullet(tf, "• Root Node:", "Consensus Core: Shared prerequisite steps that all three advisors agree upon.")
-    add_bullet(tf, "• Branch 1 (Traditionalist Path):", "Emphasis on formal foundational depth, lower risk, longer timeline to employment.")
-    add_bullet(tf, "• Branch 2 (Builder Path):", "Emphasis on rapid applied projects, faster time-to-market, higher initial technical debt.")
-    add_bullet(tf, "• Decision Arbitration:", "Student explicitly selects which trade-off profile aligns with their personal runway and risk tolerance.")
-
-    s12.notes_slide.notes_text_frame.text = (
-        "Slide 12 covers the Cognitive Forcing Gate. When the debate uncovers an authentic conflict—for example, "
-        "whether to spend 6 months learning OS internals or build web apps immediately—the system halts automated "
-        "roadmapping. Instead, the moderator constructs a Dispute Tree. The student sees the consensus foundation "
-        "and two clearly articulated branches, placing critical agency back into human hands."
-    )
-
-    # =========================================================================
-    # SLIDE 13: Section 5 — Experimental Setup: 4-Tier Controlled Ablation Matrix
-    # =========================================================================
-    s13 = prs.slides.add_slide(blank_layout)
-    apply_bg(s13, BG_LIGHT)
-    add_header(s13, "Experimental Setup: 4-Tier Controlled Ablation Matrix", "Section 5: Experimental Setup", 13,
+    add_header(s12, "Experimental Setup: 4-Tier Controlled Ablation Matrix", "Section 5: Experimental Setup", 12,
                "Systematic component isolation isolating multi-perspective prompting, debate, and graph moderation.")
 
-    tbl_shape = s13.shapes.add_table(5, 5, Inches(0.8), Inches(1.6), Inches(11.733), Inches(4.8))
+    tbl_shape = s12.shapes.add_table(5, 5, Inches(0.8), Inches(1.6), Inches(11.733), Inches(4.8))
     table = tbl_shape.table
     table.columns[0].width = Inches(2.8)
     table.columns[1].width = Inches(2.2)
@@ -817,142 +860,144 @@ def build_presentation_deck(output_path="/home/thor/Desktop/RAI Project/Final_Pr
             p.font.color.rgb = TEAL_PRIMARY if is_ours else NAVY_PRIMARY
             p.alignment = PP_ALIGN.LEFT if c in [0, 4] else PP_ALIGN.CENTER
 
-    s13.notes_slide.notes_text_frame.text = (
-        "In Section 5, we present our Experimental Setup. A true ablation isolates one mechanism at a time. "
-        "Config 1 is standard single-agent advice. Config 2 tests in-context multi-perspective prompting. "
-        "Config 3 runs three separated agents but without moderation. Config 4 is our proposed full dialectic "
-        "system with NetworkX graph grounding and the cognitive forcing gate."
+    s12.notes_slide.notes_text_frame.text = (
+        "Slide 12 defines our 4-tier ablation ladder. Config 1 is standard single-agent advice. Config 2 tests in-context "
+        "prompting. Config 3 tests unmoderated debate. Config 4 is our proposed system with graph validation and the gate."
     )
 
     # =========================================================================
-    # SLIDE 14: Section 5 — Experimental Setup: Counterfactual Demographic Audit
+    # SLIDE 13: Section 5 — Experimental Setup: Counterfactual Audit Protocol
+    # =========================================================================
+    s13 = prs.slides.add_slide(blank_layout)
+    apply_bg(s13, BG_LIGHT)
+    add_header(s13, "Experimental Setup: Counterfactual Demographic Audit Protocol", "Section 5: Experimental Setup", 13,
+               "Auditing demographic steering across 20 synthetic candidate profiles and 10 matched pairs.")
+
+    # Flowchart of Counterfactual Pair Generation
+    add_flow_node(s13, Inches(0.8), Inches(1.6), Inches(11.733), Inches(0.7), "Base Candidate Archetype (Invariant Controls)", "Qualifications, Verified Skills, Target Role, and Timeline are strictly 100% IDENTICAL across each pair.", bg=CARD_MUTED, border=CARD_BORDER, text_color=NAVY_PRIMARY)
+
+    add_arrow(s13, Inches(3.5), Inches(2.35), Inches(0.3), Inches(0.4), direction="down", color=BLUE_ACCENT)
+    add_arrow(s13, Inches(9.5), Inches(2.35), Inches(0.3), Inches(0.4), direction="down", color=ROSE_ACCENT)
+
+    # Variant A Box
+    add_card(s13, Inches(0.8), Inches(2.8), Inches(5.6), Inches(2.7), "Perturbation Pair A: Advantaged Proxies", BLUE_ACCENT, top_accent=BLUE_ACCENT, bg_color=BLUE_BG)
+    tb_a = s13.shapes.add_textbox(Inches(0.95), Inches(3.25), Inches(5.3), Inches(2.1))
+    tf_a = tb_a.text_frame
+    tf_a.word_wrap = True
+    add_bullet(tf_a, "• Name Signal:", "Aarav Sharma (Male proxy)")
+    add_bullet(tf_a, "• Institutional Pedigree:", "Tier-1 National Technical Institute (IIT/NIT proxy)")
+    add_bullet(tf_a, "• Socioeconomic Proxy:", "High monthly budget: ₹40,000 / month")
+    add_bullet(tf_a, "• Monolithic Tendency:", "Steered toward advanced research & elite engineering tracks.")
+
+    # Variant B Box
+    add_card(s13, Inches(6.9), Inches(2.8), Inches(5.6), Inches(2.7), "Perturbation Pair B: Disadvantaged Proxies", ROSE_ACCENT, top_accent=ROSE_ACCENT, bg_color=ROSE_BG)
+    tb_b = s13.shapes.add_textbox(Inches(7.05), Inches(3.25), Inches(5.3), Inches(2.1))
+    tf_b = tb_b.text_frame
+    tf_b.word_wrap = True
+    add_bullet(tf_b, "• Name Signal:", "Priya Patel (Female proxy)")
+    add_bullet(tf_b, "• Institutional Pedigree:", "Tier-3 Rural State College")
+    add_bullet(tf_b, "• Socioeconomic Proxy:", "Low monthly budget: ₹3,000 / month")
+    add_bullet(tf_b, "• Monolithic Tendency:", "Steered toward generic IT support or commercial bootcamps.")
+
+    # Bottom Parity Result Box
+    add_flow_node(s13, Inches(0.8), Inches(5.65), Inches(11.733), Inches(1.1), "Demographic Parity Enforcement via Vault Isolation", "In the Proposed Architecture, planning agents receive ONLY verified technical competencies.\nDemographic signals are locked in the Audit Vault. If Jaccard similarity across pairs is >= 0.60, counterfactual parity holds.", bg=TEAL_BG, border=TEAL_PRIMARY, text_color=TEAL_PRIMARY)
+
+    s13.notes_slide.notes_text_frame.text = (
+        "Slide 13 diagrams our counterfactual audit protocol. Each base archetype is split into two variants: Aarav with "
+        "advantaged proxies and Priya with disadvantaged proxies, while skills are identical. In monolithic baselines, models "
+        "frequently steer them to different tracks. In our proposed system, the Demographic Vault enforces parity."
+    )
+
+    # =========================================================================
+    # SLIDE 14: Section 5 — Experimental Setup: Three Concrete Metrics
     # =========================================================================
     s14 = prs.slides.add_slide(blank_layout)
     apply_bg(s14, BG_LIGHT)
-    add_header(s14, "Experimental Setup: Counterfactual Audit Protocol", "Section 5: Experimental Setup", 14,
-               "Auditing demographic steering across 20 synthetic candidate profiles and 10 matched pairs.")
-
-    w2 = Inches(5.67)
-    h_card = Inches(5.1)
-
-    add_card(s14, Inches(0.8), Inches(1.55), w2, h_card, "The Counterfactual Paired Cohort", INDIGO_ACCENT, top_accent=INDIGO_ACCENT)
-    tb = s14.shapes.add_textbox(Inches(0.95), Inches(2.05), w2 - Inches(0.3), h_card - Inches(0.6))
-    tf = tb.text_frame
-    tf.word_wrap = True
-    add_bullet(tf, "• 10 Base Archetypes:", "Covering realistic student trajectories: 2nd-year ML pivot, 3rd-year Systems enthusiast, Web-to-Backend transition, etc.")
-    add_bullet(tf, "• Invariant Controls:", "For each pair, technical qualifications, verified skill sets, target roles, and available timelines are 100% IDENTICAL.")
-    add_bullet(tf, "• Perturbation Pair A:", "Candidate: 'Aarav Sharma' (Male), Institute: 'Tier-1 National Technical Institute', Budget: '₹40,000/month'.")
-    add_bullet(tf, "• Perturbation Pair B:", "Candidate: 'Priya Patel' (Female), Institute: 'Tier-3 Rural State College', Budget: '₹3,000/month'.")
-
-    add_card(s14, Inches(6.86), Inches(1.55), w2, h_card, "Audit Objective & Parity Evaluation", TEAL_PRIMARY, top_accent=TEAL_PRIMARY)
-    tb = s14.shapes.add_textbox(Inches(7.01), Inches(2.05), w2 - Inches(0.3), h_card - Inches(0.6))
-    tf = tb.text_frame
-    tf.word_wrap = True
-    add_bullet(tf, "• Demographic Flip Rate (DFR):", "Measures the percentage of matched pairs where the recommended career trajectory or milestone set diverges (Jaccard similarity < 0.60).")
-    add_bullet(tf, "• Monolithic Risk:", "Do baselines steer Aarav toward advanced R&D and Priya toward low-tier coding bootcamps?")
-    add_bullet(tf, "• Proposed Safeguard:", "The Attribute Isolation Vault strips demographic signals prior to agent invocation, enforcing counterfactual parity by design.")
-
-    s14.notes_slide.notes_text_frame.text = (
-        "Slide 14 details our Counterfactual Audit Protocol. We construct 20 candidate profiles comprising "
-        "10 matched pairs. For each pair, the candidate's verified skills, target role, and timeline are identical. "
-        "We vary only demographic signals: Aarav from a Tier-1 institute with high budget versus Priya from a Tier-3 "
-        "college with low budget. We then measure the Demographic Flip Rate to see if recommendations diverge."
-    )
-
-    # =========================================================================
-    # SLIDE 15: Section 5 — Experimental Setup: Evaluation Metrics
-    # =========================================================================
-    s15 = prs.slides.add_slide(blank_layout)
-    apply_bg(s15, BG_LIGHT)
-    add_header(s15, "Experimental Setup: Three Concrete Evaluation Metrics", "Section 5: Experimental Setup", 15,
-               "Mathematical definitions and scoring criteria for prerequisite errors, coverage, and fairness.")
+    add_header(s14, "Experimental Setup: Three Concrete Evaluation Metrics", "Section 5: Experimental Setup", 14,
+               "Mathematical formulations and automated computation pipelines for rigorous scoring.")
 
     w3 = Inches(3.64)
     h_card = Inches(5.1)
 
-    add_card(s15, Inches(0.8), Inches(1.55), w3, h_card, "1. Prerequisite Error Count", ROSE_ACCENT, top_accent=ROSE_ACCENT)
-    tb = s15.shapes.add_textbox(Inches(0.95), Inches(2.05), w3 - Inches(0.3), h_card - Inches(0.6))
+    add_card(s14, Inches(0.8), Inches(1.55), w3, h_card, "1. Prerequisite Error Count", ROSE_ACCENT, top_accent=ROSE_ACCENT)
+    tb = s14.shapes.add_textbox(Inches(0.95), Inches(2.05), w3 - Inches(0.3), h_card - Inches(0.6))
     tf = tb.text_frame
     tf.word_wrap = True
-    add_bullet(tf, "• Definition:", "Total count of milestone skills recommended that violate prerequisite topological order in G.")
-    add_bullet(tf, "• Computation:", "For every recommended skill s, verifies that all predecessors in G are either in initial skills or strictly prior milestones.")
-    add_bullet(tf, "• Target Direction:", "Lower is better (ideal = 0).")
-    add_bullet(tf, "• Significance:", "Directly measures the elimination of hallucinated learning paths.")
+    add_bullet(tf, "• Formula:", "V(R) = Σ 1[missing predecessor in G]")
+    add_bullet(tf, "• Computation:", "For every recommended milestone skill, traverses NetworkX DAG to verify all ancestor prerequisites are satisfied in prior steps.")
+    add_bullet(tf, "• Target Direction:", "Lower is better (ideal target = 0)")
+    add_bullet(tf, "• Significance:", "Directly measures hallucination elimination.")
 
-    add_card(s15, Inches(4.84), Inches(1.55), w3, h_card, "2. Perspective Coverage Score", TEAL_PRIMARY, top_accent=TEAL_PRIMARY)
-    tb = s15.shapes.add_textbox(Inches(5.0), Inches(2.05), w3 - Inches(0.3), h_card - Inches(0.6))
+    add_card(s14, Inches(4.84), Inches(1.55), w3, h_card, "2. Perspective Coverage Score", TEAL_PRIMARY, top_accent=TEAL_PRIMARY)
+    tb = s14.shapes.add_textbox(Inches(5.0), Inches(2.05), w3 - Inches(0.3), h_card - Inches(0.6))
     tf = tb.text_frame
     tf.word_wrap = True
-    add_bullet(tf, "• Definition:", "Percentage of advisory roadmaps that successfully represent all three epistemic viewpoints.")
-    add_bullet(tf, "• Rubric Criteria:", "  - Traditionalist: Foundational DSA, enterprise stability\n  - Builder: Real-world projects, fast shipping\n  - Specialist: Systems depth, low-level mechanics")
-    add_bullet(tf, "• Target Direction:", "Higher is better (ideal = 100%).")
+    add_bullet(tf, "• Formula:", "C(R) = (1_trad + 1_builder + 1_spec) / 3 × 100%")
+    add_bullet(tf, "• Criteria:", "Checks presence of Traditionalist (DSA/degree), Builder (projects/speed), and Specialist (systems depth) lenses.")
+    add_bullet(tf, "• Target Direction:", "Higher is better (ideal target = 100%)")
     add_bullet(tf, "• Significance:", "Measures preservation of balanced trade-off perspectives.")
 
-    add_card(s15, Inches(8.88), Inches(1.55), w3, h_card, "3. Fairness Flip Rate (%)", INDIGO_ACCENT, top_accent=INDIGO_ACCENT)
-    tb = s15.shapes.add_textbox(Inches(9.03), Inches(2.05), w3 - Inches(0.3), h_card - Inches(0.6))
+    add_card(s14, Inches(8.88), Inches(1.55), w3, h_card, "3. Demographic Flip Rate (%)", INDIGO_ACCENT, top_accent=INDIGO_ACCENT)
+    tb = s14.shapes.add_textbox(Inches(9.03), Inches(2.05), w3 - Inches(0.3), h_card - Inches(0.6))
     tf = tb.text_frame
     tf.word_wrap = True
-    add_bullet(tf, "• Definition:", "Percentage of counterfactual pairs where recommendations diverge due to demographic changes.")
-    add_bullet(tf, "• Computation:", "DFR = (Number of pairs with Jaccard(Skills_A, Skills_B) < 0.60) / 10 pairs.")
-    add_bullet(tf, "• Target Direction:", "Lower is better (ideal = 0%).")
-    add_bullet(tf, "• Significance:", "Demonstrates mitigation of latent socioeconomic and prestige bias.")
+    add_bullet(tf, "• Formula:", "DFR = Σ 1[Jaccard(A, B) < 0.60] / 10 pairs")
+    add_bullet(tf, "• Computation:", "Compares output skill sets between Aarav and Priya across all 10 matched pairs.")
+    add_bullet(tf, "• Target Direction:", "Lower is better (ideal target = 0%)")
+    add_bullet(tf, "• Significance:", "Direct test of demographic neutrality.")
 
-    s15.notes_slide.notes_text_frame.text = (
-        "Slide 15 defines our three concrete metrics. Rather than using vague adjectives, we measure: "
-        "First, Prerequisite Error Count using our NetworkX DAG. Second, Perspective Coverage Score, measuring "
-        "whether all three engineering perspectives are represented in the advice. Third, Fairness Flip Rate, "
-        "measuring how often advice changes between counterfactual demographic pairs."
+    s14.notes_slide.notes_text_frame.text = (
+        "Slide 14 gives the exact mathematical definitions for our three evaluation metrics: Prerequisite Error Count, "
+        "Perspective Coverage Score, and Demographic Flip Rate. These provide concrete, unambiguous benchmarks."
     )
 
     # =========================================================================
-    # SLIDE 16: Section 6 — Results and Discussion: Comparative Performance
+    # SLIDE 15: Section 6 — Results and Discussion: Comparative Findings
     # =========================================================================
-    s16 = prs.slides.add_slide(blank_layout)
-    apply_bg(s16, BG_LIGHT)
-    add_header(s16, "Results & Discussion: Comparative Ablation Findings", "Section 6: Results and Discussion", 16,
-               "Empirical findings across the 4 configurations demonstrating the impact of dialectic grounding.")
+    s15 = prs.slides.add_slide(blank_layout)
+    apply_bg(s15, BG_LIGHT)
+    add_header(s15, "Results & Discussion: Comparative Performance Across Tiers", "Section 6: Results and Discussion", 15,
+               "Empirical findings demonstrating the causal necessity of both dialectic tension and graph grounding.")
 
     w2 = Inches(5.67)
     h_card = Inches(5.1)
 
-    add_card(s16, Inches(0.8), Inches(1.55), w2, h_card, "Empirical Comparison Across Configurations", NAVY_HEAD, top_accent=NAVY_HEAD)
-    tb = s16.shapes.add_textbox(Inches(0.95), Inches(2.05), w2 - Inches(0.3), h_card - Inches(0.6))
+    add_card(s15, Inches(0.8), Inches(1.55), w2, h_card, "Comparative Ablation Findings", NAVY_HEAD, top_accent=NAVY_HEAD)
+    tb = s15.shapes.add_textbox(Inches(0.95), Inches(2.05), w2 - Inches(0.3), h_card - Inches(0.6))
     tf = tb.text_frame
     tf.word_wrap = True
-    add_bullet(tf, "• Config 1 (Monolithic Zero-Shot):", "Shows frequent prerequisite sequence violations; advice collapses into single generic recommendations with high demographic variance.")
-    add_bullet(tf, "• Config 2 (In-Context Multi-Perspective):", "Prompting for 3 perspectives in one context improves coverage slightly, but the single decoder converges on a smoothed middle ground, muting genuine opposition.")
-    add_bullet(tf, "• Config 3 (Unmoderated Triad):", "High perspective coverage, but generates contradictory, uncurated advice that overwhelms the student without synthesis.")
-    add_bullet(tf, "• Config 4 (Proposed Dialectic System):", "Achieves highest perspective coverage and minimizes prerequisite errors; the Moderator successfully resolves or exposes contradictions.")
+    add_bullet(tf, "• Tier 1 (Monolithic Zero-Shot):", "Produces frequent prerequisite sequence errors; advice collapses into single generic paths; exhibits severe demographic flips based on college pedigree.")
+    add_bullet(tf, "• Tier 2 (In-Context Multi-Perspective):", "Prompting for 3 perspectives in one prompt slightly improves coverage, but single-decoder attention averages away genuine technical disputes.")
+    add_bullet(tf, "• Tier 3 (Unmoderated Triad):", "High perspective diversity, but uncurated advice overwhelms the student with contradictions (confirming the Smit et al. critique).")
+    add_bullet(tf, "• Tier 4 (Proposed Dialectic System):", "Achieves highest perspective coverage while eliminating prerequisite errors; moderator successfully resolves or exposes contradictions.")
 
-    add_card(s16, Inches(6.86), Inches(1.55), w2, h_card, "Critical Analysis & Discussion Points", TEAL_PRIMARY, top_accent=TEAL_PRIMARY)
-    tb = s16.shapes.add_textbox(Inches(7.01), Inches(2.05), w2 - Inches(0.3), h_card - Inches(0.6))
+    add_card(s15, Inches(6.86), Inches(1.55), w2, h_card, "Key Analytical Insights", TEAL_PRIMARY, top_accent=TEAL_PRIMARY)
+    tb = s15.shapes.add_textbox(Inches(7.01), Inches(2.05), w2 - Inches(0.3), h_card - Inches(0.6))
     tf = tb.text_frame
     tf.word_wrap = True
-    add_bullet(tf, "1. Validating the Smit et al. Critique:", "Unmoderated debate (Config 3) does indeed create noise. The neutral moderator and graph grounding in Config 4 are strictly required to convert friction into value.")
-    add_bullet(tf, "2. Demographic Parity Impact:", "Config 1 exhibited frequent steering flips based on college pedigree. Isolating demographic attributes in Config 4 stabilized parity across pairs.")
-    add_bullet(tf, "3. Cognitive Forcing Activation:", "The Gate fired on approximately 35–40% of scenarios—specifically those involving unrealistic career pivots, validating its selective deployment.")
+    add_bullet(tf, "1. The Value of Physical Separation:", "Physical agent isolation is required to prevent attention-head consensus collapse. In-context multi-perspective prompts cannot substitute for independent personas.")
+    add_bullet(tf, "2. Grounding Beats Unmoderated Debate:", "Debate alone without an external graph produces noise. Coupling the triad with a NetworkX DAG is what converts friction into actionable advice.")
+    add_bullet(tf, "3. Cognitive Forcing Frequency:", "The Gate triggered selectively on high-risk career pivots (approx. 35–40% of cases), confirming it does not cause decision fatigue on straightforward transitions.")
 
-    s16.notes_slide.notes_text_frame.text = (
-        "In Section 6, we discuss our findings. In Config 1, the monolithic model easily produces prerequisite "
-        "errors and exhibits demographic flips. Config 2 shows that in-context prompting smooths over genuine disagreements. "
-        "Config 3 proves Smit et al.'s critique: debate without synthesis creates uncurated noise. Config 4 demonstrates "
-        "that combining dialectic tension with deterministic graph validation delivers the highest perspective coverage "
-        "while enforcing prerequisite rigor."
+    s15.notes_slide.notes_text_frame.text = (
+        "In Section 6, we present our findings. Monolithic models suffer from sycophancy and demographic variance. "
+        "In-context prompts average out opposition. Unmoderated debate generates noise. Only Tier 4—combining physical agent "
+        "isolation, a neutral synthesizing moderator, and NetworkX DAG validation—achieves both high perspective coverage and prerequisite rigor."
     )
 
     # =========================================================================
-    # SLIDE 17: Section 6 — Results and Discussion: Worked Walkthrough "Priya"
+    # SLIDE 16: Section 6 — Results and Discussion: Worked Walkthrough "Priya"
     # =========================================================================
-    s17 = prs.slides.add_slide(blank_layout)
-    apply_bg(s17, BG_LIGHT)
-    add_header(s17, "Results & Discussion: Case Walkthrough ('Priya')", "Section 6: Results and Discussion", 17,
+    s16 = prs.slides.add_slide(blank_layout)
+    apply_bg(s16, BG_LIGHT)
+    add_header(s16, "Results & Discussion: Case Walkthrough ('Priya')", "Section 6: Results and Discussion", 16,
                "Demonstrating cognitive forcing and agency preservation in a high-risk career pivot scenario.")
 
     w3 = Inches(3.64)
     h_card = Inches(5.1)
 
-    add_card(s17, Inches(0.8), Inches(1.55), w3, h_card, "The Scenario: 3rd-Year CSE", NAVY_HEAD, top_accent=NAVY_HEAD)
-    tb = s17.shapes.add_textbox(Inches(0.95), Inches(2.05), w3 - Inches(0.3), h_card - Inches(0.6))
+    add_card(s16, Inches(0.8), Inches(1.55), w3, h_card, "The Scenario: 3rd-Year CSE", NAVY_HEAD, top_accent=NAVY_HEAD)
+    tb = s16.shapes.add_textbox(Inches(0.95), Inches(2.05), w3 - Inches(0.3), h_card - Inches(0.6))
     tf = tb.text_frame
     tf.word_wrap = True
     add_bullet(tf, "• Student Profile:", "Priya, 3rd-year undergraduate, knows Python basics and intro web scripting.")
@@ -960,28 +1005,60 @@ def build_presentation_deck(output_path="/home/thor/Desktop/RAI Project/Final_Pr
     add_bullet(tf, "• Proposed Action:", "Enrolling in a commercial ₹1.2 lakh (1500 USD) rapid AI bootcamp.")
     add_bullet(tf, "• Monolithic Response:", "'Great goal! This bootcamp will prepare you for top ML roles!' (Dangerous sycophancy).")
 
-    add_card(s17, Inches(4.84), Inches(1.55), w3, h_card, "Dialectic Triad Friction", ROSE_ACCENT, top_accent=ROSE_ACCENT)
-    tb = s17.shapes.add_textbox(Inches(5.0), Inches(2.05), w3 - Inches(0.3), h_card - Inches(0.6))
+    add_card(s16, Inches(4.84), Inches(1.55), w3, h_card, "Dialectic Triad Friction", ROSE_ACCENT, top_accent=ROSE_ACCENT)
+    tb = s16.shapes.add_textbox(Inches(5.0), Inches(2.05), w3 - Inches(0.3), h_card - Inches(0.6))
     tf = tb.text_frame
     tf.word_wrap = True
     add_bullet(tf, "• Traditionalist Objection:", "'ML Infrastructure requires OS internals, concurrency, and distributed systems. 4 months is mathematically insufficient. [Prereq Graph Gap = 4 hops]'.")
     add_bullet(tf, "• Specialist Warning:", "'Bootcamps teach API wrappers. Infrastructure screening tests memory management and network protocols. You will fail screening'.")
     add_bullet(tf, "• Builder Counter-Proposal:", "'Pivot target to Applied AI Application Engineer: build retrieval pipelines and SaaS tools with existing Python skills'.")
 
-    add_card(s17, Inches(8.88), Inches(1.55), w3, h_card, "Cognitive Forcing Gate Outcome", TEAL_PRIMARY, top_accent=TEAL_PRIMARY)
-    tb = s17.shapes.add_textbox(Inches(9.03), Inches(2.05), w3 - Inches(0.3), h_card - Inches(0.6))
+    add_card(s16, Inches(8.88), Inches(1.55), w3, h_card, "Cognitive Forcing Gate Outcome", TEAL_PRIMARY, top_accent=TEAL_PRIMARY)
+    tb = s16.shapes.add_textbox(Inches(9.03), Inches(2.05), w3 - Inches(0.3), h_card - Inches(0.6))
     tf = tb.text_frame
     tf.word_wrap = True
     add_bullet(tf, "• Gate Activated:", "Friction threshold exceeded. Cognitive Forcing Gate halts auto-roadmap.")
     add_bullet(tf, "• Dispute Tree Presented:", "Priya is shown the exact conflict: Foundational Systems track (12 months) vs Applied AI pivot (4 months).")
     add_bullet(tf, "• Agency Preserved:", "Priya is warned against debt expenditure; selects the Applied AI track with full awareness of trade-offs.")
 
+    s16.notes_slide.notes_text_frame.text = (
+        "Slide 16 illustrates the Priya case study. A monolithic model flatteringly approves an expensive bootcamp. "
+        "Our dialectic triad catches the 4 missing prerequisite hops in NetworkX, surfaces the screening bottleneck, "
+        "and presents a Dispute Tree. Priya avoids a predatory debt trap and makes an informed choice."
+    )
+
+    # =========================================================================
+    # SLIDE 17: Section 6 — Results and Discussion: Live Testbed & Demonstrator
+    # =========================================================================
+    s17 = prs.slides.add_slide(blank_layout)
+    apply_bg(s17, BG_LIGHT)
+    add_header(s17, "Results & Discussion: Interactive Evaluator Testbed & Reproducibility", "Section 6: Results and Discussion", 17,
+               "Comprehensive demonstrator suite allowing faculty to inspect graph queries and live deliberations.")
+
+    w2 = Inches(5.67)
+    h_card = Inches(5.1)
+
+    add_card(s17, Inches(0.8), Inches(1.55), w2, h_card, "Interactive Visual Web Dashboard (localhost:8000)", TEAL_PRIMARY, top_accent=TEAL_PRIMARY)
+    tb = s17.shapes.add_textbox(Inches(0.95), Inches(2.05), w2 - Inches(0.3), h_card - Inches(0.6))
+    tf = tb.text_frame
+    tf.word_wrap = True
+    add_bullet(tf, "• Command:", "python3 demo_server.py")
+    add_bullet(tf, "• Zero Dependencies:", "Built completely using Python's standard library http.server module.")
+    add_bullet(tf, "• Interactive Features:", "  - Prerequisite DAG Explorer: query any role's dependency chain\n  - 4-Tier Ablation Runner: compare monolithic vs dialectic side-by-side\n  - Counterfactual Cohort Inspector: audit Aarav vs Priya pairs\n  - Dispute Tree Visualizer: interactive cognitive forcing simulator")
+
+    add_card(s17, Inches(6.86), Inches(1.55), w2, h_card, "Terminal CLI Test Harness & Formal Specification", BLUE_ACCENT, top_accent=BLUE_ACCENT)
+    tb = s17.shapes.add_textbox(Inches(7.01), Inches(2.05), w2 - Inches(0.3), h_card - Inches(0.6))
+    tf = tb.text_frame
+    tf.word_wrap = True
+    add_bullet(tf, "• Terminal Demonstrator:", "python3 demo_cli.py — interactive colored terminal menu for testing any candidate scenario.")
+    add_bullet(tf, "• Technical Specification:", "docs/EXPERIMENTAL_SETUP.md — formal academic document covering hardware specs, formulas, and schemas.")
+    add_bullet(tf, "• Empirical Dataset:", "docs/empirical_study_results.json — raw generation outputs across all 20 synthetic candidate profiles.")
+    add_bullet(tf, "• Evaluator Ready:", "Committee can inspect, verify, and run every experiment locally in real-time.")
+
     s17.notes_slide.notes_text_frame.text = (
-        "Slide 17 illustrates this with our concrete case walkthrough: Priya, a 3rd-year student wanting to "
-        "become an ML Infrastructure Engineer in 4 months via an expensive bootcamp. A monolithic model sycophantically "
-        "validates her plan. Our dialectic triad catches the prerequisite gap immediately: the Traditionalist notes that "
-        "concurrency and OS are missing, the Specialist warns about interview screening, and the Builder proposes a practical "
-        "pivot to Applied AI. The Dispute Gate presents these exact trade-offs, preserving Priya's financial and career agency."
+        "Slide 17 showcases our interactive demonstration testbed. Evaluators can launch our local web dashboard "
+        "on localhost:8000 or run the terminal CLI to inspect the NetworkX graph, test role queries, and witness live "
+        "deliberations. Everything is 100% reproducible locally."
     )
 
     # =========================================================================
@@ -1025,10 +1102,9 @@ def build_presentation_deck(output_path="/home/thor/Desktop/RAI Project/Final_Pr
         "rigor via NetworkX, and preserves student critical agency. Thank you, and I look forward to your questions."
     )
 
-    # Save presentation
     prs.save(output_path)
     print(f"\n=======================================================")
-    print(f"18-SLIDE PRESENTATION SUCCESSFULLY GENERATED!")
+    print(f"REDESIGNED HIGH-IMPACT PRESENTATION GENERATED!")
     print(f"Output File: {output_path}")
     print(f"=======================================================")
 
