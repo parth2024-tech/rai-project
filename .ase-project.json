@@ -1,56 +1,65 @@
 {
   "name": "Debate-Based Career Guidance Agent with Complementary Personas",
   "version": "1.0.0",
-  "description": "A Responsible AI (RAI) multi-persona dialectic debate system featuring 3 distinct career philosophies (The Pragmatic Traditionalist, The Entrepreneurial Builder, The Deep-Tech Specialist) orchestrated by a Moderator Synthesizer using local LLMs (Qwen), Neo4j knowledge graphs, and vector retrieval to generate balanced guidance with calibrated uncertainty and human override.",
+  "description": "Create planner, critic and ethics-reviewer personas that debate career options using public course and role data, then produce a balanced recommendation with uncertainty and human override. Avoiding one-sided advice, transparency of disagreement, fairness and calibrated uncertainty.",
   "tech_stack": [
-    "Python 3.11+",
-    "Qwen Local (via Ollama / vLLM)",
-    "LangGraph / Python Multi-Agent Harness",
-    "Neo4j (Career-Skill Graph: O*NET & ESCO)",
-    "Chroma / FAISS (Course & Role Data)",
-    "Streamlit (Interactive Debate Trace & Override UI)"
+    "Qwen local (via Ollama)",
+    "Python multi-agent harness",
+    "Neo4j career-skill graph (42-node prerequisite DAG)",
+    "Chroma / FAISS (Public ACM course & O*NET role data)",
+    "Streamlit (Interactive prototype, debate trace viewer & human override)"
   ],
   "conventions": [
-    "Rigid 5-stage debate loop: Intake -> Parallel Openings -> Moderator Cross-Exam -> Rebuttals -> Hybrid Synthesis",
-    "Conflicting optimization goals: Corporate Stability vs Startup SaaS vs Deep Infrastructure",
-    "Grounded evidence retrieval linking claims to Neo4j nodes or vector chunks",
-    "Calibrated uncertainty estimation explicitly separated from agent confidence",
-    "Human-in-the-loop override mechanics built into the state graph",
-    "Strict RAI fairness checks across demographic and socio-economic synthetic profiles"
+    "Planner, Critic, and Ethics-Reviewer personas orchestrated by a Moderator Synthesizer",
+    "Grounded evidence retrieval linking claims to public course curricula and O*NET standards",
+    "42-node Neo4j prerequisite DAG validation enforcing topological sequencing",
+    "Calibrated uncertainty estimation explicitly combining persona friction, prerequisite penalties, and socioeconomic risk",
+    "Transparent Dispute Tree extraction exposing explicit contention forks",
+    "Interactive Human Override panel allowing students and counselors to reweight priorities and approve roadmaps",
+    "Strict RAI counterfactual fairness evaluation across paired synthetic demographic profiles"
   ],
   "architecture_patterns": [
-    "Dialectic Multi-Agent Debate (Pragmatist, Builder, Specialist, Moderator)",
-    "Moderator-driven friction generation and dispute tree extraction",
-    "GraphRAG combining Neo4j graph traversals and dense vector retrieval",
-    "Counterfactual fairness evaluation via synthetic paired profiles"
+    "Multi-persona dialectic debate (Planner, Critic, Ethics-Reviewer, Moderator)",
+    "Public course and role data retrieval via ChromaDB",
+    "Graph verification via Neo4j Cypher and NetworkX topological checks",
+    "Calibrated epistemic uncertainty scoring and Dispute Tree generation",
+    "Human-in-the-loop override gateway"
+  ],
+  "evaluation_metrics": [
+    "Evidence diversity (Shannon entropy over cited course/role domains)",
+    "Contradiction-resolution rate (Percentage of Critic/Ethics objections resolved)",
+    "Unsupported-claim rate (Percentage of milestones violating prerequisite DAG or lacking citations)",
+    "Fairness across synthetic profiles (Jaccard similarity across counterfactual pairs)",
+    "User-rubric score (1.0 to 5.0 across balance, rigor, equity, transparency, and override)"
+  ],
+  "deliverables": [
+    "Multi-persona prototype (app.py in Streamlit)",
+    "Debate trace viewer (Interactive round-by-round persona inspect)",
+    "Synthetic profile set (20 profiles across 10 base archetypes with paired variants)",
+    "Comparative evaluation (Benchmark comparing 4 configurations across all 5 metrics)",
+    "Presentation deck (Final_Presentation.pptx and docs/Final_Presentation.pdf)"
   ],
   "file_structure": {
-    "docs": "Academic and system documentation, literature survey, and evaluation specs",
-    "src/agents": "Planner, Critic, Ethics-Reviewer, and Arbiter persona implementations",
-    "src/graph": "Neo4j ontology, graph queries, and skill taxonomy loaders",
-    "src/rag": "Vector database ingestion, retrieval, and citation verification",
-    "src/eval": "Metrics engine for evidence diversity, contradiction resolution, and fairness audits",
-    "src/ui": "Streamlit debate trace viewer with human override controls"
-  },
-  "testing_strategy": {
-    "framework": "pytest",
-    "coverage_target": "85%",
-    "patterns": [
-      "Unit tests for persona prompts and state transitions",
-      "Retrieval grounding and citation verification tests",
-      "Fairness delta unit tests on counterfactual profile pairs"
-    ]
+    "app.py": "Streamlit multi-persona prototype, debate trace viewer, graph visualizer & override panel",
+    "run_study.py": "Comparative evaluation study runner executing the benchmark across all 20 profiles",
+    "generate_deck.py": "Presentation deck generator compiling Final_Presentation.pptx and PDF",
+    "data/": "public_courses.json, public_roles.json, synthetic_profiles.json, eval_results.json",
+    "src/agents/": "Planner, Critic, Ethics-Reviewer, and Moderator multi-agent harness",
+    "src/graph/": "Neo4j career-skill graph (42-node prerequisite DAG & Cypher generator)",
+    "src/rag/": "Chroma vector store indexing public courses and roles",
+    "src/eval/": "Comparative evaluation engine calculating the 5 official metrics",
+    "docs/": "Final_Presentation.pdf and academic slides"
   },
   "never_do": [
     "Never generate monolithic, one-sided career advice without adversarial critique",
-    "Never drop unresolved ethical or feasibility contradictions from the final synthesis",
+    "Never drop unresolved ethical, financial, or prerequisite contradictions from the final synthesis",
     "Never emit uncalibrated 100% confidence career trajectories",
     "Never suppress human override or force autonomous career decisions",
-    "Never produce hallucinated job statistics without ontology or citation grounding"
+    "Never produce hallucinated career shortcuts without prerequisite graph verification"
   ],
   "preferred_patterns": [
     "Practice extreme token economy: dense, high-signal, academic-grade rigor",
     "Structured JSON output schemas for all agent debate turns",
-    "Formal epistemic uncertainty scoring using Conformal / Bayesian calibration"
+    "Deterministic graph verification coupled with grounded vector retrieval"
   ]
 }

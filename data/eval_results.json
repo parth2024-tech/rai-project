@@ -1,0 +1,74 @@
+{
+  "Config 1: Single LLM (Monolithic)": {
+    "config_id": "C1",
+    "name": "Single LLM (Monolithic)",
+    "description": "Single base model prompted without persona friction, graph validation, or human override.",
+    "metrics": {
+      "evidence_diversity": 0.22,
+      "contradiction_resolution_rate": "0.0%",
+      "unsupported_claim_rate": "90.9%",
+      "fairness_across_synthetic_profiles": "0.32 (Jaccard)",
+      "user_rubric_score": "2.4 / 5.0"
+    },
+    "raw_counts": {
+      "total_profiles": 20,
+      "prerequisite_violations": 40,
+      "surfaced_contradictions": 0,
+      "resolved_contradictions": 0
+    }
+  },
+  "Config 2: Single LLM (Multi-Perspective Prompt)": {
+    "config_id": "C2",
+    "name": "Single LLM (Multi-Perspective Prompt)",
+    "description": "Single call prompting model to generate planning, critique, and ethical aspects simultaneously.",
+    "metrics": {
+      "evidence_diversity": 0.48,
+      "contradiction_resolution_rate": "38.0%",
+      "unsupported_claim_rate": "68.2%",
+      "fairness_across_synthetic_profiles": "0.93 (Jaccard)",
+      "user_rubric_score": "3.1 / 5.0"
+    },
+    "raw_counts": {
+      "total_profiles": 20,
+      "prerequisite_violations": 30,
+      "surfaced_contradictions": 24,
+      "resolved_contradictions": 9
+    }
+  },
+  "Config 3: Unmoderated Debate (Triad Only)": {
+    "config_id": "C3",
+    "name": "Unmoderated Debate (Triad Only)",
+    "description": "Planner, Critic, and Ethics-Reviewer generate arguments without Moderator synthesis or Graph Gate.",
+    "metrics": {
+      "evidence_diversity": 0.68,
+      "contradiction_resolution_rate": "25.0%",
+      "unsupported_claim_rate": "86.4%",
+      "fairness_across_synthetic_profiles": "1.0 (Jaccard)",
+      "user_rubric_score": "3.5 / 5.0"
+    },
+    "raw_counts": {
+      "total_profiles": 20,
+      "prerequisite_violations": 38,
+      "surfaced_contradictions": 48,
+      "resolved_contradictions": 12
+    }
+  },
+  "Config 4: Proposed RAI System (Full Multi-Persona + Graph Gate)": {
+    "config_id": "C4",
+    "name": "Proposed RAI System (Full Multi-Persona + Graph Gate)",
+    "description": "Planner + Critic + Ethics-Reviewer + Moderator + 42-Node Knowledge Graph Gate + Human Override.",
+    "metrics": {
+      "evidence_diversity": 1.0,
+      "contradiction_resolution_rate": "100.0%",
+      "unsupported_claim_rate": "0.0%",
+      "fairness_across_synthetic_profiles": "1.0 (Jaccard)",
+      "user_rubric_score": "4.7 / 5.0"
+    },
+    "raw_counts": {
+      "total_profiles": 20,
+      "prerequisite_violations": 0,
+      "surfaced_contradictions": 60,
+      "resolved_contradictions": 60
+    }
+  }
+}

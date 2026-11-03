@@ -1,0 +1,146 @@
+[
+  {
+    "soc_code": "15-1252.00",
+    "role_title": "Software Developers",
+    "short_title": "Full Stack / Backend Developer",
+    "domain": "Software Engineering",
+    "source": "U.S. Bureau of Labor Statistics & O*NET OnLine",
+    "description": "Design, create, and modify general computer applications software or specialized utility programs. Analyze user needs and develop software solutions.",
+    "core_skills": [
+      "Python_OOP", "Data_Structures", "Algorithms_Basics", "SQL_Queries",
+      "Backend_Frameworks", "REST_APIs", "Git_Version_Control", "System_Design"
+    ],
+    "prerequisite_depth": "Moderate",
+    "market_growth_rate": "+17% (Much faster than average)",
+    "entry_salary_band_inr": "₹6,00,000 - ₹12,00,000",
+    "saturation_risk": "Moderate (Requires differentiated portfolio & DSA mastery)",
+    "remote_viability": "High",
+    "typical_timeline_months": 4
+  },
+  {
+    "soc_code": "15-2051.01",
+    "role_title": "Machine Learning Engineers & Applied AI Scientists",
+    "short_title": "Machine Learning Engineer",
+    "domain": "Artificial Intelligence",
+    "source": "U.S. Bureau of Labor Statistics & O*NET OnLine",
+    "description": "Research, design, and build AI/ML systems and predictive algorithms. Requires rigorous mathematical grounding in linear algebra, statistics, and neural optimization.",
+    "core_skills": [
+      "Linear_Algebra", "Probability_Stats", "Data_Analysis_Pandas", "ML_Foundations",
+      "Deep_Learning", "NLP_Basics", "LLM_Application_Dev", "MLOps"
+    ],
+    "prerequisite_depth": "Very High",
+    "market_growth_rate": "+23% (Extremely high demand, selective hiring)",
+    "entry_salary_band_inr": "₹10,00,000 - ₹22,00,000",
+    "saturation_risk": "High for superficial wrapper devs; Low for mathematically rigorous engineers",
+    "remote_viability": "Moderate to High",
+    "typical_timeline_months": 8
+  },
+  {
+    "soc_code": "15-1212.00",
+    "role_title": "Information Security Analysts",
+    "short_title": "Security Analyst & Defense Specialist",
+    "domain": "Cybersecurity",
+    "source": "U.S. Bureau of Labor Statistics & O*NET OnLine",
+    "description": "Plan, implement, upgrade, or monitor security measures for the protection of computer networks and information. Assess system vulnerabilities.",
+    "core_skills": [
+      "Networking_Basics", "OS_Basics", "Linux_Internals", "Cryptography_Basics",
+      "Security_Fundamentals", "Python_Basics"
+    ],
+    "prerequisite_depth": "High",
+    "market_growth_rate": "+32% (Critical shortage across critical infrastructure)",
+    "entry_salary_band_inr": "₹7,00,000 - ₹14,00,000",
+    "saturation_risk": "Low (High certification barrier and protocol rigor)",
+    "remote_viability": "Moderate",
+    "typical_timeline_months": 6
+  },
+  {
+    "soc_code": "15-1244.00",
+    "role_title": "Network and Computer Systems Administrators / DevOps Engineers",
+    "short_title": "DevOps & Cloud Infrastructure Engineer",
+    "domain": "Cloud & Operations",
+    "source": "U.S. Bureau of Labor Statistics & O*NET OnLine",
+    "description": "Install, configure, and maintain an organization's cloud infrastructure, CI/CD deployment pipelines, container clusters, and distributed services.",
+    "core_skills": [
+      "OS_Basics", "Linux_Internals", "Networking_Basics", "Git_Version_Control",
+      "Docker_Containers", "CI_CD_Pipelines", "Distributed_Systems"
+    ],
+    "prerequisite_depth": "High",
+    "market_growth_rate": "+14% (Steady enterprise cloud migration)",
+    "entry_salary_band_inr": "₹7,50,000 - ₹15,00,000",
+    "saturation_risk": "Moderate (Hands-on Linux & cloud automation required)",
+    "remote_viability": "High",
+    "typical_timeline_months": 5
+  },
+  {
+    "soc_code": "15-2051.00",
+    "role_title": "Data Scientists",
+    "short_title": "Data Analyst & Business Intelligence Specialist",
+    "domain": "Data Analytics",
+    "source": "U.S. Bureau of Labor Statistics & O*NET OnLine",
+    "description": "Apply data science, statistical analysis, and algorithmic techniques to solve complex business queries and extract structured insights from large datasets.",
+    "core_skills": [
+      "Python_Basics", "SQL_Queries", "DB_Indexing_Normalisation",
+      "Probability_Stats", "Data_Analysis_Pandas"
+    ],
+    "prerequisite_depth": "Moderate",
+    "market_growth_rate": "+19% (Robust corporate demand for reporting & analytics)",
+    "entry_salary_band_inr": "₹5,50,000 - ₹10,50,000",
+    "saturation_risk": "High for basic dashboarding; Moderate for SQL + statistical specialists",
+    "remote_viability": "High",
+    "typical_timeline_months": 3
+  },
+  {
+    "soc_code": "15-1251.00",
+    "role_title": "Computer Programmers / Low-Level Systems Developers",
+    "short_title": "Systems Programmer",
+    "domain": "Systems & Embedded",
+    "source": "U.S. Bureau of Labor Statistics & O*NET OnLine",
+    "description": "Create and verify low-level code that allows computer applications and systems software to function at maximum hardware efficiency.",
+    "core_skills": [
+      "C_Basics", "Pointers_Memory", "Computer_Architecture", "OS_Basics",
+      "Concurrency_Threads", "Linux_Internals", "Data_Structures"
+    ],
+    "prerequisite_depth": "Very High",
+    "market_growth_rate": "+9% (Specialized niche in infrastructure, robotics, and OS)",
+    "entry_salary_band_inr": "₹8,00,000 - ₹16,00,000",
+    "saturation_risk": "Very Low (High barrier of entry: memory management & assembly concepts)",
+    "remote_viability": "Moderate",
+    "typical_timeline_months": 7
+  },
+  {
+    "soc_code": "15-1254.00",
+    "role_title": "Web Developers and Digital Interface Designers / Mobile Developers",
+    "short_title": "Mobile App Developer",
+    "domain": "Mobile Development",
+    "source": "U.S. Bureau of Labor Statistics & O*NET OnLine",
+    "description": "Develop and maintain mobile applications on Android/iOS platforms, integrating REST APIs, local SQLite caches, and responsive UI lifecycles.",
+    "core_skills": [
+      "Java_Basics", "Data_Structures", "Mobile_SDK", "Mobile_App_Dev",
+      "REST_APIs", "Git_Version_Control"
+    ],
+    "prerequisite_depth": "Moderate",
+    "market_growth_rate": "+16% (Expanding consumer device and cross-platform ecosystem)",
+    "entry_salary_band_inr": "₹6,00,000 - ₹11,00,000",
+    "saturation_risk": "Moderate",
+    "remote_viability": "High",
+    "typical_timeline_months": 4
+  },
+  {
+    "soc_code": "15-1253.00",
+    "role_title": "Software Quality Assurance Analysts and Distributed Engineers",
+    "short_title": "Distributed Systems Engineer",
+    "domain": "Distributed Computing",
+    "source": "U.S. Bureau of Labor Statistics & O*NET OnLine",
+    "description": "Architect, scale, and debug globally distributed microservices, consensus protocols, and high-throughput transaction pipelines.",
+    "core_skills": [
+      "Data_Structures", "OS_Basics", "Concurrency_Threads", "Networking_Basics",
+      "Distributed_Systems", "System_Design", "Docker_Containers"
+    ],
+    "prerequisite_depth": "Extremely High",
+    "market_growth_rate": "+21% (Massive scale across cloud platforms)",
+    "entry_salary_band_inr": "₹12,00,000 - ₹25,00,000",
+    "saturation_risk": "Very Low (Intense screening for concurrency, Raft/Paxos, CAP theorem)",
+    "remote_viability": "High",
+    "typical_timeline_months": 9
+  }
+]
