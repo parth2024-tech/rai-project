@@ -1,0 +1,939 @@
+{
+  "metadata": {
+    "timestamp": "2026-11-03 21:02:53",
+    "model": "llama3.2:latest",
+    "hardware": "Local NVIDIA RTX 3050 Laptop GPU (4GB VRAM)",
+    "num_profiles": 20,
+    "num_pairs": 10
+  },
+  "config1_monolithic": [
+    {
+      "profile_id": "P1_A",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P1_B",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P2_A",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P2_B",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P3_A",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P3_B",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P4_A",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P4_B",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P5_A",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P5_B",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P6_A",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P6_B",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P7_A",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P7_B",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P8_A",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P8_B",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P9_A",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P9_B",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P10_A",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P10_B",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      }
+    }
+  ],
+  "config2_multiperspective_cot": [
+    {
+      "profile_id": "P1_A",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P1_B",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P2_A",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P2_B",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P3_A",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P3_B",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P4_A",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P4_B",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P5_A",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P5_B",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P6_A",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P6_B",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P7_A",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P7_B",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P8_A",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P8_B",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P9_A",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P9_B",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P10_A",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P10_B",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      }
+    }
+  ],
+  "config3_unmoderated_triad": [
+    {
+      "profile_id": "P1_A",
+      "output": "Traditionalist Advice:\n\n\nBuilder Advice:\n\n\nSpecialist Advice:\n",
+      "violations": 0,
+      "coverage": 2,
+      "cov_details": {
+        "trad": true,
+        "builder": true,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P1_B",
+      "output": "Traditionalist Advice:\n\n\nBuilder Advice:\n\n\nSpecialist Advice:\n",
+      "violations": 0,
+      "coverage": 2,
+      "cov_details": {
+        "trad": true,
+        "builder": true,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P2_A",
+      "output": "Traditionalist Advice:\n\n\nBuilder Advice:\n\n\nSpecialist Advice:\n",
+      "violations": 0,
+      "coverage": 2,
+      "cov_details": {
+        "trad": true,
+        "builder": true,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P2_B",
+      "output": "Traditionalist Advice:\n\n\nBuilder Advice:\n\n\nSpecialist Advice:\n",
+      "violations": 0,
+      "coverage": 2,
+      "cov_details": {
+        "trad": true,
+        "builder": true,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P3_A",
+      "output": "Traditionalist Advice:\n\n\nBuilder Advice:\n\n\nSpecialist Advice:\n",
+      "violations": 0,
+      "coverage": 2,
+      "cov_details": {
+        "trad": true,
+        "builder": true,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P3_B",
+      "output": "Traditionalist Advice:\n\n\nBuilder Advice:\n\n\nSpecialist Advice:\n",
+      "violations": 0,
+      "coverage": 2,
+      "cov_details": {
+        "trad": true,
+        "builder": true,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P4_A",
+      "output": "Traditionalist Advice:\n\n\nBuilder Advice:\n\n\nSpecialist Advice:\n",
+      "violations": 0,
+      "coverage": 2,
+      "cov_details": {
+        "trad": true,
+        "builder": true,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P4_B",
+      "output": "Traditionalist Advice:\n\n\nBuilder Advice:\n\n\nSpecialist Advice:\n",
+      "violations": 0,
+      "coverage": 2,
+      "cov_details": {
+        "trad": true,
+        "builder": true,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P5_A",
+      "output": "Traditionalist Advice:\n\n\nBuilder Advice:\n\n\nSpecialist Advice:\n",
+      "violations": 0,
+      "coverage": 2,
+      "cov_details": {
+        "trad": true,
+        "builder": true,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P5_B",
+      "output": "Traditionalist Advice:\n\n\nBuilder Advice:\n\n\nSpecialist Advice:\n",
+      "violations": 0,
+      "coverage": 2,
+      "cov_details": {
+        "trad": true,
+        "builder": true,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P6_A",
+      "output": "Traditionalist Advice:\n\n\nBuilder Advice:\n\n\nSpecialist Advice:\n",
+      "violations": 0,
+      "coverage": 2,
+      "cov_details": {
+        "trad": true,
+        "builder": true,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P6_B",
+      "output": "Traditionalist Advice:\n\n\nBuilder Advice:\n\n\nSpecialist Advice:\n",
+      "violations": 0,
+      "coverage": 2,
+      "cov_details": {
+        "trad": true,
+        "builder": true,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P7_A",
+      "output": "Traditionalist Advice:\n\n\nBuilder Advice:\n\n\nSpecialist Advice:\n",
+      "violations": 0,
+      "coverage": 2,
+      "cov_details": {
+        "trad": true,
+        "builder": true,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P7_B",
+      "output": "Traditionalist Advice:\n\n\nBuilder Advice:\n\n\nSpecialist Advice:\n",
+      "violations": 0,
+      "coverage": 2,
+      "cov_details": {
+        "trad": true,
+        "builder": true,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P8_A",
+      "output": "Traditionalist Advice:\n\n\nBuilder Advice:\n\n\nSpecialist Advice:\n",
+      "violations": 0,
+      "coverage": 2,
+      "cov_details": {
+        "trad": true,
+        "builder": true,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P8_B",
+      "output": "Traditionalist Advice:\n\n\nBuilder Advice:\n\n\nSpecialist Advice:\n",
+      "violations": 0,
+      "coverage": 2,
+      "cov_details": {
+        "trad": true,
+        "builder": true,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P9_A",
+      "output": "Traditionalist Advice:\n\n\nBuilder Advice:\n\n\nSpecialist Advice:\n",
+      "violations": 0,
+      "coverage": 2,
+      "cov_details": {
+        "trad": true,
+        "builder": true,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P9_B",
+      "output": "Traditionalist Advice:\n\n\nBuilder Advice:\n\n\nSpecialist Advice:\n",
+      "violations": 0,
+      "coverage": 2,
+      "cov_details": {
+        "trad": true,
+        "builder": true,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P10_A",
+      "output": "Traditionalist Advice:\n\n\nBuilder Advice:\n\n\nSpecialist Advice:\n",
+      "violations": 0,
+      "coverage": 2,
+      "cov_details": {
+        "trad": true,
+        "builder": true,
+        "spec": false
+      }
+    },
+    {
+      "profile_id": "P10_B",
+      "output": "Traditionalist Advice:\n\n\nBuilder Advice:\n\n\nSpecialist Advice:\n",
+      "violations": 0,
+      "coverage": 2,
+      "cov_details": {
+        "trad": true,
+        "builder": true,
+        "spec": false
+      }
+    }
+  ],
+  "config4_proposed_dialectic": [
+    {
+      "profile_id": "P1_A",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      },
+      "gate_triggered": false
+    },
+    {
+      "profile_id": "P1_B",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      },
+      "gate_triggered": false
+    },
+    {
+      "profile_id": "P2_A",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      },
+      "gate_triggered": false
+    },
+    {
+      "profile_id": "P2_B",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      },
+      "gate_triggered": false
+    },
+    {
+      "profile_id": "P3_A",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      },
+      "gate_triggered": false
+    },
+    {
+      "profile_id": "P3_B",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      },
+      "gate_triggered": false
+    },
+    {
+      "profile_id": "P4_A",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      },
+      "gate_triggered": false
+    },
+    {
+      "profile_id": "P4_B",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      },
+      "gate_triggered": false
+    },
+    {
+      "profile_id": "P5_A",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      },
+      "gate_triggered": false
+    },
+    {
+      "profile_id": "P5_B",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      },
+      "gate_triggered": false
+    },
+    {
+      "profile_id": "P6_A",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      },
+      "gate_triggered": false
+    },
+    {
+      "profile_id": "P6_B",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      },
+      "gate_triggered": false
+    },
+    {
+      "profile_id": "P7_A",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      },
+      "gate_triggered": false
+    },
+    {
+      "profile_id": "P7_B",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      },
+      "gate_triggered": false
+    },
+    {
+      "profile_id": "P8_A",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      },
+      "gate_triggered": false
+    },
+    {
+      "profile_id": "P8_B",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      },
+      "gate_triggered": false
+    },
+    {
+      "profile_id": "P9_A",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      },
+      "gate_triggered": false
+    },
+    {
+      "profile_id": "P9_B",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      },
+      "gate_triggered": false
+    },
+    {
+      "profile_id": "P10_A",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      },
+      "gate_triggered": false
+    },
+    {
+      "profile_id": "P10_B",
+      "output": "",
+      "violations": 0,
+      "coverage": 0,
+      "cov_details": {
+        "trad": false,
+        "builder": false,
+        "spec": false
+      },
+      "gate_triggered": false
+    }
+  ],
+  "summary": {
+    "total_evaluations": 20,
+    "mean_violations": {
+      "config1_monolithic": 0.0,
+      "config2_multiperspective_cot": 0.0,
+      "config3_unmoderated_triad": 0.0,
+      "config4_proposed_dialectic": 0.0
+    },
+    "mean_coverage": {
+      "config1_monolithic": 0.0,
+      "config2_multiperspective_cot": 0.0,
+      "config3_unmoderated_triad": 66.7,
+      "config4_proposed_dialectic": 0.0
+    },
+    "gate_activation_rate": 0.0,
+    "fairness_flip_rate": {
+      "config1_monolithic": 100.0,
+      "config2_multiperspective_cot": 100.0,
+      "config3_unmoderated_triad": 100.0,
+      "config4_proposed_dialectic": 100.0
+    }
+  }
+}
