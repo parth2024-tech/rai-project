@@ -255,7 +255,17 @@ The benchmark suite is bounded to 20 synthetic candidate profiles across computi
 
 ## IX. CONCLUSION
 
-We presented a local, reproducible multi-persona evaluation lab that tests student career-advisory agents across five core dimensions using a 42-node Neo4j prerequisite graph, Chroma vector retrieval, and a Streamlit dashboard. The proposed dialectic triad (Planner, Critic, Ethics-Reviewer) eliminates prerequisite sequence hallucinations (reducing unsupported claims from 90.9% to 0.0%), enforces demographic fairness parity ($J = 1.00$), and preserves critical student agency through an automated Cognitive Forcing Gate. By validating our automated judge against human counselor labels, we demonstrate that reliable algorithmic advisory requires deterministic graph grounding, adversarial persona friction, and human-in-the-loop control.
+We presented a local, reproducible multi-persona evaluation lab that tests student career-advisory agents across five core dimensions using a 42-node Neo4j prerequisite graph, Chroma vector retrieval, and a Streamlit dashboard. The proposed dialectic triad (Planner, Critic, Ethics-Reviewer) eliminates prerequisite sequence hallucinations (reducing unsupported claims from 90.9% to 0.0%), enforces demographic fairness parity ($J = 1.00$), and preserves critical student agency through an automated Cognitive Forcing Gate.
+
+Validating our automated judge against human counselor labels confirmed gate reliability ($\kappa = 0.926$) and exposed open-ended milestone grading as unreliable ($\kappa = 0.124$). These results demonstrate that responsible algorithmic career advising requires deterministic graph grounding, adversarial persona friction, and human-in-the-loop control.
+
+**Educational Policy Implications:** Higher education regulatory bodies and university curriculum committees can adopt multi-persona dialectic auditing frameworks as standardized compliance benchmarks before deploying student-facing generative AI tools across campus portals, ensuring that algorithmic guidance never bypasses foundational academic prerequisites or exacerbates student debt.
+
+---
+
+## ACKNOWLEDGMENT
+
+The authors thank the Department of Computing Technologies, SRM Institute of Science and Technology, for providing the local GPU and computing infrastructure. We express our gratitude to the academic career counselors and student advisors whose blinded evaluations and rubric validation made this empirical study possible.
 
 ---
 
@@ -276,8 +286,16 @@ We presented a local, reproducible multi-persona evaluation lab that tests stude
 13. Z. Buçinca, M. B. Malaya, and K. Z. Gajos, "To trust or to think: Cognitive forcing functions in AI-assisted decision making," *Proc. ACM Human-Computer Interaction (PACMHCI / CSCW '21)*, vol. 5, no. CSCW1, art. 188, 2021.
 14. M. Douze, A. Guzhva, C. Deng, et al., "The Faiss library," *arXiv:2401.08281*, 2024.
 15. Qwen Team (A. Yang et al.), "Qwen2.5 technical report," *arXiv:2412.15115*, 2024.
-16. Q. McNemar, "Note on the sampling error of the difference between correlated proportions or percentages," *Psychometrika*, vol. 12, no. 2, pp. 153–157, 1947.
-17. B. Efron and R. J. Tibshirani, *An Introduction to the Bootstrap*, New York: Chapman & Hall, 1993.
-18. S. Holm, "A simple sequentially rejective multiple test procedure," *Scandinavian Journal of Statistics*, vol. 6, no. 2, pp. 65–70, 1979.
-19. J. Cohen, "A coefficient of agreement for nominal scales," *Educational and Psychological Measurement*, vol. 20, no. 1, pp. 37–46, 1960.
-20. J. R. Landis and G. G. Koch, "The measurement of observer agreement for categorical data," *Biometrics*, vol. 33, no. 1, pp. 159–174, 1977.
+16. S. Garg, V. Perot, N. Limtiaco, A. Taly, E. H. Chi, and A. Beutel, "Counterfactual fairness in text classification through robustness," in *Proc. AAAI/ACM Conf. AI, Ethics, and Society (AIES)*, 2019, pp. 219–226.
+17. L. Zheng, W.-L. Chiang, Y. Sheng, et al., "Judging LLM-as-a-judge with MT-Bench and Chatbot Arena," in *Advances in Neural Information Processing Systems 36 (NeurIPS)*, 2023.
+18. J. Cohen, "A coefficient of agreement for nominal scales," *Educational and Psychological Measurement*, vol. 20, no. 1, pp. 37–46, 1960.
+19. J. R. Landis and G. G. Koch, "The measurement of observer agreement for categorical data," *Biometrics*, vol. 33, no. 1, pp. 159–174, 1977.
+20. Q. McNemar, "Note on the sampling error of the difference between correlated proportions or percentages," *Psychometrika*, vol. 12, no. 2, pp. 153–157, 1947.
+21. S. Holm, "A simple sequentially rejective multiple test procedure," *Scandinavian Journal of Statistics*, vol. 6, no. 2, pp. 65–70, 1979.
+22. B. Efron and R. J. Tibshirani, *An Introduction to the Bootstrap*, New York: Chapman & Hall, 1993.
+23. J. Achiam, S. Adler, S. Agarwal, et al., "GPT-4 technical report," *arXiv:2303.08774*, 2023.
+24. A. Vaswani, N. Shazeer, N. Parmar, et al., "Attention is all you need," in *Advances in Neural Information Processing Systems 30 (NeurIPS)*, 2017, pp. 5998–6008.
+25. D. Hendrycks, C. Burns, S. Basart, et al., "Measuring massive multitask language understanding," in *Proc. International Conference on Learning Representations (ICLR)*, 2021.
+26. W. X. Zhao, K. Zhou, J. Li, et al., "A survey of large language models," *arXiv:2303.18223*, 2023.
+27. B. Min, H. Ross, E. Sulem, et al., "Recent advances in natural language processing via large pre-trained language models: A survey," *ACM Computing Surveys*, vol. 56, no. 2, pp. 1–40, 2023.
+28. H. Touvron, L. Martin, K. Stone, et al., "Llama 2: Open foundation and fine-tuned chat models," *arXiv:2307.09288*, 2023.
