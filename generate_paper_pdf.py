@@ -290,6 +290,11 @@ HTML_CONTENT = """<!DOCTYPE html>
     padding-left: 75px;
   }
 
+  .col-break {
+    break-before: column;
+    page-break-before: column;
+  }
+
   /* References */
   .ref-list {
     margin: 0;
@@ -777,42 +782,6 @@ HTML_CONTENT = """<!DOCTYPE html>
       </tbody>
     </table>
 
-    <div class="table-caption">TABLE VI<br>AGREEMENT OF THE QWEN JUDGE WITH HUMAN LABELS</div>
-    <table class="ieee-table">
-      <thead>
-        <tr>
-          <th>Judge Decision Category</th>
-          <th class="num-cell">n</th>
-          <th class="num-cell">Agree.</th>
-          <th class="num-cell">&kappa;</th>
-          <th>Landis&ndash;Koch</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Gate Activation &amp; Refusal</td>
-          <td class="num-cell">28</td>
-          <td class="num-cell">96.4%</td>
-          <td class="num-cell">0.926</td>
-          <td>almost perfect</td>
-        </tr>
-        <tr>
-          <td>Dispute Resolution Quality</td>
-          <td class="num-cell">40</td>
-          <td class="num-cell">92.5%</td>
-          <td class="num-cell">0.841</td>
-          <td>almost perfect</td>
-        </tr>
-        <tr class="bottom-border">
-          <td>Open-Ended Milestone Pacing</td>
-          <td class="num-cell">32</td>
-          <td class="num-cell">62.5%</td>
-          <td class="num-cell">0.124</td>
-          <td>slight</td>
-        </tr>
-      </tbody>
-    </table>
-
     <div class="table-caption">TABLE V<br>PERFORMANCE BREAKDOWN ACROSS TECHNICAL TRACKS</div>
     <table class="ieee-table">
       <thead>
@@ -868,38 +837,79 @@ HTML_CONTENT = """<!DOCTYPE html>
       Typos and shorthand were handled robustly across all configurations. The primary failure mode in ungrounded baselines was demographic steering: swapping gender or college tier inverted recommendations in 68% of monolithic cases. In Config 4, attribute isolation and ethics review eliminated all demographic flips (Jaccard = 1.00). Fixed seed local execution produced deterministic results across repeats (0.000 flip rate).
     </p>
     <p class="para">
-      Robustness against regional language formulations and code-mixed phrasing (Hinglish/Tanglish terms such as "placement preparation" and "arrears condonation") demonstrated that local 7B models reliably extract semantic intent when grounded in vector search, but hallucinate wildly when unconstrained. Isolating demographic attributes in an audit vault guarantees identical curricular guidance regardless of socioeconomic proxies.
+      Robustness against regional language formulations and code-mixed phrasing (Hinglish/Tanglish terms such as "placement preparation" and "arrears condonation") demonstrated that local 7B models reliably extract semantic intent when grounded in vector search, but hallucinate wildly when unconstrained.
+    </p>
+    <p class="para">
+      Isolating demographic attributes in an audit vault guarantees identical curricular guidance regardless of socioeconomic proxies, ensuring that counterfactual student profiles with identical technical skills receive strictly equivalent foundational milestones.
     </p>
 
-    <div class="subsec-heading">E. Judge validation</div>
-    <p class="para-first">
-      Table VI reports agreement between the Qwen judge and the human counselor rater. The refusal and gate judge agreed almost perfectly (&kappa; = 0.926), confirming gate reliability. The dispute resolution judge also showed high agreement (&kappa; = 0.841). In contrast, open-ended milestone pacing agreed poorly (&kappa; = 0.124), confirming that prerequisite reachability must be verified in deterministic code rather than LLM judge prompts.
-    </p>
-    <p class="para">
-      Blind human evaluation revealed that the LLM judge frequently overlooked prerequisite inversion when the generated text sounded authoritative. Deterministic graph validation served as defense-in-depth, catching 100% of reachability violations that evaded textual judge evaluation.
-    </p>
+    <div class="col-break">
+      <div class="table-caption">TABLE VI<br>AGREEMENT OF THE QWEN JUDGE WITH HUMAN LABELS</div>
+      <table class="ieee-table">
+        <thead>
+          <tr>
+            <th>Judge Decision Category</th>
+            <th class="num-cell">n</th>
+            <th class="num-cell">Agree.</th>
+            <th class="num-cell">&kappa;</th>
+            <th>Landis&ndash;Koch</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Gate Activation &amp; Refusal</td>
+            <td class="num-cell">28</td>
+            <td class="num-cell">96.4%</td>
+            <td class="num-cell">0.926</td>
+            <td>almost perfect</td>
+          </tr>
+          <tr>
+            <td>Dispute Resolution Quality</td>
+            <td class="num-cell">40</td>
+            <td class="num-cell">92.5%</td>
+            <td class="num-cell">0.841</td>
+            <td>almost perfect</td>
+          </tr>
+          <tr class="bottom-border">
+            <td>Open-Ended Milestone Pacing</td>
+            <td class="num-cell">32</td>
+            <td class="num-cell">62.5%</td>
+            <td class="num-cell">0.124</td>
+            <td>slight</td>
+          </tr>
+        </tbody>
+      </table>
 
-    <div class="sec-heading">VII. DISCUSSION</div>
-    <p class="para-first">
-      Three primary architectural lessons emerge from this study:
-    </p>
-    <p class="para">
-      <em>1) Physical agent separation prevents consensus collapse:</em> Prompting a single LLM to generate multiple views internally collapsed opposing views into an agreeable mean (CRR = 38.0%), whereas physical multi-persona separation preserved legitimate dialectic tension (CRR = 100%), resolving the critique raised by Smit et al. [6].
-    </p>
-    <p class="para">
-      <em>2) Prerequisite sequencing and arithmetic belong in code:</em> LLM decoders cannot reliably verify topological dependencies, whereas coupling debate to a 42-node graph reduced unsupported claims from 90.9% to 0.0%.
-    </p>
-    <p class="para">
-      <em>3) The evaluation judge must be validated:</em> Restricting the judge to narrow decisions achieved &kappa; &gt; 0.84, while open-ended grading failed (&kappa; = 0.124).
-    </p>
-    <p class="para">
-      <strong>Institutional Recommendations:</strong> (i) Enforce prerequisite DAG gates on automated career generation; (ii) isolate protected attributes in an audit vault; (iii) mandate zero-debt open access for low-budget students; (iv) surface dispute trees rather than forcing artificial consensus; (v) provide interactive human override controls; (vi) validate automated evaluation judges with blinded human counselor ratings.
-    </p>
+      <div class="subsec-heading">E. Judge validation</div>
+      <p class="para-first">
+        Table VI reports agreement between the Qwen judge and the human counselor rater. The refusal and gate judge agreed almost perfectly (&kappa; = 0.926), confirming gate reliability. The dispute resolution judge also showed high agreement (&kappa; = 0.841). In contrast, open-ended milestone pacing agreed poorly (&kappa; = 0.124), confirming that prerequisite reachability must be verified in deterministic code rather than LLM judge prompts.
+      </p>
+      <p class="para">
+        Blind human evaluation revealed that the LLM judge frequently overlooked prerequisite inversion when the generated text sounded authoritative. Deterministic graph validation served as defense-in-depth, catching 100% of reachability violations that evaded textual judge evaluation.
+      </p>
 
-    <div class="sec-heading">VIII. LIMITATIONS AND FUTURE WORK</div>
-    <p class="para-first">
-      The benchmark suite is currently bounded to 20 synthetic candidate profiles across computing careers; evaluating non-computing disciplines (e.g., mechanical, biotechnology, or commerce) will require constructing formal prerequisite ontologies for those specific professional domains. In addition, all persona agents currently share the Qwen 2.5 7B model family; future work will deploy cross-family triads (e.g., Qwen + Llama-3 + Mistral) to eliminate shared pre-training priors and evaluate whether epistemic diversity increases when base architectures differ.
-    </p>
+      <div class="sec-heading">VII. DISCUSSION</div>
+      <p class="para-first">
+        Three primary architectural lessons emerge from this study:
+      </p>
+      <p class="para">
+        <em>1) Physical agent separation prevents consensus collapse:</em> Prompting a single LLM to generate multiple views internally collapsed opposing views into an agreeable mean (CRR = 38.0%), whereas physical multi-persona separation preserved legitimate dialectic tension (CRR = 100%), resolving the critique raised by Smit et al. [6].
+      </p>
+      <p class="para">
+        <em>2) Prerequisite sequencing and arithmetic belong in code:</em> LLM decoders cannot reliably verify topological dependencies, whereas coupling debate to a 42-node graph reduced unsupported claims from 90.9% to 0.0%.
+      </p>
+      <p class="para">
+        <em>3) The evaluation judge must be validated:</em> Restricting the judge to narrow decisions achieved &kappa; &gt; 0.84, while open-ended grading failed (&kappa; = 0.124).
+      </p>
+      <p class="para">
+        <strong>Institutional Recommendations:</strong> (i) Enforce prerequisite DAG gates on automated career generation; (ii) isolate protected attributes in an audit vault; (iii) mandate zero-debt open access for low-budget students; (iv) surface dispute trees rather than forcing artificial consensus; (v) provide interactive human override controls; (vi) validate automated evaluation judges with blinded human counselor ratings.
+      </p>
+
+      <div class="sec-heading">VIII. LIMITATIONS AND FUTURE WORK</div>
+      <p class="para-first">
+        The benchmark suite is currently bounded to 20 synthetic candidate profiles across computing careers; evaluating non-computing disciplines (e.g., mechanical, biotechnology, or commerce) will require constructing formal prerequisite ontologies for those specific professional domains. In addition, all persona agents currently share the Qwen 2.5 7B model family; future work will deploy cross-family triads (e.g., Qwen + Llama-3 + Mistral) to eliminate shared pre-training priors and evaluate whether epistemic diversity increases when base architectures differ.
+      </p>
+    </div>
   </div>
 </div>
 
