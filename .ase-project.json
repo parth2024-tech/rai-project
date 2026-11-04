@@ -37,18 +37,20 @@
     "Debate trace viewer (Interactive round-by-round persona inspect)",
     "Synthetic profile set (20 profiles across 10 base archetypes with paired variants)",
     "Comparative evaluation (Benchmark comparing 4 configurations across all 5 metrics)",
-    "Presentation deck (Final_Presentation.pptx and docs/Final_Presentation.pdf)"
+    "Presentation deck (Final_Presentation.pptx and docs/Final_Presentation.pdf)",
+    "IEEE Research Paper (docs/ACADEMIC_RESEARCH_PAPER.md, docs/ACADEMIC_RESEARCH_PAPER.html, docs/ACADEMIC_RESEARCH_PAPER.pdf)"
   ],
   "file_structure": {
     "app.py": "Streamlit multi-persona prototype, debate trace viewer, graph visualizer & override panel",
     "run_study.py": "Comparative evaluation study runner executing the benchmark across all 20 profiles",
     "generate_deck.py": "Presentation deck generator compiling Final_Presentation.pptx and PDF",
+    "generate_paper_pdf.py": "IEEE 2-column publication paper compiler generating HTML & PDF",
     "data/": "public_courses.json, public_roles.json, synthetic_profiles.json, eval_results.json",
     "src/agents/": "Planner, Critic, Ethics-Reviewer, and Moderator multi-agent harness",
     "src/graph/": "Neo4j career-skill graph (42-node prerequisite DAG & Cypher generator)",
     "src/rag/": "Chroma vector store indexing public courses and roles",
     "src/eval/": "Comparative evaluation engine calculating the 5 official metrics",
-    "docs/": "Final_Presentation.pdf and academic slides"
+    "docs/": "Final_Presentation.pdf, ACADEMIC_RESEARCH_PAPER.pdf, ACADEMIC_RESEARCH_PAPER.md"
   },
   "never_do": [
     "Never generate monolithic, one-sided career advice without adversarial critique",
