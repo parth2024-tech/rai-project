@@ -323,19 +323,16 @@ HTML_CONTENT = """<!DOCTYPE html>
       <table class="authors-table">
         <tr>
           <td class="author-col">
-            <div class="author-name">Kushagra Goel</div>
+            <div class="author-name">Gedela Rishikesh Reddy</div>
             <div class="author-dept">Department of Computing Technologies<br>SRM Institute of Science and Technology<br>Chennai, India</div>
-            <div class="author-email">kg3893@srmist.edu.in</div>
           </td>
           <td class="author-col">
-            <div class="author-name">Md. Ayan Sadique</div>
+            <div class="author-name">Aniket Srivastava</div>
             <div class="author-dept">Department of Computing Technologies<br>SRM Institute of Science and Technology<br>Chennai, India</div>
-            <div class="author-email">md1329@srmist.edu.in</div>
           </td>
           <td class="author-col">
-            <div class="author-name">Ashmit Singh</div>
+            <div class="author-name">Parth Gupta</div>
             <div class="author-dept">Department of Computing Technologies<br>SRM Institute of Science and Technology<br>Chennai, India</div>
-            <div class="author-email">as2550@srmist.edu.in</div>
           </td>
         </tr>
       </table>

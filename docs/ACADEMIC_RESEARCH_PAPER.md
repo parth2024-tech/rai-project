@@ -1,8 +1,7 @@
 # A Local, Multi-Persona Evaluation Lab for Dialectic Student Career Advisory Agents
 
-**Kushagra Goel**, **Md. Ayan Sadique**, **Ashmit Singh**  
-*Department of Computing Technologies, SRM Institute of Science and Technology, Chennai, India*  
-Emails: `kg3893@srmist.edu.in`, `md1329@srmist.edu.in`, `as2550@srmist.edu.in`
+**Gedela Rishikesh Reddy**, **Aniket Srivastava**, **Parth Gupta**  
+*Department of Computing Technologies, SRM Institute of Science and Technology, Chennai, India*
 
 ---
 
