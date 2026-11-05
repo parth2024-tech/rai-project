@@ -10,9 +10,9 @@ Computes Evidence Diversity metric (Shannon Entropy of cited sources).
 import json
 import math
 import os
-from typing import List, Dict, Any, Optional
+from typing import Any
+
 import chromadb
-from chromadb.config import Settings
 
 DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "data")
 COURSE_FILE = os.path.join(DATA_DIR, "public_courses.json")
@@ -22,7 +22,7 @@ ROLE_FILE = os.path.join(DATA_DIR, "public_roles.json")
 class EvidenceVectorStore:
     """Manages ChromaDB vector indexing and retrieval for course and role evidence."""
 
-    def __init__(self, persist_dir: Optional[str] = None):
+    def __init__(self, persist_dir: str | None = None):
         if persist_dir:
             self.client = chromadb.PersistentClient(path=persist_dir)
         else:
@@ -100,7 +100,7 @@ class EvidenceVectorStore:
                 ids=ids
             )
 
-    def retrieve_evidence(self, query: str, top_k: int = 5) -> List[Dict[str, Any]]:
+    def retrieve_evidence(self, query: str, top_k: int = 5) -> list[dict[str, Any]]:
         """Retrieves top-k grounded evidence documents matching the query."""
         results = self.collection.query(
             query_texts=[query],
@@ -108,7 +108,7 @@ class EvidenceVectorStore:
         )
         evidence = []
         if results and "metadatas" in results and results["metadatas"]:
-            for meta, doc, dist in zip(results["metadatas"][0], results["documents"][0], results["distances"][0] if "distances" in results and results["distances"] else [0.0]*len(results["metadatas"][0])):
+            for meta, doc, dist in zip(results["metadatas"][0], results["documents"][0], results["distances"][0] if results.get("distances") else [0.0]*len(results["metadatas"][0])):
                 item = dict(meta)
                 item["snippet"] = doc
                 item["relevance_score"] = round(1.0 / (1.0 + float(dist)), 3) if dist is not None else 1.0
@@ -116,14 +116,14 @@ class EvidenceVectorStore:
         return evidence
 
     @staticmethod
-    def calculate_evidence_diversity(evidence_items: List[Dict[str, Any]]) -> float:
+    def calculate_evidence_diversity(evidence_items: list[dict[str, Any]]) -> float:
         """
         Calculates Shannon Entropy (Evidence Diversity) across cited source domains.
         H_div = - sum(p * log2(p)). Returns a normalized score between 0.0 and 1.0.
         """
         if not evidence_items:
             return 0.0
-        domain_counts = {}
+        domain_counts: dict[str, int] = {}
         for item in evidence_items:
             dom = item.get("domain", "General")
             domain_counts[dom] = domain_counts.get(dom, 0) + 1

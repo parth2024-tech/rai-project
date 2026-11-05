@@ -14,9 +14,9 @@ Implements:
 import json
 import os
 import sys
-import urllib.request
 import urllib.error
-from typing import Dict, List, Any, Optional, Tuple
+import urllib.request
+from typing import Any
 
 # Ensure root directory is on python path
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
@@ -28,7 +28,7 @@ OLLAMA_URL = os.environ.get("OLLAMA_URL", "http://localhost:11434/api/generate")
 DEFAULT_MODEL = os.environ.get("OLLAMA_MODEL", "qwen3:4b-fast")
 
 
-def call_local_qwen(prompt: str, system_prompt: str = "", model: str = DEFAULT_MODEL, temperature: float = 0.5, max_tokens: int = 350) -> Optional[str]:
+def call_local_qwen(prompt: str, system_prompt: str = "", model: str = DEFAULT_MODEL, temperature: float = 0.5, max_tokens: int = 350) -> str | None:
     """Queries local Ollama instance for Qwen/Llama inference."""
     payload = {
         "model": model,
@@ -61,10 +61,10 @@ class MultiAgentDebateHarness:
 
     def run_debate(
         self,
-        candidate_profile: Dict[str, Any],
-        user_override_weights: Optional[Dict[str, float]] = None,
+        candidate_profile: dict[str, Any],
+        user_override_weights: dict[str, float] | None = None,
         force_override: bool = False
-    ) -> Dict[str, Any]:
+    ) -> dict[str, Any]:
         """
         Executes complete dialectic debate for a candidate profile.
         Returns comprehensive trace including persona turns, graph verification,
@@ -145,7 +145,7 @@ class MultiAgentDebateHarness:
         }
 
     # ── Persona 1: Planner ──────────────────────────────────────────────────
-    def _run_planner_persona(self, profile: Dict[str, Any], evidence: List[Dict[str, Any]]) -> Dict[str, Any]:
+    def _run_planner_persona(self, profile: dict[str, Any], evidence: list[dict[str, Any]]) -> dict[str, Any]:
         prompt = (
             f"Candidate: {profile.get('candidate_name')}\n"
             f"Current Skills: {', '.join(profile.get('skills', []))}\n"
@@ -198,7 +198,7 @@ class MultiAgentDebateHarness:
         }
 
     # ── Persona 2: Critic ───────────────────────────────────────────────────
-    def _run_critic_persona(self, profile: Dict[str, Any], planner_turn: Dict[str, Any], evidence: List[Dict[str, Any]]) -> Dict[str, Any]:
+    def _run_critic_persona(self, profile: dict[str, Any], planner_turn: dict[str, Any], evidence: list[dict[str, Any]]) -> dict[str, Any]:
         prompt = (
             f"Candidate: {profile.get('candidate_name')}\n"
             f"Target: {profile.get('target')}, Timeline: {profile.get('timeline')}\n"
@@ -244,7 +244,7 @@ class MultiAgentDebateHarness:
         }
 
     # ── Persona 3: Ethics-Reviewer ──────────────────────────────────────────
-    def _run_ethics_persona(self, profile: Dict[str, Any], planner_turn: Dict[str, Any], critic_turn: Dict[str, Any], evidence: List[Dict[str, Any]]) -> Dict[str, Any]:
+    def _run_ethics_persona(self, profile: dict[str, Any], planner_turn: dict[str, Any], critic_turn: dict[str, Any], evidence: list[dict[str, Any]]) -> dict[str, Any]:
         prompt = (
             f"Candidate: {profile.get('candidate_name')} ({profile.get('gender')})\n"
             f"College Tier: {profile.get('college_tier')}, Monthly Budget: {profile.get('budget')}\n"
@@ -290,19 +290,19 @@ class MultiAgentDebateHarness:
     # ── Moderator Synthesis & Human Override Gate ───────────────────────────
     def _run_moderator_synthesis(
         self,
-        candidate_profile: Dict[str, Any],
-        planner_turn: Dict[str, Any],
-        critic_turn: Dict[str, Any],
-        ethics_turn: Dict[str, Any],
-        dispute_tree: List[Dict[str, str]],
-        graph_violations: List[Dict[str, Any]],
-        recommended_curriculum: List[str],
-        retrieved_evidence: List[Dict[str, Any]],
-        uncertainty_metrics: Dict[str, Any],
-        user_override_weights: Optional[Dict[str, float]],
+        candidate_profile: dict[str, Any],
+        planner_turn: dict[str, Any],
+        critic_turn: dict[str, Any],
+        ethics_turn: dict[str, Any],
+        dispute_tree: list[dict[str, str]],
+        graph_violations: list[dict[str, Any]],
+        recommended_curriculum: list[str],
+        retrieved_evidence: list[dict[str, Any]],
+        uncertainty_metrics: dict[str, Any],
+        user_override_weights: dict[str, float] | None,
         gate_triggered: bool,
         force_override: bool
-    ) -> Dict[str, Any]:
+    ) -> dict[str, Any]:
         weights = user_override_weights or {"velocity": 0.33, "rigor": 0.33, "equity": 0.34}
         
         # Calculate balanced trade-off orientation
@@ -338,7 +338,7 @@ class MultiAgentDebateHarness:
         }
 
     # ── Helpers ─────────────────────────────────────────────────────────────
-    def _extract_skill_nodes(self, text: str, target: str) -> List[str]:
+    def _extract_skill_nodes(self, text: str, target: str) -> list[str]:
         found = []
         for node in career_graph.graph.nodes():
             clean = node.replace("_", " ").lower()
@@ -353,7 +353,7 @@ class MultiAgentDebateHarness:
                 found = ["Data_Structures", "Algorithms_Basics", "Backend_Frameworks"]
         return found
 
-    def _build_dispute_tree(self, planner: Dict[str, Any], critic: Dict[str, Any], ethics: Dict[str, Any]) -> List[Dict[str, str]]:
+    def _build_dispute_tree(self, planner: dict[str, Any], critic: dict[str, Any], ethics: dict[str, Any]) -> list[dict[str, str]]:
         return [
             {
                 "dimension": "Velocity vs Prerequisite Depth",
@@ -380,12 +380,12 @@ class MultiAgentDebateHarness:
 
     def _calculate_calibrated_uncertainty(
         self,
-        planner: Dict[str, Any],
-        critic: Dict[str, Any],
-        ethics: Dict[str, Any],
-        violations: List[Dict[str, Any]],
-        profile: Dict[str, Any]
-    ) -> Dict[str, Any]:
+        planner: dict[str, Any],
+        critic: dict[str, Any],
+        ethics: dict[str, Any],
+        violations: list[dict[str, Any]],
+        profile: dict[str, Any]
+    ) -> dict[str, Any]:
         # Epistemic friction component (0.0 to 0.4)
         friction = 0.35 if critic.get("risk_level") == "High" else 0.15
         

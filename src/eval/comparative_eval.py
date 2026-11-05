@@ -10,23 +10,22 @@ Evaluates 4 System Configurations across 20 Synthetic Candidate Profiles on 5 Gr
 """
 
 import json
-import math
 import os
 import sys
+from typing import Any
 
 # Ensure root directory is on python path
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
+from src.agents.multi_agent_harness import MultiAgentDebateHarness
 from src.graph.career_graph import career_graph
-from src.rag.vector_store import vector_store
-from src.agents.multi_agent_harness import MultiAgentDebateHarness, call_local_qwen
 
 DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "data")
 PROFILES_FILE = os.path.join(DATA_DIR, "synthetic_profiles.json")
 RESULTS_FILE = os.path.join(DATA_DIR, "eval_results.json")
 
 
-def load_synthetic_profiles() -> List[Dict[str, Any]]:
+def load_synthetic_profiles() -> list[dict[str, Any]]:
     with open(PROFILES_FILE, "r", encoding="utf-8") as f:
         return json.load(f)
 
@@ -38,7 +37,7 @@ class ComparativeEvaluator:
         self.harness = MultiAgentDebateHarness(model_name=model_name)
         self.profiles = load_synthetic_profiles()
 
-    def run_all_configurations(self) -> Dict[str, Any]:
+    def run_all_configurations(self) -> dict[str, Any]:
         """Runs the 4 configurations and compiles empirical results."""
         results = {
             "Config 1: Single LLM (Monolithic)": self._eval_config_1_single_llm(),
@@ -54,7 +53,7 @@ class ComparativeEvaluator:
         return results
 
     # ── Config 1: Single LLM (Monolithic) ───────────────────────────────────
-    def _eval_config_1_single_llm(self) -> Dict[str, Any]:
+    def _eval_config_1_single_llm(self) -> dict[str, Any]:
         profile_outputs = []
         total_violations = 0
         total_milestones = 0
@@ -137,7 +136,7 @@ class ComparativeEvaluator:
         }
 
     # ── Config 2: Single LLM (Multi-Perspective Prompt) ─────────────────────
-    def _eval_config_2_multi_perspective(self) -> Dict[str, Any]:
+    def _eval_config_2_multi_perspective(self) -> dict[str, Any]:
         total_violations = 0
         total_milestones = 0
         diversity_scores = []
@@ -205,7 +204,7 @@ class ComparativeEvaluator:
         }
 
     # ── Config 3: Unmoderated Debate (Triad Only) ───────────────────────────
-    def _eval_config_3_unmoderated_triad(self) -> Dict[str, Any]:
+    def _eval_config_3_unmoderated_triad(self) -> dict[str, Any]:
         total_violations = 0
         total_milestones = 0
         diversity_scores = []
@@ -273,7 +272,7 @@ class ComparativeEvaluator:
         }
 
     # ── Config 4: Proposed RAI Multi-Persona System ─────────────────────────
-    def _eval_config_4_proposed_system(self) -> Dict[str, Any]:
+    def _eval_config_4_proposed_system(self) -> dict[str, Any]:
         total_violations_post_gate = 0
         total_milestones = 0
         diversity_scores = []

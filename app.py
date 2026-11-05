@@ -15,17 +15,18 @@ Streamlit Web Application featuring:
 import json
 import os
 import sys
-import streamlit as st
+
 import pandas as pd
+import streamlit as st
 
 # Ensure root directory is on python path
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, ROOT_DIR)
 
-from src.graph.career_graph import career_graph, GRAPH_NODES, GRAPH_EDGES
-from src.rag.vector_store import vector_store
 from src.agents.multi_agent_harness import MultiAgentDebateHarness
 from src.eval.comparative_eval import load_synthetic_profiles
+from src.graph.career_graph import GRAPH_EDGES, GRAPH_NODES, career_graph
+from src.rag.vector_store import vector_store
 
 # Page Configuration
 st.set_page_config(
@@ -381,7 +382,7 @@ with tab3:
         all_p = career_graph.get_all_ancestor_prerequisites(selected_skill)
         st.write(f"**Direct Prerequisites for `{selected_skill}`:**")
         st.write(", ".join(direct_p) if direct_p else "None (Foundational Entry Node)")
-        st.write(f"**Full Ancestor Prerequisite Chain:**")
+        st.write("**Full Ancestor Prerequisite Chain:**")
         st.write(" ➔ ".join(all_p) if all_p else "None")
 
     with g_col2:

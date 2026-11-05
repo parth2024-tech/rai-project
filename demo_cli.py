@@ -9,10 +9,10 @@ Allows the student to interactively demonstrate the entire experimental setup to
 5. Review Real Metric Outputs (Prerequisite Errors, Coverage, Fairness)
 """
 
-import sys
 import time
-import json
+
 import networkx as nx
+
 
 # ── 1. Hand-Built Prerequisite Graph ─────────────────────────────────────────
 def get_graph():
@@ -97,7 +97,7 @@ def show_prereq_graph_explorer(G):
     for i, r in enumerate(roles, 1):
         print(f"  [{i}] {r}")
     print(f"  [{len(roles)+1}] Search Any Specific Skill Node")
-    print(f"  [0] Return to Main Menu")
+    print("  [0] Return to Main Menu")
 
     choice = input(f"\n{YELLOW}Select role/action (0-{len(roles)+1}): {RESET}").strip()
     if choice == "0":

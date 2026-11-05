@@ -8,8 +8,9 @@ Implements:
 - Neo4j Cypher query generation & official neo4j driver synchronization
 """
 
+from typing import Any
+
 import networkx as nx
-from typing import List, Dict, Tuple, Any, Optional
 
 # Node Definitions: 42 Nodes
 GRAPH_NODES = [
@@ -156,13 +157,13 @@ class CareerSkillGraph:
             self.graph.add_node(node["id"], **node)
         self.graph.add_edges_from(GRAPH_EDGES)
 
-    def get_prerequisites(self, skill: str) -> List[str]:
+    def get_prerequisites(self, skill: str) -> list[str]:
         """Returns direct prerequisites for a given skill."""
         if skill not in self.graph:
             return []
         return list(self.graph.predecessors(skill))
 
-    def get_all_ancestor_prerequisites(self, skill: str) -> List[str]:
+    def get_all_ancestor_prerequisites(self, skill: str) -> list[str]:
         """Returns all transitive prerequisite skills in topological order."""
         if skill not in self.graph:
             return []
@@ -172,7 +173,7 @@ class CareerSkillGraph:
         ordered = [n for n in nx.topological_sort(sub) if n != skill]
         return ordered
 
-    def check_prerequisites(self, existing_skills: List[str], proposed_milestones: List[str]) -> List[Dict[str, Any]]:
+    def check_prerequisites(self, existing_skills: list[str], proposed_milestones: list[str]) -> list[dict[str, Any]]:
         """
         Detects missing prerequisite violations.
         A violation occurs if a milestone M requires P, but P is neither in existing_skills
@@ -195,7 +196,7 @@ class CareerSkillGraph:
             known.add(milestone)
         return violations
 
-    def get_topological_curriculum(self, target_skills: List[str], existing_skills: List[str]) -> List[str]:
+    def get_topological_curriculum(self, target_skills: list[str], existing_skills: list[str]) -> list[str]:
         """Generates a strictly valid prerequisite-respecting curriculum sequence."""
         needed_nodes = set()
         for t in target_skills:
@@ -219,7 +220,7 @@ class CareerSkillGraph:
         # Nodes
         for n in GRAPH_NODES:
             cat = n["category"]
-            lbl = n["label"].replace("'", "\\'")
+            lbl = str(n["label"]).replace("'", "\\'")
             nid = n["id"]
             tier = n["tier"]
             lines.append(f"MERGE (s:Skill {{id: '{nid}'}}) SET s.name = '{lbl}', s.category = '{cat}', s.tier = {tier};")
@@ -232,7 +233,7 @@ class CareerSkillGraph:
             )
         return "\n".join(lines)
 
-    def sync_to_neo4j(self, uri: str = "bolt://localhost:7687", auth: Tuple[str, str] = ("neo4j", "password")) -> Dict[str, Any]:
+    def sync_to_neo4j(self, uri: str = "bolt://localhost:7687", auth: tuple[str, str] = ("neo4j", "password")) -> dict[str, Any]:
         """Attempts connection to Neo4j database using official driver."""
         try:
             from neo4j import GraphDatabase

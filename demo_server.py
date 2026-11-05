@@ -6,10 +6,8 @@ Allows student to demonstrate the experimental setup to faculty on localhost:800
 """
 
 import http.server
-import socketserver
 import json
-import os
-import networkx as nx
+import socketserver
 
 PORT = 8000
 
@@ -442,11 +440,11 @@ class CustomHandler(http.server.SimpleHTTPRequestHandler):
 def run_server():
     socketserver.TCPServer.allow_reuse_address = True
     with socketserver.TCPServer(("", PORT), CustomHandler) as httpd:
-        print(f"\n=======================================================")
-        print(f"EXPERIMENTAL SETUP DASHBOARD RUNNING!")
+        print("\n=======================================================")
+        print("EXPERIMENTAL SETUP DASHBOARD RUNNING!")
         print(f"URL to show Sir: http://localhost:{PORT}")
-        print(f"Press Ctrl+C to stop the server when done.")
-        print(f"=======================================================\n")
+        print("Press Ctrl+C to stop the server when done.")
+        print("=======================================================\n")
         try:
             httpd.serve_forever()
         except KeyboardInterrupt:

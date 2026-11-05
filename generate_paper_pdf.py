@@ -9,7 +9,6 @@ Zero awkward empty space on any page.
 
 import os
 import subprocess
-import sys
 
 HTML_PATH = "/home/thor/Desktop/RAI Project/docs/ACADEMIC_RESEARCH_PAPER.html"
 PDF_PATH = "/home/thor/Desktop/RAI Project/docs/ACADEMIC_RESEARCH_PAPER.pdf"
