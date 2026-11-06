@@ -131,11 +131,18 @@ class MultiAgentDebateHarness:
         return {
             "candidate_profile": candidate_profile,
             "retrieved_evidence": retrieved_evidence,
+            "evidence_retrieved": retrieved_evidence,
             "evidence_diversity": evidence_diversity,
             "planner_turn": planner_turn,
             "critic_turn": critic_turn,
             "ethics_turn": ethics_turn,
+            "persona_turns": {
+                "planner": planner_turn,
+                "critic": critic_turn,
+                "ethics_reviewer": ethics_turn
+            },
             "graph_violations": graph_violations,
+            "prerequisite_violations": graph_violations,
             "topological_curriculum": recommended_curriculum,
             "dispute_tree": dispute_tree,
             "uncertainty_metrics": uncertainty_metrics,
@@ -332,6 +339,7 @@ class MultiAgentDebateHarness:
             "weights_applied": weights,
             "synthesis": synthesis_text,
             "gate_status": "Overridden by Counselor/Student" if force_override else ("Gate Active: Review Required" if gate_triggered else "Autonomous Approval"),
+            "counselor_override_active": force_override or (user_override_weights is not None),
             "resolved_curriculum": recommended_curriculum,
             "resolved_objections_count": len(dispute_tree),
             "citations": [f"{e['title']} ({e['source']})" for e in retrieved_evidence[:3]]
@@ -353,27 +361,33 @@ class MultiAgentDebateHarness:
                 found = ["Data_Structures", "Algorithms_Basics", "Backend_Frameworks"]
         return found
 
-    def _build_dispute_tree(self, planner: dict[str, Any], critic: dict[str, Any], ethics: dict[str, Any]) -> list[dict[str, str]]:
+    def _build_dispute_tree(self, planner: dict[str, Any], critic: dict[str, Any], ethics: dict[str, Any]) -> list[dict[str, Any]]:
         return [
             {
+                "dispute_id": "D1",
                 "dimension": "Velocity vs Prerequisite Depth",
                 "planner_stance": "Rapid project shipping and portfolio building within target timeline.",
                 "critic_stance": "Strict mathematical and architectural foundations required to avoid screening failure.",
                 "ethics_stance": "Pacing must accommodate student mental health and hardware constraints.",
+                "severity": "High" if critic.get("risk_level") == "High" else "Medium",
                 "resolution": "Sequence 3-week micro-sprints on prerequisites immediately before building portfolio projects."
             },
             {
+                "dispute_id": "D2",
                 "dimension": "Commercial Credentials vs Free Open Courseware",
                 "planner_stance": "Proprietary cloud certs and fast-track bootcamps for industry visibility.",
                 "critic_stance": "Certifications without deep algorithmic problem solving are disregarded by top tier firms.",
                 "ethics_stance": "Zero debt mandate: Use MIT OCW, Harvard CS50, and Kaggle/Colab free compute tiers.",
+                "severity": "Medium",
                 "resolution": "Strictly utilize free public open courseware; demonstrate competence via public GitHub code."
             },
             {
+                "dispute_id": "D3",
                 "dimension": "Algorithmic Placement Bias vs Verifiable Competence",
                 "planner_stance": "Standard job portal applications and resume mass-distribution.",
                 "critic_stance": "Resume screens ruthlessly filter non-traditional candidates lacking pedigree.",
                 "ethics_stance": "Preserve student agency through alternative verification (open source contributions).",
+                "severity": "High",
                 "resolution": "Build 2 peer-reviewed open source pull requests to provide undeniable proof of capability."
             }
         ]
