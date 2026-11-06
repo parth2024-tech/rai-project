@@ -1,0 +1,55 @@
+name: RAI Benchmark Validation
+
+on:
+  push:
+    paths:
+      - 'src/**'
+      - 'data/**'
+      - 'run_study.py'
+      - '.github/workflows/benchmark.yml'
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  validate-benchmark:
+    name: Run Comparative Evaluation Benchmark
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Validate Synthetic Profiles and Prerequisite DAG
+        run: |
+          python -c "
+          import json
+          from src.graph.career_graph import career_graph
+          assert len(career_graph.graph.nodes) == 42, 'Graph node count mismatch'
+          with open('data/synthetic_profiles.json') as f:
+              profiles = json.load(f)
+              assert len(profiles) == 20, 'Expected 20 synthetic candidate profiles'
+          print('Pre-benchmark integrity assertions passed.')
+          "
+
+      - name: Run Evaluation Benchmark
+        run: python run_study.py
+
+      - name: Verify Benchmark Output
+        run: |
+          python -c "
+          import json
+          with open('data/eval_results.json') as f:
+              data = json.load(f)
+              assert len(data) == 4, 'Expected 4 benchmark configurations'
+          print('Benchmark evaluation completed and verified.')
+          "

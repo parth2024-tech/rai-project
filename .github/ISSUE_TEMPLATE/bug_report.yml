@@ -1,0 +1,29 @@
+name: Bug Report
+description: Report an issue, hallucination, or unexpected behavior in the career guidance system
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for helping improve the Debate-Based Career Guidance Agent!
+  - type: input
+    id: candidate_profile
+    attributes:
+      label: Candidate Profile Archetype
+      description: Which synthetic profile or target role triggered the behavior?
+      placeholder: e.g., Profile 01 (Arjun Patel, AI Engineer Pivot)
+    validations:
+      required: true
+  - type: textarea
+    id: expected_behavior
+    attributes:
+      label: Expected Behavior
+      description: What should the multi-agent debate or prerequisite DAG have produced?
+    validations:
+      required: true
+  - type: textarea
+    id: actual_behavior
+    attributes:
+      label: Actual Output / Error Trace
+      description: Paste the debate trace, uncertainty score, or stack trace.
+    validations:
+      required: true
