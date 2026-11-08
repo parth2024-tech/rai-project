@@ -16,7 +16,8 @@
     "Calibrated uncertainty estimation explicitly combining persona friction, prerequisite penalties, and socioeconomic risk",
     "Transparent Dispute Tree extraction exposing explicit contention forks",
     "Interactive Human Override panel allowing students and counselors to reweight priorities and approve roadmaps",
-    "Strict RAI counterfactual fairness evaluation across paired synthetic demographic profiles"
+    "Strict RAI counterfactual fairness evaluation across paired synthetic demographic profiles",
+    "Always start every task response with an explicit estimated completion time (e.g., \u23f1\ufe0f **Estimated Time**: ~X minutes)."
   ],
   "architecture_patterns": [
     "Multi-persona dialectic debate (Planner, Critic, Ethics-Reviewer, Moderator)",
