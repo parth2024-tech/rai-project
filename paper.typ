@@ -25,7 +25,7 @@
   margin: (x: 0.50in, top: 0.60in, bottom: 0.60in),
   header: align(center)[
     #text(size: 7.5pt, fill: rgb("#475569"), font: "Liberation Serif")[
-      *SRM INSTITUTE OF SCIENCE AND TECHNOLOGY --- DEPARTMENT OF COMPUTING TECHNOLOGIES --- RESPONSIBLE AI LAB*
+      *SRM INSTITUTE OF SCIENCE AND TECHNOLOGY --- SCHOOL OF COMPUTING --- 6TH SEMESTER CAPSTONE RESEARCH REVIEW*
     ]
     #line(length: 100%, stroke: 0.4pt + rgb("#94a3b8"))
   ],
@@ -104,29 +104,33 @@
     gutter: 12pt,
     [
       #text(weight: "bold", size: 10.5pt)[Gedela Rishikesh Reddy]\
-      #text(size: 8.5pt, fill: rgb("#334155"))[
+      #text(size: 8.2pt, fill: rgb("#334155"))[
         Dept. of Computing Technologies\
-        SRM Institute of Science & Technology\
-        Chennai, Tamil Nadu, India
+        School of Computing, SRMIST\
+        Kattankulathur, Chennai, India
       ]
     ],
     [
       #text(weight: "bold", size: 10.5pt)[Aniket Srivastava]\
-      #text(size: 8.5pt, fill: rgb("#334155"))[
+      #text(size: 8.2pt, fill: rgb("#334155"))[
         Dept. of Computing Technologies\
-        SRM Institute of Science & Technology\
-        Chennai, Tamil Nadu, India
+        School of Computing, SRMIST\
+        Kattankulathur, Chennai, India
       ]
     ],
     [
       #text(weight: "bold", size: 10.5pt)[Parth Gupta]\
-      #text(size: 8.5pt, fill: rgb("#334155"))[
+      #text(size: 8.2pt, fill: rgb("#334155"))[
         Dept. of Computing Technologies\
-        SRM Institute of Science & Technology\
-        Chennai, Tamil Nadu, India
+        School of Computing, SRMIST\
+        Kattankulathur, Chennai, India
       ]
     ],
   )
+  #v(0.04in)
+  #text(size: 8.2pt, style: "italic", fill: rgb("#475569"))[
+    Pre-Final Year (6th Semester) Capstone Research Project --- Academic Year 2026--2027
+  ]
   #v(0.15in)
 ]
 
@@ -161,7 +165,7 @@ Universities and technical colleges are increasingly deploying Large Language Mo
 3. *Conversational Sycophancy:* Reinforcement Learning from Human Feedback (RLHF) strongly incentivizes models to affirm user ambitions regardless of feasibility @sharma2024sycophancy, flattering students into high-risk career leaps without structural readiness.
 4. *Demographic Steering:* Pre-trained embeddings subtly correlate prestige career trajectories with Tier-1 metropolitan institutes and male identity cues, while steering rural or Tier-3 candidates toward truncated, low-ceiling support roles @garg2019counterfactual.
 
-Spot-checking a handful of career roadmaps cannot establish whether an assistant is reliable, nor whether a prompt revision improves or degrades systemic safety. 
+While modern autoregressive foundation models based on the Transformer architecture @vaswani2017attention, including proprietary engines such as GPT-4 @openai2023gpt4 and open weights such as Llama 2 @touvron2023llama, demonstrate competitive reasoning across standardized multitask benchmarks @hendrycks2021measuring, comprehensive surveys @zhao2023survey, @min2023recent reveal that unconstrained decoders systematically hallucinate prerequisite dependencies and exhibit severe conversational sycophancy. Spot-checking a handful of career roadmaps cannot establish whether an assistant is reliable, nor whether a prompt revision improves or degrades systemic safety. 
 
 This work introduces a *reusable, fully local multi-persona evaluation lab* for student career guidance. The system executes entirely on consumer hardware (single laptop, RTX 3050 / CPU fallback) ensuring that sensitive student records never leave the local machine. Our primary contributions are:
 
@@ -214,6 +218,40 @@ If $Delta_("prereq") > 0$ or $U_("cal") >= 0.45$, the system refuses to emit an 
 3. *Algorithmic Pedigree Bias vs. Verifiable Artifacts:* Campus placement networks vs. peer-reviewed open-source pull requests.
 
 Students or counselors adjust optimization weights (Velocity vs. Rigor vs. Equity) via interactive Streamlit sliders or enact manual overrides.
+
+#align(center)[
+  #block(
+    stroke: 0.6pt + rgb("#cbd5e1"),
+    inset: (x: 7pt, y: 6pt),
+    radius: 3pt,
+    fill: rgb("#f8fafc"),
+    width: 100%,
+  )[
+    #set text(size: 7.2pt, font: ("Liberation Mono", "DejaVu Sans Mono"))
+    #set par(first-line-indent: 0pt, justify: false, leading: 0.38em)
+    #align(left)[
+      *Algorithm 1: Dialectic Deliberation and Cognitive Forcing Protocol* \
+      #line(length: 100%, stroke: 0.5pt + black)
+      *Input:* Candidate $P_i = (S_("curr"), tau, B, T)$, 42-node DAG $G=(V, E)$, Vector store $cal(V)$ \
+      *Output:* Verified Roadmap $cal(R)^*$, Uncertainty $U_("cal")$, Gate Status $G_("status")$ \
+      1: $D arrow.l cal(V)."retrieve"(tau, "top_k"=4)$ \
+      2: $m_("plan") arrow.l pi_("Planner")(P_i, D)$ \
+      3: $c_("crit") arrow.l pi_("Critic")(P_i, m_("plan"), D)$ \
+      4: $e_("eth") arrow.l pi_("Ethics")(P_i, m_("plan"), c_("crit"), D)$ \
+      5: $Delta_("prereq") arrow.l "CheckDAGReachability"(G, S_("curr"), m_("plan"))$ \
+      6: $cal(T)_("disp") arrow.l "BuildDisputeTree"(m_("plan"), c_("crit"), e_("eth"))$ \
+      7: $U_("cal") arrow.l w_1 F(c_("crit")) + w_2 Delta_("prereq") + w_3 R_("socio") + w_4 R_("time")$ \
+      8: *if* $U_("cal") >= 0.45$ *or* $Delta_("prereq") > 0$ *then* \
+      9: $quad$ $G_("status") arrow.l "TRIGGERED"$; "SurfaceDisputeTree"$(cal(T)_("disp"))$ \
+      10: $quad$ $cal(R)^* arrow.l "HumanCounselorOverride"(P_i, cal(T)_("disp"))$ \
+      11: *else* \
+      12: $quad$ $G_("status") arrow.l "AUTONOMOUS"$; $cal(R)^* arrow.l "Synthesize"(m_("plan"), c_("crit"), e_("eth"))$ \
+      13: *end if* \
+      14: *return* $(cal(R)^*, U_("cal"), G_("status"))$ \
+      #line(length: 100%, stroke: 0.5pt + black)
+    ]
+  ]
+]
 
 #align(center)[
   #block(
@@ -324,7 +362,7 @@ Target: $Delta_("dem") <= 0.10$ ($J >= 0.90$).
 *5. User-Rubric Score:* Standardized academic evaluation on a 1.0 to 5.0 scale scored across 5 dimensions: Balance, Rigor, Equity, Disagreement Transparency, and Override Feasibility. Target: $>= 4.0 / 5.0$.
 
 == C. Hybrid Scoring Design
-A pilot study demonstrated that prompting an open-ended 7B LLM judge was unreliable ($kappa = 0.12$): the judge frequently penalized valid supplementary electives. We therefore implemented a hybrid design:
+While LLM-as-a-judge approaches have gained popularity for open-domain instruction following @zheng2023judging, our empirical pilot demonstrated that prompting an open-ended 7B LLM judge was unreliable ($kappa = 0.12$): the judge frequently penalized valid supplementary electives. We therefore implemented a hybrid design:
 - Prerequisite validity is scored deterministically by traversing the 42-node graph.
 - Contradiction resolution uses the judge for a narrow categorical query: did the Moderator resolve the specific objection raised by the Critic or Ethics-Reviewer?
 - Demographic parity is computed via exact string-set Jaccard intersection.
@@ -531,7 +569,7 @@ Validating our automated judge against human counselor labels confirmed gate rel
 
 = Acknowledgment
 
-The authors thank the Department of Computing Technologies, SRM Institute of Science and Technology, for providing the local GPU and computing infrastructure. We express our gratitude to the academic career counselors and student advisors whose blinded evaluations and rubric validation made this empirical study possible.
+The authors express sincere gratitude to our Project Supervisor and the faculty review committee of the Department of Computing Technologies, School of Computing, SRM Institute of Science and Technology, for their technical mentorship, methodological critique, and continuous evaluation throughout this pre-final year (6th-semester) capstone research project. We also thank the academic career counselors and student advisors whose blinded evaluations and rubric validation made this empirical study possible.
 
 // ------------------------------------------------------------------------------
 // REFERENCES (Natively rendered via IEEE bibliography engine)

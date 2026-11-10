@@ -17,7 +17,7 @@
     "Transparent Dispute Tree extraction exposing explicit contention forks",
     "Interactive Human Override panel allowing students and counselors to reweight priorities and approve roadmaps",
     "Strict RAI counterfactual fairness evaluation across paired synthetic demographic profiles",
-    "Always start every task response with an explicit estimated completion time (e.g., \u23f1\ufe0f **Estimated Time**: ~X minutes)."
+    "Always start every task response with an explicit estimated completion time (e.g., ⏱️ **Estimated Time**: ~X minutes)."
   ],
   "architecture_patterns": [
     "Multi-persona dialectic debate (Planner, Critic, Ethics-Reviewer, Moderator)",
@@ -58,11 +58,22 @@
     "Never drop unresolved ethical, financial, or prerequisite contradictions from the final synthesis",
     "Never emit uncalibrated 100% confidence career trajectories",
     "Never suppress human override or force autonomous career decisions",
-    "Never produce hallucinated career shortcuts without prerequisite graph verification"
+    "Never produce hallucinated career shortcuts without prerequisite graph verification",
+    "Never commit or push code without passing gitleaks protect --staged secret audit",
+    "Never rely on fragile regex linters when ast-grep (sg) AST rules can be enforced",
+    "Never output verbose unsolicited recaps, exhaustive changelogs, or repetitive summaries that waste tokens — mention ONLY the most critical points unless explicitly asked"
   ],
   "preferred_patterns": [
     "Practice extreme token economy: dense, high-signal, academic-grade rigor",
     "Structured JSON output schemas for all agent debate turns",
-    "Deterministic graph verification coupled with grounded vector retrieval"
+    "Deterministic graph verification coupled with grounded vector retrieval",
+    "Use gitleaks (gitleaks protect --staged) for zero secret leakage verification before committing or pushing",
+    "Use ast-grep (sg scan) for structural AST-level syntax rules rather than regex linters",
+    "Use just (justfile) for deterministic project verification and task runs",
+    "Use adr-tools (adr new) and D2 (d2) for all architectural decision records and C4 system diagrams",
+    "Use TypeSpec (tsp compile) for contract-first API development and OpenAPI 3.1 generation",
+    "Use vl-convert (vl-convert vl2svg) and Typst CeTZ for declarative standalone vector charts",
+    "Use Typst (typst compile) exclusively for any research paper or scientific document",
+    "Practice extreme token economy: keep responses concise, high-signal, and directly answer user requests without unprompted changelogs or filler"
   ]
 }
