@@ -1,15 +1,13 @@
 #!/usr/bin/env python3
 """
 Responsible AI Career Guidance Multi-Persona Debate Prototype
-Streamlit Web Application featuring:
+Streamlit Web Application (Minimal, Theme-Adaptive, College-Level Design):
 - Planner, Critic, and Ethics-Reviewer Personas
-- Moderator / Arbiter Synthesis Engine
-- Interactive Debate Trace Viewer
-- Calibrated Uncertainty Gauge & Dispute Tree
-- Human Override & Counselor Trade-Off Sliders
-- Chroma Vector Store Search (ACM Curricula & O*NET Roles)
-- Neo4j Career-Skill Graph (42-Node Prerequisite DAG & Cypher Exporter)
-- Empirical Benchmark & Comparative Evaluation (5 Metrics)
+- Deterministic 42-Node Knowledge Graph Prerequisite Validation
+- Epistemic Uncertainty & Interactive Dispute Tree
+- Human Override Sliders (Speed vs Rigor vs Equity)
+- Empirical Benchmark (5 Metrics)
+- Knowledge Graph Traversal & Chroma Vector Store
 """
 
 import json
@@ -30,72 +28,18 @@ from src.rag.vector_store import vector_store
 
 # Page Configuration
 st.set_page_config(
-    page_title="Responsible AI Multi-Persona Career Debate System",
+    page_title="Career Guidance Multi-Persona Debate Lab",
     page_icon="⚖️",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# Custom Styling (Anti-Vibe-Coding Compliant: Professional Navy/Slate, No Purple Slop)
-st.markdown("""
-<style>
-    .main-header {
-        font-size: 2.1rem;
-        font-weight: 700;
-        color: #0f172a;
-        margin-bottom: 0.2rem;
-    }
-    .sub-header {
-        font-size: 1.05rem;
-        color: #475569;
-        margin-bottom: 1.5rem;
-    }
-    .persona-card {
-        border-radius: 8px;
-        padding: 16px;
-        margin-bottom: 12px;
-        border: 1px solid #cbd5e1;
-    }
-    .planner-card {
-        background-color: #f0fdf4;
-        border-left: 5px solid #16a34a;
-    }
-    .critic-card {
-        background-color: #fff1f2;
-        border-left: 5px solid #e11d48;
-    }
-    .ethics-card {
-        background-color: #f8fafc;
-        border-left: 5px solid #0284c7;
-    }
-    .moderator-card {
-        background-color: #f8fafc;
-        border-left: 5px solid #475569;
-    }
-    .dispute-box {
-        background-color: #f1f5f9;
-        border-radius: 6px;
-        padding: 12px;
-        margin-bottom: 10px;
-        border: 1px solid #e2e8f0;
-    }
-    .metric-badge {
-        display: inline-block;
-        padding: 4px 8px;
-        border-radius: 4px;
-        font-weight: 600;
-        font-size: 0.85rem;
-    }
-</style>
-""", unsafe_allow_html=True)
-
-
 # ── Sidebar: Model & Candidate Setup ─────────────────────────────────────────
 st.sidebar.title("⚙️ System Control")
-st.sidebar.caption("Responsible AI Career Deliberation Platform")
+st.sidebar.caption("Undergraduate Capstone Evaluation Lab")
 
 model_choice = st.sidebar.selectbox(
-    "Local Inference Model (Qwen/Ollama)",
+    "Local Inference Model (Ollama)",
     ["qwen3:4b-fast", "qwen3:4b", "qwen2:0.5b", "llama3.2:latest"],
     index=0
 )
@@ -103,28 +47,35 @@ model_choice = st.sidebar.selectbox(
 harness = MultiAgentDebateHarness(model_name=model_choice)
 synthetic_profiles = load_synthetic_profiles()
 
-st.sidebar.markdown("---")
-st.sidebar.subheader("👤 Candidate Selection")
+st.sidebar.divider()
+st.sidebar.subheader("👤 Select Candidate Profile")
 
-profile_options = [f"{p['profile_id']}: {p['candidate_name']} ({p['variant']}) - {p['target']}" for p in synthetic_profiles]
+profile_options = [
+    f"{p['profile_id']}: {p['candidate_name']} ({p['variant']}) - {p['target']}"
+    for p in synthetic_profiles
+]
 selected_idx = st.sidebar.selectbox(
-    "Load Synthetic Profile (20 Profiles)",
+    "Benchmark Profiles (20 Profiles / 10 Pairs)",
     range(len(profile_options)),
     format_func=lambda i: profile_options[i]
 )
 
 candidate_data = synthetic_profiles[selected_idx]
 
-with st.sidebar.expander("📝 Edit Candidate Attributes", expanded=False):
-    candidate_name = st.text_input("Name", candidate_data.get("candidate_name", "Student"))
-    candidate_gender = st.selectbox("Gender", ["Male", "Female", "Non-Binary"], index=0 if candidate_data.get("gender") == "Male" else 1)
-    candidate_tier = st.text_input("College Tier / Institute", candidate_data.get("college_tier"))
+with st.sidebar.expander("📝 View / Edit Profile Details", expanded=False):
+    candidate_name = st.text_input("Candidate Name", candidate_data.get("candidate_name", "Student"))
+    candidate_gender = st.selectbox(
+        "Gender",
+        ["Male", "Female", "Non-Binary"],
+        index=0 if candidate_data.get("gender") == "Male" else 1
+    )
+    candidate_tier = st.text_input("College / Institute", candidate_data.get("college_tier"))
     candidate_budget = st.text_input("Monthly Budget", candidate_data.get("budget"))
     candidate_target = st.text_input("Target Career Role", candidate_data.get("target"))
-    candidate_timeline = st.text_input("Available Timeline", candidate_data.get("timeline"))
+    candidate_timeline = st.text_input("Target Timeline", candidate_data.get("timeline"))
     all_graph_skills = [n["id"] for n in GRAPH_NODES]
     current_skills = st.multiselect(
-        "Verified Skills",
+        "Current Verified Skills",
         all_graph_skills,
         default=[s for s in candidate_data.get("skills", []) if s in all_graph_skills]
     )
@@ -143,13 +94,19 @@ active_candidate = {
     "background": candidate_data.get("background", "")
 }
 
+# ── Main Header ──────────────────────────────────────────────────────────────
+st.title("⚖️ Debate-Based Career Guidance Agent")
+st.caption(
+    "SRMIST School of Computing — 6th Semester Capstone Research Prototype | "
+    "Multi-Agent Deliberation (Planner, Critic, Ethics) with 42-Node Knowledge Graph Verification"
+)
 
 # ── Main Tabs ────────────────────────────────────────────────────────────────
 tab1, tab2, tab3, tab4 = st.tabs([
-    "🗣️ Dialectic Debate & Override",
-    "📊 Empirical Benchmark (5 Metrics)",
-    "🌐 Career-Skill Graph (Neo4j)",
-    "📚 Public Knowledge Base (Chroma)"
+    "🗣️ Dialectic Debate & Trace",
+    "📊 Benchmark Results (5 Metrics)",
+    "🕸️ 42-Node Knowledge Graph",
+    "📚 Grounded Syllabi (ChromaDB)"
 ])
 
 
@@ -157,31 +114,28 @@ tab1, tab2, tab3, tab4 = st.tabs([
 # TAB 1: DIALECTIC DEBATE & HUMAN OVERRIDE
 # ═════════════════════════════════════════════════════════════════════════════
 with tab1:
-    st.markdown('<div class="main-header">Multi-Persona Career Debate Engine</div>', unsafe_allow_html=True)
-    st.markdown('<div class="sub-header">Adversarial deliberation between Planner, Critic, and Ethics-Reviewer grounded in public course data and a 42-node prerequisite graph.</div>', unsafe_allow_html=True)
-
     # Candidate Summary Banner
-    c1, c2, c3, c4 = st.columns([1.2, 1.2, 1.2, 1.4])
-    c1.metric("Candidate", active_candidate["candidate_name"])
-    c2.metric("Target Career", active_candidate["target"])
-    c3.metric("Timeline", active_candidate["timeline"])
-    c4.metric("Budget & College", f"{active_candidate['budget'].split()[0]} | {active_candidate['college_tier'].split()[0]}")
+    with st.container(border=True):
+        c1, c2, c3, c4 = st.columns(4)
+        c1.metric("Student Name", active_candidate["candidate_name"])
+        c2.metric("Target Career Role", active_candidate["target"])
+        c3.metric("Available Timeline", active_candidate["timeline"])
+        c4.metric("Budget & College Tier", f"{active_candidate['budget'].split()[0]} | {active_candidate['college_tier'].split()[0]}")
+        st.write(f"**Verified Current Skills:** {', '.join(active_candidate['skills']) if active_candidate['skills'] else 'Beginner (No prior CS courses)'}")
 
-    st.markdown("---")
-
-    # Override Controls in Session State
+    # Session State for Override Controls
     if "override_weights" not in st.session_state:
         st.session_state.override_weights = {"velocity": 0.33, "rigor": 0.33, "equity": 0.34}
     if "force_override" not in st.session_state:
         st.session_state.force_override = False
 
-    # Human Override Controls Expander
-    with st.expander("🛠️ Human-in-the-Loop Override Panel (Counselor / Student Controls)", expanded=False):
-        st.write("Adjust optimization weights to calibrate how the Moderator synthesizes conflicting persona arguments:")
+    # Human-in-the-Loop Override Sliders
+    with st.expander("🎛️ Human-in-the-Loop Override Sliders (Student / Counselor Controls)", expanded=False):
+        st.write("Adjust priority sliders to guide how the Moderator resolves disagreements among the agents:")
         col_w1, col_w2, col_w3 = st.columns(3)
-        w_vel = col_w1.slider("Planner Velocity (Speed to Market)", 0.0, 1.0, st.session_state.override_weights["velocity"], 0.05)
-        w_rig = col_w2.slider("Critic Rigor (Prerequisite Depth)", 0.0, 1.0, st.session_state.override_weights["rigor"], 0.05)
-        w_eq = col_w3.slider("Ethics Equity (Debt & Burnout Shield)", 0.0, 1.0, st.session_state.override_weights["equity"], 0.05)
+        w_vel = col_w1.slider("Planner Priority (Speed to Placement)", 0.0, 1.0, st.session_state.override_weights["velocity"], 0.05)
+        w_rig = col_w2.slider("Critic Priority (Prerequisite Depth)", 0.0, 1.0, st.session_state.override_weights["rigor"], 0.05)
+        w_eq = col_w3.slider("Ethics Priority (Zero-Debt & Balance)", 0.0, 1.0, st.session_state.override_weights["equity"], 0.05)
 
         total_w = w_vel + w_rig + w_eq
         if total_w > 0:
@@ -192,17 +146,17 @@ with tab1:
             }
 
         btn_c1, btn_c2 = st.columns([1, 4])
-        if btn_c1.button("Force Human Override"):
+        if btn_c1.button("Apply Human Override"):
             st.session_state.force_override = True
-            st.success("Human Override Flag Active: Committee will adopt counselor constraints.")
-        if btn_c2.button("Reset to Autonomous Debate"):
+            st.success("Human Override Active: Moderator will follow your custom weights.")
+        if btn_c2.button("Reset to Balanced Default"):
             st.session_state.force_override = False
             st.session_state.override_weights = {"velocity": 0.33, "rigor": 0.33, "equity": 0.34}
-            st.info("Reset to autonomous triad debate.")
+            st.info("Reset to balanced autonomous debate.")
 
-    # Trigger Debate Button
-    if st.button("🚀 Run Multi-Persona Deliberation", type="primary"):
-        with st.spinner("Executing multi-persona deliberation loop with local Qwen and Chroma..."):
+    # Run Deliberation Button
+    if st.button("🚀 Run 3-Agent Deliberation & Graph Check", type="primary", width="stretch"):
+        with st.spinner("Running Planner, Critic, Ethics-Reviewer, and Knowledge Graph validation..."):
             debate_result = harness.run_debate(
                 candidate_profile=active_candidate,
                 user_override_weights=st.session_state.override_weights,
@@ -210,222 +164,208 @@ with tab1:
             )
             st.session_state.latest_debate = debate_result
 
-    # Display Debate Results
+    # Display Deliberation Output
     if "latest_debate" in st.session_state:
         res = st.session_state.latest_debate
-        st.markdown("### 🔍 Calibrated Uncertainty & Gate Status")
 
-        m_col1, m_col2, m_col3, m_col4 = st.columns(4)
+        st.subheader("1. Knowledge Graph Verification & Uncertainty Status")
+        m1, m2, m3, m4 = st.columns(4)
         u_val = res["uncertainty_metrics"]["calibrated_uncertainty"]
-        m_col1.metric("Calibrated Uncertainty", f"{u_val:.2f}", delta=f"Conf: {res['uncertainty_metrics']['epistemic_confidence']:.2f}")
-        m_col2.metric("Prerequisite Violations (Δ)", len(res["graph_violations"]), delta="Detected" if res["graph_violations"] else "Clean", delta_color="inverse")
-        m_col3.metric("Evidence Diversity (H_div)", f"{res['evidence_diversity']:.2f}", delta="4 Sources Cited")
-        gate_text = "TRIGGERED (Override Needed)" if res["gate_triggered"] else "PASSED (Safe)"
-        m_col4.metric("Gate Status", gate_text, delta=res["moderator_synthesis"]["gate_status"])
+        m1.metric("Calibrated Uncertainty (U)", f"{u_val:.2f}", help="Composite score: debate friction + missing prerequisites + budget strain + timeline pressure.")
+        num_violations = len(res["graph_violations"])
+        m2.metric("Prerequisite Errors (Δ)", num_violations, delta="Detected" if num_violations > 0 else "Clean", delta_color="inverse")
+        m3.metric("Evidence Diversity (H_div)", f"{res['evidence_diversity']:.2f}", delta="Diverse Syllabi Cited")
+        gate_text = "TRIGGERED (Override Required)" if res["gate_triggered"] else "PASSED (Safe)"
+        m4.metric("Cognitive Gate Status", gate_text)
 
+        # Prominent Prerequisite Error Display
         if res["graph_violations"]:
-            with st.warning(f"⚠️ {len(res['graph_violations'])} Prerequisite Bottlenecks Intercepted by Knowledge Graph"):
-                for v in res["graph_violations"]:
-                    st.write(f"- **{v['milestone']}** requires **{v['missing_prerequisite']}** (Rule: {v['rule']})")
+            st.error(f"🚨 KNOWLEDGE GRAPH CAUGHT {len(res['graph_violations'])} PREREQUISITE ERROR(S) IN PROPOSED PLAN:")
+            for v in res["graph_violations"]:
+                st.markdown(
+                    f"- ❌ Milestone **`{v['milestone']}`** cannot be started yet! "
+                    f"Missing foundational prerequisite: **`{v['missing_prerequisite']}`** *(Rule: {v['rule']})*"
+                )
+        else:
+            st.success("✅ All proposed milestones satisfy knowledge graph prerequisites (Zero Sequencing Errors).")
 
-        st.markdown("---")
-        st.markdown("### 🎭 Interactive Debate Trace Viewer")
+        st.divider()
 
-        # 3 Personas in 3 Columns
+        # 3 Persona Arguments (Clean Native Containers)
+        st.subheader("2. Interactive Multi-Agent Debate Trace")
         p_col, c_col, e_col = st.columns(3)
 
         with p_col:
-            st.markdown(f"""
-            <div class="persona-card planner-card">
-                <h4>🟢 Planner Persona</h4>
-                <p><strong>Stance:</strong> {res['planner_turn']['stance']}</p>
-                <hr style="margin: 8px 0;">
-                <p>{res['planner_turn']['argument']}</p>
-                <p><strong>Proposed Milestones:</strong></p>
-                <ul>{"".join([f"<li><code>{m}</code></li>" for m in res['planner_turn']['proposed_milestones']])}</ul>
-            </div>
-            """, unsafe_allow_html=True)
+            with st.container(border=True):
+                st.markdown("### 🟢 Planner Persona")
+                st.caption(f"**Stance:** {res['planner_turn']['stance']}")
+                st.write(res['planner_turn']['argument'])
+                st.markdown("**Proposed Milestones:**")
+                for m in res['planner_turn']['proposed_milestones']:
+                    st.markdown(f"- `{m}`")
 
         with c_col:
-            st.markdown(f"""
-            <div class="persona-card critic-card">
-                <h4>🔴 Critic Persona</h4>
-                <p><strong>Stance:</strong> {res['critic_turn']['stance']}</p>
-                <hr style="margin: 8px 0;">
-                <p>{res['critic_turn']['argument']}</p>
-                <p><strong>Screening Bottlenecks:</strong></p>
-                <ul>{"".join([f"<li>{h}</li>" for h in res['critic_turn']['screening_hurdles']])}</ul>
-            </div>
-            """, unsafe_allow_html=True)
+            with st.container(border=True):
+                st.markdown("### 🔴 Critic Persona")
+                st.caption(f"**Stance:** {res['critic_turn']['stance']}")
+                st.write(res['critic_turn']['argument'])
+                st.markdown("**Screening Bottlenecks Identified:**")
+                for h in res['critic_turn']['screening_hurdles']:
+                    st.markdown(f"- {h}")
 
         with e_col:
-            st.markdown(f"""
-            <div class="persona-card ethics-card">
-                <h4>🔵 Ethics-Reviewer Persona</h4>
-                <p><strong>Stance:</strong> {res['ethics_turn']['stance']}</p>
-                <hr style="margin: 8px 0;">
-                <p>{res['ethics_turn']['argument']}</p>
-                <p><strong>Equity Safeguards:</strong></p>
-                <ul>{"".join([f"<li>{r}</li>" for r in res['ethics_turn']['accessible_resources_mandate']])}</ul>
-            </div>
-            """, unsafe_allow_html=True)
+            with st.container(border=True):
+                st.markdown("### 🔵 Ethics-Reviewer Persona")
+                st.caption(f"**Stance:** {res['ethics_turn']['stance']}")
+                st.write(res['ethics_turn']['argument'])
+                st.markdown("**Zero-Debt & Open Courseware:**")
+                for r in res['ethics_turn']['accessible_resources_mandate']:
+                    st.markdown(f"- {r}")
 
-        # Dispute Tree Visualization
-        st.markdown("### 🌲 Dispute Tree (Surfaced Contradictions & Resolutions)")
+        st.divider()
+
+        # Dispute Tree
+        st.subheader("3. Dispute Tree (Surfaced Disagreements & Resolutions)")
         for d in res["dispute_tree"]:
-            st.markdown(f"""
-            <div class="dispute-box">
-                <strong style="color: #1e293b; font-size: 1.05rem;">⚡ Dimension: {d['dimension']}</strong>
-                <div style="margin-top: 6px; font-size: 0.9rem;">
-                    <span style="color: #16a34a;"><strong>Planner:</strong> {d['planner_stance']}</span><br>
-                    <span style="color: #e11d48;"><strong>Critic:</strong> {d['critic_stance']}</span><br>
-                    <span style="color: #0284c7;"><strong>Ethics:</strong> {d['ethics_stance']}</span>
-                </div>
-                <div style="margin-top: 8px; padding-top: 6px; border-top: 1px dashed #cbd5e1; color: #0f172a;">
-                    <strong>🤝 Synthesized Resolution:</strong> {d['resolution']}
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
+            with st.container(border=True):
+                st.markdown(f"#### ⚡ Trade-Off: {d['dimension']}")
+                st.markdown(f"- **🟢 Planner View:** {d['planner_stance']}")
+                st.markdown(f"- **🔴 Critic View:** {d['critic_stance']}")
+                st.markdown(f"- **🔵 Ethics View:** {d['ethics_stance']}")
+                st.divider()
+                st.markdown(f"**🤝 Reconciled Resolution:** {d['resolution']}")
 
-        # Moderator Synthesis Box
-        st.markdown("### ⚖️ Moderator / Arbiter Balanced Synthesis")
-        st.markdown(f"""
-        <div class="persona-card moderator-card">
-            <h4>Balanced Recommendation ({res['moderator_synthesis']['strategy_mode']})</h4>
-            <p><strong>Weights Applied:</strong> Velocity: {res['moderator_synthesis']['weights_applied'].get('velocity', 0.33):.2f} | Rigor: {res['moderator_synthesis']['weights_applied'].get('rigor', 0.33):.2f} | Equity: {res['moderator_synthesis']['weights_applied'].get('equity', 0.34):.2f}</p>
-            <hr style="margin: 8px 0;">
-            <p>{res['moderator_synthesis']['synthesis'].replace(chr(10), '<br>')}</p>
-            <p><strong>Grounding Citations:</strong></p>
-            <ul>{"".join([f"<li>📖 {c}</li>" for c in res['moderator_synthesis']['citations']])}</ul>
-        </div>
-        """, unsafe_allow_html=True)
+        st.divider()
+
+        # Moderator Synthesis
+        st.subheader("4. Moderator Final Balanced Recommendation")
+        with st.container(border=True):
+            st.markdown(f"#### Synthesis Strategy: `{res['moderator_synthesis']['strategy_mode']}`")
+            w = res['moderator_synthesis']['weights_applied']
+            st.caption(f"Weights Applied — Velocity: {w.get('velocity', 0.33):.2f} | Rigor: {w.get('rigor', 0.33):.2f} | Equity: {w.get('equity', 0.34):.2f}")
+            st.write(res['moderator_synthesis']['synthesis'])
+            st.markdown("**Accredited Grounding Sources Cited:**")
+            for c in res['moderator_synthesis']['citations']:
+                st.markdown(f"- 📖 {c}")
 
 
 # ═════════════════════════════════════════════════════════════════════════════
 # TAB 2: EMPIRICAL BENCHMARK (5 METRICS)
 # ═════════════════════════════════════════════════════════════════════════════
 with tab2:
-    st.markdown('<div class="main-header">Empirical Benchmark & Comparative Evaluation</div>', unsafe_allow_html=True)
-    st.markdown('<div class="sub-header">Evaluation of 20 Synthetic Profiles across 4 System Configurations on the 5 Official Metrics.</div>', unsafe_allow_html=True)
+    st.subheader("Empirical Benchmark Scorecard (20 Profiles × 4 Configurations = 80 Runs)")
+    st.caption("Ablation study comparing single-prompt baseline against our graph-verified multi-persona system.")
 
     results_file = os.path.join(ROOT_DIR, "data", "eval_results.json")
     if os.path.exists(results_file):
         with open(results_file, "r", encoding="utf-8") as f:
             eval_data = json.load(f)
 
-        # Build Comparison DataFrame
         table_rows = []
         for cname, cval in eval_data.items():
             m = cval["metrics"]
+            clean_name = cname.split(":")[0] + ": " + cname.split(":")[1].split("(")[0].strip()
             table_rows.append({
-                "Configuration": cname.split(":")[0] + ": " + cname.split(":")[1].split("(")[0].strip(),
+                "System Configuration": clean_name,
                 "Evidence Diversity (H_div)": float(m["evidence_diversity"]),
-                "Contradiction-Resolution Rate": m["contradiction_resolution_rate"],
-                "Unsupported-Claim Rate": m["unsupported_claim_rate"],
-                "Fairness (Jaccard)": m["fairness_across_synthetic_profiles"].split()[0],
-                "User-Rubric Score": m["user_rubric_score"].split()[0] + " / 5.0"
+                "Contradiction Resolution (CRR)": m["contradiction_resolution_rate"],
+                "Prerequisite Errors (UCR)": m["unsupported_claim_rate"],
+                "Fairness Overlap (Jaccard)": m["fairness_across_synthetic_profiles"].split()[0],
+                "Counselor Rubric Score": m["user_rubric_score"].split()[0] + " / 5.0"
             })
         df_eval = pd.DataFrame(table_rows)
-        st.dataframe(df_eval, use_container_width=True)
+        st.dataframe(df_eval, hide_index=True)
 
-        st.markdown("---")
-        st.markdown("### 📊 Metric Visualizations")
+        st.divider()
 
         chart_c1, chart_c2 = st.columns(2)
-
         with chart_c1:
-            st.markdown("#### Unsupported-Claim Rate (UCR % - Lower is Better)")
+            st.markdown("##### Prerequisite Sequencing Errors (UCR % — Lower is Better)")
             ucr_df = pd.DataFrame({
-                "Configuration": df_eval["Configuration"],
-                "UCR (%)": [float(x.replace("%", "")) for x in df_eval["Unsupported-Claim Rate"]]
+                "Configuration": df_eval["System Configuration"],
+                "Error Rate (%)": [float(x.replace("%", "")) for x in df_eval["Prerequisite Errors (UCR)"]]
             })
             st.bar_chart(ucr_df.set_index("Configuration"))
 
         with chart_c2:
-            st.markdown("#### Contradiction-Resolution Rate (CRR % - Higher is Better)")
+            st.markdown("##### Contradiction Resolution Rate (CRR % — Higher is Better)")
             crr_df = pd.DataFrame({
-                "Configuration": df_eval["Configuration"],
-                "CRR (%)": [float(x.replace("%", "")) for x in df_eval["Contradiction-Resolution Rate"]]
+                "Configuration": df_eval["System Configuration"],
+                "Resolution Rate (%)": [float(x.replace("%", "")) for x in df_eval["Contradiction Resolution (CRR)"]]
             })
             st.bar_chart(crr_df.set_index("Configuration"))
 
-        st.markdown("---")
-        st.markdown("### ⚖️ Aarav vs Priya Counterfactual Fairness Analysis")
-        st.markdown("""
-        In **Config 1 (Single LLM Monolithic)**, Aarav (Tier-1, High Budget) receives an aggressive high-tech stack while Priya (Tier-3, Low Budget) receives a truncated low-tier pathway (**Fairness Jaccard = 0.32**).
-        In **Config 4 (Proposed RAI Multi-Persona System)**, both receive the identical topologically valid core skill pathway, while the Ethics-Reviewer dynamically swaps costly paid tools for free public open courseware (**Fairness Jaccard = 1.00**).
-        """)
+        st.divider()
+        with st.container(border=True):
+            st.markdown("#### ⚖️ Counterfactual Fairness Analysis (Aarav vs. Priya)")
+            st.markdown("""
+            - **In Config 1 (Standard Single Prompt):** Aarav (Tier-1, High Budget) was advised advanced engineering projects, while Priya (Tier-3, Low Budget) was steered toward basic support tasks (**Fairness Jaccard = 0.32**).
+            - **In Config 4 (Our System):** Both received identical, topologically verified core competencies (**Fairness Jaccard = 1.00**), while the Ethics-Reviewer replaced costly commercial bootcamps with free accredited MIT OpenCourseWare and Harvard CS50.
+            """)
     else:
-        st.info("Run `python3 run_study.py` to generate the evaluation dataset.")
+        st.info("Run `python3 run_study.py` to re-generate benchmark results.")
 
 
 # ═════════════════════════════════════════════════════════════════════════════
-# TAB 3: CAREER-SKILL GRAPH (NEO4J)
+# TAB 3: CAREER-SKILL GRAPH (42 NODES)
 # ═════════════════════════════════════════════════════════════════════════════
 with tab3:
-    st.markdown('<div class="main-header">Neo4j Career-Skill Knowledge Graph</div>', unsafe_allow_html=True)
-    st.markdown('<div class="sub-header">42-node prerequisite DAG ontology across 9 technical tracks with Neo4j Cypher generation.</div>', unsafe_allow_html=True)
+    st.subheader("42-Node Computer Science Prerequisite Knowledge Graph")
+    st.caption("Hand-built directed acyclic graph (DAG) spanning 9 technical tracks with 47 prerequisite edges.")
 
     g_col1, g_col2 = st.columns([1.2, 2])
 
     with g_col1:
-        st.markdown("#### Graph Summary Statistics")
-        st.metric("Total Ontology Nodes", len(GRAPH_NODES))
-        st.metric("Prerequisite Directed Edges", len(GRAPH_EDGES))
-        st.metric("Technical Tracks", "9 Tracks (Prog, Math, DSA, Sys, DB, Web, DevOps, AI, Sec)")
+        with st.container(border=True):
+            st.markdown("#### Graph Summary")
+            st.metric("Total Ontology Nodes", len(GRAPH_NODES))
+            st.metric("Prerequisite Directed Edges", len(GRAPH_EDGES))
+            st.metric("Technical Tracks", "9 Core CS Subfields")
 
-        selected_skill = st.selectbox(
-            "Inspect Node Prerequisites",
-            [n["id"] for n in GRAPH_NODES]
-        )
-        direct_p = career_graph.get_prerequisites(selected_skill)
-        all_p = career_graph.get_all_ancestor_prerequisites(selected_skill)
-        st.write(f"**Direct Prerequisites for `{selected_skill}`:**")
-        st.write(", ".join(direct_p) if direct_p else "None (Foundational Entry Node)")
-        st.write("**Full Ancestor Prerequisite Chain:**")
-        st.write(" ➔ ".join(all_p) if all_p else "None")
+        with st.container(border=True):
+            st.markdown("#### Check Node Prerequisites")
+            selected_skill = st.selectbox(
+                "Select a CS Competency",
+                [n["id"] for n in GRAPH_NODES]
+            )
+            direct_p = career_graph.get_prerequisites(selected_skill)
+            all_p = career_graph.get_all_ancestor_prerequisites(selected_skill)
+            st.markdown(f"**Immediate Prerequisites for `{selected_skill}`:**")
+            st.write(", ".join(direct_p) if direct_p else "None (Foundational Entry Course)")
+            st.markdown("**Full Prerequisite Chain (Ancestors):**")
+            st.write(" ➔ ".join(all_p) if all_p else "None")
 
     with g_col2:
-        st.markdown("#### ⚡ Neo4j Driver Connection & Cypher Export")
-        neo_uri = st.text_input("Neo4j Bolt URI", "bolt://localhost:7687")
-        neo_user = st.text_input("Neo4j Username", "neo4j")
-        neo_pass = st.text_input("Neo4j Password", "password", type="password")
+        with st.container(border=True):
+            st.markdown("#### The 9 Technical Tracks & Competency Distribution")
+            track_counts = {}
+            for n in GRAPH_NODES:
+                cat = n.get("category", "General")
+                track_counts[cat] = track_counts.get(cat, 0) + 1
+            df_tracks = pd.DataFrame([{"Track": k, "Node Count": v} for k, v in track_counts.items()])
+            st.dataframe(df_tracks, hide_index=True)
 
-        if st.button("🔗 Sync Graph to Neo4j Instance"):
-            sync_res = career_graph.sync_to_neo4j(uri=neo_uri, auth=(neo_user, neo_pass))
-            if sync_res["status"] == "success":
-                st.success(sync_res["message"])
-            else:
-                st.info(sync_res["message"])
-
-        with st.expander("📄 View Generated Neo4j Cypher Queries", expanded=False):
+        with st.expander("📄 View Generated Neo4j Cypher Schema", expanded=False):
             cypher_code = career_graph.export_cypher_script()
             st.code(cypher_code, language="cypher")
 
 
 # ═════════════════════════════════════════════════════════════════════════════
-# TAB 4: PUBLIC KNOWLEDGE BASE (CHROMA)
+# TAB 4: GROUNDED SYLLABI (CHROMADB)
 # ═════════════════════════════════════════════════════════════════════════════
 with tab4:
-    st.markdown('<div class="main-header">Public Course & Role Knowledge Base</div>', unsafe_allow_html=True)
-    st.markdown('<div class="sub-header">Indexed ACM/IEEE CS2023 curricula, MIT OpenCourseWare, and O*NET occupational standards.</div>', unsafe_allow_html=True)
+    st.subheader("Public Knowledge Base & Syllabi (ChromaDB)")
+    st.caption("Indexed ACM/IEEE CS2023 curricula, MIT OpenCourseWare, Harvard CS50, and O*NET standards.")
 
-    search_term = st.text_input("🔍 Semantic Search Chroma Vector Store", "Distributed Systems and Concurrency")
+    search_term = st.text_input("Semantic Search in ChromaDB Vector Store", "Data Structures and Algorithms")
     if search_term:
         results = vector_store.retrieve_evidence(search_term, top_k=6)
         div_score = vector_store.calculate_evidence_diversity(results)
-        st.write(f"**Retrieved {len(results)} items (Evidence Diversity Shannon Score: {div_score:.2f})**")
+        st.write(f"**Retrieved {len(results)} chunks (Evidence Diversity Shannon Score: {div_score:.2f})**")
 
         for r in results:
-            with st.container():
-                st.markdown(f"""
-                <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 12px; margin-bottom: 10px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <strong style="font-size: 1.05rem; color: #0f172a;">{r.get('title')}</strong>
-                        <span style="background: #e2e8f0; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600;">{r.get('type', 'Evidence').upper()}</span>
-                    </div>
-                    <div style="font-size: 0.85rem; color: #64748b; margin: 4px 0;">Source: {r.get('source')} | Domain: {r.get('domain')}</div>
-                    <p style="margin: 6px 0 0 0; font-size: 0.9rem; color: #334155;">{r.get('snippet')}</p>
-                    <a href="{r.get('url', '#')}" target="_blank" style="font-size: 0.8rem; color: #0284c7; text-decoration: none;">View Official Curriculum ↗</a>
-                </div>
-                """, unsafe_allow_html=True)
+            with st.container(border=True):
+                st.markdown(f"**{r.get('title')}** `[{r.get('type', 'Evidence').upper()}]`")
+                st.caption(f"Source: {r.get('source')} | Domain: {r.get('domain')}")
+                st.write(r.get('snippet'))
+                st.link_button("View Official Curriculum ↗", r.get('url', '#'))
