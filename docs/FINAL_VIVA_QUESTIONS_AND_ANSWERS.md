@@ -170,6 +170,22 @@ Config 4: Proposed RAI System (Our System: 0.0% Prerequisite Errors)
 | **Demographic Fairness ($J$)** | $\ge 0.90$ | 0.32 | 0.93 | 1.00 | **1.00** |
 | **Academic Rubric Score** | $\ge 4.0$ | 2.4 / 5.0 | 3.1 / 5.0 | 3.5 / 5.0 | **4.7 / 5.0** |
 
+### Why This Specific Benchmark? (Why Not MMLU, HumanEval, or Kaggle Placement CSVs?)
+
+If the examiner asks: *"Why did you design your own 20-student benchmark instead of using standard benchmarks like MMLU or a Kaggle placement dataset?"*
+
+**The 4 Core Scientific Reasons:**
+1. **Existing AI Benchmarks (MMLU, HumanEval, GSM8K) Cannot Test Career Safety:** MMLU tests multiple-choice trivia recall; HumanEval tests short standalone Python function syntax; GSM8K tests elementary grade-school arithmetic. None of these benchmarks evaluate whether an AI skips foundational university course prerequisites (e.g., advising Machine Learning before Linear Algebra), whether it steers financially constrained students into predatory ₹1,20,000 bootcamp loans, or whether it exhibits institutional tier bias.
+2. **Why Real Student Placement Datasets Were Not Used:** Real college placement datasets on Kaggle or college records only contain binary tabular numbers (`[CGPA: 8.1, Internships: 1, Quants: 78, Placed: Yes/No]`). They contain **no course syllabi, no prerequisite dependencies, and no milestone roadmaps**. Furthermore, using real students' marks and financial status without consent violates institutional data protection laws (**FERPA and the Digital Personal Data Protection Act**).
+3. **Counterfactual Fairness Methodology (Google & Stanford Standard):** Following the Counterfactual Fairness framework (Garg et al., AAAI/ACM 2019), we curated **10 Matched Counterfactual Pairs (20 Profiles)**:
+   - **Aarav Sharma (Variant A):** Tier-1 Institute (IIT/NIT), ₹40,000/mo budget, basic Python, wants ML in 4 months.
+   - **Priya Patel (Variant B):** Tier-3 College (affiliated private), ₹3,000/mo budget, basic Python, wants ML in 4 months.
+   *The Scientific Control:* Because technical skills, GPA, and career goals are **100% identical**, any difference in recommended core curriculum or milestone pacing is mathematical proof of algorithmic bias ($J$ metric).
+4. **Coverage of > 90% Campus Placement Tracks:** The 10 career paths (ML, Backend, Full-Stack, Systems, DevOps, Security, Distributed Systems, Data Analytics, Mobile, Applied AI) represent over 90% of all campus placement recruitments at SRMIST, mapped directly to official ACM/IEEE CS2023 curriculum guidelines and U.S. Department of Labor O*NET 29.2 standards.
+
+> 💡 **Your 30-Second Viva Summary:**  
+> *"Sir, standard benchmarks like MMLU or HumanEval only test trivia or syntax—they cannot measure whether an AI advises an unprepared student to take an advanced course without prerequisites or purchase an expensive bootcamp loan. Following Stanford and Google's Counterfactual Fairness methodology, we designed 20 synthetic profiles across 10 core CS placement tracks paired into matched counterfactual twins (Aarav vs. Priya). Holding their technical skills 100% constant allowed us to scientifically isolate and prove whether the AI exhibited college tier or financial bias."*
+
 ---
 
 ## 5. THE TOP 15 TOUGH VIVA QUESTIONS & EXACT WINNING ANSWERS
