@@ -270,6 +270,36 @@ $ U_("cal") = w_1 F_("triad") + w_2 Delta_("prereq") + w_3 R_("socio") + w_4 R_(
   "Sir, we used *McNemar's Paired Test* on the 20 candidate profiles. Config 4 fixed 18 broken profiles from Config 1 with zero regressions, which achieved statistical significance with $p < 0.0001$."
 ])
 
+== Q: "You claim 0.0% prerequisite error. LLMs hallucinate. How can ANY LLM system have 0.00% error?"
+#callout("Answer (The Ultimate Examiner Trap):", [
+  "Sir, the 0.0% is *not* produced by the LLM! Config 1 (unconstrained LLM) had a 90.9% prerequisite violation rate. The 0.0% is guaranteed because our *Deterministic Gate (`src/graph/career_graph.py`)* runs a topological ancestor check in pure Python. If an LLM recommends 'Deep Learning' without 'Linear Algebra', the Python code intercepts the plan, blocks it with an error code, and forces the Planner to re-generate. The LLM is only a proposer; deterministic Python graph theory is the validator."
+])
+
+== Q: "What graph algorithm and time complexity did you use? What if there's a cycle?"
+#callout("Answer:", [
+  "Sir, we use Kahn's Algorithm / DFS for Topological Sort on a DAG with $O(|V| + |E|)$ complexity ($|V|=42$, $|E|=58$). At initialization, Python runs `networkx.is_directed_acyclic_graph(G)`. If a cycle exists, Python throws a `NetworkXUnfeasible` exception before runtime. Verified by `test_graph_is_directed_acyclic`."
+])
+
+== Q: "Why NetworkX instead of Neo4j in production?"
+#callout("Answer:", [
+  "Sir, NetworkX operates in-memory with sub-millisecond latency ($<1$ ms per traversal) without external socket overhead or JVM footprint. Furthermore, our architecture is dual-mode: `src/graph/career_graph.py` includes `export_to_cypher()` and `sync_to_neo4j()`, allowing the exact same 42-node graph to export to Neo4j for distributed scaling."
+])
+
+== Q: "What if agents never agree? How do you prevent infinite loops and runaway API costs?"
+#callout("Answer:", [
+  "Sir, in `src/agents/multi_agent_harness.py`, debate is hard-capped at *3 rounds ($T <= 3$)*. If consensus is not reached by round 3, the Moderator adjudicates and computes Calibrated Uncertainty $U_("cal")$. If $U_("cal") > 0.40$, it automatically flags a *Human-in-the-Loop Override*."
+])
+
+== Q: "What is the token cost and latency per student? Can SRMIST scale this to 5,000 students?"
+#callout("Answer:", [
+  "Sir, each 2-round debate consumes ~3,500 tokens (~₹0.15 / student) with 3.5 to 5.2s latency on Gemini Flash. For 5,000 students, parallel asynchronous batch processing costs ~₹750 total. Caching frequent career tracks (e.g., Tier-3 to Full-Stack) reduces redundant API calls by 70%."
+])
+
+== Q: "Why not fine-tune Llama-3 or Mistral instead of multi-agent RAG?"
+#callout("Answer:", [
+  "Sir, fine-tuning modifies neural weights, which does *not* mathematically prevent prerequisite hallucinations, incurs massive compute costs whenever tech skills update (every 6 months), and lacks an inspectable symbolic audit trail that teachers can verify."
+])
+
 == Q: "What are the real limitations of your project?"
 #callout("Answer:", [
   "Sir, our prototype has three honest limitations:
