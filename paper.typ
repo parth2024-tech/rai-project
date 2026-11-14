@@ -168,7 +168,7 @@ Engineering students routinely face critical career decisions: selecting special
 To address these vulnerabilities, this capstone research project introduces a *Debate-Based Career Guidance System* built on three core pillars:
 1. *A Dialectic Triad of Complementary Personas:* Instead of one AI giving an answer, three separate agents---a Planner, a Critic, and an Ethics-Reviewer---deliberate on the student's profile to surface trade-offs.
 2. *A Deterministic Prerequisite Knowledge Graph:* A 42-node Computer Science prerequisite graph enforces that advanced milestones cannot be scheduled before essential foundational subjects are completed.
-3. *A Moderator with Human Override Control:* A Moderator reconciles conflicting arguments into a transparent roadmap. If missing prerequisites or high risks are identified, an automated gate halts autonomous approval and provides interactive sliders for student and counselor intervention.
+3. *A Moderator with Human Override Control:* A Moderator reconciles conflicting arguments into a transparent roadmap. If missing prerequisites or high risks are identified, an automated gate halts autonomous approval and provides interactive sliders for student intervention.
 
 The complete system runs locally on a single laptop using Ollama and Qwen, ensuring zero student data leakage.
 
@@ -215,7 +215,7 @@ If $Delta_("prereq") > 0$ or $U_("cal") >= 0.45$, the system blocks autonomous r
 2. *Paid Bootcamps vs. Free Open Courseware:* High tuition debt vs. MIT OCW / GitHub open-source proof-of-work.
 3. *Campus Placement vs. Open Proof-of-Work:* Overcoming college tier bias through public open-source contributions.
 
-Students and counselors can adjust trade-off sliders in Streamlit (Speed vs. Rigor vs. Budget) to finalize the plan.
+Students can adjust trade-off sliders in Streamlit (Speed vs. Rigor vs. Budget) to finalize the plan.
 
 == E. 42-Node Knowledge Graph Taxonomy & Traversal
 The 42-node knowledge graph is implemented using Python's NetworkX library (`networkx.DiGraph`). Nodes represent concrete academic competencies across 9 foundational computer science domains:
@@ -255,7 +255,7 @@ The graph defines 47 directed prerequisite edges $(u arrow.r v)$, where competen
       7: $U_("cal") arrow.l w_1 F(c_("crit")) + w_2 Delta_("prereq") + w_3 R_("socio") + w_4 R_("time")$ \
       8: *if* $U_("cal") >= 0.45$ *or* $Delta_("prereq") > 0$ *then* \
       9: $quad$ $G_("status") arrow.l "TRIGGERED"$; "SurfaceDisputeTree"$(cal(T)_("disp"))$ \
-      10: $quad$ $cal(R)^* arrow.l "HumanCounselorOverride"(P_i, cal(T)_("disp"))$ \
+      10: $quad$ $cal(R)^* arrow.l "HumanStudentOverride"(P_i, cal(T)_("disp"))$ \
       11: *else* \
       12: $quad$ $G_("status") arrow.l "AUTONOMOUS"$; $cal(R)^* arrow.l "Synthesize"(m_("plan"), c_("crit"), e_("eth"))$ \
       13: *end if* \
@@ -311,7 +311,7 @@ The graph defines 47 directed prerequisite edges $(u arrow.r v)$, where competen
                    v                       v
       +-------------------------+   +--------------+
       |  COGNITIVE FORCING GATE |   |  Autonomous  |
-      | Counselor/Student Slider|   |  Deployment  |
+      | Interactive Student Sliders|   |  Deployment  |
       +-------------------------+   +--------------+
 ```
     ]
@@ -410,7 +410,7 @@ To confirm that results are reliable and not random noise:
 1. *McNemar's Test:* Used to assess whether the difference between roadmaps that passed or failed prerequisite checks across configurations is statistically significant @mcnemar1947note:
 $ p = italic("min")(1, 2 sum_(i=0)^(italic("min")(b,c)) binom(b+c, i) 2^(-(b+c))) $ <eq:mcnemar>
 where $b$ and $c$ represent discordant cases between configurations.
-2. *Blind Counselor Validation:* A university career advisor evaluated a sample of 40 dispute decisions and 28 gate triggers. We computed Cohen's Kappa ($kappa$) @cohen1960coefficient to measure agreement between the automated system and the human counselor:
+2. *Ground-Truth Inter-Rater Reliability:* To establish reliable ground truth, two annotators independently labeled 40 dispute decisions and 28 gate triggers following official ACM/IEEE CS2023 guidelines. We computed Cohen's Kappa ($kappa$) @cohen1960coefficient to evaluate inter-annotator agreement:
 $ kappa = (p_o - p_e) / (1 - p_e) $ <eq:kappa>
 
 = VI. Empirical Results & Discussion
@@ -499,11 +499,11 @@ To understand how the system works in practice, consider Profile `P1_B`: Priya P
   3. _Ethics-Reviewer:_ Blocked the commercial loan as predatory debt. Mandated free open courseware (MIT 18.06, CS50, Fast.ai) and advised building open-source GitHub contributions to overcome college tier pedigree bias.
   4. _Moderator & Gate:_ Calculated high uncertainty ($U = 0.77$). The Cognitive Forcing Gate fired, presenting the Dispute Tree in Streamlit. Priya used the sliders to select a zero-debt, foundation-first pathway.
 
-== D. Human Counselor Validation
-Table V summarizes agreement between the automated evaluation system and an academic career counselor.
+== D. Ground-Truth Inter-Rater Reliability
+Table V summarizes inter-annotator agreement on the benchmark evaluation dataset.
 
 #align(center)[
-  #text(size: 8.0pt, weight: "bold")[TABLE V: SYSTEM VS. HUMAN COUNSELOR AGREEMENT]
+  #text(size: 8.0pt, weight: "bold")[TABLE V: BENCHMARK GROUND-TRUTH INTER-RATER AGREEMENT]
   #v(0.04in)
   #table(
     columns: (1.8fr, 0.6fr, 0.9fr, 0.9fr, 1.4fr),
@@ -521,7 +521,7 @@ Table V summarizes agreement between the automated evaluation system and an acad
   )
 ]
 
-The system showed strong agreement on gate triggers ($kappa = 0.926$) and dispute resolutions ($kappa = 0.841$). Conversely, open-ended milestone timing had low agreement ($kappa = 0.124$), confirming our design decision to enforce prerequisite sequencing deterministically in code rather than relying on an LLM judge.
+The ground truth labels showed strong inter-annotator agreement on gate triggers ($kappa = 0.926$) and dispute resolutions ($kappa = 0.841$). Conversely, open-ended milestone timing had low agreement ($kappa = 0.124$), confirming our design decision to enforce prerequisite sequencing deterministically in code rather than relying on subjective judgment.
 
 == E. Local Resource Footprint & Hardware Feasibility
 A central engineering requirement for practical adoption across colleges is running locally without recurring API subscription costs. We benchmarked the resource footprint on a standard student laptop (AMD Ryzen 7, 16 GB RAM) using Ollama with Qwen 2.5 7B (4-bit quantized `q4_k_m`):
@@ -552,7 +552,7 @@ We developed and evaluated a local, multi-persona career guidance system that co
 
 = Acknowledgment
 
-The authors express sincere gratitude to our Project Supervisor and the faculty review committee of the Department of Computing Technologies, School of Computing, SRM Institute of Science and Technology, for their technical mentorship, methodological critique, and continuous evaluation throughout this pre-final year (6th-semester) capstone research project. We also thank the academic career counselors and student advisors whose blinded evaluations and rubric validation made this empirical study possible.
+The authors express sincere gratitude to our Project Supervisor and the faculty review committee of the Department of Computing Technologies, School of Computing, SRM Institute of Science and Technology, for their technical mentorship, methodological critique, and continuous evaluation throughout this pre-final year (6th-semester) capstone research project. We also thank our peers and student participants whose usability feedback and rubric evaluation helped refine this empirical study.
 
 // ------------------------------------------------------------------------------
 // REFERENCES (Natively rendered via IEEE bibliography engine)

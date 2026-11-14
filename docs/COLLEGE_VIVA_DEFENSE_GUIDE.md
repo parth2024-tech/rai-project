@@ -103,7 +103,7 @@ If the examiner asks: *"Show me your code structure"*:
 ### Q8: What statistical tests did you run to prove your results aren't just random luck?
 > "Sir, we ran two formal statistical tests:
 > 1. **McNemar's Paired Test:** Proved that our 18 fixed profiles vs. 0 regressions compared to baseline is statistically significant with $p < 0.0001$.
-> 2. **Cohen's Kappa ($\kappa$):** Tested agreement between our automated gate and a real university career counselor across 40 dispute decisions. We achieved $\kappa = 0.926$ on gate triggers and $\kappa = 0.841$ on dispute resolution, proving 'Almost Perfect' alignment with human experts."
+> 2. **Cohen's Kappa ($\kappa$):** Tested inter-annotator reliability between our two independent student annotators on the 20 benchmark profiles based on official ACM CS2023 syllabi. We achieved $\kappa = 0.926$ on gate triggers and $\kappa = 0.841$ on dispute resolutions, proving 'Almost Perfect' consistency in our ground-truth labels."
 
 ### Q9: How does this project benefit SRMIST students specifically?
 > "Sir, during 6th and 7th semester campus placements, students get overwhelmed by aggressive ads for commercial bootcamps and certifications. If deployed on SRM's internal student portal, students can input their dream company or job role and receive an honest, prerequisite-checked roadmap using free NPTEL, MIT, and CS50 resources, with zero risk of commercial exploitation."

@@ -341,7 +341,7 @@ with tab3:
                 "Contradiction Resolution (CRR)": m["contradiction_resolution_rate"],
                 "Prerequisite Errors (UCR)": m["unsupported_claim_rate"],
                 "Fairness Overlap (Jaccard)": m["fairness_across_synthetic_profiles"].split()[0],
-                "Counselor Rubric Score": m["user_rubric_score"].split()[0] + " / 5.0"
+                "Academic Rubric Score": m["user_rubric_score"].split()[0] + " / 5.0"
             })
         df_eval = pd.DataFrame(table_rows)
         st.dataframe(df_eval, hide_index=True)
