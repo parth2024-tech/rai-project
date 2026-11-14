@@ -35,11 +35,10 @@ st.set_page_config(
 )
 
 # ── Sidebar: Model & Candidate Setup ─────────────────────────────────────────
-st.sidebar.title("⚙️ System Control")
-st.sidebar.caption("Undergraduate Capstone Evaluation Lab")
+st.sidebar.title("Controls")
 
 model_choice = st.sidebar.selectbox(
-    "Local Inference Model (Ollama)",
+    "Local Model",
     ["qwen3:4b-fast", "qwen3:4b", "qwen2:0.5b", "llama3.2:latest"],
     index=0
 )
@@ -48,34 +47,34 @@ harness = MultiAgentDebateHarness(model_name=model_choice)
 synthetic_profiles = load_synthetic_profiles()
 
 st.sidebar.divider()
-st.sidebar.subheader("👤 Select Candidate Profile")
+st.sidebar.subheader("Candidate Profile")
 
 profile_options = [
     f"{p['profile_id']}: {p['candidate_name']} ({p['variant']}) - {p['target']}"
     for p in synthetic_profiles
 ]
 selected_idx = st.sidebar.selectbox(
-    "Benchmark Profiles (20 Profiles / 10 Pairs)",
+    "Profiles",
     range(len(profile_options)),
     format_func=lambda i: profile_options[i]
 )
 
 candidate_data = synthetic_profiles[selected_idx]
 
-with st.sidebar.expander("📝 View / Edit Profile Details", expanded=False):
-    candidate_name = st.text_input("Candidate Name", candidate_data.get("candidate_name", "Student"))
+with st.sidebar.expander("Edit Profile", expanded=False):
+    candidate_name = st.text_input("Name", candidate_data.get("candidate_name", "Student"))
     candidate_gender = st.selectbox(
         "Gender",
         ["Male", "Female", "Non-Binary"],
         index=0 if candidate_data.get("gender") == "Male" else 1
     )
-    candidate_tier = st.text_input("College / Institute", candidate_data.get("college_tier"))
-    candidate_budget = st.text_input("Monthly Budget", candidate_data.get("budget"))
-    candidate_target = st.text_input("Target Career Role", candidate_data.get("target"))
-    candidate_timeline = st.text_input("Target Timeline", candidate_data.get("timeline"))
+    candidate_tier = st.text_input("College", candidate_data.get("college_tier"))
+    candidate_budget = st.text_input("Budget", candidate_data.get("budget"))
+    candidate_target = st.text_input("Target Role", candidate_data.get("target"))
+    candidate_timeline = st.text_input("Timeline", candidate_data.get("timeline"))
     all_graph_skills = [n["id"] for n in GRAPH_NODES]
     current_skills = st.multiselect(
-        "Current Verified Skills",
+        "Skills",
         all_graph_skills,
         default=[s for s in candidate_data.get("skills", []) if s in all_graph_skills]
     )
@@ -95,18 +94,14 @@ active_candidate = {
 }
 
 # ── Main Header ──────────────────────────────────────────────────────────────
-st.title("⚖️ Debate-Based Career Guidance Agent")
-st.caption(
-    "SRMIST School of Computing — 6th Semester Capstone Research Prototype | "
-    "Multi-Agent Deliberation (Planner, Critic, Ethics) with 42-Node Knowledge Graph Verification"
-)
+st.title("Debate-Based Career Guidance Agent")
 
 # ── Main Tabs ────────────────────────────────────────────────────────────────
 tab1, tab2, tab3, tab4 = st.tabs([
-    "🗣️ Dialectic Debate & Trace",
-    "📊 Benchmark Results (5 Metrics)",
-    "🕸️ 42-Node Knowledge Graph",
-    "📚 Grounded Syllabi (ChromaDB)"
+    "Debate & Roadmap",
+    "Benchmark Results",
+    "Knowledge Graph",
+    "Course Database"
 ])
 
 
@@ -130,12 +125,11 @@ with tab1:
         st.session_state.force_override = False
 
     # Human-in-the-Loop Override Sliders
-    with st.expander("🎛️ Human-in-the-Loop Override Sliders (Student / Counselor Controls)", expanded=False):
-        st.write("Adjust priority sliders to guide how the Moderator resolves disagreements among the agents:")
+    with st.expander("Priority Sliders (Speed vs Rigor vs Equity)", expanded=False):
         col_w1, col_w2, col_w3 = st.columns(3)
-        w_vel = col_w1.slider("Planner Priority (Speed to Placement)", 0.0, 1.0, st.session_state.override_weights["velocity"], 0.05)
-        w_rig = col_w2.slider("Critic Priority (Prerequisite Depth)", 0.0, 1.0, st.session_state.override_weights["rigor"], 0.05)
-        w_eq = col_w3.slider("Ethics Priority (Zero-Debt & Balance)", 0.0, 1.0, st.session_state.override_weights["equity"], 0.05)
+        w_vel = col_w1.slider("Planner Priority (Speed)", 0.0, 1.0, st.session_state.override_weights["velocity"], 0.05)
+        w_rig = col_w2.slider("Critic Priority (Depth)", 0.0, 1.0, st.session_state.override_weights["rigor"], 0.05)
+        w_eq = col_w3.slider("Ethics Priority (Zero-Debt)", 0.0, 1.0, st.session_state.override_weights["equity"], 0.05)
 
         total_w = w_vel + w_rig + w_eq
         if total_w > 0:
@@ -146,17 +140,17 @@ with tab1:
             }
 
         btn_c1, btn_c2 = st.columns([1, 4])
-        if btn_c1.button("Apply Human Override"):
+        if btn_c1.button("Apply Override"):
             st.session_state.force_override = True
-            st.success("Human Override Active: Moderator will follow your custom weights.")
-        if btn_c2.button("Reset to Balanced Default"):
+            st.success("Override active.")
+        if btn_c2.button("Reset Default"):
             st.session_state.force_override = False
             st.session_state.override_weights = {"velocity": 0.33, "rigor": 0.33, "equity": 0.34}
-            st.info("Reset to balanced autonomous debate.")
+            st.info("Reset to default.")
 
     # Run Deliberation Button
-    if st.button("🚀 Run 3-Agent Deliberation & Graph Check", type="primary", width="stretch"):
-        with st.spinner("Running Planner, Critic, Ethics-Reviewer, and Knowledge Graph validation..."):
+    if st.button("Run Deliberation & Graph Check", type="primary", width="stretch"):
+        with st.spinner("Running deliberation..."):
             debate_result = harness.run_debate(
                 candidate_profile=active_candidate,
                 user_override_weights=st.session_state.override_weights,
@@ -168,37 +162,36 @@ with tab1:
     if "latest_debate" in st.session_state:
         res = st.session_state.latest_debate
 
-        st.subheader("1. Knowledge Graph Verification & Uncertainty Status")
-        m1, m2, m3, m4 = st.columns(4)
-        u_val = res["uncertainty_metrics"]["calibrated_uncertainty"]
-        m1.metric("Calibrated Uncertainty (U)", f"{u_val:.2f}", help="Composite score: debate friction + missing prerequisites + budget strain + timeline pressure.")
-        num_violations = len(res["graph_violations"])
-        m2.metric("Prerequisite Errors (Δ)", num_violations, delta="Detected" if num_violations > 0 else "Clean", delta_color="inverse")
-        m3.metric("Evidence Diversity (H_div)", f"{res['evidence_diversity']:.2f}", delta="Diverse Syllabi Cited")
-        gate_text = "TRIGGERED (Override Required)" if res["gate_triggered"] else "PASSED (Safe)"
-        m4.metric("Cognitive Gate Status", gate_text)
-
         # Prominent Prerequisite Error Display
         if res["graph_violations"]:
-            st.error(f"🚨 KNOWLEDGE GRAPH CAUGHT {len(res['graph_violations'])} PREREQUISITE ERROR(S) IN PROPOSED PLAN:")
+            st.error(f"❌ Knowledge Graph Detected {len(res['graph_violations'])} Prerequisite Error(s):")
             for v in res["graph_violations"]:
                 st.markdown(
-                    f"- ❌ Milestone **`{v['milestone']}`** cannot be started yet! "
+                    f"- **`{v['milestone']}`** cannot be scheduled! "
                     f"Missing foundational prerequisite: **`{v['missing_prerequisite']}`** *(Rule: {v['rule']})*"
                 )
         else:
-            st.success("✅ All proposed milestones satisfy knowledge graph prerequisites (Zero Sequencing Errors).")
+            st.success("✅ Zero prerequisite errors detected by Knowledge Graph.")
+
+        m1, m2, m3, m4 = st.columns(4)
+        u_val = res["uncertainty_metrics"]["calibrated_uncertainty"]
+        m1.metric("Uncertainty (U)", f"{u_val:.2f}")
+        num_violations = len(res["graph_violations"])
+        m2.metric("Prerequisite Errors", num_violations)
+        m3.metric("Evidence Diversity", f"{res['evidence_diversity']:.2f}")
+        gate_text = "TRIGGERED" if res["gate_triggered"] else "PASSED"
+        m4.metric("Gate Status", gate_text)
 
         st.divider()
 
         # 3 Persona Arguments (Clean Native Containers)
-        st.subheader("2. Interactive Multi-Agent Debate Trace")
+        st.subheader("Debate Trace")
         p_col, c_col, e_col = st.columns(3)
 
         with p_col:
             with st.container(border=True):
-                st.markdown("### 🟢 Planner Persona")
-                st.caption(f"**Stance:** {res['planner_turn']['stance']}")
+                st.markdown("### 🟢 Planner")
+                st.caption(f"Stance: {res['planner_turn']['stance']}")
                 st.write(res['planner_turn']['argument'])
                 st.markdown("**Proposed Milestones:**")
                 for m in res['planner_turn']['proposed_milestones']:
@@ -206,45 +199,45 @@ with tab1:
 
         with c_col:
             with st.container(border=True):
-                st.markdown("### 🔴 Critic Persona")
-                st.caption(f"**Stance:** {res['critic_turn']['stance']}")
+                st.markdown("### 🔴 Critic")
+                st.caption(f"Stance: {res['critic_turn']['stance']}")
                 st.write(res['critic_turn']['argument'])
-                st.markdown("**Screening Bottlenecks Identified:**")
+                st.markdown("**Screening Bottlenecks:**")
                 for h in res['critic_turn']['screening_hurdles']:
                     st.markdown(f"- {h}")
 
         with e_col:
             with st.container(border=True):
-                st.markdown("### 🔵 Ethics-Reviewer Persona")
-                st.caption(f"**Stance:** {res['ethics_turn']['stance']}")
+                st.markdown("### 🔵 Ethics-Reviewer")
+                st.caption(f"Stance: {res['ethics_turn']['stance']}")
                 st.write(res['ethics_turn']['argument'])
-                st.markdown("**Zero-Debt & Open Courseware:**")
+                st.markdown("**Zero-Debt Safeguards:**")
                 for r in res['ethics_turn']['accessible_resources_mandate']:
                     st.markdown(f"- {r}")
 
         st.divider()
 
         # Dispute Tree
-        st.subheader("3. Dispute Tree (Surfaced Disagreements & Resolutions)")
+        st.subheader("Dispute Tree")
         for d in res["dispute_tree"]:
             with st.container(border=True):
-                st.markdown(f"#### ⚡ Trade-Off: {d['dimension']}")
-                st.markdown(f"- **🟢 Planner View:** {d['planner_stance']}")
-                st.markdown(f"- **🔴 Critic View:** {d['critic_stance']}")
-                st.markdown(f"- **🔵 Ethics View:** {d['ethics_stance']}")
+                st.markdown(f"#### Trade-Off: {d['dimension']}")
+                st.markdown(f"- **Planner:** {d['planner_stance']}")
+                st.markdown(f"- **Critic:** {d['critic_stance']}")
+                st.markdown(f"- **Ethics:** {d['ethics_stance']}")
                 st.divider()
-                st.markdown(f"**🤝 Reconciled Resolution:** {d['resolution']}")
+                st.markdown(f"**Resolution:** {d['resolution']}")
 
         st.divider()
 
         # Moderator Synthesis
-        st.subheader("4. Moderator Final Balanced Recommendation")
+        st.subheader("Final Recommendation")
         with st.container(border=True):
-            st.markdown(f"#### Synthesis Strategy: `{res['moderator_synthesis']['strategy_mode']}`")
+            st.markdown(f"#### Strategy: `{res['moderator_synthesis']['strategy_mode']}`")
             w = res['moderator_synthesis']['weights_applied']
-            st.caption(f"Weights Applied — Velocity: {w.get('velocity', 0.33):.2f} | Rigor: {w.get('rigor', 0.33):.2f} | Equity: {w.get('equity', 0.34):.2f}")
+            st.caption(f"Weights: Velocity {w.get('velocity', 0.33):.2f} | Rigor {w.get('rigor', 0.33):.2f} | Equity {w.get('equity', 0.34):.2f}")
             st.write(res['moderator_synthesis']['synthesis'])
-            st.markdown("**Accredited Grounding Sources Cited:**")
+            st.markdown("**Citations:**")
             for c in res['moderator_synthesis']['citations']:
                 st.markdown(f"- 📖 {c}")
 
@@ -253,8 +246,7 @@ with tab1:
 # TAB 2: EMPIRICAL BENCHMARK (5 METRICS)
 # ═════════════════════════════════════════════════════════════════════════════
 with tab2:
-    st.subheader("Empirical Benchmark Scorecard (20 Profiles × 4 Configurations = 80 Runs)")
-    st.caption("Ablation study comparing single-prompt baseline against our graph-verified multi-persona system.")
+    st.subheader("Benchmark Scorecard")
 
     results_file = os.path.join(ROOT_DIR, "data", "eval_results.json")
     if os.path.exists(results_file):
@@ -280,7 +272,7 @@ with tab2:
 
         chart_c1, chart_c2 = st.columns(2)
         with chart_c1:
-            st.markdown("##### Prerequisite Sequencing Errors (UCR % — Lower is Better)")
+            st.markdown("##### Prerequisite Errors (UCR % — Lower is Better)")
             ucr_df = pd.DataFrame({
                 "Configuration": df_eval["System Configuration"],
                 "Error Rate (%)": [float(x.replace("%", "")) for x in df_eval["Prerequisite Errors (UCR)"]]
@@ -297,10 +289,10 @@ with tab2:
 
         st.divider()
         with st.container(border=True):
-            st.markdown("#### ⚖️ Counterfactual Fairness Analysis (Aarav vs. Priya)")
+            st.markdown("#### Counterfactual Fairness (Aarav vs. Priya)")
             st.markdown("""
-            - **In Config 1 (Standard Single Prompt):** Aarav (Tier-1, High Budget) was advised advanced engineering projects, while Priya (Tier-3, Low Budget) was steered toward basic support tasks (**Fairness Jaccard = 0.32**).
-            - **In Config 4 (Our System):** Both received identical, topologically verified core competencies (**Fairness Jaccard = 1.00**), while the Ethics-Reviewer replaced costly commercial bootcamps with free accredited MIT OpenCourseWare and Harvard CS50.
+            - **Config 1 (Standard Single Prompt):** Aarav (Tier-1, High Budget) received advanced tech stacks, while Priya (Tier-3, Low Budget) received low-level tasks (**Fairness Jaccard = 0.32**).
+            - **Config 4 (Our System):** Both received identical core competencies (**Fairness Jaccard = 1.00**), while substituting paid bootcamps with free MIT OpenCourseWare.
             """)
     else:
         st.info("Run `python3 run_study.py` to re-generate benchmark results.")
@@ -310,34 +302,33 @@ with tab2:
 # TAB 3: CAREER-SKILL GRAPH (42 NODES)
 # ═════════════════════════════════════════════════════════════════════════════
 with tab3:
-    st.subheader("42-Node Computer Science Prerequisite Knowledge Graph")
-    st.caption("Hand-built directed acyclic graph (DAG) spanning 9 technical tracks with 47 prerequisite edges.")
+    st.subheader("42-Node Knowledge Graph")
 
     g_col1, g_col2 = st.columns([1.2, 2])
 
     with g_col1:
         with st.container(border=True):
-            st.markdown("#### Graph Summary")
-            st.metric("Total Ontology Nodes", len(GRAPH_NODES))
-            st.metric("Prerequisite Directed Edges", len(GRAPH_EDGES))
-            st.metric("Technical Tracks", "9 Core CS Subfields")
+            st.markdown("#### Summary")
+            st.metric("Total Nodes", len(GRAPH_NODES))
+            st.metric("Prerequisite Edges", len(GRAPH_EDGES))
+            st.metric("Technical Tracks", "9 CS Tracks")
 
         with st.container(border=True):
             st.markdown("#### Check Node Prerequisites")
             selected_skill = st.selectbox(
-                "Select a CS Competency",
+                "Select a Competency",
                 [n["id"] for n in GRAPH_NODES]
             )
             direct_p = career_graph.get_prerequisites(selected_skill)
             all_p = career_graph.get_all_ancestor_prerequisites(selected_skill)
-            st.markdown(f"**Immediate Prerequisites for `{selected_skill}`:**")
+            st.markdown(f"**Prerequisites for `{selected_skill}`:**")
             st.write(", ".join(direct_p) if direct_p else "None (Foundational Entry Course)")
-            st.markdown("**Full Prerequisite Chain (Ancestors):**")
+            st.markdown("**Full Prerequisite Chain:**")
             st.write(" ➔ ".join(all_p) if all_p else "None")
 
     with g_col2:
         with st.container(border=True):
-            st.markdown("#### The 9 Technical Tracks & Competency Distribution")
+            st.markdown("#### The 9 Technical Tracks")
             track_counts = {}
             for n in GRAPH_NODES:
                 cat = n.get("category", "General")
@@ -345,7 +336,7 @@ with tab3:
             df_tracks = pd.DataFrame([{"Track": k, "Node Count": v} for k, v in track_counts.items()])
             st.dataframe(df_tracks, hide_index=True)
 
-        with st.expander("📄 View Generated Neo4j Cypher Schema", expanded=False):
+        with st.expander("Neo4j Cypher Schema", expanded=False):
             cypher_code = career_graph.export_cypher_script()
             st.code(cypher_code, language="cypher")
 
@@ -354,10 +345,9 @@ with tab3:
 # TAB 4: GROUNDED SYLLABI (CHROMADB)
 # ═════════════════════════════════════════════════════════════════════════════
 with tab4:
-    st.subheader("Public Knowledge Base & Syllabi (ChromaDB)")
-    st.caption("Indexed ACM/IEEE CS2023 curricula, MIT OpenCourseWare, Harvard CS50, and O*NET standards.")
+    st.subheader("Course Database (ChromaDB)")
 
-    search_term = st.text_input("Semantic Search in ChromaDB Vector Store", "Data Structures and Algorithms")
+    search_term = st.text_input("Search Syllabi in ChromaDB", "Data Structures and Algorithms")
     if search_term:
         results = vector_store.retrieve_evidence(search_term, top_k=6)
         div_score = vector_store.calculate_evidence_diversity(results)
