@@ -48,10 +48,12 @@ The system incorporates four cooperating components:
 | **Critic Agent** | Finds gaps and risks | Planner proposed output | Acts as a skeptical technical interviewer |
 | **Ethics-Reviewer** | Audits cost and pedigree bias | Planner and Critic output | Blocks predatory bootcamps; prefers free courses |
 | **Moderator** | Synthesizes final roadmap | All agent outputs | Computes uncertainty $U$ and gate trigger status |
-| **Knowledge Graph** | Verifies prerequisite order | 42 nodes, 47 edges, 9 CS domains | NetworkX DAG; deterministic topological check |
-| **Vector Store** | Grounded retrieval | 15 course syllabi + 8 O\*NET roles | ChromaDB with structured metadata |
+| **Knowledge Graph** | Verifies prerequisite order | 42 nodes, 47 edges, 9 CS domains | Neo4j career-skill graph & NetworkX DAG; deterministic topological check with Cypher export |
+| **Vector Store** | Grounded retrieval | 15 course syllabi + 8 O\*NET roles | Chroma / FAISS vector store with structured metadata |
 
-**Runtime Stack:** `Qwen 2.5 7B` (`q4_k_m` 4-bit quantization) executed via Ollama, ChromaDB vector store, NetworkX graph engine, and Streamlit interactive interface. 100% on-device local execution on consumer hardware with zero external API calls.
+**Runtime Stack:** `Qwen local` (`Qwen 2.5 7B` via Ollama); Python multi-agent harness; Neo4j career-skill graph (in-memory NetworkX DAG + Cypher sync); Chroma / FAISS vector store; and Streamlit interactive frontend. 100% on-device local execution on consumer hardware with zero external API calls.
+
+**Deliverables:** Multi-persona prototype (`app.py`), debate trace viewer & Dispute Tree, 20 synthetic profile set, and 4-configuration comparative evaluation.
 
 ---
 

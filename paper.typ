@@ -179,7 +179,7 @@ The proposed system consists of four interconnected components: the Grounded Evi
 
 == A. Grounded Knowledge Store
 The system indexes two accredited public data repositories:
-1. *Public Course Curricula:* 15 accredited course descriptions based on the ACM/IEEE CS2023 curriculum @acm2023cs, MIT OpenCourseWare, Berkeley CS61, and Harvard CS50, indexed in ChromaDB with metadata (course code, estimated hours, and public access links).
+1. *Public Course Curricula:* 15 accredited course descriptions based on the ACM/IEEE CS2023 curriculum @acm2023cs, MIT OpenCourseWare, Berkeley CS61, and Harvard CS50, indexed in ChromaDB / FAISS vector stores with metadata (course code, estimated hours, and public access links).
 2. *Standard Occupational Standards:* 8 official occupational roles from O\*NET and the U.S. Bureau of Labor Statistics @onet2024taxonomy, providing validated salary bands, core job tasks, and entry requirements.
 
 == B. Three-Agent Deliberation Engine
@@ -209,7 +209,7 @@ If $Delta_("prereq") > 0$ or $U_("cal") >= 0.45$, the system blocks autonomous r
 Students can adjust trade-off sliders in Streamlit (Speed vs. Rigor vs. Budget) to finalize the plan.
 
 == E. 42-Node Knowledge Graph Taxonomy & Traversal
-The 42-node knowledge graph is implemented using Python's NetworkX library (`networkx.DiGraph`). Nodes represent concrete academic competencies across 9 foundational computer science domains:
+The 42-node knowledge graph is implemented using Python's NetworkX library (`networkx.DiGraph`) for sub-millisecond in-memory traversal and includes automated Cypher schema export to Neo4j graph databases (`src/graph/career_graph.py`). Nodes represent concrete academic competencies across 9 foundational computer science domains:
 1. *Foundations & Mathematics (3 nodes):* Discrete Mathematics, Linear Algebra, Probability & Statistics.
 2. *Programming Core (5 nodes):* Python Basics, Python OOP, C Basics, Pointers & Memory Management, Java Basics.
 3. *Data Structures & Algorithms (3 nodes):* Linear/Non-linear Data Structures, Algorithm Design & Analysis, Advanced Algorithms (DP, Graph Algorithms).

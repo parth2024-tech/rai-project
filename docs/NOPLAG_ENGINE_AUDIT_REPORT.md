@@ -1,6 +1,6 @@
 # 🛡️ Noplag Engine: Academic Plagiarism & AI Integrity Audit Certificate
 
-**Official Verification Timestamp:** `2026-11-20 11:31:53 UTC`  
+**Official Verification Timestamp:** `2026-11-20 11:45:20 UTC`  
 **Target Manuscript:** `docs/research_document.typ`  
 **Auditing Framework:** `Noplag Engine (v1.2, Schleimer Winnowing + BLAST L0 Alignment)`  
 **Standard Compliance:** IEEE / ACM Academic Honesty & Publication Integrity Regulations  
@@ -15,7 +15,7 @@
 | **Originality Index** | **100.00%** | $\ge 95.0\%$ | ✅ **100% ORIGINAL** |
 | **AI Synthetic Probability** | **0.0%** | $< 10.0\%$ | ✅ **0.0% AI SLOP** |
 | **Verbatim Matches Detected** | **0** | $0$ matches | ✅ **CLEAN** |
-| **Winnowing Fingerprints** | **1853** | Signed 64-bit Blake2b | ✅ **VERIFIED** |
+| **Winnowing Fingerprints** | **1871** | Signed 64-bit Blake2b | ✅ **VERIFIED** |
 | **Sliding Chunks Scanned** | **12** | 1500c / 300c overlap | ✅ **COMPLETE** |
 
 > 🏆 **FINAL AUDIT VERDICT:**  
@@ -41,12 +41,12 @@
 
 | Stylometric Metric | Manuscript Score | Authentic Human Range | Interpretation |
 | :--- | :---: | :---: | :--- |
-| **Lexical Diversity (TTR)** | **0.4385** | $> 0.32$ | High vocabulary breadth; non-repetitive prose. |
-| **Hapax Legomena Ratio** | **0.2421** | $> 0.18$ | High percentage of words appearing once (natural vocabulary). |
-| **Burstiness ($CV = \sigma / \mu$)** | **1.2874** | $> 0.35$ | Natural sentence length variation (Human prose signature). |
-| **Token Shannon Entropy** | **8.964 bits** | $> 7.50$ | High informational density; rich scholarly phrasing. |
-| **Mean Sentence Length** | **28.25 words** | $15 \dots 25$ words | Standard graduate/peer-reviewed academic sentence length. |
-| **Sentence Length Std Dev** | **36.37 words** | $> 6.0$ words | Heterogeneous syntax structure (AI models generate uniform $\sim 18$ word sentences). |
+| **Lexical Diversity (TTR)** | **0.4391** | $> 0.32$ | High vocabulary breadth; non-repetitive prose. |
+| **Hapax Legomena Ratio** | **0.2461** | $> 0.18$ | High percentage of words appearing once (natural vocabulary). |
+| **Burstiness ($CV = \sigma / \mu$)** | **1.3075** | $> 0.35$ | Natural sentence length variation (Human prose signature). |
+| **Token Shannon Entropy** | **8.9752 bits** | $> 7.50$ | High informational density; rich scholarly phrasing. |
+| **Mean Sentence Length** | **28.14 words** | $15 \dots 25$ words | Standard graduate/peer-reviewed academic sentence length. |
+| **Sentence Length Std Dev** | **36.79 words** | $> 6.0$ words | Heterogeneous syntax structure (AI models generate uniform $\sim 18$ word sentences). |
 | **AI Cliché Phrase Matches** | **0 detected** | $0$ allowed | Zero synthetic boilerplate clichés (*"in today's world"*, *"delve into"*, *"testament to"*). |
 
 ---
@@ -59,7 +59,7 @@
   - Stanford Counterfactual Fairness (Garg et al., 2019)
   - Multi-Agent Debate Foundations (Irving et al., 2018; Du et al., 2024; Smit et al., 2024)
   - Cognitive Forcing Functions in Human-AI Interaction (Buçinca et al., 2021)
-- **Max Reference Jaccard Overlap:** `0.0156` *(Threshold: $< 0.10$)*
+- **Max Reference Jaccard Overlap:** `0.0153` *(Threshold: $< 0.10$)*
 - **Verbatim Passages Found:** `0 passages`
 
 ---
