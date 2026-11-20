@@ -226,13 +226,12 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ── Main Tabs ────────────────────────────────────────────────────────────────
-tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
+tab1, tab2, tab3, tab4, tab5 = st.tabs([
     "Architecture Comparison",
     "Dialectic Deliberation Engine",
     "Empirical Benchmark Suite",
     "Knowledge Graph (Neo4j)",
-    "Curricular Grounding (ChromaDB)",
-    "Academic Governance & Data Privacy"
+    "Curricular Grounding (ChromaDB)"
 ])
 
 
@@ -617,32 +616,4 @@ with tab5:
                 st.link_button("View Accredited Syllabus", r.get('url', '#'))
 
 
-# ═════════════════════════════════════════════════════════════════════════════
-# TAB 6: ACADEMIC GOVERNANCE & DATA PRIVACY
-# ═════════════════════════════════════════════════════════════════════════════
-with tab6:
-    st.subheader("Academic Governance & Data Privacy Policy")
-    st.caption("Standards compliant with Indian University Accreditation Guidelines (NAAC/AICTE) and strict data minimization.")
 
-    p1, p2 = st.columns(2)
-
-    with p1:
-        with st.container(border=True):
-            st.markdown("#### Student Data Privacy Charter")
-            st.markdown("""
-            1. **Zero External Data Exfiltration:** All student profile data, deliberation traces, and graph queries execute 100% locally on localhost compute. No student record is transmitted to commercial third-party cloud APIs.
-            2. **Attribute Isolation Vault:** Protected demographic attributes (candidate name, gender identity, institutional tier, and socioeconomic proxies) are isolated prior to persona deliberation.
-            3. **Zero-Debt Commercial Safeguard:** The Ethics-Reviewer persona is programmatically bound to reject predatory financing, high-interest personal loans, and commercial bootcamps, routing candidates exclusively to accredited public courseware.
-            4. **Right to Human Override:** Every algorithmic roadmap is subject to human counselor veto and milestone reweighting.
-            """)
-
-    with p2:
-        with st.container(border=True):
-            st.markdown("#### Institutional Attribution & Terms")
-            st.markdown("""
-            - **Institution:** Department of Computing Technologies, SRM Institute of Science and Technology, Chennai, India.
-            - **Student Investigators:** Gedela Rishikesh Reddy, Aniket Srivastava, Parth Gupta.
-            - **Curricular Authority:** ACM/IEEE Joint Task Force on Computing Curricula (CS2023) and U.S. Department of Labor O*NET Standards.
-            - **Licensing:** Licensed under the MIT Academic Research License.
-            - **Academic Integrity:** Designed strictly for student advising evaluation and reproducible empirical benchmarking.
-            """)
