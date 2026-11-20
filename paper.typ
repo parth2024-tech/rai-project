@@ -23,12 +23,7 @@
 #set page(
   paper: "us-letter",
   margin: (x: 0.50in, top: 0.60in, bottom: 0.60in),
-  header: align(center)[
-    #text(size: 7.5pt, fill: rgb("#475569"), font: "Liberation Serif")[
-      *RESEARCH MANUSCRIPT --- RESPONSIBLE ARTIFICIAL INTELLIGENCE & EDUCATIONAL TECHNOLOGY*
-    ]
-    #line(length: 100%, stroke: 0.4pt + rgb("#94a3b8"))
-  ],
+  header: none,
   footer: align(center)[
     #context text(size: 8.5pt, fill: rgb("#334155"), font: "Liberation Serif")[
       #counter(page).display("1")
