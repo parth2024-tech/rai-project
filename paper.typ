@@ -122,10 +122,6 @@
       ]
     ],
   )
-  #v(0.06in)
-  #text(size: 8.5pt, fill: rgb("#334155"))[
-    *Faculty Mentor:* Dr. P. Akilandeswari #h(14pt) | #h(14pt) *Industry Mentor:* Pratyush Jha
-  ]
   #v(0.12in)
 ]
 
@@ -153,7 +149,7 @@
 
 = I. Introduction
 
-Engineering students routinely face critical career decisions: selecting specialization tracks, preparing for placements, acquiring technical skills, and planning higher studies. Increasingly, students consult general-purpose conversational AI assistants for guidance. While Large Language Models (LLMs) such as GPT-4 @openai2023gpt4 and open-weight models like Llama 2 @touvron2023llama and Qwen @qwen2024report demonstrate impressive fluency, deploying a single conversational prompt for career counseling exposes students to severe risks:
+Engineering students routinely face critical career decisions: selecting specialization tracks, preparing for placements, acquiring technical skills, and planning higher studies.#footnote[This research was conducted under the technical mentorship and supervision of Dr. P. Akilandeswari (Faculty Mentor) and Pratyush Jha (Industry Mentor).] Increasingly, students consult general-purpose conversational AI assistants for guidance. While Large Language Models (LLMs) such as GPT-4 @openai2023gpt4 and open-weight models like Llama 2 @touvron2023llama and Qwen @qwen2024report demonstrate impressive fluency, deploying a single conversational prompt for career counseling exposes students to severe risks:
 
 1. *Prerequisite Sequence Failure:* Chatbots often advise novice students to immediately study advanced topics (such as Transformers or Distributed Systems) while ignoring that they lack foundational math, Data Structures, or Operating Systems. This leads to interview failure and student frustration.
 2. *Predatory Financial Debt:* Automated assistants frequently recommend commercial bootcamps and certifications costing ₹1,20,000 (~USD 1,400) to students from modest backgrounds, overlooking accredited, free open courseware (e.g., MIT OpenCourseWare, Harvard CS50).
