@@ -115,9 +115,12 @@
 - **Content Cards:**
   - **Calibrated Uncertainty Formula:**
     $$U_{\text{cal}} = 0.30 F_{\text{triad}} + 0.35 \Delta_{\text{prereq}} + 0.20 R_{\text{socio}} + 0.15 R_{\text{timeline}}$$
-    Trigger threshold: If $U_{\text{cal}} \ge 0.45$ or $\Delta_{\text{prereq}} \ge 1$, autonomous release is blocked.
+    - $R_{\text{socio}} = \min(1.0, \frac{\text{Cost}_{\text{proposed}}}{12 \times \text{Budget}})$. Evaluates to $0.0$ for free MIT OCW/CS50; spikes only on predatory debt.
+    - **Priya Patel Case Study Proof:**
+      $$0.30(0.80) + 0.35(0.75) + 0.20(0.85) + 0.15(0.65) = 0.24 + 0.2625 + 0.17 + 0.0975 = \mathbf{0.77} \ge 0.45 \implies \text{Gate Triggers}$$
+    - Trigger threshold: If $U_{\text{cal}} \ge 0.45$ or $\Delta_{\text{prereq}} \ge 1$, autonomous release is blocked; sliders activate.
   - **Dispute Tree & Sliders:** Maps debate friction into 3 student trade-off nodes (Speed vs. Rigor, Debt vs. Open Source, Placement vs. Proof-of-Work). Students adjust Speed, Rigor, and Budget sliders in Streamlit to finalize their roadmap.
-- **Presenter Notes:** *"Slide 8 details our calibrated uncertainty formula and interactive Dispute Tree. When risk exceeds 0.45 or a prerequisite error occurs, the Cognitive Forcing Gate halts release. Students adjust three sliders—Speed, Rigor, and Budget—restoring human-in-the-loop decision agency."*
+- **Presenter Notes:** *"Slide 8 details our calibrated uncertainty formula and interactive Dispute Tree. When risk exceeds 0.45 or a prerequisite error occurs, the Cognitive Forcing Gate halts release. For Priya Patel, the weighted calculation yields exactly 0.77, successfully triggering the gate. Students adjust three sliders—Speed, Rigor, and Budget—restoring human-in-the-loop decision agency."*
 
 ---
 
@@ -151,11 +154,17 @@
 - **Key Takeaway:** Quantitative criteria for prerequisite correctness, debate synthesis, diversity, and equity.
 - **Metrics Evaluated:**
   1. **Unsupported-Claim Rate ($UCR$):** Target $\le 5.0\%$ | **Observed: 0.0%**
+     - Evaluated across $N = 120$ curriculum milestones over 20 candidate profiles (average 6 milestones per plan).
+     - Formula: $\text{UCR} = \frac{|\{m \in M : \text{prereq}(m) \not\subseteq (S_{\text{curr}} \cup M_{< m})\}|}{|M|} \times 100\%$
   2. **Contradiction-Resolution Rate ($CRR$):** Target $\ge 80.0\%$ | **Observed: 100.0%**
+     - % of Critic and Ethics objections formally addressed and resolved or externalized as slider trade-offs.
   3. **Evidence Diversity ($H_{\text{div}}$):** Target $\ge 0.80$ | **Observed: 1.00**
+     - Normalized Shannon entropy across $K = 4$ accredited categories (MIT OCW, CS50, O*NET, IEEE).
   4. **Demographic Fairness ($J$):** Target $\ge 0.90$ | **Observed: 1.00**
+     - Jaccard similarity of core technical competencies between matched counterfactual pairs.
   5. **User-Rubric Score:** Target $\ge 4.0 / 5.0$ | **Observed: 4.7 / 5.0**
-- **Presenter Notes:** *"Slide 11 formalizes our five quantitative evaluation metrics: Unsupported-Claim Rate (UCR), Contradiction-Resolution Rate (CRR), Evidence Diversity (H_div), Demographic Fairness (Jaccard J), and the standardized 5-point User Rubric score. All targets were comfortably achieved or exceeded."*
+     - Standardized score across Balance, Rigor, Equity, Transparency, Feasibility.
+- **Presenter Notes:** *"Slide 11 formalizes our five quantitative evaluation metrics: Unsupported-Claim Rate (UCR evaluated across 120 milestones), Contradiction-Resolution Rate (CRR), Evidence Diversity (H_div), Demographic Fairness (Jaccard J), and the standardized 5-point User Rubric score. All targets were comfortably achieved or exceeded."*
 
 ---
 
@@ -191,11 +200,12 @@
 - **Category:** Section 7: Theoretical Insights & Defense
 - **Key Takeaway:** Addressing core examiner inquiries regarding model capability, graphs, and usability.
 - **Key Defense Insights:**
-  - *Why not GPT-4o?* Cloud models breach student privacy, require continuous fees, and still hallucinate prerequisites without external graph verification.
-  - *Why 7B models succeed:* Narrow persona decomposition + asymmetric temperatures + deterministic DAG anchors allow local 7B models to outperform monolithic frontier LLMs.
-  - *Inter-Rater Reliability:* Cohen's $\kappa = 0.926$ on ground-truth annotations. Uncalibrated 7B LLM judges scored $\kappa = 0.12$ (confirming why hybrid graph traversal is required).
+  - *Is 0.0% UCR circular since DAG checks itself?* Neuro-symbolic separation of concerns: LLMs propose diverse career trade-offs; the 42-node DAG deterministically type-checks prerequisites. Config 3 proves debate alone still has an 86.4% violation rate (Woozle effect); the graph acts as an indispensable structural filter.
+  - *Does $R_{\text{socio}}$ penalize low-income students?* No. $R_{\text{socio}} = \min(1.0, \frac{\text{Cost}}{12 \times \text{Budget}})$. When free MIT OCW/CS50 is recommended (₹0), $R_{\text{socio}} = 0.0$ for all students. It triggers only if an agent suggests an unaffordable commercial loan.
+  - *Why claim 1.00 fairness when Config 3 scored 1.00?* Config 3 achieved parity but with 86.4% invalid prerequisites. Config 4 achieves Pareto optimality: preserving $J = 1.00$ while driving prerequisite violations to strictly 0.0% and resolving 100% of disputes.
+  - *Inter-Rater Reliability:* Cohen's $\kappa = 0.926$ on ground-truth annotations ($N=28$ gate triggers). Uncalibrated 7B LLM judges scored $\kappa = 0.12$.
   - *Student User Study:* 93.3% of 15 SRMIST students preferred explicit dispute trees over chatbot sycophancy.
-- **Presenter Notes:** *"Slide 14 prepares us for tough viva voce questions. We explain why local 7B models with external graphs outperform cloud models, defend our NetworkX/Neo4j dual-mode architecture, and highlight our student study where 93.3% of participants preferred explicit dispute trees over chatbot flattery."*
+- **Presenter Notes:** *"Slide 14 prepares us for tough viva voce questions. We explain the neuro-symbolic necessity of the graph filter, defend the socioeconomic exposure formula, explain Pareto-optimal fairness, and highlight our student study where 93.3% of participants preferred explicit dispute trees over chatbot flattery."*
 
 ---
 

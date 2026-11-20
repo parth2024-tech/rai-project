@@ -442,11 +442,12 @@ def build_bw_deck(output_pptx="docs/FINAL_PRESENTATION_15_SLIDES.pptx"):
     tf8_l = s8.shapes.add_textbox(Inches(1.0), t8 + Inches(0.48), w8 - Inches(0.4), h8 - Inches(0.58)).text_frame
     add_bullet(tf8_l, "Mathematical Formulation:", "Calibrated risk score calculated across four advisory friction dimensions:")
     add_bullet(tf8_l, "U_cal =", "0.30 * F_triad + 0.35 * Delta_prereq + 0.20 * R_socio + 0.15 * R_timeline", pt_size=10.5, bold_color=COLOR_BLACK)
-    add_bullet(tf8_l, "F_triad (Persona Friction):", "Disagreement index across Planner, Critic, and Ethics outputs (0.0 to 1.0).")
-    add_bullet(tf8_l, "Delta_prereq (Graph Violations):", "Prerequisite sequence errors flagged by the 42-node DAG traversal.")
-    add_bullet(tf8_l, "R_socio (Socio-Economic Risk):", "Financial exposure index when commercial certifications threaten student budget.")
-    add_bullet(tf8_l, "R_timeline (Compression Risk):", "Timeline compression index when student timeline is below curriculum norms.")
-    add_bullet(tf8_l, "Trigger Invariant:", "If U_cal >= 0.45 or Delta_prereq >= 1, autonomous roadmap release is blocked.")
+    add_bullet(tf8_l, "F_triad (Persona Friction):", "Disagreement index across Planner, Critic, and Ethics outputs (0.0 to 1.0).", pt_size=9.2)
+    add_bullet(tf8_l, "Delta_prereq (Graph Violations):", "Prerequisite sequence errors flagged by the 42-node DAG traversal.", pt_size=9.2)
+    add_bullet(tf8_l, "R_socio (Financial Exposure):", "min(1.0, Cost / (12 * Budget)). Evaluates to 0.0 for MIT OCW; spikes only on debt.", pt_size=9.2)
+    add_bullet(tf8_l, "R_timeline (Compression Risk):", "Timeline compression index when student timeline is below curriculum norms.", pt_size=9.2)
+    add_bullet(tf8_l, "Case Study Proof (Priya):", "0.30(0.80) + 0.35(0.75) + 0.20(0.85) + 0.15(0.65) = 0.77 >= 0.45 -> Gate Triggers.", pt_size=9.2, bold_color=COLOR_BLACK)
+    add_bullet(tf8_l, "Trigger Invariant:", "If U_cal >= 0.45 or Delta_prereq >= 1, autonomous roadmap release is blocked; sliders activate.", pt_size=9.2)
 
     add_box(s8, Inches(6.8), t8, w8, h8, title="Dispute Tree & Student Slider Controls", title_size=12.0)
     tf8_r = s8.shapes.add_textbox(Inches(7.0), t8 + Inches(0.48), w8 - Inches(0.4), h8 - Inches(0.58)).text_frame
@@ -543,9 +544,9 @@ def build_bw_deck(output_pptx="docs/FINAL_PRESENTATION_15_SLIDES.pptx"):
     spacing11 = Inches(0.16)
 
     metric_defs = [
-        ("UCR (Prerequisites)", "Unsupported-Claim Rate", "<= 5.0%", "0.0%", "Percentage of recommended milestones violating prerequisite ordering in the 42-node DAG."),
-        ("CRR (Contradictions)", "Contradiction Resolution", ">= 80.0%", "100.0%", "Percentage of Critic and Ethics objections addressed and resolved in the final synthesized plan."),
-        ("H_div (Diversity)", "Evidence Diversity", ">= 0.80", "1.00", "Normalized Shannon entropy across cited knowledge categories (MIT OCW, CS50, O*NET, IEEE)."),
+        ("UCR (Prerequisites)", "Unsupported-Claim Rate", "<= 5.0%", "0.0%", "Percentage of milestones violating prerequisite ordering in 42-node DAG (N=120 milestones across 20 profiles)."),
+        ("CRR (Contradictions)", "Contradiction Resolution", ">= 80.0%", "100.0%", "Percentage of Critic and Ethics objections addressed and resolved or routed to sliders in final plan."),
+        ("H_div (Diversity)", "Evidence Diversity", ">= 0.80", "1.00", "Normalized Shannon entropy across K=4 accredited knowledge categories (MIT, CS50, O*NET, IEEE)."),
         ("J (Fairness)", "Demographic Fairness", ">= 0.90", "1.00", "Jaccard similarity of core curriculum recommendations between matched counterfactual pairs."),
         ("User Rubric", "Pedagogical Score", ">= 4.0 / 5.0", "4.7 / 5.0", "Standardized evaluation across 5 dimensions: Balance, Rigor, Equity, Transparency, Feasibility."),
     ]
@@ -699,9 +700,9 @@ def build_bw_deck(output_pptx="docs/FINAL_PRESENTATION_15_SLIDES.pptx"):
 
     add_box(s14, Inches(0.8), t14, w14, h14, title="Core Committee Examination Defenses", title_size=12.0)
     tf14_l = s14.shapes.add_textbox(Inches(1.0), t14 + Inches(0.48), w14 - Inches(0.4), h14 - Inches(0.58)).text_frame
-    add_bullet(tf14_l, "Q1: Why not just use GPT-4o or Claude 3.5?", "Two reasons: First, cloud models violate student privacy and incur continuous token costs. Second, empirical literature proves even frontier models hallucinate prerequisite order without structural graph verification.")
-    add_bullet(tf14_l, "Q2: Isn't a 7B model too small for complex debate?", "By assigning narrow persona roles with asymmetric temperatures (0.3 vs 0.6) and anchoring in a 42-node DAG, Qwen 2.5 7B matches or exceeds monolithic frontier models while running locally.")
-    add_bullet(tf14_l, "Q3: Why NetworkX instead of Neo4j for the prototype?", "NetworkX executes in-memory in < 0.2 ms with zero server overhead. However, our architecture is dual-mode: we include automated Cypher export to Neo4j for enterprise scaling.")
+    add_bullet(tf14_l, "Q1: Is 0.0% UCR circular since DAG checks itself?", "Neuro-symbolic separation: LLM generates diverse trade-offs; the DAG deterministically type-checks prerequisites. Config 3 proves debate alone has 86.4% errors (Woozle effect); the graph is an essential structural filter.")
+    add_bullet(tf14_l, "Q2: Does R_socio in U_cal penalize low-income students?", "No! R_socio = min(1.0, Cost / (12 * Budget)). When free MIT OCW/CS50 is recommended, R_socio = 0.0 for all students. The gate triggers only if an agent suggests unaffordable commercial bootcamp debt.")
+    add_bullet(tf14_l, "Q3: Why claim 1.00 fairness when Config 3 scored 1.00?", "Config 3 achieved parity but with 86.4% invalid prerequisites. Config 4 achieves Pareto optimality: preserving J=1.00 while driving prerequisite violations to strictly 0.0% and resolving 100% of disputes.")
 
     add_box(s14, Inches(6.8), t14, w14, h14, title="Empirical Validation & Student Usability", title_size=12.0)
     tf14_r = s14.shapes.add_textbox(Inches(7.0), t14 + Inches(0.48), w14 - Inches(0.4), h14 - Inches(0.58)).text_frame

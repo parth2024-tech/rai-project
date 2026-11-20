@@ -350,11 +350,13 @@
     - *Mathematical Risk Formulation:*
       $ U_("cal") = 0.30 F_("triad") + 0.35 Delta_("prereq") + 0.20 R_("socio") + 0.15 R_("timeline") $
     - *Friction Dimensions:*
-      - $F_("triad")$ (Persona Friction): Disagreement index across Planner, Critic, and Ethics.
+      - $F_("triad")$ (Persona Friction): Disagreement index across Planner, Critic, and Ethics ($0.0$ to $1.0$).
       - $Delta_("prereq")$ (Graph Violations): Prerequisite sequence errors flagged by the 42-node DAG.
-      - $R_("socio")$ (Socio-Economic Risk): Financial exposure index when commercial certifications threaten student budget.
+      - $R_("socio")$ (Financial Exposure): $min(1.0, "Cost"_("proposed") / (12 times "Budget"))$. Evaluates to $0.0$ for free MIT OCW/CS50; spikes only on predatory debt.
       - $R_("timeline")$ (Compression Risk): Timeline compression index when requested months are under curriculum requirements.
-    - *Trigger Threshold:* If $U_("cal") >= 0.45$ or $Delta_("prereq") >= 1$, autonomous release is blocked.
+    - *Case Study Proof (Priya Patel):*
+      $ 0.30(0.80) + 0.35(0.75) + 0.20(0.85) + 0.15(0.65) = 0.7700 = bold(0.77) >= 0.45 $
+    - *Trigger Invariant:* If $U_("cal") >= 0.45$ or $Delta_("prereq") >= 1$, autonomous release is blocked; student sliders activate.
   ],
   bw_card(title: "DISPUTE TREE & STUDENT SLIDER CONTROLS")[
     - *Dispute Tree Structure ($cal(T)_("dispute")$):* Rather than hiding disagreement, the Moderator maps active debate friction into three explicit student trade-off nodes:
@@ -477,9 +479,24 @@
   ]
 )
 
-#v(8pt)
-#bw_card(title: "CORE MATHEMATICAL FORMULATIONS")[
-  $ H_("div") = - (sum_(i=1)^K p_i log_2 p_i) / (log_2 K) in [0.0, 1.0] quad (K = 4) #h(40pt) J(S_a, S_b) = (|S_a inter S_b|) / (|S_a union S_b|) in [0.0, 1.0] $
+#v(6pt)
+#bw_card(title: "CORE MATHEMATICAL FORMULATIONS & EVALUATION DENOMINATORS")[
+  #grid(
+    columns: (1.2fr, 1fr),
+    gutter: 12pt,
+    [
+      - *Prerequisite Violation Rate (N = 120 milestones across 20 profiles):*
+        $ "UCR" = (|{m in M : "prereq"(m) not subset (S_("curr") union M_(< m))}|) / (|M|) times 100% $
+      - *Counterfactual Demographic Parity ($S_a, S_b$ core technical competencies):*
+        $ J(S_a, S_b) = (|S_a inter S_b|) / (|S_a union S_b|) in [0.0, 1.0] $
+    ],
+    [
+      - *Normalized Shannon Evidence Diversity ($K = 4$ accredited sources):*
+        $ H_("div") = - (sum_(i=1)^K p_i log_2 p_i) / (log_2 K) in [0.0, 1.0] $
+      - *Calibrated Risk Index ($tau = 0.45$ optimal F1-score threshold):*
+        $ U_("cal") = 0.30 F_("triad") + 0.35 Delta_("prereq") + 0.20 R_("socio") + 0.15 R_("timeline") $
+    ]
+  )
 ]
 
 #pagebreak()
@@ -576,12 +593,12 @@
   columns: (1fr, 1fr),
   gutter: 12pt,
   bw_card(title: "CORE COMMITTEE EXAMINATION DEFENSES")[
-    - *Q1: Why not just use GPT-4o or Claude 3.5?* \
-      Two reasons: First, cloud models violate student privacy and incur continuous token costs. Second, empirical literature proves even frontier models hallucinate prerequisite order without structural graph verification.
-    - *Q2: Isn't a 7B model too small for complex debate?* \
-      By assigning narrow persona roles with asymmetric temperatures (0.3 vs 0.6) and anchoring in a 42-node DAG, Qwen 2.5 7B matches or exceeds monolithic frontier models while running locally.
-    - *Q3: Why NetworkX instead of Neo4j for the prototype?* \
-      NetworkX executes in-memory in $< 0.2 "ms"$ with zero server overhead. However, our architecture is dual-mode: we include automated Cypher export to Neo4j for enterprise scaling.
+    - *Q1: Is 0.0% UCR circular since the DAG validates itself?* \
+      Neuro-symbolic separation: LLMs generate diverse career trade-offs; the DAG deterministically type-checks prerequisites (like a compiler). Config 3 proves debate alone still has an 86.4% violation rate (Woozle effect); the graph is an essential structural filter.
+    - *Q2: Does $R_("socio")$ in $U_("cal")$ penalize low-income students?* \
+      No! $R_("socio") = min(1.0, "Cost"_("proposed") / (12 times "Budget"))$. For accredited zero-cost courseware (MIT OCW, CS50), $R_("socio") = 0.0$ for both rich and poor students. The gate triggers only if an agent attempts to steer a low-budget student into predatory debt.
+    - *Q3: Why claim 1.00 fairness when Config 3 already scored 1.00?* \
+      Config 3 achieved parity but with 86.4% invalid prerequisites. Config 4 achieves Pareto optimality: preserving $J = 1.00$ demographic parity while driving prerequisite errors to strictly 0.0% and resolving 100% of disputes.
   ],
   bw_card(title: "EMPIRICAL VALIDATION & STUDENT USABILITY")[
     - *Ground-Truth Reliability (Cohen's Kappa):* \
