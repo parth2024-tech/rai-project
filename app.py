@@ -143,7 +143,10 @@ model_choice = st.sidebar.selectbox(
 )
 
 # Neo4j Database Connection Indicator
-neo4j_info = career_graph.check_neo4j_status()
+if hasattr(career_graph, "check_neo4j_status"):
+    neo4j_info = career_graph.check_neo4j_status()
+else:
+    neo4j_info = {"connected": False, "node_count": 0, "edge_count": 0}
 if neo4j_info.get("connected"):
     st.sidebar.success(f"Neo4j: Online ({neo4j_info.get('node_count')} nodes, {neo4j_info.get('edge_count')} edges)")
 else:
@@ -537,7 +540,10 @@ with tab4:
 
         with st.expander("Neo4j Live Database & Cypher Workbench", expanded=True):
             st.markdown("##### Live Neo4j Service Status")
-            n_status = career_graph.check_neo4j_status()
+            if hasattr(career_graph, "check_neo4j_status"):
+                n_status = career_graph.check_neo4j_status()
+            else:
+                n_status = {"connected": False, "node_count": 0, "edge_count": 0}
 
             nc1, nc2, nc3 = st.columns([1.5, 1, 1])
             with nc1:
