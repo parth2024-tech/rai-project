@@ -167,7 +167,7 @@ The complete system runs locally on a single laptop using Ollama and Qwen, ensur
 
 *Limitations of Single-Agent Advisory Systems.* Holistic evaluation studies such as HELM @liang2023holistic demonstrate that single-score evaluations conceal critical trade-offs. CheckList @ribeiro2020beyond established behavioral testing for NLP, emphasizing that counterfactual perturbations (such as changing a student's college tier while holding skills constant) must not alter substantive recommendations. In career planning, single-agent models collapse competing goals into a single biased answer @zhao2023survey, @min2023recent.
 
-*Multi-Agent Debate.* Irving et al. @irving2018ai proposed AI safety via debate, demonstrating that competing agents can reveal errors that an unassisted observer misses. Du et al. @du2024improving and Liang et al. @liang2023encouraging proved that multi-agent interaction stimulates divergent reasoning and reduces hallucinations compared to single-agent prompts. However, Smit et al. @smit2024should observed that unconstrained debate often deteriorates into agreement bias if models share identical weights. We prevent this collapse by grounding the debate in an external prerequisite knowledge graph.
+*Multi-Agent Debate.* Irving et al. @irving2018ai proposed AI safety via debate, demonstrating that competing agents can reveal errors that an unassisted observer misses. Du et al. @du2024improving and Liang et al. @liang2023encouraging proved that multi-agent interaction stimulates divergent reasoning and reduces hallucinations compared to single-agent prompts. However, Smit et al. @smit2024should observed that unconstrained debate often deteriorates into agreement bias if models share identical weights. Without external grounding, debating agents can also amplify each other's false premises (the Woozle Effect). We prevent this collapse by grounding the debate in an external prerequisite knowledge graph.
 
 *Knowledge Graphs & Grounded Retrieval.* Retrieval-Augmented Generation (RAG) @lewis2020retrieval grounds text generation in retrieved documents. RAGAS @es2024ragas provides evaluation for retrieval faithfulness. In curriculum design, however, semantic similarity alone is insufficient: claiming "Deep Learning takes two weeks" may match course keywords but violates academic sequencing @acm2023cs. We therefore enforce topological sequencing using a 42-node prerequisite graph aligned with ACM/IEEE CS2023 @acm2023cs and O\*NET standards @onet2024taxonomy.
 
@@ -198,7 +198,7 @@ $ Delta_("prereq") = |{ (u, v) in cal(E)_("prereq") : v in M and u in.not (S_("c
 
 The system then evaluates the *Confidence & Risk Score*:
 $ U_("cal") = w_1 F_("triad") + w_2 Delta_("prereq") + w_3 R_("socio") + w_4 R_("timeline") $ <eq:ucal>
-*In plain terms:* A composite risk score between 0.0 and 1.0 reflecting persona disagreements ($F_("triad")$), missing prerequisites ($Delta_("prereq")$), low student budget ($R_("socio")$), and rushed timelines ($R_("timeline")$). If $U_("cal") >= 0.45$, the gate halts automatic release.
+*In plain terms:* A composite risk score between 0.0 and 1.0 reflecting persona disagreements ($F_("triad")$), missing prerequisites ($Delta_("prereq")$), low student budget ($R_("socio")$), and rushed timelines ($R_("timeline")$) with calibrated weights $(w_1 = 0.30, w_2 = 0.35, w_3 = 0.20, w_4 = 0.15)$. If $U_("cal") >= 0.45$, the gate halts automatic release.
 
 == D. Interactive Verification Gate & Student Override
 If $Delta_("prereq") > 0$ or $U_("cal") >= 0.45$, the system blocks autonomous roadmap release. It activates the *Verification Gate*, displaying an explicit *Dispute Tree* ($cal(T)_("dispute")$) across three key student trade-offs:
@@ -243,7 +243,7 @@ The graph defines 47 directed prerequisite edges $(u arrow.r v)$, where competen
       4: *Ethics Agent:* Flag predatory bootcamp debt and enforce zero-cost resources \
       5: $Delta_("prereq") arrow.l "CheckDAGPrerequisites"(G, "CurrentSkills", M)$ \
       6: $cal(T)_("disp") arrow.l "BuildDisputeTree"("Planner", "Critic", "Ethics")$ \
-      7: $U_("cal") arrow.l w_1 F_("disagree") + w_2 Delta_("prereq") + w_3 R_("budget") + w_4 R_("time")$ \
+      7: $U_("cal") arrow.l w_1 F_("triad") + w_2 Delta_("prereq") + w_3 R_("socio") + w_4 R_("timeline")$ \
       8: *if* $U_("cal") >= 0.45$ *or* $Delta_("prereq") > 0$ *then* \
       9: $quad$ $G_("status") arrow.l "TRIGGERED"$; Present Dispute Tree $cal(T)_("disp")$ on UI \
       10: $quad$ $R^* arrow.l "ApplyStudentInteractiveSliders"(P, cal(T)_("disp"))$ \
@@ -433,7 +433,7 @@ Table III displays the evaluation results across all five metrics.
   )
 ]
 
-Config 1 (Monolithic LLM) failed basic prerequisite checks on 90.9% of profiles because the base model jumps straight into advanced tools. Config 2 (multi-perspective prompting) improved contradiction handling slightly (38.0%), but internal attention still collapsed disagreements. In contrast, our proposed system (Config 4) eliminated prerequisite violations completely ($U C R = 0.0\%$) and achieved 100.0% contradiction resolution.
+Config 1 (Monolithic LLM) failed basic prerequisite checks on 90.9% of profiles because the base model jumps straight into advanced tools. Config 2 (multi-perspective prompting) improved contradiction handling slightly (38.0%), but internal attention still collapsed disagreements. In Config 3, unmoderated debate without external grounding suffered from the "Woozle Effect": agents reinforced each other's optimistic milestone skips, resulting in an 86.4% prerequisite violation rate. In contrast, our proposed system (Config 4) couples debate with deterministic graph traversal, eliminating prerequisite violations completely ($U C R = 0.0\%$) and achieving 100.0% contradiction resolution.
 
 #align(center)[
   #block(
