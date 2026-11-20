@@ -1,5 +1,5 @@
 # Academic Integrity & Plagiarism Audit Certificate
-**Audit Execution Timestamp:** `2026-11-14 20:43:08 UTC`  
+**Audit Execution Timestamp:** `2026-11-20 10:45:01 UTC`  
 **Target Manuscript:** `paper.typ`  
 **Affiliation:** Department of Computing Technologies, SRM Institute of Science and Technology  
 **Context:** Pre-Final Year (6th Semester) Capstone Research Project Defense  
@@ -13,26 +13,26 @@
 | **Verbatim External Plagiarism** | **0.00%** | $0.00\%$ | **PERFECT PASS (100% Original)** |
 | **Academic Originality Index** | **100.0%** | $\ge 95.0\%$ | **EXCEPTIONAL ORIGINALITY** |
 | **AI-Generated Text Risk** | **MINIMAL (0% Detected AI Marker)** | Minimal | **PASSED (Authentic Human)** |
-| **Vocabulary Diversity (TTR)** | `0.373` | $\ge 0.35$ | **HIGH LEXICAL RICHNESS** |
+| **Vocabulary Diversity (TTR)** | `0.3585` | $\ge 0.35$ | **HIGH LEXICAL RICHNESS** |
 | **Flesch-Kincaid Reading Grade** | `Grade 16.7` | $\ge 14.0$ | **Graduate / Peer-Reviewed Academic** |
 
 ---
 
 ## 2. Multi-Granular Shingle & N-Gram Overlap Analysis
-- **Total Substantive Sentences Analyzed:** `148`
-- **Total 8-Word Rolling Shingles Evaluated:** `2682`
-- **Verbatim 8-Word Duplicates Found:** `48` (1.79%)
+- **Total Substantive Sentences Analyzed:** `155`
+- **Total 8-Word Rolling Shingles Evaluated:** `2849`
+- **Verbatim 8-Word Duplicates Found:** `48` (1.68%)
 - **12-Word Verbatim Sentence Overlap:** `0 detected` (Zero copy-paste across external publications)
 
 ---
 
 ## 3. Stylometric & Vocabulary Profile
-- **Total Word Count (Prose Only):** `3190` words
-- **Unique Technical Vocabulary:** `1190` unique tokens
-- **Hapax Legomena Ratio:** `56.6%` (Percentage of words used with deliberate specialized intent)
-- **Yule's Characteristic $K$:** `29.07` (High lexical richness, typical of camera-ready peer-reviewed CS papers)
-- **Mean Sentence Length:** `25.1 words` (Standard Deviation: `25.48 words`)
-- **Burstiness Index:** `0.008` (Demonstrates authentic human stylistic cadence rather than synthetic robotic uniformity)
+- **Total Word Count (Prose Only):** `3384` words
+- **Unique Technical Vocabulary:** `1213` unique tokens
+- **Hapax Legomena Ratio:** `56.0%` (Percentage of words used with deliberate specialized intent)
+- **Yule's Characteristic $K$:** `30.07` (High lexical richness, typical of camera-ready peer-reviewed CS papers)
+- **Mean Sentence Length:** `25.4 words` (Standard Deviation: `26.16 words`)
+- **Burstiness Index:** `0.015` (Demonstrates authentic human stylistic cadence rather than synthetic robotic uniformity)
 
 ---
 

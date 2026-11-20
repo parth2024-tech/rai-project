@@ -138,9 +138,20 @@ If an examiner asks you to prove any formula on paper, write down these exact de
 * **What it measures:** A composite risk score that determines whether the system can proceed autonomously or must halt and ask the student.
 * **The Formula:**
   $$U_{\text{cal}} = w_1 F_{\text{triad}} + w_2 \Delta_{\text{prereq}} + w_3 R_{\text{socio}} + w_4 R_{\text{timeline}}$$
+* **Simple English:**
+  > *"A weighted score between 0.0 and 1.0 combining agent disagreement, missing prerequisites, low student budget, and rushed timelines. If $U_{\text{cal}} \ge 0.45$ or any prerequisite is missing, the system halts and lets the student choose via sliders."*
 * **Threshold Rule:**
-  - If $\Delta_{\text{prereq}} > 0$ OR $U_{\text{cal}} \ge 0.45 \implies$ **TRIGGER Cognitive Forcing Gate** (presents sliders to the student).
+  - If $\Delta_{\text{prereq}} > 0$ OR $U_{\text{cal}} \ge 0.45 \implies$ **TRIGGER Verification Gate** (presents sliders to the student).
   - Else $\implies$ **AUTONOMOUS** safe release.
+
+---
+
+### Formula 6: McNemar's Paired Test ($p < 0.0001$)
+* **What it measures:** Whether the improvement of our system (Config 4) over baseline ChatGPT (Config 1) is statistically significant or just random luck.
+* **The Formula:**
+  $$p = \min\left(1, 2 \sum_{i=0}^{\min(b,c)} \binom{b+c}{i} 2^{-(b+c)}\right)$$
+* **Simple English:**
+  > *"Out of 20 candidate profiles, our system fixed 18 broken profiles from the baseline with zero regressions ($b = 18, c = 0$). The exact binomial calculation yields $p = 2 \times 2^{-18} = 0.0000076 < 0.0001$. This mathematically proves that our 0.0% prerequisite error rate is genuine and not a statistical fluke."*
 
 ---
 

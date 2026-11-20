@@ -141,7 +141,7 @@
 #pad(x: 0.30in, bottom: 0.12in)[
   #set par(first-line-indent: 0pt, justify: true, leading: 0.50em)
   #text(size: 8.5pt)[
-    *#emph[Abstract]---Large Language Models (LLMs) are widely used by engineering students for advice on careers, electives, and upskilling roadmaps. However, conventional single-prompt chatbots frequently generate generic, one-sided recommendations, affirm unrealistic student assumptions (sycophancy), fail to enforce foundational course prerequisites, and steer low-budget students toward expensive commercial certifications. In this project, we develop a local multi-persona career advisory system that replaces single-agent output with structured dialectic debate among three specialized agents: a Planner (who designs actionable learning milestones), a Critic (who exposes missing course prerequisites, timeline risks, and interview hurdles), and an Ethics-Reviewer (who safeguards against predatory bootcamp debt, enforces free open courseware, and promotes student well-being). To prevent models from hallucinating invalid sequences, the debate is coupled with a 42-node prerequisite knowledge graph spanning 9 Computer Science domains. A Moderator agent synthesizes the debate into a balanced roadmap. When high uncertainty or prerequisite gaps are detected, an interactive Cognitive Forcing Gate alerts the student, allowing transparent human slider control over career priorities. We evaluate our system across 20 synthetic candidate profiles representing 10 technical career paths with matched demographic and socioeconomic pairs (Tier-1 high-budget vs. Tier-3 low-budget students). Experimental results indicate that our graph-verified multi-persona system reduces prerequisite sequencing errors from 90.9% in the baseline to 0.0%, achieves 100.0% contradiction resolution, and provides equal core technical pathways regardless of student background. The entire architecture executes locally on consumer hardware without external APIs, guaranteeing complete student data privacy.*
+    *#emph[Abstract]---Large Language Models (LLMs) are widely used by engineering students for advice on careers, electives, and upskilling roadmaps. However, conventional single-prompt chatbots frequently generate generic, one-sided recommendations, affirm unrealistic student assumptions (sycophancy), fail to enforce foundational course prerequisites, and steer low-budget students toward expensive commercial certifications. In this project, we develop a local multi-persona career advisory system that replaces single-agent output with structured multi-agent debate among three specialized agents: a Planner (who designs actionable learning milestones), a Critic (who exposes missing course prerequisites, timeline risks, and interview hurdles), and an Ethics-Reviewer (who safeguards against predatory bootcamp debt, enforces free open courseware, and promotes student well-being). To prevent models from hallucinating invalid sequences, the debate is coupled with a 42-node prerequisite knowledge graph spanning 9 Computer Science domains. A Moderator agent synthesizes the debate into a balanced roadmap. When high uncertainty or prerequisite gaps are detected, an interactive Verification Gate alerts the student, allowing transparent human slider control over career priorities. We evaluate our system across 20 synthetic candidate profiles representing 10 technical career paths with matched demographic and socioeconomic pairs (Tier-1 high-budget vs. Tier-3 low-budget students). Experimental results indicate that our graph-verified multi-persona system reduces prerequisite sequencing errors from 90.9% in the baseline to 0.0%, achieves 100.0% contradiction resolution, and provides equal core technical pathways regardless of student background. The entire architecture executes locally on consumer hardware without external APIs, guaranteeing complete student data privacy.*
 
     #v(0.05in)
     *#emph[Index Terms]---Career guidance, multi-agent debate, knowledge graph, prerequisite verification, counterfactual fairness, human-in-the-loop, responsible AI.*
@@ -166,32 +166,32 @@ Engineering students routinely face critical career decisions: selecting special
 4. *Socioeconomic and Institutional Bias:* Standard training data subtly associates elite corporate roles with metropolitan Tier-1 institutes, while suggesting basic support tasks to students from rural or Tier-3 colleges @garg2019counterfactual.
 
 To address these vulnerabilities, this capstone research project introduces a *Debate-Based Career Guidance System* built on three core pillars:
-1. *A Dialectic Triad of Complementary Personas:* Instead of one AI giving an answer, three separate agents---a Planner, a Critic, and an Ethics-Reviewer---deliberate on the student's profile to surface trade-offs.
-2. *A Deterministic Prerequisite Knowledge Graph:* A 42-node Computer Science prerequisite graph enforces that advanced milestones cannot be scheduled before essential foundational subjects are completed.
-3. *A Moderator with Human Override Control:* A Moderator reconciles conflicting arguments into a transparent roadmap. If missing prerequisites or high risks are identified, an automated gate halts autonomous approval and provides interactive sliders for student intervention.
+1. *Three-Agent Deliberation (Planner, Critic, Ethics):* Instead of one AI giving an answer, three separate agents deliberate on the student's profile to surface trade-offs.
+2. *Deterministic Prerequisite Knowledge Graph:* A 42-node Computer Science prerequisite graph enforces that advanced milestones cannot be scheduled before essential foundational subjects are completed.
+3. *Moderator with Interactive Student Override:* A Moderator reconciles conflicting arguments into a transparent roadmap. If missing prerequisites or high risks are identified, an automated gate halts autonomous approval and provides interactive sliders for student intervention.
 
 The complete system runs locally on a single laptop using Ollama and Qwen, ensuring zero student data leakage.
 
 = II. Related Work
 
-*Limitations of Single-Agent Advisory Systems.* Holistic evaluation studies such as HELM @liang2023holistic demonstrate that single-score evaluations conceal critical trade-offs. CheckList @ribeiro2020beyond established behavioral testing for NLP, emphasizing that label-preserving perturbations (such as changing a student's college tier or name) must not alter substantive recommendations. In career planning, single-agent models collapse competing goals into a single biased answer @zhao2023survey, @min2023recent.
+*Limitations of Single-Agent Advisory Systems.* Holistic evaluation studies such as HELM @liang2023holistic demonstrate that single-score evaluations conceal critical trade-offs. CheckList @ribeiro2020beyond established behavioral testing for NLP, emphasizing that counterfactual perturbations (such as changing a student's college tier while holding skills constant) must not alter substantive recommendations. In career planning, single-agent models collapse competing goals into a single biased answer @zhao2023survey, @min2023recent.
 
 *Multi-Agent Debate.* Irving et al. @irving2018ai proposed AI safety via debate, demonstrating that competing agents can reveal errors that an unassisted observer misses. Du et al. @du2024improving and Liang et al. @liang2023encouraging proved that multi-agent interaction stimulates divergent reasoning and reduces hallucinations compared to single-agent prompts. However, Smit et al. @smit2024should observed that unconstrained debate often deteriorates into agreement bias if models share identical weights. We prevent this collapse by grounding the debate in an external prerequisite knowledge graph.
 
 *Knowledge Graphs & Grounded Retrieval.* Retrieval-Augmented Generation (RAG) @lewis2020retrieval grounds text generation in retrieved documents. RAGAS @es2024ragas provides evaluation for retrieval faithfulness. In curriculum design, however, semantic similarity alone is insufficient: claiming "Deep Learning takes two weeks" may match course keywords but violates academic sequencing @acm2023cs. We therefore enforce topological sequencing using a 42-node prerequisite graph aligned with ACM/IEEE CS2023 @acm2023cs and O\*NET standards @onet2024taxonomy.
 
-*Fairness and Human-in-the-Loop AI.* Geyik et al. @geyik2019fairness investigated fairness in ranking systems. Buçinca et al. @bucinca2021trust proposed cognitive forcing functions to disrupt blind trust in AI systems. Our Cognitive Forcing Gate implements this principle by exposing explicit trade-offs and requiring active human confirmation.
+*Fairness and Human-in-the-Loop AI.* Geyik et al. @geyik2019fairness investigated fairness in ranking systems. Buçinca et al. @bucinca2021trust proposed cognitive forcing functions (interactive checkpoints to prevent users from blindly accepting AI recommendations). Our Interactive Verification Gate implements this principle by exposing explicit trade-offs and requiring active student confirmation.
 
 = III. System Architecture
 
-The proposed system consists of four interconnected components: the Grounded Evidence Store, the Dialectic Triad Engine, the 42-Node Prerequisite Graph, and the Moderator Synthesis Gate (Fig. 1).
+The proposed system consists of four interconnected components: the Grounded Evidence Store, the Three-Agent Deliberation Engine, the 42-Node Prerequisite Graph, and the Moderator Synthesis Gate (Fig. 1).
 
 == A. Grounded Knowledge Store
 The system indexes two accredited public data repositories:
 1. *Public Course Curricula:* 15 accredited course descriptions based on the ACM/IEEE CS2023 curriculum @acm2023cs, MIT OpenCourseWare, Berkeley CS61, and Harvard CS50, indexed in ChromaDB with metadata (course code, estimated hours, and public access links).
 2. *Standard Occupational Standards:* 8 official occupational roles from O\*NET and the U.S. Bureau of Labor Statistics @onet2024taxonomy, providing validated salary bands, core job tasks, and entry requirements.
 
-== B. The Dialectic Triad Engine
+== B. Three-Agent Deliberation Engine
 Deliberation is divided among three physically separated agent personas powered by local Qwen 2.5 7B @qwen2024report via Ollama:
 - *The Planner Persona:* Acts as an ambitious career strategist. Grounded in ACM course modules, it formulates step-by-step milestones, project deliverables, and timelines.
 - *The Critic Persona:* Acts as a skeptical technical interviewer. It identifies missing mathematical and systems prerequisites, highlights market saturation risks, and stresses realistic interview screening hurdles.
@@ -203,14 +203,14 @@ The system implements a hand-crafted 42-node Directed Acyclic Graph (DAG) coveri
 When the Planner proposes a sequence of milestones $M = [m_1, m_2, dots, m_k]$, the graph deterministically checks whether every prerequisite of milestone $v$ has either been mastered already ($S_("curr")$) or is scheduled prior to $v$ ($M_(< v)$):
 $ Delta_("prereq") = |{ (u, v) in cal(E)_("prereq") : v in M and u in.not (S_("curr") union M_(< v)) }| $ <eq:prereq>
 
-In simple terms, $Delta_("prereq")$ counts how many required foundational subjects are missing in the proposed plan.
+*In plain terms:* This formula checks the student's proposed courses against the prerequisite graph. It returns the exact count of missing foundational subjects (e.g., taking Deep Learning without Linear Algebra). If $Delta_("prereq") = 0$, the curriculum sequence is academically valid.
 
-The system then evaluates *Calibrated Epistemic Uncertainty*:
+The system then evaluates the *Confidence & Risk Score*:
 $ U_("cal") = w_1 F_("triad") + w_2 Delta_("prereq") + w_3 R_("socio") + w_4 R_("timeline") $ <eq:ucal>
-where $F_("triad")$ reflects disagreement among personas, $R_("socio")$ represents budget vulnerability, and $R_("timeline")$ accounts for compressed timelines.
+*In plain terms:* A composite risk score between 0.0 and 1.0 reflecting persona disagreements ($F_("triad")$), missing prerequisites ($Delta_("prereq")$), low student budget ($R_("socio")$), and rushed timelines ($R_("timeline")$). If $U_("cal") >= 0.45$, the gate halts automatic release.
 
-== D. Cognitive Forcing Gate & Human Override
-If $Delta_("prereq") > 0$ or $U_("cal") >= 0.45$, the system blocks autonomous roadmap release. It activates the *Cognitive Forcing Gate*, displaying an explicit *Dispute Tree* ($cal(T)_("dispute")$) across three key student trade-offs:
+== D. Interactive Verification Gate & Student Override
+If $Delta_("prereq") > 0$ or $U_("cal") >= 0.45$, the system blocks autonomous roadmap release. It activates the *Verification Gate*, displaying an explicit *Dispute Tree* ($cal(T)_("dispute")$) across three key student trade-offs:
 1. *Speed vs. Depth:* Rushing projects vs. mastering foundational algorithms and systems.
 2. *Paid Bootcamps vs. Free Open Courseware:* High tuition debt vs. MIT OCW / GitHub open-source proof-of-work.
 3. *Campus Placement vs. Open Proof-of-Work:* Overcoming college tier bias through public open-source contributions.
@@ -242,24 +242,24 @@ The graph defines 47 directed prerequisite edges $(u arrow.r v)$, where competen
     #set text(size: 7.2pt, font: ("Liberation Mono", "DejaVu Sans Mono"))
     #set par(first-line-indent: 0pt, justify: false, leading: 0.38em)
     #align(left)[
-      *Algorithm 1: Dialectic Deliberation and Cognitive Forcing Protocol* \
+      *Algorithm 1: Multi-Agent Deliberation and Interactive Verification Protocol* \
       #line(length: 100%, stroke: 0.5pt + black)
-      *Input:* Candidate $P_i = (S_("curr"), tau, B, T)$, 42-node DAG $G=(V, E)$, Vector store $cal(V)$ \
-      *Output:* Verified Roadmap $cal(R)^*$, Uncertainty $U_("cal")$, Gate Status $G_("status")$ \
-      1: $D arrow.l cal(V)."retrieve"(tau, "top_k"=4)$ \
-      2: $m_("plan") arrow.l pi_("Planner")(P_i, D)$ \
-      3: $c_("crit") arrow.l pi_("Critic")(P_i, m_("plan"), D)$ \
-      4: $e_("eth") arrow.l pi_("Ethics")(P_i, m_("plan"), c_("crit"), D)$ \
-      5: $Delta_("prereq") arrow.l "CheckDAGReachability"(G, S_("curr"), m_("plan"))$ \
-      6: $cal(T)_("disp") arrow.l "BuildDisputeTree"(m_("plan"), c_("crit"), e_("eth"))$ \
-      7: $U_("cal") arrow.l w_1 F(c_("crit")) + w_2 Delta_("prereq") + w_3 R_("socio") + w_4 R_("time")$ \
+      *Input:* Student Profile $P$ (Skills, Target, Budget, Time), 42-Node DAG $G$, ChromaDB $V$ \
+      *Output:* Verified Roadmap $R^*$, Risk Score $U_("cal")$, Gate Status $G_("status")$ \
+      1: Retrieve accredited course modules from $V$ for target career track \
+      2: *Planner Agent:* Propose candidate learning milestones $M$ \
+      3: *Critic Agent:* Identify missing prerequisites and interview screening risks \
+      4: *Ethics Agent:* Flag predatory bootcamp debt and enforce zero-cost resources \
+      5: $Delta_("prereq") arrow.l "CheckDAGPrerequisites"(G, "CurrentSkills", M)$ \
+      6: $cal(T)_("disp") arrow.l "BuildDisputeTree"("Planner", "Critic", "Ethics")$ \
+      7: $U_("cal") arrow.l w_1 F_("disagree") + w_2 Delta_("prereq") + w_3 R_("budget") + w_4 R_("time")$ \
       8: *if* $U_("cal") >= 0.45$ *or* $Delta_("prereq") > 0$ *then* \
-      9: $quad$ $G_("status") arrow.l "TRIGGERED"$; "SurfaceDisputeTree"$(cal(T)_("disp"))$ \
-      10: $quad$ $cal(R)^* arrow.l "HumanStudentOverride"(P_i, cal(T)_("disp"))$ \
+      9: $quad$ $G_("status") arrow.l "TRIGGERED"$; Present Dispute Tree $cal(T)_("disp")$ on UI \
+      10: $quad$ $R^* arrow.l "ApplyStudentInteractiveSliders"(P, cal(T)_("disp"))$ \
       11: *else* \
-      12: $quad$ $G_("status") arrow.l "AUTONOMOUS"$; $cal(R)^* arrow.l "Synthesize"(m_("plan"), c_("crit"), e_("eth"))$ \
+      12: $quad$ $G_("status") arrow.l "AUTONOMOUS"$; $R^* arrow.l "SynthesizeApprovedRoadmap"(M)$ \
       13: *end if* \
-      14: *return* $(cal(R)^*, U_("cal"), G_("status"))$ \
+      14: *return* $(R^*, U_("cal"), G_("status"))$ \
       #line(length: 100%, stroke: 0.5pt + black)
     ]
   ]
@@ -292,14 +292,14 @@ The graph defines 47 directed prerequisite edges $(u arrow.r v)$, where competen
                                |
                                v
             +-------------------------------------+
-            |        DIALECTIC TRIAD ENGINE       |
+            |      THREE-AGENT DELIBERATION       |
             |  [Planner]   [Critic]   [Ethics]    |
             +-------------------------------------+
                                |
                                v
             +-------------------------------------+
             |         MODERATOR SYNTHESIS         |
-            |  Dispute Tree & Uncertainty (U_cal) |
+            |    Dispute Tree & Risk Score (U)    |
             +-------------------------------------+
                                |
                        Is U_cal >= 0.45
@@ -310,13 +310,13 @@ The graph defines 47 directed prerequisite edges $(u arrow.r v)$, where competen
                    |                       |
                    v                       v
       +-------------------------+   +--------------+
-      |  COGNITIVE FORCING GATE |   |  Autonomous  |
-      | Interactive Student Sliders|   |  Deployment  |
+      |    VERIFICATION GATE    |   |  Autonomous  |
+      |  Interactive Student UI |   |  Deployment  |
       +-------------------------+   +--------------+
 ```
     ]
     #set text(size: 8.0pt, font: ("Liberation Serif", "Nimbus Roman"))
-    *Fig. 1. Architectural schematic of the Debate-Based Career Guidance System, coupling the Dialectic Triad with a 42-Node Prerequisite Knowledge Graph and Cognitive Forcing Gate.*
+    *Fig. 1. Architectural schematic of the Debate-Based Career Guidance System, coupling Three-Agent Deliberation with a 42-Node Prerequisite Knowledge Graph and Interactive Verification Gate.*
   ]
 ]
 
@@ -355,23 +355,23 @@ For example, Profile P1_A represents *Aarav Sharma* (Tier-1 institute, ₹40,000
 
 == B. Formulations of the Five Evaluation Metrics
 
-*1. Unsupported-Claim Rate (UCR):* The percentage of recommended milestones that violate prerequisite order or lack grounding:
+*1. Prerequisite Error Rate (UCR):* The percentage of recommended milestones that violate prerequisite ordering in the 42-node graph:
 $ U C R = (|{m in M : "prereq"(m) subset.not (S_("curr") union M_(< m))}|) / (|M|) times 100\% $ <eq:ucr>
-Target: $U C R <= 5.0\%$ (Ideally 0.0%).
+*In plain terms:* Counts how often the AI recommended an advanced subject before foundational courses were completed (Target: $<= 5.0\%$, Ours: *0.0%*).
 
-*2. Evidence Diversity ($H_("div")$):* Normalized Shannon entropy evaluating whether recommendations cite multiple accredited sources (MIT OCW, Harvard CS50, O\*NET) rather than a single source:
+*2. Evidence Diversity ($H_("div")$):* Normalized Shannon entropy evaluating whether recommendations cite multiple accredited sources (MIT, Harvard, O\*NET) rather than repeating a single source:
 $ H_("div") = - (sum_(i=1)^K p_i log_2 p_i) / (log_2 K) in [0.0, 1.0] $ <eq:hdiv>
-Target: $H_("div") >= 0.80$.
+*In plain terms:* Measures resource breadth across our four knowledge pillars. A score of 1.0 means all four pillars were equally referenced (Target: $>= 0.80$, Ours: *1.00*).
 
-*3. Contradiction-Resolution Rate (CRR):* The percentage of surfaced Critic and Ethics objections successfully reconciled in the final plan:
+*3. Contradiction-Resolution Rate (CRR):* The percentage of surfaced Critic and Ethics objections successfully resolved in the final plan:
 $ C R R = (|D_("resolved")|) / (|D_("surfaced")|) times 100\% $ <eq:crr>
-Target: $C R R >= 80.0\%$.
+*In plain terms:* Measures whether the Moderator actually solved the technical and debt risks raised during debate rather than ignoring them (Target: $>= 80\%$, Ours: *100.0%*).
 
-*4. Counterfactual Demographic Fairness ($J$):* The Jaccard similarity of recommended core competencies between matched candidate pairs $(a, b) in P$:
+*4. Fairness Across Student Backgrounds ($J$):* The Jaccard similarity of recommended core competencies between matched candidate pairs $(a, b) in P$:
 $ J(S_a, S_b) = (|S_a inter S_b|) / (|S_a union S_b|) $ <eq:jaccard>
-Target: $J >= 0.90$ (indicating that both students receive equivalent core training).
+*In plain terms:* Compares Aarav (Tier-1) and Priya (Tier-3). A score of 1.0 means both received the same high-quality core curriculum with zero institutional discrimination (Target: $>= 0.90$, Ours: *1.00*).
 
-*5. User-Rubric Score:* A standardized academic evaluation (1.0 to 5.0 scale) scored across Balance, Rigor, Equity, Transparency, and Feasibility. Target: $>= 4.0 / 5.0$.
+*5. User-Rubric Score:* A 5-point academic quality score assessing Balance, Rigor, Equity, Transparency, and Feasibility (Target: $>= 4.0 / 5.0$, Ours: *4.7 / 5.0*).
 
 == C. Hybrid Scoring Design
 While LLM-as-a-judge approaches have gained popularity for open-domain instruction following @zheng2023judging, our empirical pilot demonstrated that prompting an open-ended 7B LLM judge was unreliable ($kappa = 0.12$): the judge frequently penalized valid supplementary electives. We therefore implemented a hybrid design:
@@ -406,12 +406,14 @@ We evaluated four system configurations on the benchmark suite (Table II).
 ]
 
 == Statistical Evaluation Protocol
-To confirm that results are reliable and not random noise:
-1. *McNemar's Test:* Used to assess whether the difference between roadmaps that passed or failed prerequisite checks across configurations is statistically significant @mcnemar1947note:
+To verify that our empirical results are mathematically sound and not random noise:
+1. *McNemar's Paired Test:* Used to assess whether the difference between roadmaps that passed or failed prerequisite checks across configurations is statistically significant @mcnemar1947note:
 $ p = italic("min")(1, 2 sum_(i=0)^(italic("min")(b,c)) binom(b+c, i) 2^(-(b+c))) $ <eq:mcnemar>
-where $b$ and $c$ represent discordant cases between configurations.
-2. *Ground-Truth Inter-Rater Reliability:* To establish reliable ground truth, two annotators independently labeled 40 dispute decisions and 28 gate triggers following official ACM/IEEE CS2023 guidelines. We computed Cohen's Kappa ($kappa$) @cohen1960coefficient to evaluate inter-annotator agreement:
+*In plain terms:* A standard statistical test for paired binary outcomes. Config 4 fixed 18 broken profiles from Config 1 with zero regressions, yielding $p < 0.0001$ (statistically significant).
+
+2. *Benchmark Inter-Rater Reliability:* To establish reliable ground truth, two student authors independently annotated 40 dispute decisions and 28 gate triggers against official ACM/IEEE CS2023 guidelines. We computed Cohen's Kappa ($kappa$) @cohen1960coefficient to evaluate agreement:
 $ kappa = (p_o - p_e) / (1 - p_e) $ <eq:kappa>
+*In plain terms:* $p_o$ is observed agreement and $p_e$ is chance agreement. Gate triggers achieved $kappa = 0.926$ (almost perfect agreement), confirming consistent ground-truth standards.
 
 = VI. Empirical Results & Discussion
 
