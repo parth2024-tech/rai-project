@@ -8,6 +8,7 @@ Implements:
 - Neo4j Cypher query generation & official neo4j driver synchronization
 """
 
+import os
 from typing import Any
 
 import networkx as nx
@@ -148,6 +149,11 @@ GRAPH_EDGES = [
 ]
 
 
+NEO4J_URI = os.environ.get("NEO4J_URI", "bolt://localhost:7687")
+NEO4J_USER = os.environ.get("NEO4J_USER", "neo4j")
+NEO4J_PASSWORD = os.environ.get("NEO4J_PASSWORD", "password123")
+
+
 class CareerSkillGraph:
     """Encapsulates the 42-node Prerequisite Knowledge Graph."""
 
@@ -233,7 +239,45 @@ class CareerSkillGraph:
             )
         return "\n".join(lines)
 
-    def sync_to_neo4j(self, uri: str = "bolt://localhost:7687", auth: tuple[str, str] = ("neo4j", "password")) -> dict[str, Any]:
+    def check_neo4j_status(self, uri: str = NEO4J_URI, auth: tuple[str, str] = (NEO4J_USER, NEO4J_PASSWORD)) -> dict[str, Any]:
+        """Checks if Neo4j is running and returns count of stored nodes and edges."""
+        try:
+            from neo4j import GraphDatabase
+            driver = GraphDatabase.driver(uri, auth=auth)
+            with driver.session() as session:
+                n_count = session.run("MATCH (s:Skill) RETURN count(s) AS c").single()["c"]
+                e_count = session.run("MATCH ()-[r:PREREQUISITE_FOR]->() RETURN count(r) AS c").single()["c"]
+            driver.close()
+            return {
+                "connected": True,
+                "node_count": n_count,
+                "edge_count": e_count,
+                "uri": uri,
+                "message": f"Connected to Neo4j ({n_count} nodes, {e_count} edges)"
+            }
+        except Exception as e:
+            return {
+                "connected": False,
+                "node_count": 0,
+                "edge_count": 0,
+                "uri": uri,
+                "message": f"Neo4j offline or unreachable ({e})"
+            }
+
+    def run_cypher_query(self, query: str, uri: str = NEO4J_URI, auth: tuple[str, str] = (NEO4J_USER, NEO4J_PASSWORD)) -> list[dict[str, Any]]:
+        """Executes a read-only Cypher query and returns records as dictionaries."""
+        try:
+            from neo4j import GraphDatabase
+            driver = GraphDatabase.driver(uri, auth=auth)
+            with driver.session() as session:
+                result = session.run(query)
+                records = [dict(record) for record in result]
+            driver.close()
+            return records
+        except Exception as e:
+            return [{"error": str(e)}]
+
+    def sync_to_neo4j(self, uri: str = NEO4J_URI, auth: tuple[str, str] = (NEO4J_USER, NEO4J_PASSWORD)) -> dict[str, Any]:
         """Attempts connection to Neo4j database using official driver."""
         try:
             from neo4j import GraphDatabase

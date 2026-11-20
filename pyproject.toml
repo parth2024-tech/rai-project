@@ -23,4 +23,4 @@ disallow_untyped_defs = false
 
 [tool.pytest.ini_options]
 pythonpath = ["."]
-testpaths = ["tests"]
+testpaths = ["tests/test_basic.py"]

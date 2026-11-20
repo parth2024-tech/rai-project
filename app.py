@@ -44,6 +44,13 @@ model_choice = st.sidebar.selectbox(
     index=0
 )
 
+# Neo4j Database Connection Indicator
+neo4j_info = career_graph.check_neo4j_status()
+if neo4j_info.get("connected"):
+    st.sidebar.success(f"🟢 Neo4j: Online ({neo4j_info.get('node_count')} nodes)")
+else:
+    st.sidebar.info("🟡 Neo4j: Offline (NetworkX Fallback)")
+
 harness = MultiAgentDebateHarness(model_name=model_choice)
 synthetic_profiles = load_synthetic_profiles()
 
@@ -414,7 +421,57 @@ with tab4:
             df_tracks = pd.DataFrame([{"Track": k, "Node Count": v} for k, v in track_counts.items()])
             st.dataframe(df_tracks, hide_index=True)
 
-        with st.expander("Neo4j Cypher Schema", expanded=False):
+        with st.expander("Neo4j Live Database & Cypher Console", expanded=True):
+            st.markdown("##### 🔌 Live Neo4j Database Connection")
+            n_status = career_graph.check_neo4j_status()
+            
+            nc1, nc2, nc3 = st.columns([1.5, 1, 1])
+            with nc1:
+                if n_status.get("connected"):
+                    st.success(f"Connected: `{n_status.get('uri')}`")
+                    st.caption(f"Database contains **{n_status.get('node_count')}** nodes & **{n_status.get('edge_count')}** directed edges.")
+                else:
+                    st.warning("Neo4j database is offline. Fallback active.")
+            
+            with nc2:
+                if st.button("🔄 Sync Graph to Neo4j", use_container_width=True):
+                    with st.spinner("Syncing 42 nodes & 47 edges..."):
+                        sync_res = career_graph.sync_to_neo4j()
+                        if sync_res.get("status") == "success":
+                            st.toast("✅ Graph successfully synced to Neo4j!")
+                            st.rerun()
+                        else:
+                            st.error(sync_res.get("message"))
+
+            with nc3:
+                st.link_button("🌐 Open Neo4j Browser", "http://localhost:7474", use_container_width=True, help="Username: neo4j | Password: password123")
+
+            st.divider()
+            st.markdown("##### 🔍 Live Cypher Query Console")
+            
+            preset_queries = {
+                "Prerequisites for Deep Learning": "MATCH (p:Skill)-[:PREREQUISITE_FOR]->(s:Skill {id: 'Deep_Learning'}) RETURN p.name AS Prerequisite, p.category AS Track, s.name AS Target",
+                "Systems Track Dependency Chain": "MATCH path = (p:Skill {category: 'Systems'})-[:PREREQUISITE_FOR*1..3]->(s:Skill) RETURN p.name AS FromSkill, s.name AS ToSkill LIMIT 10",
+                "Node Counts by Knowledge Area": "MATCH (s:Skill) RETURN s.category AS Track, count(s) AS NodeCount ORDER BY NodeCount DESC",
+                "Critical Bottleneck Nodes (High In-Degree)": "MATCH (s:Skill)<-[:PREREQUISITE_FOR]-(p:Skill) RETURN s.name AS Milestone, count(p) AS PrereqRequirements ORDER BY PrereqRequirements DESC LIMIT 8"
+            }
+            
+            selected_preset = st.selectbox("Select a Preset Cypher Query", list(preset_queries.keys()))
+            custom_cypher = st.text_area("Cypher Query", preset_queries[selected_preset], height=80)
+            
+            if st.button("⚡ Run Cypher Query"):
+                if n_status.get("connected"):
+                    records = career_graph.run_cypher_query(custom_cypher)
+                    if records and "error" in records[0]:
+                        st.error(f"Cypher Error: {records[0]['error']}")
+                    elif records:
+                        st.dataframe(pd.DataFrame(records), use_container_width=True)
+                    else:
+                        st.info("Query returned 0 records.")
+                else:
+                    st.warning("Cannot execute query: Neo4j server is offline.")
+
+        with st.expander("Neo4j Cypher Schema & Export Script", expanded=False):
             cypher_code = career_graph.export_cypher_script()
             st.code(cypher_code, language="cypher")
 
