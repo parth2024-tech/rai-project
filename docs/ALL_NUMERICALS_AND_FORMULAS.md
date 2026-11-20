@@ -1,7 +1,8 @@
 # 🧮 MASTER NUMERICALS & FORMULAS COMPENDIUM
 ## Complete Mathematical Proofs, Arithmetic Derivations & Benchmark Values
 ### Project: Local, Multi-Dimensional Evaluation Lab for Student Career Advisory LLM Agents
-**Authors:** Gedela Rishikesh Reddy, Aniket Srivastava, Parth Gupta  
+**Authors:** Aniket Srivastava, Parth Gupta, Gedela Rishikesh Reddy  
+**Mentors:** Dr. Akilandeswari P (Faculty Mentor), Pratyush Jha (Industry Mentor, ZS Associates, Pune)  
 **Document Purpose:** Standalone mathematical reference for viva examination, whiteboard derivations, and examiner scrutiny.
 
 ---

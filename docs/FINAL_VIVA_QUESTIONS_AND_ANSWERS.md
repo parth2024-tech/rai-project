@@ -1,7 +1,8 @@
 # 🎓 Master Viva Defense Guide: Comprehensive Project Documentation & Grilling Answers
 ## A Local, Multi-Dimensional Evaluation Lab for Student Career Advisory LLM Agents
 **Department of Computing Technologies | SRM Institute of Science and Technology, Chennai, India**  
-**Student Investigators:** Gedela Rishikesh Reddy, Aniket Srivastava, Parth Gupta  
+**Student Investigators:** Aniket Srivastava, Parth Gupta, Gedela Rishikesh Reddy  
+**Mentors:** Dr. Akilandeswari P (Faculty Mentor), Pratyush Jha (Industry Mentor, ZS Associates, Pune)  
 **Degree Program:** B.Tech in Computer Science and Engineering  
 **Academic Year:** 2025–2026
 

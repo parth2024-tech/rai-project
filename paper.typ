@@ -7,7 +7,7 @@
 
 #set document(
   title: "Debate-Based Career Guidance Agent with Complementary Personas and Knowledge Graph Verification",
-  author: ("Gedela Rishikesh Reddy", "Aniket Srivastava", "Parth Gupta"),
+  author: ("Aniket Srivastava", "Parth Gupta", "Gedela Rishikesh Reddy", "Dr. Akilandeswari P", "Pratyush Jha"),
   keywords: (
     "Career guidance",
     "multi-agent debate",
@@ -22,7 +22,7 @@
 
 #set page(
   paper: "us-letter",
-  margin: (x: 0.50in, top: 0.60in, bottom: 0.60in),
+  margin: (x: 0.50in, top: 0.52in, bottom: 0.52in),
   header: none,
   footer: align(center)[
     #context text(size: 8.5pt, fill: rgb("#334155"), font: "Liberation Serif")[
@@ -98,31 +98,45 @@
     columns: (1fr, 1fr, 1fr),
     gutter: 12pt,
     [
-      #text(weight: "bold", size: 10.5pt)[Gedela Rishikesh Reddy]\
-      #text(size: 8.2pt, fill: rgb("#334155"))[
-        Dept. of Computing Technologies\
-        SRM Institute of Science and Technology\
-        Kattankulathur, Chennai, India
-      ]
+      #text(size: 9.8pt)[ANIKET SRIVASTAVA]\
+      #text(style: "italic", size: 8.2pt)[Dept. of Computing Technologies]\
+      #text(style: "italic", size: 8.2pt)[SRM Institute Of Science And Technology]\
+      #text(size: 8.2pt)[Chennai, India]\
+      #text(size: 8.2pt)[as6608\@srmist.edu.in]
     ],
     [
-      #text(weight: "bold", size: 10.5pt)[Aniket Srivastava]\
-      #text(size: 8.2pt, fill: rgb("#334155"))[
-        Dept. of Computing Technologies\
-        SRM Institute of Science and Technology\
-        Kattankulathur, Chennai, India
-      ]
+      #text(size: 9.8pt)[PARTH GUPTA]\
+      #text(style: "italic", size: 8.2pt)[Dept. of Computing Technologies]\
+      #text(style: "italic", size: 8.2pt)[SRM Institute Of Science And Technology]\
+      #text(size: 8.2pt)[Chennai, India]\
+      #text(size: 8.2pt)[pg5206\@srmist.edu.in]
     ],
     [
-      #text(weight: "bold", size: 10.5pt)[Parth Gupta]\
-      #text(size: 8.2pt, fill: rgb("#334155"))[
-        Dept. of Computing Technologies\
-        SRM Institute of Science and Technology\
-        Kattankulathur, Chennai, India
-      ]
+      #text(size: 9.8pt)[GEDELA RISHIKESH REDDY]\
+      #text(style: "italic", size: 8.2pt)[Dept. of Computing Technologies]\
+      #text(style: "italic", size: 8.2pt)[SRM Institute Of Science And Technology]\
+      #text(size: 8.2pt)[Chennai, India]\
+      #text(size: 8.2pt)[rg0330\@srmist.edu.in]
     ],
   )
-  #v(0.12in)
+  #v(0.08in)
+  #grid(
+    columns: (1fr, 1fr),
+    gutter: 20pt,
+    [
+      #text(size: 9.8pt)[DR. AKILANDESWARI P]\
+      #text(style: "italic", size: 8.2pt)[Dept. of Computing Technologies]\
+      #text(style: "italic", size: 8.2pt)[SRM Institute Of Science And Technology]\
+      #text(size: 8.2pt)[Chennai, India]\
+      #text(size: 8.2pt)[akilandp\@srmist.edu.in]
+    ],
+    [
+      #text(size: 9.8pt)[PRATYUSH JHA]\
+      #text(style: "italic", size: 8.2pt)[ZS Associates]\
+      #text(size: 8.2pt)[Pune, India]
+    ],
+  )
+  #v(0.08in)
 ]
 
 // ------------------------------------------------------------------------------
@@ -149,7 +163,7 @@
 
 = I. Introduction
 
-Engineering students routinely face critical career decisions: selecting specialization tracks, preparing for placements, acquiring technical skills, and planning higher studies.#footnote[This research was conducted under the technical mentorship and supervision of Dr. P. Akilandeswari (Faculty Mentor) and Pratyush Jha (Industry Mentor).] Increasingly, students consult general-purpose conversational AI assistants for guidance. While Large Language Models (LLMs) such as GPT-4 @openai2023gpt4 and open-weight models like Llama 2 @touvron2023llama and Qwen @qwen2024report demonstrate impressive fluency, deploying a single conversational prompt for career counseling exposes students to severe risks:
+Engineering students routinely face critical career decisions: selecting specialization tracks, preparing for placements, acquiring technical skills, and planning higher studies. Increasingly, students consult general-purpose conversational AI assistants for guidance. While Large Language Models (LLMs) such as GPT-4 @openai2023gpt4 and open-weight models like Llama 2 @touvron2023llama and Qwen @qwen2024report demonstrate impressive fluency, deploying a single conversational prompt for career counseling exposes students to severe risks:
 
 1. *Prerequisite Sequence Failure:* Chatbots often advise novice students to immediately study advanced topics (such as Transformers or Distributed Systems) while ignoring that they lack foundational math, Data Structures, or Operating Systems. This leads to interview failure and student frustration.
 2. *Predatory Financial Debt:* Automated assistants frequently recommend commercial bootcamps and certifications costing ₹1,20,000 (~USD 1,400) to students from modest backgrounds, overlooking accredited, free open courseware (e.g., MIT OpenCourseWare, Harvard CS50).

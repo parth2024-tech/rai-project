@@ -6,7 +6,7 @@
 
 #set document(
   title: "Master Viva Defense Guide — Responsible AI Career Guidance Agent",
-  author: ("Gedela Rishikesh Reddy", "Aniket Srivastava", "Parth Gupta"),
+  author: ("Aniket Srivastava", "Parth Gupta", "Gedela Rishikesh Reddy", "Dr. Akilandeswari P", "Pratyush Jha"),
   date: auto,
 )
 
@@ -98,7 +98,8 @@
   #v(3pt)
   #text(size: 9pt, fill: rgb("#64748b"))[
     *Department of Computing Technologies | SRM Institute of Science and Technology, Chennai, India* \
-    Student Investigators: *Gedela Rishikesh Reddy*, *Aniket Srivastava*, *Parth Gupta* \
+    Student Investigators: *Aniket Srivastava*, *Parth Gupta*, *Gedela Rishikesh Reddy* \
+    Faculty Mentor: *Dr. Akilandeswari P* | Industry Mentor: *Pratyush Jha* (ZS Associates, Pune) \
     Degree: B.Tech Computer Science and Engineering | Academic Session: 2025–2026
   ]
   #v(0.1in)

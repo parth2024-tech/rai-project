@@ -8,7 +8,7 @@
 
 #set document(
   title: "Research Document: Career Guidance Evaluation Protocol",
-  author: ("Gedela Rishikesh Reddy", "Aniket Srivastava", "Parth Gupta"),
+  author: ("Aniket Srivastava", "Parth Gupta", "Gedela Rishikesh Reddy", "Dr. Akilandeswari P", "Pratyush Jha"),
   date: auto,
 )
 
@@ -67,9 +67,9 @@
   ] \
   #v(3pt)
   #text(size: 8.2pt, fill: rgb("#475569"))[
-    *Authors:* Gedela Rishikesh Reddy, Aniket Srivastava, Parth Gupta \
+    *Authors:* Aniket Srivastava, Parth Gupta, Gedela Rishikesh Reddy \
     Department of Computing Technologies, SRM Institute of Science and Technology \
-    *Faculty Mentor:* Dr. P. Akilandeswari #h(12pt) | #h(12pt) *Industry Mentor:* Pratyush Jha
+    *Faculty Mentor:* Dr. Akilandeswari P #h(12pt) | #h(12pt) *Industry Mentor:* Pratyush Jha (ZS Associates, Pune)
   ]
   #v(3pt)
   #line(length: 100%, stroke: 0.8pt + rgb("#0f172a"))

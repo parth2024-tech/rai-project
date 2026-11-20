@@ -65,11 +65,12 @@
   ]
   #v(8pt)
   #text(size: 10pt, weight: "bold")[
-    Gedela Rishikesh Reddy | Aniket Srivastava | Parth Gupta
+    Aniket Srivastava | Parth Gupta | Gedela Rishikesh Reddy
   ]
   #v(2pt)
   #text(size: 8.5pt, fill: gray.darken(20%))[
-    Department of Computer Science & Engineering | Academic Year 2026-2027
+    Mentors: Dr. Akilandeswari P (Faculty) | Pratyush Jha (ZS Associates, Pune) \
+    Department of Computing Technologies | SRM Institute of Science and Technology
   ]
 ]
 
