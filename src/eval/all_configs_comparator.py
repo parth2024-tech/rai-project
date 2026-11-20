@@ -129,48 +129,48 @@ def compare_all_configs(candidate_profile: dict[str, Any], harness: Any = None) 
         )
 
     return {
-        "Config 1 (ChatGPT Baseline)": {
-            "title": "Config 1: Monolithic Single Prompt (ChatGPT Baseline)",
+        "Config 1 (Monolithic Baseline)": {
+            "title": "Configuration 1: Monolithic Single Prompt (Standard Baseline)",
             "description": "Standard unaugmented single LLM call.",
             "answer": c1_answer,
             "milestones": c1_milestones,
             "violations": c1_violations,
             "cost": c1_cost,
-            "fairness": "Biased (0.32 Jaccard: Tier-1 gets tech, Tier-3 gets low-tier tasks)",
+            "fairness": "Biased (0.32 Jaccard: Tier-1 receives systems tracks, Tier-3 receives IT support)",
             "verdict": "FAILED" if c1_violations else "PASSED",
-            "verdict_reason": f"{len(c1_violations)} Prerequisite Violations + Predatory Debt Steering"
+            "verdict_reason": f"{len(c1_violations)} prerequisite violations and commercial debt steering"
         },
-        "Config 2 (Multi-Perspective Prompt)": {
-            "title": "Config 2: Single LLM (Multi-Perspective Prompt)",
-            "description": "Single call prompting model to generate 3 viewpoints simultaneously.",
+        "Config 2 (Multi-Perspective Prompting)": {
+            "title": "Configuration 2: Multi-Perspective Single Prompt",
+            "description": "Single prompt instructing the model to evaluate three distinct viewpoints simultaneously.",
             "answer": c2_answer,
             "milestones": c2_milestones,
             "violations": c2_violations,
             "cost": c2_cost,
             "fairness": "Moderate (0.93 Jaccard)",
             "verdict": "PARTIAL",
-            "verdict_reason": f"{len(c2_violations)} Prerequisite Violation + Attention Averaging Collapse"
+            "verdict_reason": f"{len(c2_violations)} prerequisite violation with attention-averaging compromise"
         },
         "Config 3 (Unmoderated Debate)": {
-            "title": "Config 3: Unmoderated 3-Agent Debate",
-            "description": "Planner, Critic, and Ethics argue freely without Knowledge Graph or Moderator.",
+            "title": "Configuration 3: Unmoderated Multi-Persona Deliberation",
+            "description": "Planner, Critic, and Ethics debate without knowledge graph validation or moderator arbitration.",
             "answer": c3_answer,
             "milestones": c3_milestones,
             "violations": c3_violations,
-            "cost": "Conflicted (Agents disagreed)",
-            "fairness": "Unclear (No finalized consensus)",
+            "cost": "Conflicted (agents reached deadlocked recommendations)",
+            "fairness": "Unverified (no unified consensus roadmap generated)",
             "verdict": "FAILED",
-            "verdict_reason": "Deadlocked Debate — No Unified Roadmap Synthesized"
+            "verdict_reason": "Unresolved deliberation deadlock without topological synthesis"
         },
-        "Config 4 (Our Proposed RAI System)": {
-            "title": "Config 4: Proposed RAI System (Multi-Persona + 42-Node Graph)",
-            "description": "Planner + Critic + Ethics + 42-Node Knowledge Graph + Moderator Synthesis.",
+        "Config 4 (Proposed Deliberation System)": {
+            "title": "Configuration 4: Dialectic Triad with Topological Knowledge Graph Gate",
+            "description": "Planner, Critic, and Ethics personas arbitrated by 42-node prerequisite DAG and cognitive forcing gate.",
             "answer": c4_answer,
             "milestones": c4_milestones,
             "violations": c4_violations,
-            "cost": "₹0.00 (100% Free MIT OpenCourseWare & Harvard CS50)",
-            "fairness": "1.00 (Perfect Jaccard: Identical core curriculum across all tiers)",
+            "cost": "0.00 (100% accredited public courseware from MIT, Berkeley, and CMU)",
+            "fairness": "1.00 (Strict counterfactual parity across demographic and institutional tiers)",
             "verdict": "PASSED",
-            "verdict_reason": "0.0% Prerequisite Errors + 100% Contradiction Resolution + Zero Debt"
+            "verdict_reason": "0.0% prerequisite violations, 100% contradiction resolution, zero debt"
         }
     }
