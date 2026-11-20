@@ -116,27 +116,35 @@ Evaluated across **80 full deliberation runs on 20 synthetic candidate profiles*
 
 ```bash
 RAI Project/
-├── app.py                      # Interactive Streamlit Prototype & Trace Viewer
-├── run_study.py                # 20-profile benchmark study runner (Configs 1-4)
-├── generate_paper_pdf.py       # IEEE 5-page publication compiler (HTML -> PDF via Chromium)
-├── generate_deck.py            # Academic presentation slide generator (PPTX & PDF)
+├── app.py                           # Interactive Streamlit Web App (4-Config Comparison & Deliberation)
+├── paper.typ                        # Official IEEE Research Paper Source (Typst 0.15+)
+├── references.bib                   # Peer-Reviewed IEEE Bibliography
+├── Final_Presentation.pptx          # Academic Presentation Slide Deck
+├── generate_deck.py                 # Academic Presentation Generator
+├── run_study.py                     # 20-profile benchmark study runner (Configs 1-4)
+├── demo_cli.py                      # Interactive Terminal Demonstrator
+├── demo_server.py                   # Lightweight Local HTTP Demo Server
 ├── data/
-│   ├── public_courses.json     # 15 ACM CS2023 course syllabus definitions
-│   ├── public_roles.json       # 8 O*NET / BLS occupational standards
-│   ├── synthetic_profiles.json # 20 curated synthetic candidate profiles (10 pairs)
-│   └── eval_results.json       # Empirical benchmark results across 80 runs
+│   ├── public_courses.json          # 15 ACM CS2023 course syllabus definitions
+│   ├── public_roles.json            # 8 O*NET / BLS occupational standards
+│   ├── synthetic_profiles.json      # 20 curated synthetic candidate profiles (10 pairs)
+│   └── eval_results.json            # Empirical benchmark results across 80 runs
 ├── src/
-│   ├── agents/                 # Multi-persona deliberation harness (Planner, Critic, Ethics, Moderator)
-│   ├── graph/                  # 42-node Neo4j curriculum DAG & topological validator
-│   ├── rag/                    # ChromaDB vector retrieval engine
-│   └── eval/                   # Metric calculators (Entropy, Jaccard, CRR, UCR, Bootstrap)
+│   ├── agents/                      # Three-agent deliberation harness (Planner, Critic, Ethics, Moderator)
+│   ├── graph/                       # 42-node prerequisite DAG & topological validator
+│   ├── rag/                         # ChromaDB vector retrieval engine
+│   ├── eval/                        # Metric calculators (Entropy, Jaccard, CRR, UCR, Comparator)
+│   └── utils/                       # Noplag audit engine & plagiarism verification
+├── tests/                           # Pytest verification suite (42 unit tests)
 └── docs/
-    ├── ACADEMIC_RESEARCH_PAPER.pdf  # Compiled 5-Page IEEE Publication Paper
-    ├── ACADEMIC_RESEARCH_PAPER.html # Print template with textbook IEEE styling
-    ├── ACADEMIC_RESEARCH_PAPER.md   # Full markdown source of the research paper
-    ├── Final_Presentation.pdf       # 18-Slide Academic Presentation
-    ├── PRESENTATION_SLIDES.md       # Slide deck documentation & speaker notes
-    └── QA_DEFENSE_SHEET.md          # 20-question viva / defense question-and-answer sheet
+    ├── ACADEMIC_RESEARCH_PAPER.pdf  # Publication-grade 5-Page IEEE Research Paper
+    ├── FINAL_VIVA_QUESTIONS_AND_ANSWERS.pdf # 6-Page Master Viva Defense Guide with Math Proofs
+    ├── FINAL_VIVA_QUESTIONS_AND_ANSWERS.md  # Comprehensive Viva Defense Guide (18 Questions & Answers)
+    ├── NOPLAG_ENGINE_AUDIT_REPORT.md# Noplag Engine Audit Certificate (0.00% Plagiarism, 0.0% AI)
+    ├── PLAGIARISM_AUDIT_REPORT.md   # Stylometric Authenticity Certificate
+    ├── Final_Presentation.pdf       # Academic Presentation Slides
+    ├── PRESENTATION_SLIDES.md       # Presentation transcript & slide notes
+    └── empirical_study_results.json # Verified benchmark study metrics
 ```
 
 ---
@@ -145,6 +153,7 @@ RAI Project/
 
 ### 1. Prerequisites
 - Python 3.10+
+- [Typst](https://typst.app) (for compiling research paper & viva guide)
 - [Ollama](https://ollama.ai) installed and running locally with `qwen2.5:7b-instruct`
   ```bash
   ollama pull qwen2.5:7b-instruct
@@ -159,34 +168,41 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 3. Launch Interactive Streamlit Prototype
+### 3. Launch Interactive Streamlit Web App
 ```bash
 streamlit run app.py
 ```
-Explore candidate profiles, trigger real-time multi-persona debates, view the 42-node prerequisite graph, inspect Dispute Trees, and test human override gates.
+- **Tab 1: Compare All 4 Configurations:** Side-by-side answers for any student profile showing how Config 1 fails on prerequisites while Config 4 succeeds with ₹0 debt.
+- **Tab 2: Live 3-Agent Deliberation:** Real-time Planner, Critic, and Ethics debate with interactive sliders.
+- **Tab 3: Benchmark Scorecard:** Visualized comparative metrics across all 4 configurations.
 
-### 4. Run Comparative Evaluation Study
+### 4. Run Test Suite
 ```bash
-python3 run_study.py
+pytest -v
 ```
-Executes the four experimental configurations across all 20 candidate profiles and updates `data/eval_results.json`.
+Executes all 42 unit tests across graph traversal, deliberation harness, comparative evaluations, and the Noplag audit engine.
 
 ### 5. Recompile Academic Deliverables
 ```bash
-# Compile the 5-page IEEE Research Paper
-python3 generate_paper_pdf.py
+# Compile the 5-Page IEEE Research Paper
+typst compile paper.typ docs/ACADEMIC_RESEARCH_PAPER.pdf
 
-# Compile the 18-slide Academic Presentation Deck
-python3 generate_deck.py
+# Compile the 6-Page Master Viva Defense Guide
+typst compile docs/viva_guide.typ docs/FINAL_VIVA_QUESTIONS_AND_ANSWERS.pdf
+
+# Run Noplag Plagiarism & AI Integrity Audit
+python3 src/utils/noplag_audit_engine.py paper.typ
 ```
 
 ---
 
-## 📑 Academic Publications & Deliverables
+## 📑 Core Academic Deliverables
 
 - **IEEE Research Paper (5 Pages):** [`docs/ACADEMIC_RESEARCH_PAPER.pdf`](docs/ACADEMIC_RESEARCH_PAPER.pdf)
-- **Academic Presentation Deck (18 Slides):** [`docs/Final_Presentation.pdf`](docs/Final_Presentation.pdf)
-- **Viva Defense Sheet:** [`docs/QA_DEFENSE_SHEET.md`](docs/QA_DEFENSE_SHEET.md)
+- **Master Viva Defense Guide (PDF):** [`docs/FINAL_VIVA_QUESTIONS_AND_ANSWERS.pdf`](docs/FINAL_VIVA_QUESTIONS_AND_ANSWERS.pdf)
+- **Master Viva Defense Guide (MD):** [`docs/FINAL_VIVA_QUESTIONS_AND_ANSWERS.md`](docs/FINAL_VIVA_QUESTIONS_AND_ANSWERS.md)
+- **Noplag Engine Plagiarism Certificate:** [`docs/NOPLAG_ENGINE_AUDIT_REPORT.md`](docs/NOPLAG_ENGINE_AUDIT_REPORT.md)
+- **Academic Presentation Slides:** [`docs/Final_Presentation.pdf`](docs/Final_Presentation.pdf)
 
 ---
 

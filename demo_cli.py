@@ -298,7 +298,7 @@ def main():
         print(f"  {CYAN}[2]{RESET} {BOLD}Inspect 4-Tier Controlled Ablation Matrix{RESET} (Prompts, Temperatures & Topologies)")
         print(f"  {CYAN}[3]{RESET} {BOLD}Inspect Counterfactual Audit Cohort{RESET} (20 Profiles / 10 Demographic Pairs)")
         print(f"  {CYAN}[4]{RESET} {BOLD}Run Live Deliberation & Cognitive Forcing Demonstration{RESET}")
-        print(f"  {CYAN}[5]{RESET} {BOLD}View Formal Setup Documentation{RESET} (docs/EXPERIMENTAL_SETUP.md)")
+        print(f"  {CYAN}[5]{RESET} {BOLD}View Master Defense Guide{RESET} (docs/FINAL_VIVA_QUESTIONS_AND_ANSWERS.md)")
         print(f"  {CYAN}[0]{RESET} Exit\n")
         
         choice = input(f"{YELLOW}Enter option (0-5): {RESET}").strip()
@@ -311,7 +311,7 @@ def main():
         elif choice == "4":
             run_live_simulation(G)
         elif choice == "5":
-            print(f"\n{BOLD}Documentation file located at:{RESET} docs/EXPERIMENTAL_SETUP.md")
+            print(f"\n{BOLD}Documentation file located at:{RESET} docs/FINAL_VIVA_QUESTIONS_AND_ANSWERS.md")
             print("Contains hardware specs, ablation matrices, mathematical metrics, and validation schemas.")
             input(f"{YELLOW}Press Enter to continue...{RESET}")
         elif choice == "0":
