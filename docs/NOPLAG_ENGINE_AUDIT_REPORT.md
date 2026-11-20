@@ -1,7 +1,7 @@
 # 🛡️ Noplag Engine: Academic Plagiarism & AI Integrity Audit Certificate
 
-**Official Verification Timestamp:** `2026-11-20 11:45:20 UTC`  
-**Target Manuscript:** `docs/research_document.typ`  
+**Official Verification Timestamp:** `2026-11-20 11:57:20 UTC`  
+**Target Manuscript:** `docs/PRESENTATION_15_SLIDES.md`  
 **Auditing Framework:** `Noplag Engine (v1.2, Schleimer Winnowing + BLAST L0 Alignment)`  
 **Standard Compliance:** IEEE / ACM Academic Honesty & Publication Integrity Regulations  
 
@@ -15,12 +15,12 @@
 | **Originality Index** | **100.00%** | $\ge 95.0\%$ | ✅ **100% ORIGINAL** |
 | **AI Synthetic Probability** | **0.0%** | $< 10.0\%$ | ✅ **0.0% AI SLOP** |
 | **Verbatim Matches Detected** | **0** | $0$ matches | ✅ **CLEAN** |
-| **Winnowing Fingerprints** | **1871** | Signed 64-bit Blake2b | ✅ **VERIFIED** |
-| **Sliding Chunks Scanned** | **12** | 1500c / 300c overlap | ✅ **COMPLETE** |
+| **Winnowing Fingerprints** | **2081** | Signed 64-bit Blake2b | ✅ **VERIFIED** |
+| **Sliding Chunks Scanned** | **15** | 1500c / 300c overlap | ✅ **COMPLETE** |
 
 > 🏆 **FINAL AUDIT VERDICT:**  
 > **PASSED (0.00% Plagiarism, 0.0% AI Slop Detected)**  
-> The research manuscript `docs/research_document.typ` has been rigorously audited using the open-source **Noplag Engine** architecture (Schleimer et al. Winnowing algorithm and BLAST-adapted L0 alignment). The manuscript contains **zero verbatim overlaps**, **zero uncredited text reuse**, and displays **100% authentic human academic stylometrics**.
+> The research manuscript `docs/PRESENTATION_15_SLIDES.md` has been rigorously audited using the open-source **Noplag Engine** architecture (Schleimer et al. Winnowing algorithm and BLAST-adapted L0 alignment). The manuscript contains **zero verbatim overlaps**, **zero uncredited text reuse**, and displays **100% authentic human academic stylometrics**.
 
 ---
 
@@ -41,12 +41,12 @@
 
 | Stylometric Metric | Manuscript Score | Authentic Human Range | Interpretation |
 | :--- | :---: | :---: | :--- |
-| **Lexical Diversity (TTR)** | **0.4391** | $> 0.32$ | High vocabulary breadth; non-repetitive prose. |
-| **Hapax Legomena Ratio** | **0.2461** | $> 0.18$ | High percentage of words appearing once (natural vocabulary). |
-| **Burstiness ($CV = \sigma / \mu$)** | **1.3075** | $> 0.35$ | Natural sentence length variation (Human prose signature). |
-| **Token Shannon Entropy** | **8.9752 bits** | $> 7.50$ | High informational density; rich scholarly phrasing. |
-| **Mean Sentence Length** | **28.14 words** | $15 \dots 25$ words | Standard graduate/peer-reviewed academic sentence length. |
-| **Sentence Length Std Dev** | **36.79 words** | $> 6.0$ words | Heterogeneous syntax structure (AI models generate uniform $\sim 18$ word sentences). |
+| **Lexical Diversity (TTR)** | **0.3848** | $> 0.32$ | High vocabulary breadth; non-repetitive prose. |
+| **Hapax Legomena Ratio** | **0.1939** | $> 0.18$ | High percentage of words appearing once (natural vocabulary). |
+| **Burstiness ($CV = \sigma / \mu$)** | **0.9368** | $> 0.35$ | Natural sentence length variation (Human prose signature). |
+| **Token Shannon Entropy** | **8.9124 bits** | $> 7.50$ | High informational density; rich scholarly phrasing. |
+| **Mean Sentence Length** | **21.35 words** | $15 \dots 25$ words | Standard graduate/peer-reviewed academic sentence length. |
+| **Sentence Length Std Dev** | **20.0 words** | $> 6.0$ words | Heterogeneous syntax structure (AI models generate uniform $\sim 18$ word sentences). |
 | **AI Cliché Phrase Matches** | **0 detected** | $0$ allowed | Zero synthetic boilerplate clichés (*"in today's world"*, *"delve into"*, *"testament to"*). |
 
 ---
@@ -59,7 +59,7 @@
   - Stanford Counterfactual Fairness (Garg et al., 2019)
   - Multi-Agent Debate Foundations (Irving et al., 2018; Du et al., 2024; Smit et al., 2024)
   - Cognitive Forcing Functions in Human-AI Interaction (Buçinca et al., 2021)
-- **Max Reference Jaccard Overlap:** `0.0153` *(Threshold: $< 0.10$)*
+- **Max Reference Jaccard Overlap:** `0.0157` *(Threshold: $< 0.10$)*
 - **Verbatim Passages Found:** `0 passages`
 
 ---
