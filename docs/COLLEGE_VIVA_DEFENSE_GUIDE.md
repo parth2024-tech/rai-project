@@ -1,7 +1,7 @@
 # College Viva & Presentation Defense Guide
 ## Debate-Based Career Guidance Agent with Complementary Personas and Knowledge Graph Verification
-**Department of Computing Technologies | School of Computing | SRMIST**  
-**Pre-Final Year (6th Semester) Capstone Research Review**
+**Department of Computing Technologies | SRM Institute of Science and Technology**  
+**Faculty Mentor:** Dr. P. Akilandeswari | **Industry Mentor:** Pratyush Jha
 
 ---
 

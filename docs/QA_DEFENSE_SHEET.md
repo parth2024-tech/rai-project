@@ -1,7 +1,7 @@
 # Presentation Defense & Q&A Preparation Sheet
 ## Debate-Based Career Guidance Agent with Complementary Personas
-**Department of Computing Technologies | School of Computing | SRMIST**  
-**Pre-Final Year (6th Semester) Capstone Research Review**
+**Department of Computing Technologies | SRM Institute of Science and Technology**  
+**Faculty Mentor:** Dr. P. Akilandeswari | **Industry Mentor:** Pratyush Jha
 
 This document provides 100% honest, verified technical answers aligned directly with the actual implemented codebase.
 

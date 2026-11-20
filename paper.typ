@@ -1,7 +1,7 @@
 // ==============================================================================
-// IEEE Two-Column Academic Paper — Undergraduate Capstone Research Project
+// IEEE Two-Column Academic Paper — Responsible AI Research Manuscript
 // Debate-Based Career Guidance Agent with Complementary Personas
-// Department of Computing Technologies, School of Computing, SRMIST
+// Department of Computing Technologies, School of Computing
 // Typeset natively in Typst 0.15+ (Camera-Ready Academic Manuscript)
 // ==============================================================================
 
@@ -25,7 +25,7 @@
   margin: (x: 0.50in, top: 0.60in, bottom: 0.60in),
   header: align(center)[
     #text(size: 7.5pt, fill: rgb("#475569"), font: "Liberation Serif")[
-      *SRM INSTITUTE OF SCIENCE AND TECHNOLOGY --- SCHOOL OF COMPUTING --- 6TH SEMESTER CAPSTONE RESEARCH REVIEW*
+      *RESEARCH MANUSCRIPT --- RESPONSIBLE ARTIFICIAL INTELLIGENCE & EDUCATIONAL TECHNOLOGY*
     ]
     #line(length: 100%, stroke: 0.4pt + rgb("#94a3b8"))
   ],
@@ -106,7 +106,7 @@
       #text(weight: "bold", size: 10.5pt)[Gedela Rishikesh Reddy]\
       #text(size: 8.2pt, fill: rgb("#334155"))[
         Dept. of Computing Technologies\
-        School of Computing, SRMIST\
+        SRM Institute of Science and Technology\
         Kattankulathur, Chennai, India
       ]
     ],
@@ -114,7 +114,7 @@
       #text(weight: "bold", size: 10.5pt)[Aniket Srivastava]\
       #text(size: 8.2pt, fill: rgb("#334155"))[
         Dept. of Computing Technologies\
-        School of Computing, SRMIST\
+        SRM Institute of Science and Technology\
         Kattankulathur, Chennai, India
       ]
     ],
@@ -122,16 +122,16 @@
       #text(weight: "bold", size: 10.5pt)[Parth Gupta]\
       #text(size: 8.2pt, fill: rgb("#334155"))[
         Dept. of Computing Technologies\
-        School of Computing, SRMIST\
+        SRM Institute of Science and Technology\
         Kattankulathur, Chennai, India
       ]
     ],
   )
-  #v(0.04in)
-  #text(size: 8.2pt, style: "italic", fill: rgb("#475569"))[
-    Pre-Final Year (6th Semester) Capstone Research Project --- Academic Year 2026--2027
+  #v(0.06in)
+  #text(size: 8.5pt, fill: rgb("#334155"))[
+    *Faculty Mentor:* Dr. P. Akilandeswari #h(14pt) | #h(14pt) *Industry Mentor:* Pratyush Jha
   ]
-  #v(0.15in)
+  #v(0.12in)
 ]
 
 // ------------------------------------------------------------------------------
@@ -165,7 +165,7 @@ Engineering students routinely face critical career decisions: selecting special
 3. *Conversational Sycophancy:* As shown by Sharma et al. @sharma2024sycophancy, models trained with human feedback tend to agree with the user's optimistic assumptions rather than offering honest, realistic critique. If a beginner student claims they want to become a Senior ML Engineer in three months, the model flatters them instead of correcting the timeline.
 4. *Socioeconomic and Institutional Bias:* Standard training data subtly associates elite corporate roles with metropolitan Tier-1 institutes, while suggesting basic support tasks to students from rural or Tier-3 colleges @garg2019counterfactual.
 
-To address these vulnerabilities, this capstone research project introduces a *Debate-Based Career Guidance System* built on three core pillars:
+To address these vulnerabilities, this research paper introduces a *Debate-Based Career Guidance System* built on three core pillars:
 1. *Three-Agent Deliberation (Planner, Critic, Ethics):* Instead of one AI giving an answer, three separate agents deliberate on the student's profile to surface trade-offs.
 2. *Deterministic Prerequisite Knowledge Graph:* A 42-node Computer Science prerequisite graph enforces that advanced milestones cannot be scheduled before essential foundational subjects are completed.
 3. *Moderator with Interactive Student Override:* A Moderator reconciles conflicting arguments into a transparent roadmap. If missing prerequisites or high risks are identified, an automated gate halts autonomous approval and provides interactive sliders for student intervention.
@@ -533,7 +533,7 @@ A central engineering requirement for practical adoption across colleges is runn
 - *Institutional Privacy & Zero Cost:* Because inference runs 100% on-device, student queries, academic records, and career aspirations remain entirely private without transmitting sensitive data to third-party cloud servers. Furthermore, the operational cost is ₹0.00 per query.
 
 == F. Qualitative Student Evaluation & Usability
-We conducted a usability trial with 15 pre-final year Computer Science students at SRMIST. Each participant evaluated both a standard monolithic ChatGPT recommendation and our debate-based roadmap for their personal profile:
+We conducted a usability trial with 15 undergraduate Computer Science students across multiple specialization tracks. Each participant evaluated both a standard monolithic ChatGPT recommendation and our debate-based roadmap for their personal profile:
 - 14 out of 15 students (93.3%) reported that the explicit 3-perspective Dispute Tree helped them understand hidden trade-offs and interview risks far better than a single authoritative recommendation.
 - 100% of participants from lower socioeconomic backgrounds strongly favored the Ethics-Reviewer's emphasis on free MIT OpenCourseWare and GitHub proof-of-work over predatory commercial bootcamp loans.
 - All students successfully used the interactive Streamlit override sliders to calibrate their study schedules according to their available weekly hours.
@@ -550,11 +550,11 @@ Our current prototype evaluates 20 synthetic candidate profiles across Computer 
 
 = IX. Conclusion
 
-We developed and evaluated a local, multi-persona career guidance system that combines dialectic debate among three agents (Planner, Critic, Ethics-Reviewer) with a 42-node prerequisite knowledge graph and a Cognitive Forcing Gate. Experimental results demonstrate that deterministic graph verification eliminates prerequisite sequencing errors ($90.9\% arrow.r 0.0\%$), ensures demographic fairness ($J = 1.00$), and prevents predatory debt by directing students toward accredited open courseware.
+We developed and evaluated a local, multi-persona career guidance system that combines structured debate among three agents (Planner, Critic, Ethics-Reviewer) with a 42-node prerequisite knowledge graph and an interactive Verification Gate. Experimental results demonstrate that deterministic graph verification eliminates prerequisite sequencing errors ($90.9\% arrow.r 0.0\%$), ensures demographic fairness ($J = 1.00$), and prevents predatory debt by directing students toward accredited open courseware.
 
 = Acknowledgment
 
-The authors express sincere gratitude to our Project Supervisor and the faculty review committee of the Department of Computing Technologies, School of Computing, SRM Institute of Science and Technology, for their technical mentorship, methodological critique, and continuous evaluation throughout this pre-final year (6th-semester) capstone research project. We also thank our peers and student participants whose usability feedback and rubric evaluation helped refine this empirical study.
+The authors express sincere gratitude to our Faculty Mentor, Dr. P. Akilandeswari, and our Industry Mentor, Pratyush Jha, for their technical mentorship, architectural critique, and continuous guidance throughout this research. We also thank our peers and student participants whose usability feedback and rubric evaluations helped refine this empirical study.
 
 // ------------------------------------------------------------------------------
 // REFERENCES (Natively rendered via IEEE bibliography engine)

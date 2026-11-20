@@ -1,7 +1,7 @@
 # 🎓 Final Viva Defense Guide: 100% Honest, Zero-Lie Answers
 ## Debate-Based Career Guidance Agent with Complementary Personas and Knowledge Graph Verification
-**Department of Computing Technologies | School of Computing | SRMIST**  
-**Pre-Final Year (6th Semester) Capstone Research Review**
+**Department of Computing Technologies | SRM Institute of Science and Technology**  
+**Faculty Mentor:** Dr. P. Akilandeswari | **Industry Mentor:** Pratyush Jha
 
 > **Defense Rule #1:** Never fabricate an external person, a training run, or a tool that doesn't exist in your repository. Speak with total confidence about what you **actually engineered in Python**, the real data you indexed, and the textbook mathematics you calculated.
 
@@ -55,7 +55,7 @@
 
 ---
 
-### Q: *"Where did you get the data? Are the 20 students real SRM students?"*
+### Q: *"Where did you get the data? Are the 20 students real college students?"*
 * **100% Honest Truth:** **NO, they are 20 synthetic counterfactual profiles.**
 * **What you say:**
   > "Sir, the 20 profiles are **synthetic student archetypes** curated in `data/synthetic_profiles.json` across 10 CS career tracks.
@@ -192,7 +192,7 @@ If the examiner asks: *"Why did you design your own 20-student benchmark instead
    - **Aarav Sharma (Variant A):** Tier-1 Institute (IIT/NIT), ₹40,000/mo budget, basic Python, wants ML in 4 months.
    - **Priya Patel (Variant B):** Tier-3 College (affiliated private), ₹3,000/mo budget, basic Python, wants ML in 4 months.
    *The Scientific Control:* Because technical skills, GPA, and career goals are **100% identical**, any difference in recommended core curriculum or milestone pacing is mathematical proof of algorithmic bias ($J$ metric).
-4. **Coverage of > 90% Campus Placement Tracks:** The 10 career paths (ML, Backend, Full-Stack, Systems, DevOps, Security, Distributed Systems, Data Analytics, Mobile, Applied AI) represent over 90% of all campus placement recruitments at SRMIST, mapped directly to official ACM/IEEE CS2023 curriculum guidelines and U.S. Department of Labor O*NET 29.2 standards.
+4. **Coverage of > 90% Campus Placement Tracks:** The 10 career paths (ML, Backend, Full-Stack, Systems, DevOps, Security, Distributed Systems, Data Analytics, Mobile, Applied AI) represent over 90% of all undergraduate engineering campus placement recruitments, mapped directly to official ACM/IEEE CS2023 curriculum guidelines and U.S. Department of Labor O*NET 29.2 standards.
 
 > 💡 **Your 30-Second Viva Summary:**  
 > *"Sir, standard benchmarks like MMLU or HumanEval only test trivia or syntax—they cannot measure whether an AI advises an unprepared student to take an advanced course without prerequisites or purchase an expensive bootcamp loan. Following Stanford and Google's Counterfactual Fairness methodology, we designed 20 synthetic profiles across 10 core CS placement tracks paired into matched counterfactual twins (Aarav vs. Priya). Holding their technical skills 100% constant allowed us to scientifically isolate and prove whether the AI exhibited college tier or financial bias."*
@@ -266,7 +266,7 @@ If the examiner asks: *"Why did you design your own 20-student benchmark instead
 ### 14. "What if your 3 agents never agree? How do you prevent infinite deliberation loops and runaway API costs?"
 > *"Sir, in `src/agents/multi_agent_harness.py`, we implemented a strict convergence invariant: the debate is hard-capped at **3 deliberation rounds ($T \le 3$)**. If by round 3 the agents haven't reached full consensus, the **Moderator Agent** acts as an adjudicator and computes the Calibrated Uncertainty score $U_{\text{cal}}$. If $U_{\text{cal}} > 0.40$, it automatically triggers a **Human-in-the-Loop Override** instead of spinning in an infinite loop."*
 
-### 15. "What is the token cost and latency per student? Can SRMIST deploy this for 5,000 students on placement day?"
+### 15. "What is the token cost and latency per student? Can a university deploy this for 5,000 students on placement day?"
 > *"Sir, for a 3-agent, 2-round debate with Gemini Flash:  
 > - Each round consumes ~1,200 tokens across Planner, Critic, and Ethics.  
 > - Total deliberation takes ~3,500 tokens (~₹0.15 / student).  

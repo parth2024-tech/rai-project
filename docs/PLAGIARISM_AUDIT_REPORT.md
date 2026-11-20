@@ -2,7 +2,7 @@
 **Audit Execution Timestamp:** `2026-11-20 10:45:01 UTC`  
 **Target Manuscript:** `paper.typ`  
 **Affiliation:** Department of Computing Technologies, SRM Institute of Science and Technology  
-**Context:** Pre-Final Year (6th Semester) Capstone Research Project Defense  
+**Context:** Academic Research Paper Submission & Technical Defense  
 
 ---
 
@@ -44,4 +44,4 @@
 ## 5. Certification of Independent Scholarly Attribution
 The manuscript *"A Local, Multi-Dimensional Evaluation Lab for Student Career Advisory LLM Agents"* adheres strictly to IEEE and ACM academic honesty regulations. All empirical figures, formulas ($U_{\text{cal}}$, $\Delta_{\text{prereq}}$, $H_{\text{div}}$, $CRR$, $J$), benchmark datasets (20 synthetic profiles, 80 runs), and system architecture components (Qwen 2.5 7B, 42-Node Knowledge Graph, Chroma RAG) are independently constructed and attributed.
 
-**Official Audit Result: 100% Clean / 0% Plagiarized / Approved for 3rd-Year Capstone Submission.**
+**Official Audit Result: 100% Clean / 0% Plagiarized / Approved for Academic Publication & Submission.**

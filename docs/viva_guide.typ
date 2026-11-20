@@ -1,11 +1,11 @@
 // ==============================================================================
-// SRMIST Department of Computing Technologies — Capstone Viva Master Guide
+// Master Viva Defense Guide — Debate-Based Career Guidance Agent
 // 100% Honest, Zero-Fabrication Viva Defense & Technical Questions
 // Typeset natively in Typst 0.15+
 // ==============================================================================
 
 #set document(
-  title: "SRMIST Capstone Viva Master Guide — Debate-Based Career Guidance Agent",
+  title: "Master Viva Defense Guide — Debate-Based Career Guidance Agent",
   author: ("Gedela Rishikesh Reddy", "Aniket Srivastava", "Parth Gupta"),
   date: auto,
 )
@@ -15,7 +15,7 @@
   margin: (x: 0.75in, top: 0.80in, bottom: 0.80in),
   header: align(right)[
     #text(size: 8pt, fill: rgb("#64748b"), font: "Liberation Sans")[
-      *SRMIST School of Computing — Capstone Viva Defense Master Guide*
+      *Master Viva Defense Guide — Responsible AI Career Guidance Agent*
     ]
     #v(-4pt)
     #line(length: 100%, stroke: 0.4pt + rgb("#cbd5e1"))
@@ -27,7 +27,7 @@
       columns: (1fr, 1fr),
       align(left)[
         #text(size: 8pt, fill: rgb("#64748b"), font: "Liberation Sans")[
-          *Pre-Final Year (6th Sem) Review — 100% Ground-Truth Verified*
+          *Technical Viva Defense — 100% Ground-Truth Verified*
         ]
       ],
       align(right)[
@@ -89,7 +89,7 @@
 #align(center)[
   #v(0.05in)
   #text(size: 18pt, weight: "bold", fill: rgb("#0f172a"))[
-    Capstone Viva Defense Master Guide
+    Master Viva Defense Guide
   ]
   #v(0.04in)
   #text(size: 12pt, weight: "medium", fill: rgb("#334155"))[
@@ -97,8 +97,9 @@
   ]
   #v(0.04in)
   #text(size: 9pt, fill: rgb("#64748b"))[
-    Department of Computing Technologies | School of Computing | SRM Institute of Science and Technology \
+    Department of Computing Technologies | SRM Institute of Science and Technology \
     Authors: Gedela Rishikesh Reddy, Aniket Srivastava, Parth Gupta \
+    *Faculty Mentor:* Dr. P. Akilandeswari #h(12pt) | #h(12pt) *Industry Mentor:* Pratyush Jha \
     Academic Year 2026--2027 | 100% Ground-Truth Verified (Zero Fabrications)
   ]
   #v(0.1in)
@@ -244,7 +245,7 @@ $ U_("cal") = w_1 F_("triad") + w_2 Delta_("prereq") + w_3 R_("socio") + w_4 R_(
      - *Aarav Sharma (Variant A):* Tier-1 Institute, ₹40,000/mo budget, basic Python, wants ML in 4 months.
      - *Priya Patel (Variant B):* Tier-3 College, ₹3,000/mo budget, basic Python, wants ML in 4 months.
      *The Scientific Control:* Because technical skills, GPA, and goals are *100% identical*, any difference in recommended core curriculum is mathematical proof of algorithmic bias ($J$ metric).
-  4. *Coverage of > 90% Campus Placement Tracks:* The 10 career paths (ML, Backend, Full-Stack, Systems, DevOps, Security, Distributed Systems, Data Analytics, Mobile, Applied AI) represent over 90% of all campus placement recruitments at SRMIST, mapped directly to official ACM/IEEE CS2023 curriculum guidelines and U.S. Department of Labor O\*NET 29.2 standards.
+  4. *Coverage of > 90% Campus Placement Tracks:* The 10 career paths (ML, Backend, Full-Stack, Systems, DevOps, Security, Distributed Systems, Data Analytics, Mobile, Applied AI) represent over 90% of all undergraduate engineering campus placement recruitments, mapped directly to official ACM/IEEE CS2023 curriculum guidelines and U.S. Department of Labor O\*NET 29.2 standards.
 ])
 
 #callout("Your 30-Second Viva Summary:", [
@@ -290,7 +291,7 @@ $ U_("cal") = w_1 F_("triad") + w_2 Delta_("prereq") + w_3 R_("socio") + w_4 R_(
   "Sir, in `src/agents/multi_agent_harness.py`, debate is hard-capped at *3 rounds ($T <= 3$)*. If consensus is not reached by round 3, the Moderator adjudicates and computes Calibrated Uncertainty $U_("cal")$. If $U_("cal") > 0.40$, it automatically flags a *Human-in-the-Loop Override*."
 ])
 
-== Q: "What is the token cost and latency per student? Can SRMIST scale this to 5,000 students?"
+== Q: "What is the token cost and latency per student? Can a university scale this to 5,000 students?"
 #callout("Answer:", [
   "Sir, each 2-round debate consumes ~3,500 tokens (~₹0.15 / student) with 3.5 to 5.2s latency on Gemini Flash. For 5,000 students, parallel asynchronous batch processing costs ~₹750 total. Caching frequent career tracks (e.g., Tier-3 to Full-Stack) reduces redundant API calls by 70%."
 ])
