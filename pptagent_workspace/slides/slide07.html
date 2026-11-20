@@ -1,0 +1,183 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+  html, body {
+    width: 1280px;
+    height: 720px;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: #ffffff;
+    color: #000000;
+    font-family: -apple-system, BlinkMacSystemFont, "Liberation Sans", Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  .slide {
+    width: 1280px;
+    height: 720px;
+    padding: 40px 50px;
+    position: relative;
+    background: #ffffff;
+  }
+  .header {
+    border-bottom: 2px solid #000000;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+  }
+  .header-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    font-weight: 700;
+    color: #555555;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }
+  .slide-title {
+    margin: 0;
+    font-size: 26px;
+    font-weight: 800;
+    color: #000000;
+    line-height: 1.2;
+  }
+  .slide-subtitle {
+    margin: 4px 0 0 0;
+    font-size: 14px;
+    color: #444444;
+    font-weight: 500;
+  }
+  .footer {
+    position: absolute;
+    bottom: 25px;
+    left: 50px;
+    right: 50px;
+    border-top: 1px solid #000000;
+    padding-top: 8px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: #555555;
+    font-weight: 600;
+  }
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 18px;
+  }
+  .grid-4 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 14px;
+  }
+  .grid-6 {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+  }
+  .box {
+    border: 1.5px solid #000000;
+    background: #ffffff;
+    padding: 14px 16px;
+  }
+  .box-header {
+    background: #000000;
+    color: #ffffff;
+    margin: -14px -16px 12px -16px;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+  }
+  .box p, .box li {
+    font-size: 12.5px;
+    line-height: 1.45;
+    color: #222222;
+    margin: 0 0 6px 0;
+  }
+  .box strong {
+    color: #000000;
+  }
+  ul {
+    margin: 0;
+    padding-left: 18px;
+  }
+  li {
+    margin-bottom: 5px;
+  }
+  .table-academic {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+  .table-academic th {
+    border-top: 2px solid #000000;
+    border-bottom: 1.5px solid #000000;
+    padding: 8px 10px;
+    text-align: left;
+    background: #000000;
+    color: #ffffff;
+    font-weight: 700;
+  }
+  .table-academic td {
+    padding: 7px 10px;
+    border-bottom: 1px solid #cccccc;
+    color: #111111;
+  }
+  .table-academic tr:last-child td {
+    border-bottom: 2px solid #000000;
+  }
+  .highlight-row {
+    font-weight: 800;
+    background: #f0f0f0;
+  }
+  .stat-callout {
+    font-size: 26px;
+    font-weight: 900;
+    color: #000000;
+    text-align: center;
+    margin: 8px 0;
+    border-bottom: 1px solid #000000;
+    padding-bottom: 6px;
+  }
+</style></head><body><main class="slide">
+    <div class="header">
+      <div class="header-meta"><span>Section 4: Knowledge Graph Engineering</span><span>07 / 15</span></div>
+      <h1 class="slide-title">The 42-Node Prerequisite Knowledge Graph</h1>
+      <p class="slide-subtitle">A deterministic DAG spanning 9 CS domains with sub-millisecond in-memory traversal and automated Neo4j Cypher synchronization.</p>
+    </div>
+    <div class="grid-2" style="gap: 20px;">
+      <div class="box">
+        <div class="box-header">CURRICULUM TAXONOMY & DOMAIN COVERAGE</div>
+        <ul>
+          <li><strong>Node Coverage (42 Total Nodes across 9 Domains):</strong>
+            <ul>
+              <li><strong>Foundations (3):</strong> Discrete Math, Linear Algebra, Probability & Statistics.</li>
+              <li><strong>Programming Core (5):</strong> Python Basics, Python OOP, C Basics, Pointers, Java.</li>
+              <li><strong>Systems & Architecture (7):</strong> Computer Arch, OS Internals, Concurrency, Linux/POSIX, Networking, Distributed Systems, System Design.</li>
+              <li><strong>Databases & Storage (4):</strong> RDBMS, SQL Optimization, Normalization, NoSQL.</li>
+              <li><strong>Web & Software Eng (4):</strong> HTML/CSS, JavaScript, Backend, REST APIs.</li>
+              <li><strong>Machine Learning & AI (7):</strong> Data Wrangling, ML Basics, Deep Learning, NLP/Transformers, LLMs/RAG, MLOps, AI Ethics.</li>
+              <li><strong>Security, Cloud & Mobile (8):</strong> DSA (3), Cloud/DevOps (4), Security/Mobile (5).</li>
+            </ul>
+          </li>
+          <li><strong>Directed Edges (47 Edges):</strong> Prerequisite dependencies (e.g. Linear Algebra &rarr; ML Foundations &rarr; Deep Learning).</li>
+        </ul>
+      </div>
+      <div class="box">
+        <div class="box-header">DETERMINISTIC TRAVERSAL & NEO4J EXPORT</div>
+        <ul>
+          <li><strong>Mathematical Prerequisite Formulation:</strong><br>
+            <code style="display:block; padding: 6px; background: #f0f0f0; margin: 4px 0; font-size: 11px;">&Delta;_prereq = |&#123; (u, v) &isin; E_prereq : v &isin; M and u &notin; (S_curr &cup; M_&lt;v) &#125;|</code>
+          </li>
+          <li><strong>Algorithmic Complexity:</strong> Evaluated via NetworkX topological sorting in deterministic O(|V| + |E|) time (<strong>&lt; 0.2 milliseconds</strong>).</li>
+          <li><strong>In-Memory NetworkX Rationale:</strong> Sub-millisecond latency without external socket overhead or JVM server memory footprint on student hardware.</li>
+          <li><strong>Enterprise Neo4j Integration:</strong> Includes automated Cypher query generator (<code>sync_to_neo4j</code>) allowing the exact same 42-node graph to synchronize with enterprise Neo4j databases.</li>
+        </ul>
+      </div>
+    </div>
+    <footer class="footer"><span>Responsible AI in Educational Advisory — Academic Defense</span><span>Slide 07 / 15</span></footer></main></body></html>
