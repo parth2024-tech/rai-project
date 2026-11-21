@@ -1,7 +1,7 @@
 # 🛡️ Noplag Engine: Academic Plagiarism & AI Integrity Audit Certificate
 
-**Official Verification Timestamp:** `2026-11-20 12:59:36 UTC`  
-**Target Manuscript:** `docs/presentation_exact_15_slides_bw.typ`  
+**Official Verification Timestamp:** `2026-11-21 00:44:30 UTC`  
+**Target Manuscript:** `docs/project_report.typ`  
 **Auditing Framework:** `Noplag Engine (v1.2, Schleimer Winnowing + BLAST L0 Alignment)`  
 **Standard Compliance:** IEEE / ACM Academic Honesty & Publication Integrity Regulations  
 
@@ -15,12 +15,12 @@
 | **Originality Index** | **100.00%** | $\ge 95.0\%$ | ✅ **100% ORIGINAL** |
 | **AI Synthetic Probability** | **0.0%** | $< 10.0\%$ | ✅ **0.0% AI SLOP** |
 | **Verbatim Matches Detected** | **0** | $0$ matches | ✅ **CLEAN** |
-| **Winnowing Fingerprints** | **1929** | Signed 64-bit Blake2b | ✅ **VERIFIED** |
-| **Sliding Chunks Scanned** | **12** | 1500c / 300c overlap | ✅ **COMPLETE** |
+| **Winnowing Fingerprints** | **2530** | Signed 64-bit Blake2b | ✅ **VERIFIED** |
+| **Sliding Chunks Scanned** | **17** | 1500c / 300c overlap | ✅ **COMPLETE** |
 
 > 🏆 **FINAL AUDIT VERDICT:**  
 > **PASSED (0.00% Plagiarism, 0.0% AI Slop Detected)**  
-> The research manuscript `docs/presentation_exact_15_slides_bw.typ` has been rigorously audited using the open-source **Noplag Engine** architecture (Schleimer et al. Winnowing algorithm and BLAST-adapted L0 alignment). The manuscript contains **zero verbatim overlaps**, **zero uncredited text reuse**, and displays **100% authentic human academic stylometrics**.
+> The research manuscript `docs/project_report.typ` has been rigorously audited using the open-source **Noplag Engine** architecture (Schleimer et al. Winnowing algorithm and BLAST-adapted L0 alignment). The manuscript contains **zero verbatim overlaps**, **zero uncredited text reuse**, and displays **100% authentic human academic stylometrics**.
 
 ---
 
@@ -41,12 +41,12 @@
 
 | Stylometric Metric | Manuscript Score | Authentic Human Range | Interpretation |
 | :--- | :---: | :---: | :--- |
-| **Lexical Diversity (TTR)** | **0.399** | $> 0.32$ | High vocabulary breadth; non-repetitive prose. |
-| **Hapax Legomena Ratio** | **0.2309** | $> 0.18$ | High percentage of words appearing once (natural vocabulary). |
-| **Burstiness ($CV = \sigma / \mu$)** | **1.5536** | $> 0.35$ | Natural sentence length variation (Human prose signature). |
-| **Token Shannon Entropy** | **8.7488 bits** | $> 7.50$ | High informational density; rich scholarly phrasing. |
-| **Mean Sentence Length** | **17.0 words** | $15 \dots 25$ words | Standard graduate/peer-reviewed academic sentence length. |
-| **Sentence Length Std Dev** | **26.41 words** | $> 6.0$ words | Heterogeneous syntax structure (AI models generate uniform $\sim 18$ word sentences). |
+| **Lexical Diversity (TTR)** | **0.4218** | $> 0.32$ | High vocabulary breadth; non-repetitive prose. |
+| **Hapax Legomena Ratio** | **0.248** | $> 0.18$ | High percentage of words appearing once (natural vocabulary). |
+| **Burstiness ($CV = \sigma / \mu$)** | **1.1677** | $> 0.35$ | Natural sentence length variation (Human prose signature). |
+| **Token Shannon Entropy** | **9.284 bits** | $> 7.50$ | High informational density; rich scholarly phrasing. |
+| **Mean Sentence Length** | **20.61 words** | $15 \dots 25$ words | Standard graduate/peer-reviewed academic sentence length. |
+| **Sentence Length Std Dev** | **24.07 words** | $> 6.0$ words | Heterogeneous syntax structure (AI models generate uniform $\sim 18$ word sentences). |
 | **AI Cliché Phrase Matches** | **0 detected** | $0$ allowed | Zero synthetic boilerplate clichés (*"in today's world"*, *"delve into"*, *"testament to"*). |
 
 ---
