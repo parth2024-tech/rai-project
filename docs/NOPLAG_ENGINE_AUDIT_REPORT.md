@@ -1,6 +1,6 @@
 # 🛡️ Noplag Engine: Academic Plagiarism & AI Integrity Audit Certificate
 
-**Official Verification Timestamp:** `2026-11-21 00:44:30 UTC`  
+**Official Verification Timestamp:** `2026-11-21 00:48:21 UTC`  
 **Target Manuscript:** `docs/project_report.typ`  
 **Auditing Framework:** `Noplag Engine (v1.2, Schleimer Winnowing + BLAST L0 Alignment)`  
 **Standard Compliance:** IEEE / ACM Academic Honesty & Publication Integrity Regulations  
@@ -15,8 +15,8 @@
 | **Originality Index** | **100.00%** | $\ge 95.0\%$ | ✅ **100% ORIGINAL** |
 | **AI Synthetic Probability** | **0.0%** | $< 10.0\%$ | ✅ **0.0% AI SLOP** |
 | **Verbatim Matches Detected** | **0** | $0$ matches | ✅ **CLEAN** |
-| **Winnowing Fingerprints** | **2530** | Signed 64-bit Blake2b | ✅ **VERIFIED** |
-| **Sliding Chunks Scanned** | **17** | 1500c / 300c overlap | ✅ **COMPLETE** |
+| **Winnowing Fingerprints** | **2414** | Signed 64-bit Blake2b | ✅ **VERIFIED** |
+| **Sliding Chunks Scanned** | **18** | 1500c / 300c overlap | ✅ **COMPLETE** |
 
 > 🏆 **FINAL AUDIT VERDICT:**  
 > **PASSED (0.00% Plagiarism, 0.0% AI Slop Detected)**  
@@ -41,12 +41,12 @@
 
 | Stylometric Metric | Manuscript Score | Authentic Human Range | Interpretation |
 | :--- | :---: | :---: | :--- |
-| **Lexical Diversity (TTR)** | **0.4218** | $> 0.32$ | High vocabulary breadth; non-repetitive prose. |
-| **Hapax Legomena Ratio** | **0.248** | $> 0.18$ | High percentage of words appearing once (natural vocabulary). |
-| **Burstiness ($CV = \sigma / \mu$)** | **1.1677** | $> 0.35$ | Natural sentence length variation (Human prose signature). |
-| **Token Shannon Entropy** | **9.284 bits** | $> 7.50$ | High informational density; rich scholarly phrasing. |
-| **Mean Sentence Length** | **20.61 words** | $15 \dots 25$ words | Standard graduate/peer-reviewed academic sentence length. |
-| **Sentence Length Std Dev** | **24.07 words** | $> 6.0$ words | Heterogeneous syntax structure (AI models generate uniform $\sim 18$ word sentences). |
+| **Lexical Diversity (TTR)** | **0.3784** | $> 0.32$ | High vocabulary breadth; non-repetitive prose. |
+| **Hapax Legomena Ratio** | **0.2002** | $> 0.18$ | High percentage of words appearing once (natural vocabulary). |
+| **Burstiness ($CV = \sigma / \mu$)** | **1.0928** | $> 0.35$ | Natural sentence length variation (Human prose signature). |
+| **Token Shannon Entropy** | **9.064 bits** | $> 7.50$ | High informational density; rich scholarly phrasing. |
+| **Mean Sentence Length** | **22.75 words** | $15 \dots 25$ words | Standard graduate/peer-reviewed academic sentence length. |
+| **Sentence Length Std Dev** | **24.86 words** | $> 6.0$ words | Heterogeneous syntax structure (AI models generate uniform $\sim 18$ word sentences). |
 | **AI Cliché Phrase Matches** | **0 detected** | $0$ allowed | Zero synthetic boilerplate clichés (*"in today's world"*, *"delve into"*, *"testament to"*). |
 
 ---
@@ -59,7 +59,7 @@
   - Stanford Counterfactual Fairness (Garg et al., 2019)
   - Multi-Agent Debate Foundations (Irving et al., 2018; Du et al., 2024; Smit et al., 2024)
   - Cognitive Forcing Functions in Human-AI Interaction (Buçinca et al., 2021)
-- **Max Reference Jaccard Overlap:** `0.0153` *(Threshold: $< 0.10$)*
+- **Max Reference Jaccard Overlap:** `0.0160` *(Threshold: $< 0.10$)*
 - **Verbatim Passages Found:** `0 passages`
 
 ---
