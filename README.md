@@ -10,9 +10,11 @@ An academic, reproducible, and fully local evaluation lab designed to benchmark 
 ---
 
 ### Authors & Affiliation
-- **Gedela Rishikesh Reddy**
-- **Aniket Srivastava**
-- **Parth Gupta**
+- **Aniket Srivastava** (`as6608@srmist.edu.in`)
+- **Parth Gupta** (`pg5206@srmist.edu.in`)
+- **Gedela Rishikesh Reddy** (`rg0330@srmist.edu.in`)
+- **Faculty Mentor:** Dr. Akilandeswari P (`akilandp@srmist.edu.in`)
+- **Industry Mentor:** Pratyush Jha (ZS Associates, Pune)
 
 *Department of Computing Technologies, SRM Institute of Science and Technology, Chennai, India*
 
@@ -119,8 +121,6 @@ RAI Project/
 ├── app.py                           # Interactive Streamlit Web App (4-Config Comparison & Deliberation)
 ├── paper.typ                        # Official IEEE Research Paper Source (Typst 0.15+)
 ├── references.bib                   # Peer-Reviewed IEEE Bibliography
-├── Final_Presentation.pptx          # Academic Presentation Slide Deck
-├── generate_deck.py                 # Academic Presentation Generator
 ├── run_study.py                     # 20-profile benchmark study runner (Configs 1-4)
 ├── demo_cli.py                      # Interactive Terminal Demonstrator
 ├── demo_server.py                   # Lightweight Local HTTP Demo Server
@@ -138,12 +138,13 @@ RAI Project/
 ├── tests/                           # Pytest verification suite (42 unit tests)
 └── docs/
     ├── ACADEMIC_RESEARCH_PAPER.pdf  # Publication-grade 5-Page IEEE Research Paper
-    ├── FINAL_VIVA_QUESTIONS_AND_ANSWERS.pdf # 6-Page Master Viva Defense Guide with Math Proofs
-    ├── FINAL_VIVA_QUESTIONS_AND_ANSWERS.md  # Comprehensive Viva Defense Guide (18 Questions & Answers)
+    ├── ALL_NUMERICALS_AND_FORMULAS.pdf # Standalone 8-Page Master Numericals & Formulas Guide
+    ├── ALL_NUMERICALS_AND_FORMULAS.md  # Complete Mathematical Proofs & Derivations
+    ├── FINAL_VIVA_QUESTIONS_AND_ANSWERS.pdf # 13-Page Master Viva Defense Guide with Math Proofs
+    ├── FINAL_VIVA_QUESTIONS_AND_ANSWERS.md  # Comprehensive Viva Defense Guide & 41-Term Glossary
+    ├── PROJECT_REPORT.pdf           # Comprehensive Academic Capstone Project Report
     ├── NOPLAG_ENGINE_AUDIT_REPORT.md# Noplag Engine Audit Certificate (0.00% Plagiarism, 0.0% AI)
     ├── PLAGIARISM_AUDIT_REPORT.md   # Stylometric Authenticity Certificate
-    ├── Final_Presentation.pdf       # Academic Presentation Slides
-    ├── PRESENTATION_SLIDES.md       # Presentation transcript & slide notes
     └── empirical_study_results.json # Verified benchmark study metrics
 ```
 
@@ -199,10 +200,11 @@ python3 src/utils/noplag_audit_engine.py paper.typ
 ## 📑 Core Academic Deliverables
 
 - **IEEE Research Paper (5 Pages):** [`docs/ACADEMIC_RESEARCH_PAPER.pdf`](docs/ACADEMIC_RESEARCH_PAPER.pdf)
+- **Master Numericals Compendium (PDF):** [`docs/ALL_NUMERICALS_AND_FORMULAS.pdf`](docs/ALL_NUMERICALS_AND_FORMULAS.pdf)
 - **Master Viva Defense Guide (PDF):** [`docs/FINAL_VIVA_QUESTIONS_AND_ANSWERS.pdf`](docs/FINAL_VIVA_QUESTIONS_AND_ANSWERS.pdf)
 - **Master Viva Defense Guide (MD):** [`docs/FINAL_VIVA_QUESTIONS_AND_ANSWERS.md`](docs/FINAL_VIVA_QUESTIONS_AND_ANSWERS.md)
+- **Academic Capstone Project Report:** [`docs/PROJECT_REPORT.pdf`](docs/PROJECT_REPORT.pdf)
 - **Noplag Engine Plagiarism Certificate:** [`docs/NOPLAG_ENGINE_AUDIT_REPORT.md`](docs/NOPLAG_ENGINE_AUDIT_REPORT.md)
-- **Academic Presentation Slides:** [`docs/Final_Presentation.pdf`](docs/Final_Presentation.pdf)
 
 ---
 
